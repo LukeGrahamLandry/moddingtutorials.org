@@ -1,0 +1,33 @@
+{
+    "sections": [
+        {
+            "folder": "forge-1.17-tutorials",
+            "url": "o17",
+            "title": "Forge 1.17.1",
+            "files": ["java-basics", "environment-setup", "basic-items", "advanced-items", "basic-blocks", "advanced-blocks", "tools-armor", "tile-entities", "enchantments", "recipes"]
+        },
+        {
+            "folder": "forge-1.16-tutorials",
+            "url": "o16",
+            "title": "Forge 1.16.5",
+            "files": ["java-basics", "environment-setup", "basic-items", "advanced-items", "basic-blocks", "advanced-blocks", "tools-armor", "tile-entities", "enchantments", "recipes"]
+        }
+    ],
+    "videos": [
+        "https://www.youtube.com/watch?v=jVzeGKbVLCc",
+        "https://www.youtube.com/watch?v=lJp6rdELdu8",
+        "https://youtu.be/koOd2Gt9Zog",
+        "https://youtu.be/D0_NLp0D0Sc",
+        "https://youtu.be/eEQEEl_kmGI",
+        "https://www.youtube.com/watch?v=P69zeZvgyYI",
+        "https://www.youtube.com/watch?v=HU1oRcqaxs4",
+        "https://youtu.be/l-sPwrHytjU",
+        "https://www.youtube.com/watch?v=Oy1zC2UFnRs",
+        "https://www.youtube.com/watch?v=3X4xpDrE04Y",
+        "https://www.youtube.com/watch?v=-Ea6UU9fFOA",
+        "https://www.youtube.com/watch?v=dMdPHJsAEDY"
+    ],
+    "playlists": {
+        "1.15": "PLxBLp3RqmUMEU5vrtMY6tgfP2lnJD0OUj"
+    }
+}

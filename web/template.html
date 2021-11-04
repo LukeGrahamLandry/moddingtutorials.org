@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Modding Tutorial: $TITLE </title>
+
+    <link rel="shortcut icon" href="/img/logo.png">
+    <link rel="stylesheet" href="/styles/tutorial.css">
+    <link rel="stylesheet" href="/styles/md.css">
+    <!-- <link rel="stylesheet" href="/styles/index.css"> -->
+    <link rel="stylesheet" id="theme" href="">
+    <link rel="stylesheet" href="/code.css">
+
+    <style>
+        .err {
+            border: none;
+        }
+    </style>
+
+    <script defer data-domain="moddingtutorials.org" src="https://plausible.io/js/plausible.js"></script>
+</head>
+<body>
+    <div id="side-nav">
+        <div style="padding: 10px;">
+            <a href="index">About</a>
+            <a href="my-mods" style="float: right;">My Mods</a>
+
+            <div style="text-align: center; padding-top: 10px;">
+                <label class="switch">
+                    <input type="checkbox" id="dark" onclick="updateDarkmode()">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+            <br>
+            <div>
+                <select id="dropdown" style="color: black; text-align: center; padding: 5px; width: 100%; font-weight: bold;">
+                    $VERSIONS
+                </select>
+            </div>
+        </div>
+       
+        <div id="nav">
+            $INDEX
+        </div>
+        
+        <div style="padding: 10px; font-size: 12px;">
+            &copy; 2021 Luke Graham Landry, All Rights Reserved
+        </div>
+    </div>
+
+    <div id="container">
+        <div id="phone-header" class="hide-for-print centered">
+            <div onclick="toggle()" style="float: right; cursor: pointer;">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+            <br>
+        </div>
+
+        <div id="content" class="markdown-body centered">
+            $CONTENT
+        </div>
+
+        <div class="hide-for-print" id="foot" style="display: none;">
+            <br> <br>
+            <div class="hide-for-print centered" id="buttons">
+                <a id="back-a" class="img-link">
+                    <button class="btn btn-primary" style="width: 18%;" id="back">Back</button>
+                </a>
+                <a id="next-a" class="img-link">
+                    <button class="btn btn-primary" style="width: 80%;" id="next">Next Tutorial</button>
+                </a>
+            </div>
+            <br><br>
+
+             <div style="border: 2px solid red; width: fit-content; display: inline-block;">
+                <a href="https://github.com/LukeGrahamLandry/modding-tutorials" class="img-link">
+                    <div class="app">
+                        <img src="/img/github.png" style="width: 70px">
+                    </div>
+                </a>
+        
+                <a href="https://discord.gg/VbZVnRd" class="img-link">
+                    <div class="app">
+                        <img src="/img/discord.png" style="width: 70px">
+                    </div>
+                </a>
+        
+                <a href="https://www.youtube.com/channel/UC8gYhA5SkhI1tajZ5JF2pbQ/playlists" class="img-link">
+                    <div class="app">
+                        <img src="/img/youtube.png" style="width: 70px">
+                    </div>
+                </a>
+        
+                <a href="https://www.patreon.com/LukeGrahamLandry" class="img-link">
+                    <div class="app">
+                        <img src="/img/patreon.png" style="width: 70px">
+                    </div>
+                </a>    
+             </div>
+    
+            <br> <br>
+        </div>
+    </div>
+
+    <script src="/js/dark.js"></script>
+    <script>
+        let tutorials = $TUTORIALS;
+
+        // forward back buttons
+        let thisPage = window.location.pathname.split("/").pop().split(".")[0]
+        let index = tutorials.indexOf(thisPage);
+
+        if (index != -1){
+            document.getElementById("foot").style.display = "block";
+
+            if (index == 0){
+                document.getElementById("back").disabled = true;
+            } else {
+                document.getElementById("back-a").href = tutorials[index - 1];
+            }
+
+            if (index == (tutorials.length - 1)){
+                document.getElementById("next").disabled = true;
+            } else {
+                document.getElementById("next-a").href = tutorials[index + 1]
+            }
+        }
+
+        // version select
+        document.getElementById("dropdown").onchange = function (e){
+            let new_url = e.target.value;
+            window.location.href = "/" + new_url + "/" + thisPage;
+        }
+        
+
+        // mobile nav expand button
+        let showing = false;
+        function toggle(){
+            showing = !showing;
+
+            if (showing){
+                document.getElementById("side-nav").style.display = "block";
+            } else {
+                document.getElementById("side-nav").style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
