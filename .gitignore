@@ -1,1 +1,10 @@
 **/.DS_Store
+
+*
+!web/*
+!forge-1.17-tutorials/*
+!forge-1.16-tutorials/*
+!pages/*
+!build.py
+!.gitignore
+!.gitattributes

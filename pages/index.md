@@ -33,6 +33,8 @@ This is an index of the content covered on this site.
     - summary of Java syntax 
 - [Mappings](mappings)
     - the deobfuscation of minecraft's code
+- [Registries](registries)
+    - how minecraft handles game objects
 - [Server vs Client](sides)
     - the separation of logic and rendering
 

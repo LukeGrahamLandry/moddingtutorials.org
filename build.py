@@ -74,7 +74,6 @@ def combile_md(source_folder, filename, target_folder, index_html, pages_list, v
             f.write('cloudflare pages can not deal with trailing slashes properly. redirecting to <a href="' + title + '">' + title + '</a> <script> window.location.href = "/' + title + '";</script>')
 
 
-current_index = 0
 for section_data in site_data["sections"]:
     for root, dirs, files in os.walk(section_data["folder"], topdown=False):
         if not os.path.isdir(section_data["url"]):
@@ -101,7 +100,7 @@ for section_data in site_data["sections"]:
                     print(section_data["url"], namei)
                     combile_md(rooti, namei, section_data["url"], index_html, section_data["files"], versions_html)
 
-                    if current_index == len(site_data["sections"])-1:
+                    if section_data["url"] == "o16":
                         combile_md(rooti, namei, None, index_html, section_data["files"], versions_html)
 
         for name in files:
@@ -109,11 +108,8 @@ for section_data in site_data["sections"]:
                 print(section_data["url"], name)
                 combile_md(root, name, section_data["url"], index_html, section_data["files"], versions_html)
 
-                if current_index == len(site_data["sections"])-1:
+                if section_data["url"] == "o16":
                     combile_md(root, name, None, index_html, section_data["files"], versions_html)
-
-    current_index += 1
-
 
 for root, dirs, files in os.walk("web", topdown=True):
     for dir in dirs:
@@ -175,3 +171,5 @@ with open("my-mods.html", "w") as f:
 
 shutil.copy("my-mods.html", "o16/my-mods.html")
 shutil.copy("my-mods.html", "o17/my-mods.html")
+
+# export PATH=$PATH:/opt/buildhome/.local/bin && pip3 install markdown && pip3 install pygments && python3 build.py

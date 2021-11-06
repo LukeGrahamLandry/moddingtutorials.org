@@ -241,7 +241,7 @@ input:checked + .slider:before {
   padding: 5px;
   font-size: 20px;
 
-  overflow: scroll;
+  overflow-y: scroll;
 }
 
 #container {
@@ -284,4 +284,13 @@ body {
 
 #dropdown {
   background-color: #eeee00;
+}
+
+.mod {
+  background-color: rgb(247, 247, 247);
+  color: black;
+}
+
+.mod:hover {
+  box-shadow: inset 0 0 0 1000px rgb(221, 221, 221);
 }

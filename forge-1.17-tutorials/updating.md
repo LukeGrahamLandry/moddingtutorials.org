@@ -1,6 +1,6 @@
 # Updating from 1.16 to 1.17
 
-BEfore you do anything, please **make a backup** so you can roll back if something goes wrong. Be careful to follow these steps in order!  
+Before you do anything, please **make a backup** so you can roll back if something goes wrong. Be careful to follow these steps in order!  
 
 First open the terminal / CMD and navigate to your mod folder with the command `cd /path/to/mod/folder`. 
 
@@ -81,11 +81,24 @@ In intellij this is how you make sure your project is set to use it:
 2. Wrench Icon > Gradle Settings  
     Use the "Gradle JVM" dropdown menu to select java 16
 
+## Update mods.toml
+
+open your src/main/resources/META-INF/mods.toml file.  
+
+change the required version for the minecraft dependency to  
+
+    versionRange="[1.17.1,1.18)"
+
+and the forge loader version to  
+
+    loaderVersion="[37,)" 
+
+
 ## Code Fixes
 
-You will probably have to remove some unused package imports that try to reference nonexistant packages from 1.16.
+You will probably have to remove some unused package imports that try to reference nonexistant packages from 1.16. Many of Vanilla's package names have changed. The class names update gradle script will have added imports for the new packages but may not have removed the old ones. So if you mod won't build because of these, just remove the broken import lines, you may have to look through all your .java files to find them.
 
-The package names for some important forge classes have changed. You can try to your mod to find any errors. You should be able to just delete any invalid package imports from the top of your files and use your IDE to reimport them. Effected Classes: RegistryObject
+The package names for some important forge classes have changed (`fml` -> `fmllegacy`). You can try to your mod to find any errors. You should be able to just delete any invalid package imports from the top of your files and use your IDE to reimport them. Effected Classes: RegistryObject
 
 There are a few other changes to make in your code. For example,
 
@@ -108,16 +121,3 @@ protected static <E extends BlockEntity, A extends BlockEntity> BlockEntityTicke
     return correctType == type ? (BlockEntityTicker<A>)ticker : null;
 }
 ```
-
-
-## Update mods.toml
-
-open your src/main/resources/META-INF/mods.toml file.  
-
-change the required version for the minecraft dependency to  
-
-    versionRange="[1.17.1,1.18)"
-
-and the forge loader version to  
-
-    loaderVersion="[37,)" 

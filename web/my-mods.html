@@ -13,27 +13,6 @@
         body {
             text-align: center;
         }
-
-        .mod {
-            display: inline-block;
-            width: 85%;
-            max-width: 800px;
-            text-align: left;
-            background-color: rgb(247, 247, 247);
-            border-radius: 10px;
-            padding: 1rem;
-            margin: 1rem;
-            color: black;
-        }
-
-        .mod b {
-            font-size: 75px;
-        }
-
-        .mod img {
-            height: 50px;
-            margin-right: 20px;
-        }
         
         #other {
             display: inline-block;
@@ -71,9 +50,38 @@
             font-family: monospace;
         }
 
+        .cards {
+            display: grid;
+            justify-content: center;
+            grid-template-columns: repeat(auto-fit,16rem);
+        }
+
+        .mod {
+            margin: 10px;
+            border-radius: 5px;
+        }
+
+        .mod:hover {
+            text-decoration: none;
+            transform: scale(1.2);
+        }
+
+        .mod img {
+            width: 100%;
+        }
+
+        .mod b {
+            font-size: 1.5rem;
+            padding-top: 0.3rem;
+        }
+
+        .mod p {
+            padding: 10px;
+        }
+
         @media only screen and (max-width: 480px) {
-            .mod b {
-                font-size: 45px;
+            .video {
+                
             }
         }
 
@@ -84,74 +92,65 @@
 <body>
     <h1> Luke's Mods </h1>
     <b> I work with Forge and Fabric versions 1.17.x, 1.16.x and 1.15.x </b> <br> <br>
-
-    <div class="videos">
-        $VIDEOS
-    </div>
    
-    <div id="curse" style="text-align: center;">
-        <a href="https://www.curseforge.com/minecraft/mc-mods/mimic-mod">
-            <div class="mod">
-                <img src="/img/my-mods/mimic.png" alt="Mod Icon">
-                <b> Mimic </b>
-                <p>
-                    The stealthy mimic mob looks exactly like a chest but attacks when opened! 
-                    They spawn in place of loot chests, kill them to claim your treasure. They can also be tamed and used as portable storage. 
-                    Available for Forge 1.16.5
-                </p>
-            </div>
+    <div id="curse" class="cards" style="text-align: center;">
+        <a href="https://www.curseforge.com/minecraft/mc-mods/mimic-mod" class="mod">
+            <img src="/img/my-mods/mimic.png" alt="Mod Icon">
+            <b> Mimic </b>
+            <p>
+                The stealthy mimic mob looks exactly like a chest but attacks when opened! 
+                They spawn in place of loot chests, kill them to claim your treasure. They can also be tamed and used as portable storage. 
+                Available for Forge 1.16.5
+            </p>
         </a>
 
-        <a href="https://www.curseforge.com/minecraft/mc-mods/mountables">
-            <div class="mod">
-                <img src="/img/my-mods/mountables.png" alt="Mod Icon">
-                <b> Mountables </b>
-                <p>
-                    The spiritual successor to Animal Bikes. Craft mountable versions of your favourite vanilla creatures. 
-                    They can be upgraded with speed, flight, fire proof and more. 
-                    Available for Forge 1.16.5
-                </p>
-            </div>
+        <a href="https://www.curseforge.com/minecraft/mc-mods/mountables" class="mod">
+            <img src="/img/my-mods/mountables.png" alt="Mod Icon">
+            <b> Mountables </b>
+            <p>
+                The spiritual successor to Animal Bikes. Craft mountable versions of your favourite vanilla creatures. 
+                They can be upgraded with speed, flight, fire proof and more. 
+                Available for Forge 1.16.5
+            </p>
         </a>
 
-        <a href="https://www.curseforge.com/minecraft/mc-mods/tribes">
-            <div class="mod">
-                <img src="/img/my-mods/tribes.png" alt="Mod Icon">
-                <b> Tribes </b>
-                <p>
-                    Inspired by the Factions plugin. Allows players to form groups. 
-                    Claim land, manage ranks, kick/ban players, choose a deity and level up your tribe to gain always active potion effects.
-                    Most features are configurable. Available for Forge 1.16.5 and Forge 1.17.1
-                </p>
-            </div>
+        <a href="https://www.curseforge.com/minecraft/mc-mods/tribes" class="mod">
+            <img src="/img/my-mods/tribes.png" alt="Mod Icon">
+            <b> Tribes </b>
+            <p>
+                Inspired by the Factions plugin. Allows players to form groups. 
+                Claim land, manage ranks, kick/ban players, choose a deity and level up your tribe to gain always active potion effects.
+                Most features are configurable. Available for Forge 1.16.5 and Forge 1.17.1
+            </p>
         </a>
 
         <!-- Clara's food mod -->
 
-        <a href="https://www.curseforge.com/minecraft/mc-mods/inclusive-enchanting">
-            <div class="mod">
-                <img src="/img/my-mods/inclusive-enchanting.png" alt="Mod Icon">
-                <b> Inclusive Enchanting </b>
-                <p>
-                    Allows most enchantments to apply to extra items. For example punch/flame crossbows, quick charge bows, 
-                    and fire aspect tools (acts as auto-smelt). 
-                    Available for Forge 1.16.5
-                </p>
-            </div>
+        <a href="https://www.curseforge.com/minecraft/mc-mods/inclusive-enchanting" class="mod">
+            <img src="/img/my-mods/inclusive-enchanting.png" alt="Mod Icon">
+            <b> Inclusive Enchanting </b>
+            <p>
+                Allows most enchantments to apply to extra items. For example punch/flame crossbows, quick charge bows, 
+                and fire aspect tools (acts as auto-smelt). 
+                Available for Forge 1.16.5
+            </p>
         </a>
 
-        <a href="https://www.curseforge.com/minecraft/mc-mods/harder-core">
-            <div class="mod">
-                <img src="/img/my-mods/harder-core.png" alt="Mod Icon">
-                <b> Harder Core </b>
-                <p>
-                    Adds a thirst bar that must be managed like hunger. Temperature and air quality that punish being in hostile environments. 
-                    Deadly shadows when you enter darkness and blood moons (1/8 of nights have much higher mob spawns). 
-                    To help you out, a grave holds your items when you die so they don't despawn (but its guarded by your corpse).
-                    Available for Forge 1.16.5
-                </p>
-            </div>
+        <a href="https://www.curseforge.com/minecraft/mc-mods/harder-core" class="mod">
+            <img src="/img/my-mods/harder-core.png" alt="Mod Icon">
+            <b> Harder Core </b>
+            <p>
+                Adds a thirst, temperature and air quality bars that punish being in hostile environments. 
+                Deadly shadows when you enter darkness and blood moons. 
+                When you die, a grave guarded by your corpse holds your items. Available for Forge 1.16.5
+            </p>
         </a>
+    </div>
+
+    <br>
+
+    <div class="videos">
+        $VIDEOS
     </div>
 
     <div id="other">
@@ -161,6 +160,14 @@
         <p>Simple gun mod ported from Fabric 1.16.5 to Forge 1.16.5. </p>
         <ul>
         <li><a href="http://www.curseforge.com/minecraft/mc-mods/industrial-earth-guns">https://www.curseforge.com/minecraft/mc-mods/industrial-earth-guns</a></li>
+        </ul>
+
+        <h2>Tutorial Mod</h2>
+        <p> Read my text tutorials right here on <a href="/">moddingtutorials.org</a></p>
+        <ul>
+        <li><a href="https://github.com/LukeGrahamLandry/modding-tutorials/tree/forge-1.17.1">Code for Forge 1.17.1 </a></li>
+        <li><a href="https://github.com/LukeGrahamLandry/modding-tutorials/tree/forge-1.16.5">Code for Forge 1.16.5 </a></li>
+        <li><a href="https://github.com/LukeGrahamLandry/modding-tutorials/tree/forge-1.15.2">Code for Forge 1.15.2 </a></li>
         </ul>
 
         <h2>Nightmare Craft</h2>
@@ -217,9 +224,6 @@
         $FORGE1.15
     </div>
 
-    <br> <br>
-    My text tutorials for Forge 1.16.5 and Forge 1.17.1 are on this site. <a href="/"> Read now! </a>
-    
     <script src="/js/dark.js"></script>
 </body>
 </html>

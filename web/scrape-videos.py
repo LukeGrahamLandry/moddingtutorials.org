@@ -9,6 +9,8 @@ data = {
     "paid": []
 }
 
+# probably shouldn't have my api key public like this
+# but it should only be able to access the youtube api v3 so it doesn't really matter
 api_key = "AIzaSyD3YtUIi_m0OHp_fcZxLSInHPr2KWzuJKM"
 youtube = build('youtube', 'v3', developerKey=api_key)
 

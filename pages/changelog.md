@@ -5,6 +5,9 @@
 - goal: patchouli, bows and arrows, potions. (videos that did well before)
 
 ## November 4
+- move everything to the LukeGrahamLandry/modding-tutorials git repository
+
+## November 3
 - new my-mods page. use youtube api to generate video list html
 
 ## November 1

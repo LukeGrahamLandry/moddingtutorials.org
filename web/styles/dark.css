@@ -100,6 +100,24 @@ body::-webkit-scrollbar {
     border: 3px solid rgb(20, 20, 20);
   }
 
+  #side-nav::-webkit-scrollbar {
+    width: 15px;               /* width of the entire scrollbar */
+  }
+  #side-nav::-webkit-scrollbar-track {
+    background: rgb(20, 20, 20);        /* color of the tracking area */
+  }
+  #side-nav::-webkit-scrollbar-thumb {
+    background-color: rgb(53, 53, 53);    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    border: 3px solid rgb(20, 20, 20);
+  }
+
+  #content pre {
+    scrollbar-color:  rgb(53, 53, 53)  rgb(20, 20, 20);  /* new but only for firefox*/
+  }
+  #side-nav {
+    scrollbar-color:  rgb(53, 53, 53)  rgb(20, 20, 20);  /* new but only for firefox*/
+  }
   
 
 /* new appearence */
@@ -125,7 +143,11 @@ body, #content {
 /* my-mods */
 .mod {
   background-color: #18191b;
-  color: #a7b3c1;
+  color: #a7b3c1 !important;
+}
+
+.mod:hover {
+  box-shadow: inset 0 0 0 1000px rgb(0, 0, 0) !important;
 }
 
 .video {
