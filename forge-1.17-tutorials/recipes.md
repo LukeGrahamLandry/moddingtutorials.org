@@ -1,5 +1,3 @@
-1.17 update not complete, check back soon
-
 # Recipes
 
 In this tutorial we learn about the json recipe formats used by crafting tables, furnaces, smithing tables and stone cutters. We also use an event handler to manipulate the anvil's outputs. 
@@ -110,15 +108,11 @@ Vanilla uses the stone cutter for more efficient crafting of stone items but you
       "count": 2
     }
 
-
-
 ## Anvil 
 
 ### Repair 
 
 If you want to repair a custom item in an anvil, there are two methods on your item class to override. `isRepairable` is self explanatory. `isValidRepairItem` takes in the item stacks on the left and right of the anvil and returns true if the right is a valid repair item (only called if the left is your item).
-
-
 
 ```
 @Override

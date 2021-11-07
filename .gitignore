@@ -1,6 +1,6 @@
 **/.DS_Store
 
-*
+// *
 !web/*
 !forge-1.17-tutorials/*
 !forge-1.16-tutorials/*
@@ -8,3 +8,4 @@
 !build.py
 !.gitignore
 !.gitattributes
+!README.md

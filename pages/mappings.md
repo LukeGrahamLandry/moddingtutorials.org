@@ -1,4 +1,5 @@
-coming soon...  
+coming soon...   
+[Join the discord server](https://discord.gg/VbZVnRd) to be notified when it is released. 
 
 ## Switching Mappings
 

@@ -103,21 +103,25 @@ The package names for some important forge classes have changed (`fml` -> `fmlle
 There are a few other changes to make in your code. For example,
 
 - ForgeRegistries.TILE_ENTITIES -> ForgeRegistries.BLOCK_ENTITIES
-- the `harvestTool` block properties method does not exist. I think it's just defined by the material type instead. 
+- the `harvestTool` and `harvestLevel` block properties method does not exist. You must use tags instead (described in the [basic blocks tutorial](basic-blocks))
 - the `getBurnTime(ItemStack)` method on items is now `getBurnTime(ItemStack, @Nullable RecipeType<?>)`
 - xRot and yRot on players/other entities are now private. you must use the getter and setter methods. 
 - the `hasTileEntity` does not exist, the block should implement `EntityBlock` instead
-- instead of a tile entity implementing `ITickableTileEntity`, it should have a method: `tick(Level, BlockPos, BlockState, YourTileEntity)` and the block should override `getTicker` as follows
+- instead of a tile entity implementing `ITickableTileEntity`, use the following code:
 
 ```
+// on the Block class
 @Nullable
 @Override
 public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type) {
-    return createTickerHelper(type, TileEntityInit.MOB_SLAYER.get(), MobSlayerTile::tick);
+    return type == TileEntityInit.MOB_SLAYER.get() ? MobSlayerTile::tick : null;
 }
 
-@Nullable
-protected static <E extends BlockEntity, A extends BlockEntity> BlockEntityTicker<A> createTickerHelper(BlockEntityType<A> type, BlockEntityType<E> correctType, BlockEntityTicker<? super E> ticker) {
-    return correctType == type ? (BlockEntityTicker<A>)ticker : null;
+// on the BlockEntity class
+
+public static <T extends BlockEntity> void tick(Level level, BlockPos pos, BlockState state, T be) {
+    MobSlayerTile tile = (MobSlayerTile) be;
+
+    // your code here
 }
 ```

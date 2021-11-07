@@ -1,5 +1,3 @@
-1.17 update not complete, check back soon
-
 # Advanced Blocks
 
 A tutorial on making a block with custom behaviour. It will react to being right clicked, explosions, random ticks and even act as soil for crops!
@@ -27,12 +25,12 @@ Just like with the `Item` class, `Block` has many fun methods to override to get
 
 ### Right Click Behaviour
 
-The `use` method defines what happens when a player right clicks the block. Note that is is called twice. Once for the off-hand and once for the main hand. You can check which hand it's for by comparing the `hand` argument that's passed in to `Hand.MAIN_HAND` and `Hand.*OFF_HAND*`*.*
+The `use` method defines what happens when a player right clicks the block. Note that is is called twice. Once for the off-hand and once for the main hand. You can check which hand it's for by comparing the `hand` argument that's passed in to `InteractionHand.MAIN_HAND` and `InteractionHand.*OFF_HAND*`*.*
 
 You can do anything you want here but I want my block to be explosive so I'll start by getting the `ItemStack` in the player's hand and checking if it is gun powder. The world's explode method requires the entity responsible for the explosion (for death messages, etc. Can be `null`), the position, the size to make the explosion (tnt is 4), a boolean of whether it should set fires, and the explosion mode (`NONE` does not damage terrain, `BREAK` drops items from the blocks it breaks while `DESTROY` deletes them).  I'll also shrink the item stack by one so it consumes the gun powder. 
 
     @Override
-    public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
+    public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         ItemStack held = player.getItemInHand(hand);
     
         if (!world.isClientSide() && held.getItem() == Items.GUNPOWDER){
@@ -48,13 +46,13 @@ Note that explosions won't work if the block's blast resistance is too high (bec
 
 **Server vs Client**
 
-You might also notice that I have an extra condition before doing anything: `!world.isClient()`. This checks that we are running on the server side. Minecraft's code is split into two sections. These are easiest to think about when you imagine playing on a server with other people. There is one computer somewhere that thinks about all the logic for the game (the server) and tells the other players what their computer should render (the clients). Some things happen only on the server (like saving world data), some things happen only on the client (like rendering entities), but most things happen on both (like this `Block.use` method). Learn more: [here](https://forge.gemwire.uk/wiki/Sides).
+You might also notice that I have an extra condition before doing anything: `!world.isClient()`. This checks that we are running on the server side. Minecraft's code is split into two sections. These are easiest to think about when you imagine playing on a server with other people. There is one computer somewhere that thinks about all the logic for the game (the server) and tells the other players what their computer should render (the clients). Some things happen only on the server (like saving world data), some things happen only on the client (like rendering entities), but most things happen on both (like this `Block.use` method). Learn more: [here](sides).
 
 This means that you have to manually check which side you're on if you plan to do anything that might behave differently across the sides. Most behaviour you want to run only on the server side and let Minecraft automatically sync to the client. It can get very weird if you accidentally only do something on the client. Important to note that fields set on your objects can have different values on the client and the server. This can lead to some very confusing behaviour if you're not careful. Later when you do more complicated things and need you sync data between the client and the server, you will have to use packets. 
 
-**Action Result Types**
+**Interaction Results**
 
-There are four different `ActionResultType`s you can return from this method (also used in several others involving players interacting with things).
+There are four different `InteractionResult`s you can return from this method (also used in several others involving players interacting with things).
 
 - `SUCCESS`: Use this when your item/block/entity has met all the requirements for the interaction, and you have completed everything that needs to be done. This will prevent any further action from being taken with the interaction.
 - `CONSUME`: You can use this when you meet the same conditions as SUCCESS, but additionally are consuming an item/block as part of the interaction. This ActionResultType isn't explicitly checked as of 1.15.2, and so using this is mostly optional. 
@@ -66,8 +64,8 @@ There are four different `ActionResultType`s you can return from this method (al
 You can use the `wasExploded` method to react to the block being broken by an explosion. I'll just create an explosion just like before so they can be used in chain reactions like TNT. 
 
     @Override
-    public void wasExploded(World world, BlockPos pos, Explosion explosion) {
-    	world.explode(null, pos.getX(), pos.getY(), pos.getZ(), 4.0F, true, Explosion.Mode.DESTROY);
+    public void wasExploded(Level world, BlockPos pos, Explosion explosion) {
+    	  world.explode(null, pos.getX(), pos.getY(), pos.getZ(), 4.0F, true, Explosion.BlockInteraction.DESTROY);
         super.wasExploded(world, pos, explosion);
     }
 
@@ -76,11 +74,11 @@ You can use the `wasExploded` method to react to the block being broken by an ex
 You can override `canSustainPlant` to allow your block to act as soil for specific plants, simply return true if the plant passed in should be allowed to grow. I'll get the `Block` from the `Iplantable` passed in and allow it to grow if it's a cactus. Otherwise, I'll use the super method to let the vanilla behaviour decide. Which in this case will always be false, preventing any other plants from growing. 
 
     @Override
-    public boolean canSustainPlant(BlockState state, IBlockReader world, BlockPos pos, Direction facing, IPlantable plantable) {
-    	Block plant = plantable.getPlant(world, pos.relative(facing)).getBlock();
+    public boolean canSustainPlant(BlockState state, BlockGetter world, BlockPos pos, Direction facing, IPlantable plantable) {
+    	  Block plant = plantable.getPlant(world, pos.relative(facing)).getBlock();
     
         if (plant == Blocks.CACTUS){
-    		return true;
+    		    return true;
         } else {
             return super.canSustainPlant(state, world, pos, facing, plantable);
         }
@@ -90,13 +88,17 @@ You can override `canSustainPlant` to allow your block to act as soil for specif
 
 Sometimes a block needs to do something occasionally (for example crops need to grow, grass needs to spread). Over time each block in the world randomly have its tick method called. The median time between random ticks is 47 seconds and it's affected by the random tick speed game rule. Learn more on [the wiki](https://minecraft.fandom.com/wiki/Tick#Random_tick).
 
-To allow your block to receive random ticks, you must either call `randomTicks()` on the `Block.Properties` used to create your block or override `isRandomlyTicking` in your block class to return true.
+To allow your block to receive random ticks, you must either call `randomTicks()` on the `Block.Properties` used to create your block **or** override `isRandomlyTicking` in your block class to return true.
 
 Then you can override `randomTick` to do something interesting. I'll make mine check if the block above is air and create a cactus. 
 
-    // !! call randomTicks() on your block properties or this wont work !!
     @Override
-    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random rand) {
+    public boolean isRandomlyTicking(BlockState state) {
+        return true;
+    }
+
+    @Override
+    public void randomTick(BlockState state, ServerLevel world, BlockPos pos, Random rand) {
         BlockState above = world.getBlockState(pos.above());
         if (above.isAir()){
             world.setBlockAndUpdate(pos.above(), Blocks.CACTUS.defaultBlockState());
@@ -116,14 +118,14 @@ The `Block` class has lots more methods to play with. Here's a description of a 
 
 ### Related Tutorials
 
-- [Tile Entities](/tile-entities): Allows your block to save data and react to every tick. I made mine kill nearby mobs!
--  You can also make your block a point of interest for a custom villager profession. Tutorial for this coming soon! [Join the discord server](https://discord.gg/VbZVnRd) to be notified when they are released. 
+- [Block Entities](/tile-entities): Allows your block to save data and react to every tick. I made mine kill nearby mobs!
+-  You can also make your block a point of interest for a custom villager profession. Tutorial for this coming soon! [Join the discord server](https://discord.gg/VbZVnRd) to be notified when it is released. 
 
 ### Rotation
 
 To make the block rotatable like a furnace, you have to add a property to the block state so you can tell the model file which sides to render where. It will hold a value of `NORTH`, `SOUTH`, `EAST`, or `WEST` which represents the direction it is facing. First create the property as a static field in your block class. 
 
-    public static final DirectionProperty FACING = HorizontalBlock.FACING;
+    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
  Then set a default value of the state in the constructor. We will replace this with the correct direction when a player places the block but it would probably randomly crash sometimes if you don't do this. 
 
@@ -132,8 +134,8 @@ To make the block rotatable like a furnace, you have to add a property to the bl
 You also need to tell the block about the properties it is allowed to use by adding this method:
 
     @Override
-    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
-    	builder.add(FACING);
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+    	  builder.add(FACING);
     }
 
 You'll have to override `getStateForPlacement` to have it face the player when placed. This snippet is taken from the vanilla furnace. If you want to to face forwards from the player instead of towards them, take out the `.getOpposite()`.
@@ -192,5 +194,5 @@ You should now have a fully functional block with custom functionality!
 ## Extension
 
 - Make a soil that grows crops very quickly while it's raining
-  - hint: look at how the vanilla `BoneMealItem` uses `IGrowable`
+  - hint: look at how the vanilla `BoneMealItem` uses `BonemealableBlock`
 - Make a directional block that rotates when you right click it

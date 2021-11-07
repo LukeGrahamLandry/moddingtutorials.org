@@ -1,12 +1,10 @@
-1.17 update not complete, check back soon
-
 # Basic Blocks
 
 In this tutorial we will register a simple block with a texture and a loot table. It will be a similar process to basic items.
 
 ## Concepts 
 
-Blocks are very similar to items. They must be registered so the game knows about them. Each type block is an instance of the `Block` class (not each physical block in the world). Basic traits of your block can be set with a properties object but more complex behaviour will require your own class that extends `Block`. 
+Blocks are very similar to items. They must be registered so the game knows about them. Each type block is an instance of the `Block` class (not each physical block in the world). Basic traits of your block can be set with a properties object but more complex behavior will require your own class that extends `Block`. 
 
 ## New Block
 
@@ -20,14 +18,33 @@ In your init package make a new class called BlockInit. The code here is mostly 
     }
 
 
-The Block constructer in the supplier takes a Block.Properties object made by calling the `Block.Properties.of`  method. This takes a Material which sets a few characteristics about your block like whether its flammable, how it reacts to pistons, default sounds, whether it blocks player motion, and what tools can mine it by default. Vanilla has many options to chose from, just let your IDE autocomplete from `Material`.
+The Block constructor in the supplier takes a `Block.Properties` object made by calling the `Block.Properties.of`  method. This takes a Material which sets a few characteristics about your block like whether its flammable, how it reacts to pistons, default sounds, whether it blocks player motion, and what tools can mine it by default. Vanilla has many options to chose from, just let your IDE autocomplete from `Material`.
 
 Then your `Properties` object has many other methods you can call to set different traits, just like we did with items. `strength` lets you pass in how long it takes to break and how resistant to explosions it is. `harvestLevel` sets what level of tool you need to mine it (0 is wood, 4 is netherite) and `harvestTool` lets you set what type of tool you need. You have to call `requiresCorrectToolForDrops` if it should be like stone and drop nothing without the tool.  If you want it to be a light source you can use lightLevel with a lambda expression that maps a blockstate to a value from 1 to 16. There are many more like `friction` (used by ice), `speedFactor` (used by soul sand) and `jumpFactor` (used by honey). So that supplier might looks something like this:
 
     () -> new Block(Block.Properties.of(Material.STONE).strength(4f, 1200f).harvestLevel(2).harvestTool(ToolType.PICKAXE).requiresCorrectToolForDrops().lightLevel((state) -> 15))
 
 
-You can also use `AbstractBlock.Properties.copy(ANOTHER_BLOCK)` to avoid writing things out repeatedly. All vanilla blocks can be accessed with `Blocks.INSERT_NAME_HERE` so you can copy properties from one of them if you feel like it. Or avoid redundancy by referencing `YOUR_BLOCK.get()`
+You can also use `Block.Properties.copy(ANOTHER_BLOCK)` to avoid writing things out repeatedly. All vanilla blocks can be accessed with `Blocks.INSERT_NAME_HERE` so you can copy properties from one of them if you feel like it. Or avoid redundancy by referencing `YOUR_BLOCK.get()`
+
+## Tags 
+
+To make your block require a certain type and level of tool, you must add it to a tag. Tags are how minecraft catagories blocks/items behavior in a way accessible to datapacks. For example, there is a tag for `sapplings` and one for `crops`. 
+
+Vanilla adds tags for each tool type: `mineable/pickaxe`, `mineable/axe`, `mineable/shovel`, `mineable/hoe` and for each harvest level: `needs_stone_tool`, `needs_iron_tool`, `needs_diamond_tool`. You can add your block to some of these tags to make certain tools mine it quickly and respect the `requiresCorrectToolForDrops()` call on the `Block.Properties`.  
+
+Create the folders `src/data/minecraft/tags/blocks`, in that directory create files for each tag you want to add your block to. They should be named `tag_name.json`. If the tag name has a `/` in it, that part before it is the name of the folder (ie, the `shovel.json` file goes in the `mineable` folder). These files will contain a json object with the `replace` key set to false (so you don't remove vanilla behavior) and the `values` key set to a list of registry names for the blocks you want to behave as described by the tag. 
+
+For example, I'll make `needs_iron_tool.json` and the `mineable` containing `pickaxe.json`. Both will contain the following text: 
+
+    {
+        "replace": false,
+        "values": [
+            "firstmod:smile_block"
+        ]
+    }
+
+This will make my block mine quickly with a pickaxe and only drop when using a pickaxe of iron or higher. Remember you must also call `requiresCorrectToolForDrops()` on your block properties object for this to work. 
 
 ## Block Item
 
@@ -69,7 +86,7 @@ In the constructor of your main class add this line to call the register method 
 
 ## Assets
 
-In your project folder go to `src/main/resources/assets/mod id`. Make a new folder called blockstates and in your models folder make a new folder called block. In textures make a new folder called blocks and put the png image you want to use for your block's texture. Then go out to `src/main/resources/data/mod id` and make a folder called loot_tables and in that make a folder called blocks.
+In your project folder go to `src/main/resources/assets/mod_id`. Make a new folder called blockstates and in your models folder make a new folder called block. In textures make a new folder called blocks and put the png image you want to use for your block's texture. Then go out to `src/main/resources/data/mod_id` and make a folder called loot_tables and in that make a folder called blocks.
 
 In blockstates make a file called block_name.json (replace block_name with whatever string you passed in as your registry name). Since this is a simple block, we just need one varient that points to a model. Make sure you change firstmod to your mod id and smile_block to the registry name of your block.
 

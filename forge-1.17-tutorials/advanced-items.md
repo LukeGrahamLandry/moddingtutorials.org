@@ -1,5 +1,3 @@
-1.17 update not complete, check back soon
-
 # Advanced Items
 
 A tutorial on making items with unique custom behaviours. We will make a food that gives a potion effect, a furnace fuel and an item that teleports you forward when right clicked.
@@ -18,9 +16,9 @@ Then on the Item.Properties, call the food function. This takes in a Food create
                         .food(new Food.Builder().nutrition(4).saturationMod(2).build()
     
 
-To make your food grant a potion effect when eaten, call the effect function of your Food.Builder (before you call build). This takes a supplier for an EffectInstance which takes the effect you want to give, the duration (in ticks so 20 is one second), and the amplifier (0 is level I). The effect method also takes the likelihood your effect will be applied (1.0F is always and 0F is never). So this code will have a 50% chance to give fire resistance I for 10 seconds.
+To make your food grant a potion effect when eaten, call the `effect` function of your `Food.Builder` (before you call `build()`). This takes a supplier for an `MobEffectInstance` which takes the effect you want to give, the duration (in ticks so 20 is one second), and the amplifier (0 is level I). The effect method also takes the likelihood your effect will be applied (1.0F is always and 0F is never). So this code will have a 50% chance to give fire resistance I for 10 seconds.
 
-    .effect(() -> new EffectInstance(Effects.FIRE_RESISTANCE, 200, 0), 0.5F)
+    .effect(() -> new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 200, 0), 0.5F)
     
 
 ## Fuel
@@ -42,10 +40,10 @@ Make a new package called items and create the FuelItem class you referenced whe
     }
     
 
-Then override the getBurnTime method. This takes the itemStack being used as fuel and returns the burn time in ticks. It will return the int we saved from the constructor. 
+Then override the `getBurnTime` method. As arguments, this takes the `ItemStack` being used as fuel and the recipe type (SMELTING, SMOKING or SMITHING) both of which we will ignore. It returns the burn time in ticks. It will return the int we saved from the constructor. 
 
     @Override
-    public int getBurnTime(ItemStack itemStack) {
+    public int getBurnTime(ItemStack itemStack, @Nullable RecipeType<?> recipeType) {
         return this.burnTicks;
     }
     
@@ -75,13 +73,13 @@ Start the same way as for a fuel. In ItemInit, copy paste basic item, rename and
 To do something when it's right clicked, override use. It takes in the world which lets you effect blocks and stuff, the player that used it and whether it was main or offhand.
 
     @Override
-    public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
+    public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
     	return super.use(world, player, hand);
     }
 
 So in that method we can use a function built into the item class to do a raycast in the direction the player is looking and save the first thing it hits in a variable. Then we can set the player's position to that position. That will teleport the player forward.
 
-    BlockRayTraceResult ray = getPlayerPOVHitResult(world, player, RayTraceContext.FluidMode.NONE);
+    BlockHitResult ray = getPlayerPOVHitResult(world, player, ClipContext.Fluid.NONE);
     BlockPos lookPos = ray.getBlockPos();
     player.setPos(lookPos.getX(), lookPos.getY(), lookPos.getZ());
 
@@ -91,22 +89,22 @@ If you tried it now you'd notice that when you try to teleport straight down it 
 
 Currently the range of the teleport is just the players mining range. To fix that, we can make our own version of this getPlayerPOVHitResult method. If you command click (MacOS Intellij, idk what it is for windows) on the method you can jump to its declaration in the Item class. Its a bunch of confusing math but we can just copy it into our class and try to figure it out. 
 
-You can see its getting the position of the player's eyes, then calculating the direction you're looking and multiplying that by this a float called d0. So if you change that, you change the length of the vector and thus the range. If there's no block close in front of you, you'll just teleport the full distance. Let's just name our new function something different so we can be sure we aren't messing up any other behaviours. Don't forget to switch the use method to be using our new rayTrace.
+You can see its getting the position of the player's eyes, then calculating the direction you're looking and multiplying that by this a float called d0. So if you change that, you change the length of the vector and thus the range. If there's no block close in front of you, you'll just teleport the full distance. Let's just name our new function something different so we can be sure we aren't messing up any other behaviors. Don't forget to switch the use method to be using our new `rayTrace`.
 
-    protected static BlockRayTraceResult rayTrace(World world, PlayerEntity player, RayTraceContext.FluidMode fluidMode) {
+    protected static BlockRayTraceResult rayTrace(Level world, Player player, ClipContext.Fluid fluidMode) {
             double range = 15;
     
-            float f = player.xRot;
-            float f1 = player.yRot;
+            float f = player.getXRot();
+            float f1 = player.getYRot();
             Vector3d vector3d = player.getEyePosition(1.0F);
-            float f2 = MathHelper.cos(-f1 * ((float)Math.PI / 180F) - (float)Math.PI);
-            float f3 = MathHelper.sin(-f1 * ((float)Math.PI / 180F) - (float)Math.PI);
-            float f4 = -MathHelper.cos(-f * ((float)Math.PI / 180F));
-            float f5 = MathHelper.sin(-f * ((float)Math.PI / 180F));
+            float f2 = Mth.cos(-f1 * ((float)Math.PI / 180F) - (float)Math.PI);
+            float f3 = Mth.sin(-f1 * ((float)Math.PI / 180F) - (float)Math.PI);
+            float f4 = -Mth.cos(-f * ((float)Math.PI / 180F));
+            float f5 = Mth.sin(-f * ((float)Math.PI / 180F));
             float f6 = f3 * f4;
             float f7 = f2 * f4;
             Vector3d vector3d1 = vector3d.add((double)f6 * range, (double)f5 * range, (double)f7 * range);
-            return world.clip(new RayTraceContext(vector3d, vector3d1, RayTraceContext.BlockMode.OUTLINE, fluidMode, player));
+            return world.clip(new ClipContext(vector3d, vector3d1, ClipContext.Block.OUTLINE, fluidMode, player));
         }
 
 If you want to limit how often the item can be used you can add a cool down. The second argument is the time they have to wait before using it again in ticks (1/20 of a second). You can also make teleporting reset how far you've fallen so you can use the item to escape fall damage.
@@ -118,36 +116,36 @@ If you want to limit how often the item can be used you can add a cool down. The
 
 You can also play a sound. This will play the enderman's teleport sound that the player's position. The last two arguments are volume and pitch. 
 
-    world.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.ENDERMAN_TELEPORT, SoundCategory.PLAYERS, 1.0F, 1.0F);
+    world.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.ENDERMAN_TELEPORT, SoundSource.PLAYERS, 1.0F, 1.0F);
     
 
 If we want to give the players some help understanding our mod, we can add a tool tip when they hover over the item in their inventory. So override appendHoverText and add to the tooltip. The StringTextComponent class is just a string that Minecraft can render.
 
     @Override
-    public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+    public void appendHoverText(ItemStack stack, @Nullable Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
         tooltip.add(new StringTextComponent("teleports you where you're looking"));
     
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
     }
 
-If you want less clutter for the player, you can only show this when they're holding shift. So make a new package called util and a class called KeyboardHelper. Everything here will be static, we can get the game window so we can get user input. Then make some functions to check if they're holding shift, space, or control respectively. For shift and control we are checking both the left and right one. Don't forget to import all these classes. 
+If you want less clutter for the player, you can only show this when they're holding shift. So make a new package called util and a class called KeyboardHelper. Everything here will be static, we can get the game window so we can get user input. Then make some functions to check if they're holding shift, space, or control respectively. For shift and control we are checking both the left and right one. Don't forget to import all these classes. Note: this class can only be used on the client side, [Learn More](sides).
 
     public class KeyboardHelper {
         private static final long WINDOW = Minecraft.getInstance().getWindow().getWindow();
-    
+
         @OnlyIn(Dist.CLIENT)
         public static boolean isHoldingShift() {
-            return InputMappings.isKeyDown(WINDOW, GLFW.GLFW_KEY_LEFT_SHIFT) || InputMappings.isKeyDown(WINDOW, GLFW.GLFW_KEY_RIGHT_SHIFT);
+            return InputConstants.isKeyDown(WINDOW, GLFW.GLFW_KEY_LEFT_SHIFT) || InputConstants.isKeyDown(WINDOW, GLFW.GLFW_KEY_RIGHT_SHIFT);
         }
-    
+
         @OnlyIn(Dist.CLIENT)
         public static boolean isHoldingControl() {
-            return InputMappings.isKeyDown(WINDOW, GLFW.GLFW_KEY_LEFT_CONTROL) || InputMappings.isKeyDown(WINDOW, GLFW.GLFW_KEY_RIGHT_CONTROL);
+            return InputConstants.isKeyDown(WINDOW, GLFW.GLFW_KEY_LEFT_CONTROL) || InputConstants.isKeyDown(WINDOW, GLFW.GLFW_KEY_RIGHT_CONTROL);
         }
-    
+
         @OnlyIn(Dist.CLIENT)
         public static boolean isHoldingSpace() {
-            return InputMappings.isKeyDown(WINDOW, GLFW.GLFW_KEY_SPACE);
+            return InputConstants.isKeyDown(WINDOW, GLFW.GLFW_KEY_SPACE);
         }
     }
 
@@ -165,7 +163,7 @@ If you want it to use durability you can get the item stack being used, increase
     if (stack.getDamageValue() >= stack.getMaxDamage()) stack.setCount(0);
     
 
-Then you can go back to ItemInit. Dont forget to import your special item class. If you did the durability thing you have to set the durability to something in the Item.Properties. Giving it durability automatically makes the max stack size one (normally set by the stacksTo method on the properties builder).
+Then you can go back to ItemInit. Dont forget to import your special item class. If you did the durability thing you have to set the durability to something in the `Item.Properties`. Giving it durability automatically makes the max stack size one (normally set by the `stacksTo` method on the properties builder).
 
     new Item.Properties().tab(ModCreativeTab.instance).durability(50)
     
@@ -197,7 +195,7 @@ If you run the game the items show up in the creative tab and have textures. You
 
 - Make an item that gives poison to any entity you right click
 
-    - hint: `entity.addEffect(new EffectInstance(Effects.VANILLA_NAME, duration, amplifier));`
+    - hint: `entity.addEffect(new MobEffectInstance(MobEffects.VANILLA_NAME, duration, amplifier));`
 
 - Make an item that propels the player in the direction they're looking
 

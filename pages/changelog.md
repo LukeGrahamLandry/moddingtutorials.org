@@ -1,11 +1,17 @@
 # Change Log
 
-- goal: update tutorial text to 1.17
-- goal: events, mappings, sides, registries 
+- goal: events, mappings, sides, registries, loot tables
 - goal: patchouli, bows and arrows, potions. (videos that did well before)
+- goal: videos
+
+## November 7
+- updated tutorial text to 1.17
+
+## November 6
+- condensed the curseforge releases on my-mods page
 
 ## November 4
-- move everything to the LukeGrahamLandry/modding-tutorials git repository
+- moved everything to the LukeGrahamLandry/modding-tutorials git repository
 
 ## November 3
 - new my-mods page. use youtube api to generate video list html

@@ -15,6 +15,9 @@ You must do this in a class that implements `IItemTier`. The simplest way to do 
     public enum ModItemTier implements IItemTier {
         PINK(3, 3000, 10.0F, 5.0F, 5, () -> {
             return Ingredient.of(ItemInit.SMILE.get());
+        }),
+        EXAMPLE(1, 1, 1.0F, 1.0F, 1, () -> {
+            return Ingredient.of(Items.STICK);
         });
     
         private final int level;

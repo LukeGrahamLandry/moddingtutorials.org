@@ -1,5 +1,3 @@
-1.17 update not complete, check back soon
-
 # Enchantments
 
 A tutorial on making enchantments. We will make an enchantment that goes on boots and builds a bridge of blocks under you when you walk. 
@@ -23,8 +21,6 @@ Don't forget to actually call this deferred register from the constructor of you
 EnchantmentInit.ENCHANTMENTS.register(modEventBus);
 ```
 
-
-
 ## Enchantment Class
 
 Create a package called `enchants` and a class that extends `Enchantment` (named whatever you used to create the enchantment above). Instead of taking constructor parameters, I'll hard code them since we only use this class for one enchantment. 
@@ -37,22 +33,17 @@ public class BridgeEnchantment extends Enchantment {
 }
 ```
 
-
 ### Constructor Values
 
 - `rarity`: is a value of the `Enchantment.Rarity` enum (COMMON, UNCOMMON, RARE or VERY_RARE). Each of the 4 options has a different weight value (ranging from 10 to 1) which defines how likely it is to be chosen by the enchantment table. 
-- `enchantType`: is a value of the `EnchantmentType` enum. It defines which types of items the enchantment can be applied to. Vanilla has options for each type of armour and tool but we will cover making custom ones shortly. 
-- `slotType`: is an array of values of the `EquipmentSlotType` enum which defines the slots where the game will look for the enchantment on an entity. If you want to be valid for all slots, use `EquipmentSlotType.values()`. `EnchantmentHelper.getEnchantmentLevel(Enchantment, LivingEntity)` is the method that vanilla uses to find the highest level of an enchantment effecting an entity and it respects this slotType value. This means, for example, that even if you edit the nbt of a chest plate to add the frost walker enchantment, the game will not recognize it because it only looks at your feet. 
+- `enchantType`: is a value of the `EnchantmentCategory` enum. It defines which types of items the enchantment can be applied to. Vanilla has options for each type of armour and tool but we will cover making custom ones shortly. 
+- `slotType`: is an array of values of the `EquipmentSlot` enum which defines the slots where the game will look for the enchantment on an entity. If you want to be valid for all slots, use `EquipmentSlot.values()`. `EnchantmentHelper.getEnchantmentLevel(Enchantment, LivingEntity)` is the method that vanilla uses to find the highest level of an enchantment effecting an entity and it respects this slotType value. This means, for example, that even if you edit the nbt of a chest plate to add the frost walker enchantment, the game will not recognize it because it only looks at your feet. 
 
-For this example I'll be using `super(Enchantment.Rarity.RARE, EnchantmentType.ARMOR_FEET, new EquipmentSlotType[]{EquipmentSlotType.FEET});`
-
-
+For this example I'll be using `super(Enchantment.Rarity.RARE, EnchantmentCategory.ARMOR_FEET, new EquipmentSlot[]{EquipmentSlot.FEET});`
 
 ### Useful Methods
 
 The `Enchantment` class has several methods that you can override to decide more details about your enchantment. 
-
-
 
 #### getMaxLevel
 
@@ -76,8 +67,6 @@ protected boolean checkCompatibility(Enchantment other) {
 }
 ```
 
-
-
 #### doPostAttack
 
 Called when a player (and most other entities) with this enchantment (on its helmet, chest, legs, boots, main hand, or off hand) attacks an entity. This will run multiple times if the attacker has multiple items with your enchantment. Vanilla uses this for bane of arthropods to give spiders a brief slowness effect. 
@@ -91,8 +80,6 @@ public void doPostAttack(LivingEntity attacker, Entity target, int level) {
 }
 ```
 
-
-
 #### doPostHurt
 
 Called when something with this enchantment is attacked. Same as above, this will run multiple times for multiple items and does not respect the enchantment's `slotType`. Vanilla uses this for the thorns enchantment. 
@@ -100,11 +87,9 @@ Called when something with this enchantment is attacked. Same as above, this wil
 ```
 @Override
 public void doPostHurt(LivingEntity target, Entity attacker, int p_151367_3_) {
-	target.addEffect(new EffectInstance(Effects.DAMAGE_BOOST, 100));
+	target.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 100));
 }
 ```
-
-
 
 #### Simple Booleans
 
@@ -141,8 +126,6 @@ public static class BridgeBuildingHandler {
 }
 ```
 
-
-
 Next I'll do something based on the level of my enchantment the player has. 
 
 If the player has my enchantment and is holding shift, I'll check the block below them. If it is air, I'll set it to slime instead. This will form a nice bridge to walk on so you can kinda fly while shifting. 
@@ -155,20 +138,17 @@ if (level > 0 && event.player.isShiftKeyDown()){
 }
 ```
 
-
-
 ## Applying to Custom Items
 
-If you want to make an enchantment that will only show up when you put an item you made in the enchantment table, you must make your own `EnchantmentType`. We use the static `create` method on `EnchantmentType` which takes a string name for the type and a predicate that takes in the item being enchanted and returns a boolean representing whether it can accept the enchantment. Then simply make your enchantment class, pass your new `EnchantmentType` into the constructor and register it with the deferred register in your `EnchantmentInit` as before. 
+If you want to make an enchantment that will only show up when you put an item you made in the enchantment table, you must make your own `EnchantmentCategory`. We use the static `create` method on `EnchantmentCategory` which takes a string name for the type and a predicate that takes in the item being enchanted and returns a boolean representing whether it can accept the enchantment. Then simply make your enchantment class, pass your new `EnchantmentCategory` into the constructor and register it with the deferred register in your `EnchantmentInit` as before. 
 
 This example would allow the enchantment to apply to the teleport staff item we made in the [advanced items tutorial](/advanced-items). 
 
-
     public class DistanceEnchantment extends Enchantment {
-        static EnchantmentType TELEPORT_STAFF_TYPE = EnchantmentType.create("teleport_staff", (item -> item == ItemInit.TELEPORT_STAFF.get()));
+        static EnchantmentCategory TELEPORT_STAFF_TYPE = EnchantmentCategory.create("teleport_staff", item -> item == ItemInit.TELEPORT_STAFF.get());
     
         public DistanceEnchantment() {
-            super(Rarity.UNCOMMON, TELEPORT_STAFF_TYPE, new EquipmentSlotType[]{EquipmentSlotType.MAINHAND, EquipmentSlotType.OFFHAND});
+            super(Rarity.COMMON, TELEPORT_STAFF_TYPE, new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
         }
     }
 
@@ -182,8 +162,6 @@ public int getEnchantmentValue() {
 	return 10;
 }
 ```
-
-
 
 ## Assets
 

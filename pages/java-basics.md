@@ -4,7 +4,9 @@ Before you begin trying to make a Minecraft mod, it is important that you are co
 
 If you're new to programming, I recommend you follow along and experiment with my examples. If you don't have java installed on your computer yet, you can use an [online compiler](https://www.onlinegdb.com/online_java_compiler) to run your programs without leaving your web browser. 
 
-## Types
+I promise this will be the longest and most boring page on this site. 
+
+## Primitive Types
 
 Every piece of information your programs can store has a type. Simple data types are called primitives and are the building blocks of more complex types
 
@@ -176,6 +178,8 @@ An if statement controls the flow of your program. You can specify code to run o
 ---
 
 # to be continued...
+
+[Join the discord server](https://discord.gg/VbZVnRd) to be notified when more of this tutorial is released.
 
 - While Loops
 
