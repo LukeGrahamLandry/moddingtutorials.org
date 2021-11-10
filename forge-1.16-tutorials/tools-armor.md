@@ -296,4 +296,4 @@ You can override `makesPiglinsNeutral` to return true if you want your armor to 
 
 ### Related Tutorials 
 
-- You can make armor with complex 3d models made in BlockBench. This will be covered in a future tutorial. [Join the discord server](https://discord.gg/VbZVnRd) to be notified when it is released. 
+- You can make armor with complex 3d models made in BlockBench. This will be covered in a future tutorial. Join [the discord server](https://discord.gg/VbZVnRd) or [the email list](https://buttondown.email/LukeGrahamLandry) to be notified when it is released. 

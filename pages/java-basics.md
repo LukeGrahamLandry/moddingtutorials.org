@@ -56,8 +56,6 @@ float b = 4f;
 long c = 1234L;
 ```
 
-
-
 ## Comments 
 
 Any text on a line past `//` is ignored by the complier. This is called a comment. They can be used to describe the thought process behind your code to make it easier to read.
@@ -70,8 +68,6 @@ it will be ignored */
 
 int foobar = 4; // also a comment
 ```
-
-
 
 ## Operators
 
@@ -164,6 +160,17 @@ Operators that evaluate to booleans can be chained together to form boolean expr
 
 `bar` however, will be `false` because only one of the expressions was `true`.
 
+## Output Text
+
+The simplest way for your program to display information to the user is:
+
+```
+System.out.println("Hello World");
+System.out.println(10 * 2 + 5);
+```
+
+Whatever you pass in to that function call will be printed to the console. 
+
 ## If Statements
 
 An if statement controls the flow of your program. You can specify code to run only if a boolean expression (known as a condition in this context) is true. 
@@ -175,18 +182,169 @@ An if statement controls the flow of your program. You can specify code to run o
        // run some code
     }
 
+### Else 
+
+You may find your self wanting to run another block of code only if your condition is false. You could do something like this,
+
+```
+if (condition){
+    runCode();
+}
+if (!condition){
+    runOtherCode();
+}
+```
+
+But there's a less verbose way:
+
+```
+if (condition){
+    runCode();
+} else {
+    runOtherCode();
+}
+```
+
+### If Else
+
+You may find your self wanting to check anther condition only if the first was false. You could do something like this:
+
+```
+if (condition){
+    runCode();
+} else {
+    if (otherCondition){
+        runOtherCode();
+    } else {
+        if (thirdCondition){
+            thingOne();
+        } else {
+            thingTwo();
+        }
+    }
+}
+```
+
+But there's a more clear way:
+
+```
+if (condition){
+    runCode();
+} else if (otherCondition){
+    runOtherCode();
+else if (thirdCondition){
+    thingOne();
+} else {
+    thingTwo();
+}
+```
+
+Remember, as soon as one of the conditions evaluates to true, that block will execute and none of the lower ones will.  
+
+less levels of nesting = less spaghetti code = good
+
+## While Loops
+
+The ability to repeat code can be extremely useful. While loops use a condition, just like if statements. 
+
+```
+int x = 0;
+while (x < 4){
+    System.out.println(x * 4);
+    x++;   
+}
+```
+
+that code will set x to zero and then only if x is less than 4: print x and increase x by one. Then it will go back up and repeat the check if x is less than 4. It will keep looping around until the check fails. The output will look like this:
+
+```
+0
+4
+8
+12
+```
+
+You can easily make infinite loops. `true` is always `true` so the condition will always pass. 
+
+```
+while (true){
+    calledInfiniteTimesLOL();
+}
+```
+
+You can also force a loop to exit early by using the `break;` statement. This will immediately exit the loop and move on to the code in the next block. 
+
+```
+while (carHasGas){
+    moveForward();
+    if (wasBreakPushed){
+        break;
+    }
+}
+```
+
+You can also skip the remaining part of a loop and immediately restart at the condition. 
+
+```
+while (true){
+    doSomething();
+    if (bar){
+        continue;
+    }
+    somethingElse();
+}
+```
+
+is equivalent to 
+
+```
+while (true){
+    doSomething();
+    if (!bar){
+        somethingElse();
+    }
+}
+```
+
+## For Loops
+
+There is a more efficient way to write my first while loop example. 
+
+```
+for (int x=0;x<4;x++){
+    System.out.println(x * 4);
+}
+```
+
+Instead of the first set of brackets just containing a condition, it has 3 statements. 
+1. called at the beginning, the first time the loop runs. commonly to initialize a counter variable
+2. the condition checked before each iteration. the loop ends if this is false
+3. called at the end of each iteration. commonly to increment the counter variable
+
+`break` and `continue` statements work the same as before. 
+
+## Scopes 
+
+Variables declared within {a code block} cannot be accessed from outside the block. They can however, be accessed by inner blocks.
+
+```
+int a = 0;
+if (foo){
+    // can access a 
+    while (bar){
+        float b = 2.7f;
+        // do some math whatever idk
+        // can access a and b
+    }
+    // can not access b anymore
+}
+```
+
 ---
 
 # to be continued...
 
 [Join the discord server](https://discord.gg/VbZVnRd) to be notified when more of this tutorial is released.
-
-- While Loops
-
-- For Loops
-
-- Scopes
-    - Variables declared within {a code block} cannot be accessed from outside the block. They can however, be accessed by inner blocks. 
 
 - Objects
 

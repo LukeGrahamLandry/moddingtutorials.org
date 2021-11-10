@@ -119,7 +119,7 @@ The `Block` class has lots more methods to play with. Here's a description of a 
 ### Related Tutorials
 
 - [Block Entities](/tile-entities): Allows your block to save data and react to every tick. I made mine kill nearby mobs!
--  You can also make your block a point of interest for a custom villager profession. Tutorial for this coming soon! [Join the discord server](https://discord.gg/VbZVnRd) to be notified when it is released. 
+-  You can also make your block a point of interest for a custom villager profession. Tutorial for this coming soon! Join [the discord server](https://discord.gg/VbZVnRd) or [the email list](https://buttondown.email/LukeGrahamLandry) to be notified when it is released. 
 
 ### Rotation
 

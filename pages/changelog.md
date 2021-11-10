@@ -4,6 +4,9 @@
 - goal: patchouli, bows and arrows, potions. (videos that did well before)
 - goal: videos
 
+## November 8 
+- added email list form 
+
 ## November 7
 - updated tutorial text to 1.17
 

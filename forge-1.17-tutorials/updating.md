@@ -45,7 +45,7 @@ gradlew -PUPDATE_CLASSNAMES=true updateClassnames
 
 When thats done running, you can remove the apply plugin line from your build.gradle if you want.  
 
-> This script is by SizableShrimp and released under the Creative Commons Zero v1.0 Universal license. just incase the repository is no longer up, I have a mirror you can use at https://raw.githubusercontent.com/LukeGrahamLandry/forge-modding-tutorial/forge-1.17.1/classname_update_script.gradle
+> This script is by SizableShrimp and released under the Creative Commons Zero v1.0 Universal license. just incase the repository is no longer up, I have a mirror you can use at https://raw.githubusercontent.com/LukeGrahamLandry/modding-tutorials/forge-1.17.1/classname_update_script.gradle
 
 ## Finish Updating build.gradle 
 
@@ -103,10 +103,10 @@ The package names for some important forge classes have changed (`fml` -> `fmlle
 There are a few other changes to make in your code. For example,
 
 - ForgeRegistries.TILE_ENTITIES -> ForgeRegistries.BLOCK_ENTITIES
-- the `harvestTool` and `harvestLevel` block properties method does not exist. You must use tags instead (described in the [basic blocks tutorial](basic-blocks))
+- the `harvestTool` and `harvestLevel` block properties methods do not exist. You must use tags instead (described in the [basic blocks tutorial](basic-blocks))
 - the `getBurnTime(ItemStack)` method on items is now `getBurnTime(ItemStack, @Nullable RecipeType<?>)`
 - xRot and yRot on players/other entities are now private. you must use the getter and setter methods. 
-- the `hasTileEntity` does not exist, the block should implement `EntityBlock` instead
+- the `hasTileEntity` method does not exist, the block should implement `EntityBlock` instead
 - instead of a tile entity implementing `ITickableTileEntity`, use the following code:
 
 ```
@@ -125,3 +125,5 @@ public static <T extends BlockEntity> void tick(Level level, BlockPos pos, Block
     // your code here
 }
 ```
+
+- a bunch of stuff with entity models and rendering has changed. I'll add info about this as my tutorials get to it

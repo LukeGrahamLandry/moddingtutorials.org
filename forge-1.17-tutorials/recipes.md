@@ -193,4 +193,4 @@ public static void handleRepair(AnvilUpdateEvent event){
 
 ## Others
 
-- Potion recipes are not data driven, they must be done from code. This will be covered in a future tutorial. [Join the discord server](https://discord.gg/VbZVnRd) to be notified when it is released.  
+- Potion recipes are not data driven, they must be done from code. This will be covered in a future tutorial. Join [the discord server](https://discord.gg/VbZVnRd) or [the email list](https://buttondown.email/LukeGrahamLandry) to be notified when it is released.  
