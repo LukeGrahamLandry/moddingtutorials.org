@@ -1,12 +1,10 @@
-# Custom Arrows
-
-## Custom Projectile 
+# Custom Projectile 
 
 Your projectile is an example of an entity. Entities have a position in the world, are bound to a renderer so the player can see them, have a bounding box to detect collisions, and react to ticks (move around, etc). Each individual entity in the world is an instance of the `Entity` class. There are many classes that extend `Entity` to give more interesting behavior. 
 
 Each entity also has an `EntityType`. This must be registered just like blocks/items. The `EntityType` tells the game which renderer to use and which `Entity` class to use to define your entity's behavior when it is loaded from disk. 
 
-### Init
+## Init
 
 Start by setting up a deferred register for entities. 
 
@@ -18,7 +16,7 @@ public class EntityInit {
 
 Then you will use it to register an `EntityType` for your custom arrow. As usual, you pass in a string to use as a registry name and a supplier for your entity type. Entity types are created with the `EntityType.Builder` class. This allows you to set a few traits of your entity. 
 
-The builder needs a supplier for your entity class. If you're entity class has multiple constructors, it seems to get confused which you mean so you have to cast it to `EntityType.IFactory`. You also give it a `EntityClassification` (better description of this will be in the entities tutorial), for projectiles you should use `MISC`. This sets a few trThe `sized` method sets the width and height of the bounding box, so how big an area your projectile checks for hitting something (vanilla arrows use 0.5 by 0.5). Finally call the `build` method, the argument here should be the same as the registry used earlier name (idk why but that's what vanilla does. if anyone finds out, pls tell me). 
+The builder needs a supplier for your entity class. If you're entity class has multiple constructors, it seems to get confused which you mean so you have to cast it to `EntityType.IFactory`. You also give it a `EntityClassification` (better description of this will be in the hostile entities tutorial), for projectiles you should use `MISC`. The `sized` method sets the width and height of the bounding box, so how big an area your projectile checks for hitting something (vanilla arrows use 0.5 by 0.5). Finally call the `build` method, the argument here should be the same as the registry used earlier name (idk why but that's what vanilla does. if anyone finds out, pls tell me). 
 
     public static final RegistryObject<EntityType<ExplosiveArrowEntity>> TORCH_ARROW = ENTITY_TYPES.register("torch_arrow",
                 () -> EntityType.Builder.of((EntityType.IFactory<ExplosiveArrowEntity>) ExplosiveArrowEntity::new, EntityClassification.MISC).sized(0.5F, 0.5F).build("torch_arrow"));
@@ -29,11 +27,11 @@ Remember to call this registry from the constructor of your main class.
 EntityInit.ENTITY_TYPES.register(modEventBus);
 ```
 
-### Arrow Class
+## Arrow Class
 
 Now we will actually create the class referenced above to define the behavior of the projectile. There's a kinda elaborate tree of classes with different behaviors already implemented, you can read the descriptions below to choose which to extend for your arrow. Each class has its own behavior and keeps the behavior of anything lower down the chain. 
 
-#### Vanilla Classes
+### Vanilla Classes
 
 Entity
 - does the absolute minimum, you must define all behavior
@@ -61,7 +59,7 @@ ThrowableEntity > ProjectileEntity > Entity
 ProjectileItemEntity > ThrowableEntity > ProjectileEntity > Entity
 - renders as an item by implementing `IRendersAsItem` and having an entity type bound to `SpriteRenderer`
 
-#### Your Class
+### Your Class
 
 I will be extending `AbstractArrowEntity`. Below are the constructors that give you. The `getPickupItem` method returns the item stack to give the player when they walk over your arrow stuck in the ground.
 
@@ -128,7 +126,7 @@ protected void tickDespawn() {
 }
 ```
 
-### Rendering
+## Rendering
 
 To allow players to see your arrow in the world, you must bind it to an `EntityRenderer` that defines its appearance. 
 
@@ -164,7 +162,7 @@ Once you're happy with your texture image, you can make a folder called `entity`
 
 You can also have multiple textures and switch between them based on properties of the projectile object passed to `getTextureLocation`. For example, you could check the value of `arrow.tickCount` and cycle between different textures every second. Note that you can only access values present on the client side so you may need to use a `DataParameter` to sync data from the server. This will be covered in more detail in the entities tutorial. Join [the discord server](https://discord.gg/VbZVnRd) or [the email list](https://buttondown.email/LukeGrahamLandry) to be notified when it is released. 
 
-#### Bind Renderer
+### Bind Renderer
 
 For the game to know that your new renderer class should be used whenever your arrow exists in the world, you must register it on the client setup event. The forge events system is described in more depth in [the events tutorial](/events).
 
@@ -180,11 +178,11 @@ public class ClientSetup {
 }
 ```
 
-### Using Your Arrow
+## Using Your Arrow
 
-You can add your arrow to the world whenever you want. The rest of this tutorial will cover creating a custom arrow item so vanilla bows can shoot your projectile and creating a custom bow with a custom projectile (the arrow shooting code shown here could be used anywhere else in your code).
+You can add your arrow to the world whenever you want. The next section of this tutorial will cover creating a custom arrow item so vanilla bows can shoot your projectile. You could also create a custom bow that specificity shoots the projectile we just made. A tutorial for this is coming soon. Join [the discord server](https://discord.gg/VbZVnRd) or [the email list](https://buttondown.email/LukeGrahamLandry) to be notified when it is released. 
 
-Example that could be used anywhere you have access to a player (ie, on item right click):
+Example of summoning your arrow entity that could be used anywhere you have access to a player (ie, on item right click):
 
 ```
 if (!player.level.isClientSide()){
@@ -195,8 +193,6 @@ if (!player.level.isClientSide()){
 ```
 
 ## Arrow Item
-
-### Item
 
 Arrows are just an item like any other with a special method that allows bows to create the correct arrow entity to shoot. Create a class that extends `ArrowItem` and simply override the `createArrow` method to return a new instance of the arrow entity you created above. 
 
@@ -241,8 +237,4 @@ Create the folders `src/main/resources/data/minecraft/tags/items` and within tha
 ### Assets
 
 The arrow item requires model and texture files as well as a lang entry as covered in the [basic items tutorial](basic-items)
-
-## Bow Item
-
-This section is coming soon! Join [the discord server](https://discord.gg/VbZVnRd) or [the email list](https://buttondown.email/LukeGrahamLandry) to be notified when it is released. 
 
