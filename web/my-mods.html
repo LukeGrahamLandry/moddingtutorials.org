@@ -80,8 +80,20 @@
         }
 
         .mod i {
-            font-size: 0.6rem;
-            padding-top: 5px;
+            font-size: 0.8rem;
+            padding-bottom: 5px;
+        }
+
+        #contributions {
+            display: grid;
+            justify-content: center;
+            grid-template-columns: repeat(auto-fit,8rem);
+            font-size: 0.8rem;
+        }
+
+        #contributions .mod b {
+            font-size: 1.15rem;
+            padding-top: 0.3rem;
         }
 
         @media only screen and (max-width: 480px) {
@@ -159,15 +171,30 @@
     <div class="videos">
         $VIDEOS
     </div>
+    <br>
+    <div id="contributions" style="text-align: center;">
+        <a href="https://www.curseforge.com/minecraft/mc-mods/industrial-earth-guns" class="mod">
+            <img src="/img/my-mods/guns.png" alt="Mod Icon">
+            <b> Industrial Earth Guns </b>
+            <p>
+                A simple gun mod I ported from Fabric to Forge 1.16.5
+            </p>
+        </a>
+
+        <a href="https://www.curseforge.com/minecraft/mc-mods/snail-mail" class="mod">
+            <img src="/img/my-mods/snail.png" alt="Mod Icon">
+            <b> Snail Mail </b>
+            <p>
+                Send players items in the mail. My balance fix: prevent using envelopes as cheap backpacks.
+            </p>
+            <i> Forge 1.16.5 </i>
+        </a>
+    </div>
+
+    <!-- add a section for mods made by students during tutoring -->
 
     <div id="other">
         <h1> Other Projects </h1>
-
-        <h2>Industrial Earth Guns</h2>
-        <p>Simple gun mod ported from Fabric 1.16.5 to Forge 1.16.5. </p>
-        <ul>
-        <li><a href="http://www.curseforge.com/minecraft/mc-mods/industrial-earth-guns">https://www.curseforge.com/minecraft/mc-mods/industrial-earth-guns</a></li>
-        </ul>
 
         <h2>Tutorial Mod</h2>
         <p> Read my text tutorials right here on <a href="/">moddingtutorials.org</a></p>

@@ -1,7 +1,7 @@
 body {
     background-color: #1c1e22;
     scrollbar-color:  rgb(53, 53, 53)  rgb(20, 20, 20);  /* new but only for firefox*/
-    color: #a7b3c1;
+    color: #c3c7cd;
 }
 
 
@@ -37,7 +37,7 @@ body {
 /* TUTORIALS */
 
 #content {
-    color: #a7b3c1;
+    color: #c3c7cd;
     background-color: #282c35;
 }
 
@@ -46,7 +46,7 @@ body {
   }
 
 #content pre {
-    background-color: rgb(30, 30, 30);
+    background-color: #242424;
     scrollbar-color:  rgb(53, 53, 53)  rgb(20, 20, 20);  /* new but only for firefox*/
 }
 
@@ -123,7 +123,7 @@ body::-webkit-scrollbar {
 /* new appearence */
 
 #side-nav, #nav, .post {
-  background-color: rgb(25, 25, 25);
+  background-color: rgb(22, 22, 22);
 }
 
 .post:hover {
@@ -131,7 +131,7 @@ body::-webkit-scrollbar {
 }
 
 body, #content {
-  background-color: #212121; /* #282c35; */
+  background-color: #1a1a1a; /* #282c35; */
 }
 
 
@@ -143,7 +143,7 @@ body, #content {
 /* my-mods */
 .mod {
   background-color: #18191b;
-  color: #a7b3c1 !important;
+  color: #c3c7cd !important;
 }
 
 .mod:hover {
@@ -151,5 +151,14 @@ body, #content {
 }
 
 .video {
-  color: #a7b3c1 !important;
+  color: #c3c7cd !important;
 }
+
+.highlight .mf, .highlight .mi {
+  color: #ffa600;
+}
+
+.highlight .kt {
+  color: #ff00a3;
+}
+

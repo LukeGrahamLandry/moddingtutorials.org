@@ -10,7 +10,7 @@
             "folder": "forge-1.16-tutorials",
             "url": "o16",
             "title": "Forge 1.16.5",
-            "files": ["java-basics", "environment-setup", "basic-items", "advanced-items", "basic-blocks", "advanced-blocks", "tools-armor", "tile-entities", "enchantments", "recipes"]
+            "files": ["java-basics", "environment-setup", "basic-items", "advanced-items", "basic-blocks", "advanced-blocks", "tools-armor", "tile-entities", "enchantments", "recipes", "bows-and-arrows"]
         }
     ],
     "videos": [
