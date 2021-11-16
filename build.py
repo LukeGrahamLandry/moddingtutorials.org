@@ -164,7 +164,7 @@ def getVideosHTML(videos):
 with open("web/my-mods.html", "r") as f:
     my_mods_html = "".join(f.readlines())
 
-my_mods_html = my_mods_html.replace("$VIDEOS", getVideosHTML(video_data["paid"])).replace("$FORGE1.15", getVideosHTML(video_data["1.15"]))
+my_mods_html = my_mods_html.replace("$VIDEOS", getVideosHTML(video_data["paid"])) # .replace("$FORGE1.15", getVideosHTML(video_data["1.15"]))
 
 with open("my-mods.html", "w") as f:
      f.write(my_mods_html)

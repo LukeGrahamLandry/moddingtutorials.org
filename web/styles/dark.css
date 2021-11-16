@@ -142,7 +142,7 @@ body, #content {
 
 /* my-mods */
 .mod {
-  background-color: #18191b;
+  background-color: rgb(0, 0, 0);
   color: #c3c7cd !important;
 }
 

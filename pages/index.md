@@ -6,9 +6,9 @@ Welcome!
 
 I make these because I was frustrated by the lack of documentation and useable tutorials for Forge. All the tutorials I could find were long videos of someone talking extremely slowly. I hope to offer an alternative: text tutorials for those who don't need to a visual follow along. Hopefully my tutorials will be less painful to refer to if you happen to forget something.
 
-This site has tutorials for Forge 1.16.5 and Forge 1.17.1, you can use the yellow drop down menu on the left to switch versions. The tutorials use Mojang's official [mappings](mappings) (aka mojimaps). 
+This site has tutorials for Forge 1.16.5 and Forge 1.17.1, you can use the yellow drop down menu on the left to switch versions.
 
-If you find text versions hard to follow, I will soon have videos that slowly work through the 1.17 tutorials on [YouTube](https://www.youtube.com/channel/UC8gYhA5SkhI1tajZ5JF2pbQ/). The source code for all my tutorials can be found on [GitHub](https://github.com/LukeGrahamLandry/modding-tutorials). If you're interested in the history of this site, you can read [The Changelog](changelog) and [Why Long Videos?](why-long-video).
+The source code for all my tutorials can be found on [GitHub](https://github.com/LukeGrahamLandry/modding-tutorials). If you're interested in the history of this site, you can read [The Changelog](changelog).
 
 ## Contact
 
@@ -78,10 +78,9 @@ This is an index of the content covered on this site.
     - furnaces, smokers, camp fires and blast furnaces
     - smithing table and stone cutter
     - use an event to craft in an anvil
-- [Custom Bow and Arrows](bow-and-arrows)
+- [Custom Arrows](arrows)
     - register a projectile entity that explodes when it hits someone
     - an arrow item that lets you shoot your custom projectile from a vanilla bow or crossbow
-    - a custom bow 
 
 ## Thanks
 

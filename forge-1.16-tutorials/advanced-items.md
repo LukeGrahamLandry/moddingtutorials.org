@@ -187,7 +187,13 @@ You can setup the textures, models and lang file exactly the same as for basic i
 
 If you run the game the items show up in the creative tab and have textures. You can eat the food and sometimes get fire resistance. My fuel coal can be used in a furnace and smelts 16 items. Finally the staff will teleport you and lose durability.
 
-## Extension
+## Related Tutorials 
+
+- [Tools & Armor](tools-armor): allow your item to be used as a tool or worn as armor
+- [Arrows](arrows): allow bows to use your item as ammo
+- Custom Bow tutorial coming soon. Join [the discord server](https://discord.gg/VbZVnRd) or [the email list](https://buttondown.email/LukeGrahamLandry) to be notified when it is released. 
+
+## Practice
 
 - Make an item that replaces any block you right click with dirt
 

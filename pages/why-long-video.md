@@ -1,4 +1,6 @@
-# Why Long Videos? (a history lesson)
+# Why Long Videos?
+
+The history of my tutorials.
 
 ## August 2020
 

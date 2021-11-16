@@ -1,8 +1,11 @@
 # Change Log
 
 - goal: events, mappings, sides, registries, loot tables
-- goal: patchouli, bows and arrows, potions. (videos that did well before)
+- goal: patchouli, bows, potions. (videos that did well before)
 - goal: videos
+
+## November 13
+- arrows tutorial 
 
 ## November 8 
 - added email list form 

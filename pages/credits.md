@@ -20,6 +20,7 @@ People who paid me to make mods. DM LukeGrahamLandry#6888 on discord to commissi
 - [CheckPoint](https://www.youtube.com/c/TheCheckpoint)
 - [LoKk1](https://www.youtube.com/c/LoKk1)
 - [Divine Gaming Inc](http://divine-gaming.com/)
+- [Cicoda](https://www.curseforge.com/members/cicoda/projects)
 - [Redrix](https://www.curseforge.com/members/redrixttv/projects)
 - [The Ult1mate Guy](https://www.curseforge.com/members/theu1t1mateguy/projects)
 - [Cammie](https://github.com/CammiePone)

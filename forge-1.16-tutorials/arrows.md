@@ -18,8 +18,8 @@ Then you will use it to register an `EntityType` for your custom arrow. As usual
 
 The builder needs a supplier for your entity class. If you're entity class has multiple constructors, it seems to get confused which you mean so you have to cast it to `EntityType.IFactory`. You also give it a `EntityClassification` (better description of this will be in the hostile entities tutorial), for projectiles you should use `MISC`. The `sized` method sets the width and height of the bounding box, so how big an area your projectile checks for hitting something (vanilla arrows use 0.5 by 0.5). Finally call the `build` method, the argument here should be the same as the registry used earlier name (idk why but that's what vanilla does. if anyone finds out, pls tell me). 
 
-    public static final RegistryObject<EntityType<ExplosiveArrowEntity>> TORCH_ARROW = ENTITY_TYPES.register("torch_arrow",
-                () -> EntityType.Builder.of((EntityType.IFactory<ExplosiveArrowEntity>) ExplosiveArrowEntity::new, EntityClassification.MISC).sized(0.5F, 0.5F).build("torch_arrow"));
+    public static final RegistryObject<EntityType<ExplosiveArrowEntity>> EXPLOSIVE_ARROW = ENTITY_TYPES.register("explosive_arrow",
+                () -> EntityType.Builder.of((EntityType.IFactory<ExplosiveArrowEntity>) ExplosiveArrowEntity::new, EntityClassification.MISC).sized(0.5F, 0.5F).build("explosive_arrow"));
 
 Remember to call this registry from the constructor of your main class.
 
@@ -34,15 +34,18 @@ Now we will actually create the class referenced above to define the behavior of
 ### Vanilla Classes
 
 Entity
+
 - does the absolute minimum, you must define all behavior
 
 ProjectileEntity > Entity
+
 - saves its owner 
 - has methods for shooting: sets its movement direction 
 - has methods for what happens for reacting to impacts
 - does **not** have logic for moving or detecting collisions, *you must write this yourself or extend something lower down*. 
 
 AbstractArrowEntity > ProjectileEntity > Entity
+
 - movement and collision detection logic in the tick method
 - rotates to face direction of movement
 - piercing logic (`setPierceLevel`, used by crossbows)
@@ -51,12 +54,15 @@ AbstractArrowEntity > ProjectileEntity > Entity
 - able to be shot from normal bows by using the ArrowItem class
 
 ArrowEntity > AbstractArrowEntity > ProjectileEntity > Entity
+
 - logic for holding potion effects (apply on hit, make particles)
 
 ThrowableEntity > ProjectileEntity > Entity
+
 - movement and collision detection logic in the tick method
 
 ProjectileItemEntity > ThrowableEntity > ProjectileEntity > Entity
+
 - renders as an item by implementing `IRendersAsItem` and having an entity type bound to `SpriteRenderer`
 
 ### Your Class
@@ -180,7 +186,7 @@ public class ClientSetup {
 
 ## Using Your Arrow
 
-You can add your arrow to the world whenever you want. The next section of this tutorial will cover creating a custom arrow item so vanilla bows can shoot your projectile. You could also create a custom bow that specificity shoots the projectile we just made. A tutorial for this is coming soon. Join [the discord server](https://discord.gg/VbZVnRd) or [the email list](https://buttondown.email/LukeGrahamLandry) to be notified when it is released. 
+You can add your arrow to the world whenever you want. The next section of this tutorial will cover creating a custom arrow item so vanilla bows can shoot your projectile. You could also create a custom bow (by extending `BowItem`) that specificity shoots the projectile we just made. A tutorial for this is coming soon. Join [the discord server](https://discord.gg/VbZVnRd) or [the email list](https://buttondown.email/LukeGrahamLandry) to be notified when it is released. 
 
 Example of summoning your arrow entity that could be used anywhere you have access to a player (ie, on item right click):
 

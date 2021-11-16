@@ -116,11 +116,6 @@ The `Block` class has lots more methods to play with. Here's a description of a 
 - `onPlace`
 - `getExpDrop` returns the number of experience points to give when broken (like some vanilla ores)
 
-### Related Tutorials
-
-- [Block Entities](/tile-entities): Allows your block to save data and react to every tick. I made mine kill nearby mobs!
--  You can also make your block a point of interest for a custom villager profession. Tutorial for this coming soon! Join [the discord server](https://discord.gg/VbZVnRd) or [the email list](https://buttondown.email/LukeGrahamLandry) to be notified when it is released. 
-
 ### Rotation
 
 To make the block rotatable like a furnace, you have to add a property to the block state so you can tell the model file which sides to render where. It will hold a value of `NORTH`, `SOUTH`, `EAST`, or `WEST` which represents the direction it is facing. First create the property as a static field in your block class. 
@@ -191,7 +186,12 @@ It can be named anything because a single block state definition might need mult
 You should now have a fully functional block with custom functionality! 
 ![](/img/sad-block.png)
 
-## Extension
+## Related Tutorials
+
+- [Tile Entities](tile-entities): Allows your block to save data and react to every tick. I made mine kill nearby mobs!
+-  You can also make your block a point of interest for a custom villager profession. Tutorial for this coming soon! Join [the discord server](https://discord.gg/VbZVnRd) or [the email list](https://buttondown.email/LukeGrahamLandry) to be notified when they are released. 
+
+## Practice
 
 - Make a soil that grows crops very quickly while it's raining
   - hint: look at how the vanilla `BoneMealItem` uses `BonemealableBlock`

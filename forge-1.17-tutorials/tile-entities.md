@@ -207,7 +207,7 @@ The block to which you bound your block entity is a block like any other. Don't 
 
 You can also use code to do more complex rendering logic for your block entity. This will be covered in a future tutorial. Join [the discord server](https://discord.gg/VbZVnRd) or [the email list](https://buttondown.email/LukeGrahamLandry) to be notified when it is released. 
 
-## Extension
+## Practice
 
 - Make the mob slayer we made in this tutorial directional. That is, instead of the area of effect being centered on the block, have the block rotateable from like the last tutorial and only attack mobs in the forwards direction.
 - Make a block entity that teleports nearby mobs on top of it

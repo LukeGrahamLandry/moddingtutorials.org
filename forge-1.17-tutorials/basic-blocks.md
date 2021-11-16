@@ -157,6 +157,10 @@ You should end up with a file structure like this:
             - loot_tables/blocks  
                 - block_name.json  
 
+### Data Generators 
+
+If your mod has a lot of blocks that just use their own basic texture, it can be tedious (and error prone) to repeatedly copy the model/blockstate/loot_table json file, just changing a single line each time. Luckily, Minecraft provides a way to generate these files from code. This will be covered in detail in a future tutorial. Join [the discord server](https://discord.gg/VbZVnRd) or [the email list](https://buttondown.email/LukeGrahamLandry) to be notified when it is released. 
+
 ## Run the game
 
 If we run the game, we can see that the block shows up in our creative tab. We can place it and break it with an iron pickaxe
