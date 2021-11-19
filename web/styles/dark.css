@@ -36,7 +36,7 @@ body {
 
 /* TUTORIALS */
 
-#content {
+#content, .content {
     color: #c3c7cd;
     background-color: #282c35;
 }
@@ -130,7 +130,7 @@ body::-webkit-scrollbar {
   background-color: #282c35;
 }
 
-body, #content {
+body, #content, .content {
   background-color: #1a1a1a; /* #282c35; */
 }
 

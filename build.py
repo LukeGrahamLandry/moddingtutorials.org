@@ -92,6 +92,7 @@ def combile_md(source_folder, filename, target_folder, index_html, pages_list, v
         with open(target_folder + "/" + title + "/index.html", "w") as f:
             f.write('cloudflare pages can not deal with trailing slashes properly. redirecting to <a href="' + title + '">' + title + '</a> <script> window.location.href = "/' + title + '";</script>')
 
+versions_select = {}
 
 for section_data in site_data["sections"]:
     for root, dirs, files in os.walk(section_data["folder"], topdown=False):
@@ -112,6 +113,9 @@ for section_data in site_data["sections"]:
              if s["url"] == section_data["url"]:
                  versions_html += " selected"
              versions_html += '>' + s["title"] + "</option>"
+
+        if s["url"] not in versions_select:
+            versions_select[s["url"]] = versions_html
 
         for rooti, dirsi, filesi in os.walk("pages", topdown=False):
             for namei in filesi:
@@ -190,5 +194,15 @@ with open("my-mods.html", "w") as f:
 
 shutil.copy("my-mods.html", "o16/my-mods.html")
 shutil.copy("my-mods.html", "o17/my-mods.html")
+
+
+with open("web/index.html", "r") as f:
+    index_html = "".join(f.readlines())
+
+for url, versions_html in versions_select:
+    with open(url + "/index.html", "w") as f:
+        f.write(index_html.replace("$VERSIONS", versions_html))
+
+shutil.copy("o16/index.html", "index.html")
 
 # export PATH=$PATH:/opt/buildhome/.local/bin && pip3 install markdown && pip3 install pygments && python3 build.py

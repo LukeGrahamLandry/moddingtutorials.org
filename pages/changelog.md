@@ -6,6 +6,9 @@ If you're interested in a more detailed write up on the various formats my tutor
 - goal: patchouli, bows, potions. (videos that did well before)
 - goal: videos (I'll wait for 1.18)
 
+## November 19
+- new index page: planned tutorials sorted into categories 
+
 ## November 17
 - add meta tags 
 

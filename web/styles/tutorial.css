@@ -12,7 +12,7 @@ body {
     background-color: rgb(229, 226, 226);
 }
 
-#content {
+#content, .content {
   background-color: white;
 
     text-align: left;
