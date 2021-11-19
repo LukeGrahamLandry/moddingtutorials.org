@@ -185,14 +185,14 @@ Register your armor items like normal using the `ArmorItem` class. It needs a re
 ### Assets
 
 In `/src/main/resources/assets/modid/textures` make a new folder called `models` and in that one called `armor`. Here you will put the texture map for your armor. It's sort of a weird format, they look like this:   
-![](/img/template_layer_1.png)
+![armor texture template layer one](/img/template_layer_1.png)
 
-![](/img/template_layer_2.png)
+![armor texture template layer two](/img/template_layer_2.png)
 
 Use those exact templates because the positioning is important, they should be 512 by 256 (but it's the 1:2 ratio that matters). The first one must be named `name_layer_1.png` and is for the helmet and chest plate. The second must be named `name_layer_2.png` and is leggings and boots. Of course, replace `name` with the string you used in your armor material (without the `modid:` prefix). So for me it's `pink_layer_1.png` and `pink_layer_2.png`. 
 
 The other assets (model json & lang) are the same as for normal items. 
-![](/img/armor.png)
+![player wearing custom armor in game](/img/armor.png)
 
 ## Advanced Armor
 

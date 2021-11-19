@@ -1,14 +1,12 @@
 # Minecraft Modding Tutorials
 
-Welcome! 
+Welcome! This site has tutorials for making Minecraft mods with Forge 1.16.5 and Forge 1.17.1. You can use the yellow drop down menu on the left to switch versions. The source code for all my tutorials can be found on [GitHub](https://github.com/LukeGrahamLandry/modding-tutorials).
 
 ## About
 
 I make these because I was frustrated by the lack of documentation and useable tutorials for Forge. All the tutorials I could find were long videos of someone talking extremely slowly. I hope to offer an alternative: text tutorials for those who don't need to a visual follow along. Hopefully my tutorials will be less painful to refer to if you happen to forget something.
 
-This site has tutorials for Forge 1.16.5 and Forge 1.17.1, you can use the yellow drop down menu on the left to switch versions.
-
-The source code for all my tutorials can be found on [GitHub](https://github.com/LukeGrahamLandry/modding-tutorials). If you're interested in the history of this site, you can read [The Changelog](changelog).
+If you're interested in the history of this site, you can read [The Changelog](changelog).
 
 ## Contact
 
@@ -31,6 +29,7 @@ If you found my tutorials helpful and want more, donating is a great way to enco
 This is an index of the content covered on this site.
 
 ### Overview
+
 - [Java Basics](java-basics)
     - summary of Java syntax 
 - [Mappings](mappings)
@@ -41,6 +40,7 @@ This is an index of the content covered on this site.
     - the separation of logic and rendering
 
 ### Tutorials 
+
 - [Environment Setup](environment-setup)
     - install Java and an IDE
     - set up the forge mdk

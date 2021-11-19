@@ -40,7 +40,7 @@ apply from: 'https://raw.githubusercontent.com/SizableShrimp/Forge-Class-Remappe
 
 Run this command in the terminal / CMD (on windows, remove the `./` prefix)
 ```
-gradlew -PUPDATE_CLASSNAMES=true updateClassnames
+./gradlew -PUPDATE_CLASSNAMES=true updateClassnames
 ```
 
 When thats done running, you can remove the apply plugin line from your build.gradle if you want.  

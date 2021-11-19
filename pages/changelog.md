@@ -1,8 +1,13 @@
 # Change Log
 
+If you're interested in a more detailed write up on the various formats my tutorials have taken, you can read [Why Long Videos?](why-long-video)
+
 - goal: events, mappings, sides, registries, loot tables
 - goal: patchouli, bows, potions. (videos that did well before)
-- goal: videos
+- goal: videos (I'll wait for 1.18)
+
+## November 17
+- add meta tags 
 
 ## November 13
 - arrows tutorial 

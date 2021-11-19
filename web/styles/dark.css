@@ -154,6 +154,8 @@ body, #content {
   color: #c3c7cd !important;
 }
 
+/* code */
+
 .highlight .mf, .highlight .mi {
   color: #ffa600;
 }
@@ -162,3 +164,6 @@ body, #content {
   color: #ff00a3;
 }
 
+.highlight .o {
+  color: #00f2ff;
+}

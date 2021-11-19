@@ -19,7 +19,7 @@ ignore = ["about.md", "support.md", "my-mods.md", "contact.md"]
 tutorials = ["java-basics", "environment-setup", "basic-items", "advanced-items", "basic-blocks", "advanced-blocks", "tools-armor", "tile-entities", "enchantments",
              "recipes"]
 
-def combile_md(source_folder, filename, target_folder, index_html, pages_list, versions_html):
+def combile_md(source_folder, filename, target_folder, index_html, pages_list, versions_html, can=None):
     with open(source_folder + "/" + filename, "r") as f:
          md_content = "".join(f.readlines())
     html_content = markdown.markdown(md_content, extensions=['fenced_code'])
@@ -45,14 +45,33 @@ def combile_md(source_folder, filename, target_folder, index_html, pages_list, v
         html_syntax_highlighted += "</code>"
         html_syntax_highlighted += end
     
-    displayName = ""
-    for part in filename.split(".")[0].split("-"):
-        displayName += part[0].upper() + part[1:] + " "
-
-    full_content = template.replace("$CONTENT", html_syntax_highlighted).replace("$TITLE", displayName).replace("$INDEX", index_html).replace("$TUTORIALS", json.dumps(pages_list)).replace("$VERSIONS", versions_html)
-
     title = ".".join(filename.split(".")[:-1])
     filename_to_write = title + ".html"
+    
+    # meta tags
+    meta = ""
+    if True:
+        displayName = ""
+        for part in filename.split(".")[0].split("-"):
+            displayName += part[0].upper() + part[1:] + " "
+        displayName += " | Minecraft Modding Tutorials"
+        
+        if title == "index":
+            displayName = "Minecraft Forge Modding Tutorials"
+
+        meta += "<title>" + displayName + "</title>"
+        path = title
+        if target_folder is not None and title not in site_data["un_versioned"]:
+            path = target_folder + path
+        else:
+            if can is not None and title not in site_data["un_versioned"]:
+                path = can + path
+        meta += '<link rel="canonical" href="https://moddingtutorials.org/' + path + '"/>'
+
+        if title in site_data["descriptions"]:
+            meta += '<meta name="description" content="' + site_data["descriptions"][title] + '">'
+
+    full_content = template.replace("$CONTENT", html_syntax_highlighted).replace("$META", meta).replace("$INDEX", index_html).replace("$TUTORIALS", json.dumps(pages_list)).replace("$VERSIONS", versions_html)
 
     if target_folder is None:
         with open(filename_to_write, "w") as f:
@@ -101,7 +120,7 @@ for section_data in site_data["sections"]:
                     combile_md(rooti, namei, section_data["url"], index_html, section_data["files"], versions_html)
 
                     if section_data["url"] == "o16":
-                        combile_md(rooti, namei, None, index_html, section_data["files"], versions_html)
+                        combile_md(rooti, namei, None, index_html, section_data["files"], versions_html, "o16")
 
         for name in files:
             if (".md" in name):
@@ -109,7 +128,7 @@ for section_data in site_data["sections"]:
                 combile_md(root, name, section_data["url"], index_html, section_data["files"], versions_html)
 
                 if section_data["url"] == "o16":
-                    combile_md(root, name, None, index_html, section_data["files"], versions_html)
+                    combile_md(root, name, None, index_html, section_data["files"], versions_html, "o16")
 
 for root, dirs, files in os.walk("web", topdown=True):
     for dir in dirs:

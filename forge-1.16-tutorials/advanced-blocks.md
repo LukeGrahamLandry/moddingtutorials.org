@@ -180,7 +180,7 @@ It can be named anything because a single block state definition might need mult
 ## Run the Game
 
 You should now have a fully functional block with custom functionality! 
-![](/img/sad-block.png)
+![example of advanced block in game](/img/sad-block.png)
 
 ## Related Tutorials
 

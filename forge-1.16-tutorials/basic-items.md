@@ -115,4 +115,4 @@ If your mod has a lot of items that just use their own basic texture, it can be 
 
 Now run the game. It will take a few minutes to load but eventually you should be able to see that your item shows up in your creative tab.
 
-![](../img/creative-tab.png)
+![example of creative tab in game](/img/creative-tab.png)

@@ -7,7 +7,7 @@ How to setup a forge development environment for 1.17.1 with the official mappin
 First, download the JDK (java 8 development kit). Go to [oracle.com](https://www.oracle.com/java/technologies/javase/jdk16-archive-downloads.html) and select your operating system. It will ask you to make an account but you can borrow someone else's credentials from [bugmenot.com](http://bugmenot.com/view/oracle.com). Just copy paste them in and if the first doesn't work, try the next one.
 
 Next you need the Forge 1.17.1 MDK (mod development kit) from [files.minecraftforge.net](https://files.minecraftforge.net/net/minecraftforge/forge/index_1.17.1.html). Get the recommended version cause its the most likely to work.
-![](/img/download-forge.png)
+![forge mdk download page](/img/download-forge.png)
 When you click the button to download the MDK it will send you to a page with ads. Very important not to click any of them (even if they look like pop ups from your OS), just wait a few seconds until the skip button appears in the top right and click that to download.
 
 Then you need an IDE to write your code. Download intellij from [jetbrains.com](https://www.jetbrains.com/idea/download) and get the community addition because it's free.

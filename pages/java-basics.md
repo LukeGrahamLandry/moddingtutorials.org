@@ -164,10 +164,8 @@ Operators that evaluate to booleans can be chained together to form boolean expr
 
 The simplest way for your program to display information to the user is:
 
-```
-System.out.println("Hello World");
-System.out.println(10 * 2 + 5);
-```
+    System.out.println("Hello World");
+    System.out.println(10 * 2 + 5);
 
 Whatever you pass in to that function call will be printed to the console. 
 
