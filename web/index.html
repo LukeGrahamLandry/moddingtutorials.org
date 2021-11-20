@@ -36,7 +36,7 @@
             white-space: pre;
         }
 
-        #index div span{
+        #index div span {
             color: rgb(97, 97, 97);
         }
     </style>
@@ -82,6 +82,8 @@
             <a href="tools-armor"> Tools and Armor </a>
             <span> 
                 Bows <br>
+                Stacks & NBT <br>
+                Backpack <br>
             </span> 
         </div>
         <div>
@@ -91,6 +93,7 @@
             <a href="tile-entities"> Tile Entities </a>
             <span>
                 Crops <br>
+                Containers <br>
                 Custom Furnace <br>
                 Misc Block Types <br> <!-- Stairs, Slabs, Buttons, Doors, fences, torches, ladders -->
             </span>
@@ -125,6 +128,7 @@
                 Tinkers Construct <br> <!-- materials, traits, tools, parts -->
                 Connected Textures <br>
                 Better Questing <br>
+                Botania Mana <br>
             </span>
         </div>
         <div>
@@ -158,8 +162,8 @@
                 3d Models <br>
                 Achievements <br>
                 Loot Tables <br>
-                Block States <br> <!-- include custom properties code -->
-                Item Models <br> <!-- layers, colors, properties -->
+                Block States <br> <!-- include custom properties code --> 
+                Item Models <br> <!-- layers, colors, properties --> 
                 Data Gen <br>
             </span>
         </div>
@@ -168,38 +172,38 @@
             <span>
                 Particles <br>
                 Tile Entity Renderers <br>
-                Item Stack TE Renderers <br>
+                Item Stack TER <br>
                 Screens <br>
-                Containers <br>
                 HUD <br>
+                Shaders <br>
+                Baked Models <br>
+                Obj Models <br>
             </span>
         </div>
         <div>
             <b> Example Mods </b>
             <span>
-                Grave Stones <br> <!-- holds your items when you die -->
+                Gravestones <br> <!-- holds your items when you die -->
                 Mob Capture Net <br> <!-- Right click a mob to grab it, left click to throw the net. Craft with an egg to get spawn egg -->
                 Bundled Items <br> <!-- craft 4 totems/potions/golden apples together. have 150 durability, each use takes 50 (so 4 uses). Unbreaking and mending work. Compat with popular totem mods, curios. -->
-                Spooked (Ghosts) <br> <!-- Fly through walls and chase living mobs but dont attack. Just scares things like creepers are scared of cats. Craft sythe that shoots projectiles that go through walls. Call it spooked. Compatibility to drop ectoplasm. Config for only taking magic damage -->
+                Ghosts <br> <!-- Fly through walls and chase living mobs but dont attack. Just scares things like creepers are scared of cats. Craft sythe that shoots projectiles that go through walls. Call it spooked. Compatibility to drop ectoplasm. Config for only taking magic damage -->
                 Coins <br> <!-- mobs drop coins, special looting enchant, show your balance on HUD, drop some on death, merchant that sells things for coins -->
             </span>
         </div>
         <div>
-            <div style="display: inline-block; max-width: 800px;">
-                <form
-                    action="https://buttondown.email/api/emails/embed-subscribe/LukeGrahamLandry"
-                    method="post"
-                    target="popupwindow"
-                    onsubmit="window.open('https://buttondown.email/LukeGrahamLandry', 'popupwindow')"
-                    class="embeddable-buttondown-form"
-                >
-                
-                <label for="bd-email">Want to get notified of new tutorials? </label> <br>
-                <input type="email" name="email" id="bd-email" placeholder="Enter your email" style="padding: 10px; width: 300px;"/>
-                <input type="submit" value="Subscribe" style="padding: 10px; cursor: pointer; background-color: red; font-weight: bold; border-radius: 3px; border: none;" />
-                or, <a href="https://buttondown.email/LukeGrahamLandry/rss">subscribe via RSS</a>
-                </form>
-            </div>
+            <!-- take people off this list once i cover everything they do -->
+            <b> Further Reading </b>
+            <a href="https://darkhax.net/2020/07/mixins">Darkhax Mixins</a>
+            <a href="https://forge.gemwire.uk/wiki/Main_Page">Community Wiki</a>
+            <a href="https://mcforge.readthedocs.io/en/latest/">Forge Docs</a>
+            <a href="https://wiki.mcjty.eu/modding/index.php?title=Main_Page"> mcjty Tutorials </a>
+            <a href="https://github.com/TheGreyGhost/MinecraftByExample"> MC By Example 1.16 </a> 
+            <a href="https://www.youtube.com/playlist?list=PLaevjqy3XufYmltqo0eQusnkKVN7MpTUe">TurtyWurty 1.15</a>
+        </div>
+        <div>
+            Want to get notified of new tutorials? 
+            <a href="https://discord.com/invite/VbZVnRd"><button style="padding: 5px; cursor: pointer;">join the discord server</button></a>
+            <a href="https://buttondown.email/LukeGrahamLandry"><button style="padding: 5px; cursor: pointer;">join the email list</button></a>
         </div>
     </div>
     <div class="centered">
@@ -212,6 +216,7 @@
                 Hopefully my tutorials will be less painful to refer to if you happen to forget something.
                 <br> <br>
                 The source code for all my tutorials can be found on <a href="https://github.com/LukeGrahamLandry/modding-tutorials">GitHub</a>. 
+                For a more detailed description of the content in each tutorial, read the <a href="topics">Topics</a> page. 
                 If you're interested in the history of this site, you can read <a href="changelog">The Changelog</a>.
             </p>
     
@@ -227,7 +232,7 @@
                 If you have an idea for a mod and would like to commission me to make it a reality, 
                 DM me on discord (LukeGrahamLandry#6888). Please prepare a detailed description of the 
                 features you want so I can give you a meaningful quote. I will require a 30% deposit before 
-                I begin work. Due to time constraints, no commissions under $100 will be taken. I'm happy 
+                I begin work. Due to time constraints, no commissions under $75 will be taken. I'm happy 
                 to work in versions 1.16.x or 1.17.x on Forge or Fabric. You can take a look at the <a href="my-mods">My Mods</a> page 
                 for some examples of my past work. 
                 <br> <br>
@@ -252,6 +257,22 @@
     
     <br> 
     <br>
+    <div style="display: inline-block; max-width: 800px;">
+        <form
+            action="https://buttondown.email/api/emails/embed-subscribe/LukeGrahamLandry"
+            method="post"
+            target="popupwindow"
+            onsubmit="window.open('https://buttondown.email/LukeGrahamLandry', 'popupwindow')"
+            class="embeddable-buttondown-form"
+        >
+        
+        <label for="bd-email">Want to get notified of new tutorials? </label> <br>
+        <input type="email" name="email" id="bd-email" placeholder="Enter your email" style="padding: 10px; width: 300px;"/>
+        <input type="submit" value="Subscribe" style="padding: 10px; cursor: pointer; background-color: red; font-weight: bold; border-radius: 3px; border: none;" />
+        <br> or, <a href="https://buttondown.email/LukeGrahamLandry/rss">subscribe via RSS</a>
+        </form>
+    </div>
+    <br><br>
     <div style="width: fit-content; display: inline-block;">
         <a href="https://github.com/LukeGrahamLandry/modding-tutorials" class="img-link">
             <div class="app">
@@ -276,6 +297,12 @@
                 <img src="/img/patreon.png" style="width: 70px">
             </div>
         </a>    
+
+        <a href="https://buttondown.email/LukeGrahamLandry" class="img-link">
+            <div class="app">
+                <img src="/img/mail.png" style="width: 70px">
+            </div>
+        </a>  
      </div>
 
      <div style="text-align: center; position: absolute; top: 5px; right: 5px">

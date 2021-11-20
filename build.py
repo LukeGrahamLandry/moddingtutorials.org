@@ -62,10 +62,10 @@ def combile_md(source_folder, filename, target_folder, index_html, pages_list, v
         meta += "<title>" + displayName + "</title>"
         path = title
         if target_folder is not None and title not in site_data["un_versioned"]:
-            path = target_folder + path
+            path = target_folder + "/" + path
         else:
             if can is not None and title not in site_data["un_versioned"]:
-                path = can + path
+                path = can + "/" + path
         meta += '<link rel="canonical" href="https://moddingtutorials.org/' + path + '"/>'
 
         if title in site_data["descriptions"]:
@@ -199,7 +199,7 @@ shutil.copy("my-mods.html", "o17/my-mods.html")
 with open("web/index.html", "r") as f:
     index_html = "".join(f.readlines())
 
-for url, versions_html in versions_select:
+for url, versions_html in versions_select.items():
     with open(url + "/index.html", "w") as f:
         f.write(index_html.replace("$VERSIONS", versions_html))
 
