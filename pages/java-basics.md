@@ -120,10 +120,12 @@ There are 3 boolean operators.
 - `&&`, and, which checks that both of the values are true
 - `||`, or, which checks that at least one of the values is true
 
+'''
     boolean foo = true;
     boolean bar = !foo;  // false
     boolean baz = foo && bar; // false
     boolean bam = foo || bar; // true
+'''
 
 There are 6 types of equality operator. They are used to compare 2 numbers and evaluate to a boolean. 
 
@@ -230,7 +232,7 @@ if (condition){
     runCode();
 } else if (otherCondition){
     runOtherCode();
-else if (thirdCondition){
+} else if (thirdCondition){
     thingOne();
 } else {
     thingTwo();
@@ -249,7 +251,7 @@ The ability to repeat code can be extremely useful. While loops use a condition,
 int x = 0;
 while (x < 4){
     System.out.println(x * 4);
-    x++;   
+    x = x + 1;   
 }
 ```
 

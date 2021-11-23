@@ -81,16 +81,20 @@
             padding: 10px;
         }
 
-        #contributions {
+        .contributions {
             display: grid;
             justify-content: center;
             grid-template-columns: repeat(auto-fit,10rem);
             font-size: 0.8rem;
         }
 
-        #contributions .mod b {
+        .contributions .mod b {
             font-size: 1.15rem;
             padding-top: 0.3rem;
+        }
+
+        .info {
+            font-size: small; max-width: 600px; display: inline-block;
         }
 
     </style>
@@ -101,7 +105,7 @@
     <h1> Luke's Mods </h1>
     <b> I work with Forge and Fabric versions 1.17.x, 1.16.x and 1.15.x </b> <br> 
 
-    <p style="font-size: small; max-width: 600px; display: inline-block;">
+    <p class="info">
         If you have an idea for a mod and would like to commission me to make it a reality, 
         DM me on discord (LukeGrahamLandry#6888). Please prepare a detailed description of the 
         features you want so I can give you a meaningful quote. 
@@ -138,6 +142,14 @@
             </p>
         </a>
 
+        <a href="https://www.curseforge.com/minecraft/mc-mods/dem-lobsters" class="mod">
+            <img src="/img/my-mods/lobsters.png" alt="Mod Icon">
+            <b> Dem Lobsters </b>
+            <p>
+                Don't like mining? Farm colorful lobsters instead! Forge 1.16.5
+            </p>
+        </a>
+
         <a href="https://www.curseforge.com/minecraft/mc-mods/inclusive-enchanting" class="mod">
             <img src="/img/my-mods/inclusive-enchanting.png" alt="Mod Icon">
             <b> Inclusive Enchanting </b>
@@ -164,18 +176,7 @@
         $VIDEOS
     </div>
     <br>
-    <div id="contributions" style="text-align: center;">
-        <!-- Clara's food mod -->
-        <!--
-        <a href="https://www.curseforge.com/minecraft/mc-mods/cultivated-snacks" class="mod">
-            <img src="/img/my-mods/snacks.png" alt="Mod Icon">
-            <b> Cultivated Snacks </b>
-            <p>
-                A food mod based on Thermal Series crops. Made by TheTinCan during tutoring sessions. Forge 1.16.5
-            </p>
-        </a>
-        -->
-
+    <div class="contributions" style="text-align: center;">
         <a href="https://www.curseforge.com/minecraft/mc-mods/industrial-earth-guns" class="mod">
             <img src="/img/my-mods/guns.png" alt="Mod Icon">
             <b> Industrial Earth Guns </b>
@@ -192,9 +193,28 @@
             </p>
         </a>
     </div>
-
-    <!-- add a section for mods made by students during tutoring -->
-
+    <br>
+    <div style="border: 2px solid blue;">
+        <br>
+        <div class="info">
+            <b> The mods shown below were made by beginners during one-on-one tutoring. </b> <br>
+            
+            Want real time personalized help learning to make Minecraft mods? 
+            Get on a video call with me, share your screen and I'll guide you through making anything you can imagine. 
+            DM me on discord (LukeGrahamLandry#6888) and we'll find a time that works for both of us. Fee: $30/hour
+        </div>
+        <div class="contributions" style="text-align: center;">
+            <a href="https://www.curseforge.com/minecraft/mc-mods/cultivated-snacks" class="mod">
+                <img src="/img/my-mods/snacks.png" alt="Mod Icon">
+                <b> Cultivated Snacks </b>
+                <p>
+                    A food mod based on Thermal Series crops. Made by TheTinCan during tutoring sessions. Forge 1.16.5
+                </p>
+            </a>
+        </div>
+    </div>
+    
+    <br>
     <div id="other">
         <h1> Other Projects </h1>
 

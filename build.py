@@ -54,7 +54,7 @@ def combile_md(source_folder, filename, target_folder, index_html, pages_list, v
         displayName = ""
         for part in filename.split(".")[0].split("-"):
             displayName += part[0].upper() + part[1:] + " "
-        displayName += " | Minecraft Modding Tutorials"
+        displayName += "| Minecraft Modding Tutorials"
         
         if title == "index":
             displayName = "Minecraft Forge Modding Tutorials"
@@ -81,6 +81,7 @@ def combile_md(source_folder, filename, target_folder, index_html, pages_list, v
         if (not os.path.isdir( title)):
             os.mkdir(title)
         with open(title + "/index.html", "w") as f:
+            f.write('<link rel="canonical" href="https://moddingtutorials.org/' + title + '"/>')
             f.write('cloudflare pages can not deal with trailing slashes properly. redirecting to <a href="' + title + '">' + title + '</a> <script> window.location.href = "/' + title + '";</script>')
     else: 
         with open(target_folder + "/" + filename_to_write, "w") as f:
@@ -89,10 +90,13 @@ def combile_md(source_folder, filename, target_folder, index_html, pages_list, v
         # ugly hack
         if (not os.path.isdir(target_folder + "/" + title)):
             os.mkdir(target_folder + "/" + title)
+        
         with open(target_folder + "/" + title + "/index.html", "w") as f:
-            f.write('cloudflare pages can not deal with trailing slashes properly. redirecting to <a href="' + title + '">' + title + '</a> <script> window.location.href = "/' + title + '";</script>')
+            f.write('<link rel="canonical" href="https://moddingtutorials.org/' + target_folder + "/" + title + '"/>')
+            f.write('cloudflare pages can not deal with trailing slashes properly. redirecting to <a href="' + target_folder + "/" + title + '">' + title + '</a> <script> window.location.href = "/' + target_folder + "/" + title + '";</script>')
 
 versions_select = {}
+default_section_url = "o16"
 
 for section_data in site_data["sections"]:
     for root, dirs, files in os.walk(section_data["folder"], topdown=False):
@@ -114,8 +118,7 @@ for section_data in site_data["sections"]:
                  versions_html += " selected"
              versions_html += '>' + s["title"] + "</option>"
 
-        if s["url"] not in versions_select:
-            versions_select[s["url"]] = versions_html
+        versions_select[section_data["url"]] = versions_html
 
         for rooti, dirsi, filesi in os.walk("pages", topdown=False):
             for namei in filesi:
@@ -123,16 +126,16 @@ for section_data in site_data["sections"]:
                     print(section_data["url"], namei)
                     combile_md(rooti, namei, section_data["url"], index_html, section_data["files"], versions_html)
 
-                    if section_data["url"] == "o16":
-                        combile_md(rooti, namei, None, index_html, section_data["files"], versions_html, "o16")
+                    if section_data["url"] == default_section_url:
+                        combile_md(rooti, namei, None, index_html, section_data["files"], versions_html, default_section_url)
 
         for name in files:
             if (".md" in name):
                 print(section_data["url"], name)
                 combile_md(root, name, section_data["url"], index_html, section_data["files"], versions_html)
 
-                if section_data["url"] == "o16":
-                    combile_md(root, name, None, index_html, section_data["files"], versions_html, "o16")
+                if section_data["url"] == default_section_url:
+                    combile_md(root, name, None, index_html, section_data["files"], versions_html, default_section_url)
 
 for root, dirs, files in os.walk("web", topdown=True):
     for dir in dirs:
@@ -192,17 +195,14 @@ my_mods_html = my_mods_html.replace("$VIDEOS", getVideosHTML(video_data["paid"])
 with open("my-mods.html", "w") as f:
      f.write(my_mods_html)
 
-shutil.copy("my-mods.html", "o16/my-mods.html")
-shutil.copy("my-mods.html", "o17/my-mods.html")
-
-
 with open("web/index.html", "r") as f:
     index_html = "".join(f.readlines())
 
 for url, versions_html in versions_select.items():
+    shutil.copy("my-mods.html", url + "/my-mods.html")
     with open(url + "/index.html", "w") as f:
         f.write(index_html.replace("$VERSIONS", versions_html))
 
-shutil.copy("o16/index.html", "index.html")
+shutil.copy(default_section_url + "/index.html", "index.html")
 
 # export PATH=$PATH:/opt/buildhome/.local/bin && pip3 install markdown && pip3 install pygments && python3 build.py
