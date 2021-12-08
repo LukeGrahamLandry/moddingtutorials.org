@@ -1,5 +1,3 @@
-**/.DS_Store
-
 // *
 !web/*
 !forge-1.17-tutorials/*
@@ -9,3 +7,5 @@
 !.gitignore
 !.gitattributes
 !README.md
+**/.DS_Store
+*/.DS_Store

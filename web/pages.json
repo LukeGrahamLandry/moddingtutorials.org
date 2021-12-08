@@ -12,7 +12,7 @@
             "url": "o16",
             "title": "Forge 1.16.5",
             "files": ["java-basics", "environment-setup", "basic-items", "advanced-items", "basic-blocks", 
-                "advanced-blocks", "tools-armor", "tile-entities", "enchantments", "recipes", "arrows"]
+                "advanced-blocks", "tools-armor", "tile-entities", "enchantments", "recipes", "arrows", "dem-lobsters"]
         }
     ],
     "un_versioned": ["java-basics", "index", "changelog", "credits", "mappings", "my-mods", "my-work", "registries", "sides", "why-long-video"],
@@ -50,6 +50,7 @@
         "mappings": "An in-depth explication of the code mappings system used for making Minecraft mods",
         "sides": "An in-depth explication of the difference between the Client Side and the Server Side when making Minecraft mods",
         "registries": "An in-depth explication of how Minecraft mods register game objects (like items, blocks, entities, etc)",
-        "events": "An in-depth explication of how the Forge Events System allows your Minecraft mod to react to actions taken in game"
+        "events": "An in-depth explication of how the Forge Events System allows your Minecraft mod to react to actions taken in game",
+        "dem-lobsters": "Add integration with Dem Lobsters to your mod. Easily create a new lobster type that produces your modded resources. "
     }
 }
