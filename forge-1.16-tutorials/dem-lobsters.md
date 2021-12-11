@@ -8,17 +8,15 @@ You can improve your mod by adding compatibility with Dem Lobsters!
 
 First, allow your development environment to import the needed classes by adding the following to your build.gradle
 
-```
-repositories {
-    maven {
-        url "https://www.cursemaven.com"
+    repositories {
+        maven {
+            url "https://www.cursemaven.com"
+        }
     }
-}
 
-dependencies {
-    runtimeOnly fg.deobf("curse.maven:lobsters-549438:FILE_ID")
-}
-```
+    dependencies {
+        runtimeOnly fg.deobf("curse.maven:lobsters-549438:FILE_ID")
+    }
 
 Replace `FILE_ID` with the file id for the latest build released on curseforge. 
 You can find this by opening [the Files page](https://www.curseforge.com/minecraft/mc-mods/dem-lobsters/files), 
@@ -115,14 +113,12 @@ In the constructor of your mod's main class, conditionally call your `LobsterTyp
 
 Add the following to your mods.toml
 
-```
-[[dependencies.yourmodid]]
-    modId="lobsters"
-    mandatory=false
-    versionRange="[1.0,)"
-    ordering="BEFORE"
-    side="BOTH"
-```
+    [[dependencies.yourmodid]]
+        modId="lobsters"
+        mandatory=false
+        versionRange="[1.0,)"
+        ordering="BEFORE"
+        side="BOTH"
 
 If for some strange reason you want to crash when Dem Lobsters is not installed, change the value of `mandatory` to `true`.
 

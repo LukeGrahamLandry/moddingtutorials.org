@@ -96,7 +96,7 @@ def combile_md(source_folder, filename, target_folder, index_html, pages_list, v
             f.write('cloudflare pages can not deal with trailing slashes properly. redirecting to <a href="' + target_folder + "/" + title + '">' + title + '</a> <script> window.location.href = "/' + target_folder + "/" + title + '";</script>')
 
 versions_select = {}
-default_section_url = "o16"
+default_section_url = "o18"
 
 for section_data in site_data["sections"]:
     for root, dirs, files in os.walk(section_data["folder"], topdown=False):

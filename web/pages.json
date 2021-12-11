@@ -1,6 +1,13 @@
 {
     "sections": [
         {
+        "folder": "forge-1.18-tutorials",
+        "url": "o18",
+        "title": "Forge 1.18.1",
+        "files": ["java-basics", "environment-setup", "basic-items", "advanced-items", "basic-blocks", 
+            "advanced-blocks", "tools-armor", "tile-entities", "enchantments", "recipes", "arrows"]
+        },
+        {
             "folder": "forge-1.17-tutorials",
             "url": "o17",
             "title": "Forge 1.17.1",
@@ -28,25 +35,26 @@
         "https://www.youtube.com/watch?v=Oy1zC2UFnRs",
         "https://www.youtube.com/watch?v=3X4xpDrE04Y",
         "https://www.youtube.com/watch?v=-Ea6UU9fFOA",
-        "https://www.youtube.com/watch?v=dMdPHJsAEDY"
+        "https://www.youtube.com/watch?v=dMdPHJsAEDY",
+	"https://youtu.be/OdJctpYzCdo"
     ],
     "playlists": {
         "1.15": "PLxBLp3RqmUMEU5vrtMY6tgfP2lnJD0OUj"
     },
     "descriptions":{
-        "index": "Detailed text tutorials for creating Minecraft mods with Forge 1.17.1 or Forge 1.16.5",
+        "index": "Detailed text tutorials for creating Minecraft mods with Forge 1.18.1, 1.17.1 or 1.16.5",
         "java-basics": "An overview of java programming language concepts required to create Minecraft mods.",
-        "environment-setup": "Setup a development environment to create a Minecraft mod with the Forge API (1.17.1 or 1.16.5)",
+        "environment-setup": "Setup a development environment to create a Minecraft mod with the Forge API (1.18.1, 1.17.1 or 1.16.5)",
         "basic-items": "How to create a simple item in your Minecraft Forge mod (1.17.1 or 1.16.5)",
-        "advanced-items": "How to create items with complex bevavior, like food and fuel (Forge 1.17.1 or 1.16.5)",
-        "basic-blocks": "How to create a simple block in your Minecraft Forge Mod (1.17.1 or 1.16.5)",
-        "advanced-blocks": "Create a block with complex behavior (like reacting to right clicks) in your Minecraft Forge Mod (1.17.1 or 1.16.5)",
-        "tools-armor": "Create custom tools and armor in your Minecraft mod (Forge 1.17.1 or 1.16.5)",
-        "tile-entities": "Create a block entity that stores data and reacts to ticks (Forge 1.17.1 or 1.16.5)",
-        "enchantments": "Create a custom enchantment that builds a bridge as you walk (Forge 1.17.1 or 1.16.5)",
+        "advanced-items": "How to create items with complex bevavior, like food and fuel (Forge 1.18.1, 1.17.1 or 1.16.5)",
+        "basic-blocks": "How to create a simple block in your Minecraft Forge Mod (1.18.1, 1.17.1 or 1.16.5)",
+        "advanced-blocks": "Create a block with complex behavior (like reacting to right clicks) in your Minecraft Forge Mod (1.18.1, 1.17.1 or 1.16.5)",
+        "tools-armor": "Create custom tools and armor in your Minecraft mod (Forge 1.18.1, 1.17.1 or 1.16.5)",
+        "tile-entities": "Create a block entity that stores data and reacts to ticks (Forge 1.18.1, 1.17.1 or 1.16.5)",
+        "enchantments": "Create a custom enchantment that builds a bridge as you walk (Forge 1.18.1, 1.17.1 or 1.16.5)",
         "recipes": "Define recipes in the crafting table, furnace, smithing table, anvil, brewing stand and stone cutter",
-        "arrows": "Create a custom projectile that can be shot from a bow (Forge 1.17.1 or 1.16.5)",
-        "updating": "A detailed tutorial on updating your Minecraft Forge mod from 1.16 to 1.17",
+        "arrows": "Create a custom projectile that can be shot from a bow (Forge 1.18.1, 1.17.1 or 1.16.5)",
+        "updating": "A detailed tutorial on updating your Minecraft Forge mod from 1.16 to 1.17 to 1.18",
         "mappings": "An in-depth explication of the code mappings system used for making Minecraft mods",
         "sides": "An in-depth explication of the difference between the Client Side and the Server Side when making Minecraft mods",
         "registries": "An in-depth explication of how Minecraft mods register game objects (like items, blocks, entities, etc)",

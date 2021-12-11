@@ -85,14 +85,17 @@ In intellij this is how you make sure your project is set to use it:
 
 open your src/main/resources/META-INF/mods.toml file.  
 
-change the required version for the minecraft dependency to  
-
-    versionRange="[1.17.1,1.18)"
-
-and the forge loader version to  
+change the forge loader version to  
 
     loaderVersion="[37,)" 
 
+change the required version for the `minecraft` dependency to  
+
+    versionRange="[1.17.1,1.18)"
+
+and the required version for the `forge` dependency to  
+
+    versionRange="[37,)"
 
 ## Code Fixes
 

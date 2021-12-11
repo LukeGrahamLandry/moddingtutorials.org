@@ -162,12 +162,12 @@ The format Minecraft uses for most of the data it saves is called NBT ([Named Bi
 
 In code, the class that is used for this format is `CompoundTag`. There are many types of data you can store in an `CompoundTag`: `boolean`, `int`, `String`, `double`, `float`, `long`, an array of `long`s, `byte`, a `Tag` (like another `CompoundTag` or a `ListTag`). You've got all the primitives and more so with enough effort you can make an nbt representation for any object. The general methods to use are `CompoundTag.putType(key, value)`, `CompoundTag.getType(key)` and `compundNBT.contains(key)`. The key is always a `String` and the value can be any supported type (just change the method name, ie `getString`, etc).
 
-Tile entities use the `save` method to get the data to store as a `CompoundTag` when the world is saved and `load` to read back that nbt into normal variables. I'll use this to simply store my `isActive` field and read it back. Make sure to call the super methods to let Minecraft store the block entity's base data. 
+Tile entities use the `saveAdditional` method to get the data to store as a `CompoundTag` when the world is saved and `load` to read back that nbt into normal variables. I'll use this to simply store my `isActive` field and read it back. Make sure to call the super methods to let Minecraft store the block entity's base data. 
 
     @Override
-    public CompoundTag save(CompoundTag nbt) {
+    public void saveAdditional(CompoundTag nbt) {
+        super.saveAdditional(nbt);
         nbt.putBoolean("active", this.isActive);
-        return super.save(nbt);
     }
     
     @Override
