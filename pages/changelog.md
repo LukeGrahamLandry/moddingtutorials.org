@@ -4,7 +4,14 @@ If you're interested in a more detailed write up on the various formats my tutor
 
 - goal: events, mappings, sides, registries, loot tables
 - goal: patchouli, bows, potions. (videos that did well before)
+- goal: releasing your mod (gradlew build, github, curseforge)
 - goal: videos (I'll wait for 1.18)
+
+## December 13
+- add brewing recipes section Recipes tutorial
+
+## December 11
+- update to 1.18
 
 ## November 19
 - new index page: planned tutorials sorted into categories 

@@ -166,7 +166,7 @@ public static void initAnvilRecipes()
 }
 ```
 
-This init method must be called from somewhere when the game starts but it must be after modded items have been initialized so they can be referenced by our recipes. I'll call it on the `FMLCommonSetupEvent` with the following method in my **main class**. 
+This init method must be called from somewhere when the game starts but it must be after modded items have been initialized so they can be referenced by our recipes. I'll call it on the `FMLCommonSetupEvent` with the following method in my **main class**. Note that the event listener for this is added by the line `modEventBus.addListener(this::setup);` in my constructor.  
 
 ```
 private void setup(final FMLCommonSetupEvent event) {
@@ -191,6 +191,18 @@ public static void handleRepair(AnvilUpdateEvent event){
 }
 ```
 
-## Others
+## Brewing Stand
 
-- Potion recipes are not data driven, they must be done from code. This will be covered in a future tutorial. Join [the discord server](https://discord.gg/VbZVnRd) or [the email list](https://buttondown.email/LukeGrahamLandry) to be notified when it is released.  
+Brewing stand recipes are not data driven, they must be done from code. Also note that there is no requirement that the inputs and outputs actually be potions. 
+
+This should be done on the `FMLCommonSetupEvent` so that items will already be registered so you can directly reference them. Make sure to properly listen for the event! `BrewingRecipeRegistry` has a list of all the combinations that are checked by the brewing stand. You can use the `addRecipe` method to add to it. 
+
+The first argument is an ingredient that will go in the bottom water bottle slots (this should not be stackable because of how vanilla's code works). The second argument is an ingredient that goes in the top slot (like netherwart). The final argument is the item stack to output when the recipe is finished. 
+
+```
+private void setup(final FMLCommonSetupEvent event) {
+    BrewingRecipeRegistry.addRecipe(Ingredient.of(Items.DIAMOND_AXE), Ingredient.of(ItemInit.SMILE.get()), new ItemStack(Items.NETHERITE_AXE));
+}
+```
+
+Of course, this can also be used to create recipes for your own custom potions once they've been registered. This will be covered in the Effects tutorial. Join [the discord server](https://discord.gg/VbZVnRd) or [the email list](https://buttondown.email/LukeGrahamLandry) to be notified when it is released.  

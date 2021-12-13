@@ -14,7 +14,7 @@ If you have any questions or feedback about my tutorials, please [join my discor
 
 ## Commissions 
 
-If you have an idea for a mod and would like to commission me to make it a reality, DM me on discord (LukeGrahamLandry#6888). Please prepare a detailed description of the features you want so I can give you a meaningful quote. I will require a 30% deposit before I begin work. Due to time constraints, no commissions under $100 will be taken. I'm happy to work in versions 1.16.x or 1.17.x on Forge or Fabric. You can take a look at [my mods](my-mods) for some examples of my past work. 
+If you have an idea for a mod and would like to commission me to make it a reality, DM me on discord (LukeGrahamLandry#6888). Please prepare a detailed description of the features you want so I can give you a meaningful quote. I will require a 30% deposit before I begin work. Due to time constraints, no commissions under $100 will be taken. I'm happy to work in versions 1.18.x, 1.17.x or 1.16.x on Forge or Fabric. You can take a look at [my mods](my-mods) for some examples of my past work. 
 
 I also offer one-on-one tutoring. Want real time personalized help learning to make Minecraft mods? 
 Get on a video call with me, share your screen and I'll guide you through making anything you can imagine. 
