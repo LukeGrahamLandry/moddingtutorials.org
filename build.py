@@ -5,6 +5,7 @@ from pygments import highlight
 from pygments.formatters import HtmlFormatter
 import re
 from xml.sax import saxutils as su
+from datetime import datetime
 
 with open("web/pages.json", "r") as f:
     site_data = json.loads("".join(f.readlines()))
@@ -51,6 +52,7 @@ def combile_md(source_folder, filename, target_folder, index_html, pages_list, v
     # meta tags
     meta = ""
     if True:
+        meta += "<!-- submit a fix to the content of this page: https://github.com/LukeGrahamLandry/modding-tutorials/{}/{} -->".format(source_folder.split("/")[-1], filename)
         displayName = ""
         for part in filename.split(".")[0].split("-"):
             displayName += part[0].upper() + part[1:] + " "
@@ -95,114 +97,121 @@ def combile_md(source_folder, filename, target_folder, index_html, pages_list, v
             f.write('<link rel="canonical" href="https://moddingtutorials.org/' + target_folder + "/" + title + '"/>')
             f.write('cloudflare pages can not deal with trailing slashes properly. redirecting to <a href="' + target_folder + "/" + title + '">' + title + '</a> <script> window.location.href = "/' + target_folder + "/" + title + '";</script>')
 
-versions_select = {}
-default_section_url = "o18"
+def buildSite():
+    versions_select = {}
+    default_section_url = "o18"
 
-for section_data in site_data["sections"]:
-    for root, dirs, files in os.walk(section_data["folder"], topdown=False):
-        if not os.path.isdir(section_data["url"]):
-            os.mkdir(section_data["url"])
+    for section_data in site_data["sections"]:
+        for root, dirs, files in os.walk(section_data["folder"], topdown=False):
+            if not os.path.isdir(section_data["url"]):
+                os.mkdir(section_data["url"])
 
-        index_html = ""
-        for page_name in section_data["files"]:
-            displayName = ""
-            for part in page_name.split("-"):
-                displayName += part[0].upper() + part[1:] + " "
-        
-            index_html += '<a href="/' + section_data["url"] + "/" + page_name + '" class="post">' + displayName + '</a>'
+            index_html = ""
+            for page_name in section_data["files"]:
+                displayName = ""
+                for part in page_name.split("-"):
+                    displayName += part[0].upper() + part[1:] + " "
+            
+                index_html += '<a href="/' + section_data["url"] + "/" + page_name + '" class="post">' + displayName + '</a>'
 
-        versions_html = ""
-        for s in site_data["sections"]:
-             versions_html += '<option value="' + s["url"] + '"'
-             if s["url"] == section_data["url"]:
-                 versions_html += " selected"
-             versions_html += '>' + s["title"] + "</option>"
+            versions_html = ""
+            for s in site_data["sections"]:
+                versions_html += '<option value="' + s["url"] + '"'
+                if s["url"] == section_data["url"]:
+                    versions_html += " selected"
+                versions_html += '>' + s["title"] + "</option>"
 
-        versions_select[section_data["url"]] = versions_html
+            versions_select[section_data["url"]] = versions_html
 
-        for rooti, dirsi, filesi in os.walk("pages", topdown=False):
-            for namei in filesi:
-                if (".md" in namei):
-                    print(section_data["url"], namei)
-                    combile_md(rooti, namei, section_data["url"], index_html, section_data["files"], versions_html)
+            for rooti, dirsi, filesi in os.walk("pages", topdown=False):
+                for namei in filesi:
+                    if (".md" in namei):
+                        print(section_data["url"], namei)
+                        combile_md(rooti, namei, section_data["url"], index_html, section_data["files"], versions_html)
+
+                        if section_data["url"] == default_section_url:
+                            combile_md(rooti, namei, None, index_html, section_data["files"], versions_html, default_section_url)
+
+            for name in files:
+                if (".md" in name):
+                    print(section_data["url"], name)
+                    combile_md(root, name, section_data["url"], index_html, section_data["files"], versions_html)
 
                     if section_data["url"] == default_section_url:
-                        combile_md(rooti, namei, None, index_html, section_data["files"], versions_html, default_section_url)
+                        combile_md(root, name, None, index_html, section_data["files"], versions_html, default_section_url)
 
-        for name in files:
-            if (".md" in name):
-                print(section_data["url"], name)
-                combile_md(root, name, section_data["url"], index_html, section_data["files"], versions_html)
+    for root, dirs, files in os.walk("web", topdown=True):
+        for dir in dirs:
+            if (not os.path.isdir(dir)):
+                os.mkdir(dir)
 
-                if section_data["url"] == default_section_url:
-                    combile_md(root, name, None, index_html, section_data["files"], versions_html, default_section_url)
+        rel_dir = os.path.relpath(root, os.getcwd() + "/web")
 
-for root, dirs, files in os.walk("web", topdown=True):
-    for dir in dirs:
-        if (not os.path.isdir(dir)):
-            os.mkdir(dir)
+        if (not os.path.isdir(rel_dir)):
+            os.mkdir(rel_dir)
 
-    rel_dir = os.path.relpath(root, os.getcwd() + "/web")
+        for file in files:
+            if ".py" in file or ".json" in file:
+                continue
 
-    if (not os.path.isdir(rel_dir)):
-        os.mkdir(rel_dir)
+            shutil.copy("web/" + rel_dir + "/" + file, rel_dir + "/" + file)
 
-    for file in files:
-        if ".py" in file or ".json" in file:
-            continue
+    with open("code.css", "w") as f:
+        f.write(formatter.get_style_defs())
 
-        shutil.copy("web/" + rel_dir + "/" + file, rel_dir + "/" + file)
+    shutil.copy("o16/index.html", "index.html")
 
-with open("code.css", "w") as f:
-     f.write(formatter.get_style_defs())
+    with open("web/videos.json", "r") as f:
+        video_data = json.loads("".join(f.readlines()))
 
-shutil.copy("o16/index.html", "index.html")
+    def getViews(video):
+        return int(video["views"])
 
-with open("web/videos.json", "r") as f:
-    video_data = json.loads("".join(f.readlines()))
+    def getVideosHTML(videos):
+        videos.sort(reverse=True, key=getViews)
 
-def getViews(video):
-    return int(video["views"])
+        video_html = ""
 
-def getVideosHTML(videos):
-    videos.sort(reverse=True, key=getViews)
+        for video in videos:
+            video_html += '<a class="video" href="https://www.youtube.com/watch?v=' + video["id"] + '"> \n' 
+            video_html += '<img src="/img/videos/' +  video["id"] + '.jpg" alt="video thumbnail"> \n'
 
-    video_html = ""
+            video["views"] = int(video["views"])
+            if video["views"] >= 1000000:
+                views = str(video["views"] / 1000000)[0:3] + "M"
+            elif video["views"] >= 1000:
+                views = str(video["views"] // 1000) + "K"
+            else:
+                views = str(video["views"])
 
-    for video in videos:
-        video_html += '<a class="video" href="https://www.youtube.com/watch?v=' + video["id"] + '"> \n' 
-        video_html += '<img src="/img/videos/' +  video["id"] + '.jpg" alt="video thumbnail"> \n'
+            video_html += '<b class="title">' + video["title"][0:45] + "</b> \n"
+            video_html += "<b>" + views + ' Views </b> <b class="title"> by ' + video["channel"] + " </b> \n"
+            video_html += "</a>\n"
+        
+        return video_html
 
-        video["views"] = int(video["views"])
-        if video["views"] >= 1000000:
-            views = str(video["views"] / 1000000)[0:3] + "M"
-        elif video["views"] >= 1000:
-            views = str(video["views"] // 1000) + "K"
-        else:
-            views = str(video["views"])
+    with open("web/my-mods.html", "r") as f:
+        my_mods_html = "".join(f.readlines())
 
-        video_html += '<b class="title">' + video["title"][0:45] + "</b> \n"
-        video_html += "<b>" + views + ' Views </b> <b class="title"> by ' + video["channel"] + " </b> \n"
-        video_html += "</a>\n"
-    
-    return video_html
+    my_mods_html = my_mods_html.replace("$VIDEOS", getVideosHTML(video_data["paid"])) # .replace("$FORGE1.15", getVideosHTML(video_data["1.15"]))
 
-with open("web/my-mods.html", "r") as f:
-    my_mods_html = "".join(f.readlines())
+    with open("my-mods.html", "w") as f:
+        f.write(my_mods_html)
 
-my_mods_html = my_mods_html.replace("$VIDEOS", getVideosHTML(video_data["paid"])) # .replace("$FORGE1.15", getVideosHTML(video_data["1.15"]))
+    with open("web/index.html", "r") as f:
+        index_html = "".join(f.readlines())
 
-with open("my-mods.html", "w") as f:
-     f.write(my_mods_html)
+    for url, versions_html in versions_select.items():
+        shutil.copy("my-mods.html", url + "/my-mods.html")
+        with open(url + "/index.html", "w") as f:
+            f.write(index_html.replace("$VERSIONS", versions_html))
 
-with open("web/index.html", "r") as f:
-    index_html = "".join(f.readlines())
+    shutil.copy(default_section_url + "/index.html", "index.html")
 
-for url, versions_html in versions_select.items():
-    shutil.copy("my-mods.html", url + "/my-mods.html")
-    with open(url + "/index.html", "w") as f:
-        f.write(index_html.replace("$VERSIONS", versions_html))
 
-shutil.copy(default_section_url + "/index.html", "index.html")
+buildSite()
 
-# export PATH=$PATH:/opt/buildhome/.local/bin && pip3 install markdown && pip3 install pygments && python3 build.py
+# export PATH=$PATH:/opt/buildhome/.local/bin && pip3 install requests && pip3 install markdown && pip3 install pygments && python3 build.py
+# PYTHON_VERSION 3.7
+
+# https://cf.way2muchnoise.eu/

@@ -13,10 +13,10 @@ In your ItemInit class copy the code for a basic item and change the names.
 Then on the Item.Properties, call the food function. This takes in a Food created with a Food.Builder. The Food.Builder has a variety of functions that let you set different properties of the food. For example, nutrition lets you set how much hunger it restores. When you're done call build to create the Food object.
 
     new Item.Properties().tab(ModCreativeTab.instance)
-                        .food(new Food.Builder().nutrition(4).saturationMod(2).build()
+                        .food(new FoodProperties.Builder().nutrition(4).saturationMod(2).build()
     
 
-To make your food grant a potion effect when eaten, call the `effect` function of your `Food.Builder` (before you call `build()`). This takes a supplier for an `MobEffectInstance` which takes the effect you want to give, the duration (in ticks so 20 is one second), and the amplifier (0 is level I). The effect method also takes the likelihood your effect will be applied (1.0F is always and 0F is never). So this code will have a 50% chance to give fire resistance I for 10 seconds.
+To make your food grant a potion effect when eaten, call the `effect` function of your `FoodProperties.Builder` (before you call `build()`). This takes a supplier for an `MobEffectInstance` which takes the effect you want to give, the duration (in ticks so 20 is one second), and the amplifier (0 is level I). The effect method also takes the likelihood your effect will be applied (1.0F is always and 0F is never). So this code will have a 50% chance to give fire resistance I for 10 seconds.
 
     .effect(() -> new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 200, 0), 0.5F)
     

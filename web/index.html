@@ -17,16 +17,28 @@
 
     <style>
         #index {
+            /*
             display: grid;
             justify-content: center;
             grid-template-columns: repeat(auto-fit,12rem);
             padding: 25px;
+            */
+
+            overflow: auto;
+            white-space: nowrap;
+
+            margin-bottom: 1.5rem;
+            max-width: 800px;
+            display: inline-block;
         }
 
         #index div {
             font-size: 1.2rem;
-            text-align: left;
-            padding-bottom: 1rem;
+            text-align: center;
+            padding: 1rem;
+
+            display: inline-block;
+            vertical-align: top;
         }
 
         #index div a::after, #index div b::after{
@@ -56,7 +68,7 @@
             <b> Start </b>
             <a href="java-basics"> Java Basics </a>
             <a href="environment-setup"> Environment Setup </a>
-            <a href="/updating"> 1.16 to 1.17 to 1.18 Update </a>
+            <a href="updating"> Updating </a>
             <span>
                 Github & CurseForge <br>
             </span>
@@ -201,7 +213,7 @@
             <a href="https://www.youtube.com/playlist?list=PLaevjqy3XufYmltqo0eQusnkKVN7MpTUe" target="_blank" style="color: rgba(0, 162, 255, 0.6) !important;">TurtyWurty 1.15</a>
         </div>
         <div>
-            Want to get notified of new tutorials? 
+            Want to get notified of new tutorials? <br>
             <a href="https://discord.com/invite/VbZVnRd" target="_blank"><button style="padding: 5px; cursor: pointer;">Join the Discord Server</button></a>
             <a href="https://buttondown.email/LukeGrahamLandry" target="_blank"><button style="padding: 5px; cursor: pointer;">Join the Email List</button></a>
             <a href="https://buttondown.email/LukeGrahamLandry/rss" target="_blank"><button style="padding: 5px; cursor: pointer;">RSS Feed</button></a>

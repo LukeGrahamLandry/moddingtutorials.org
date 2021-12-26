@@ -47,7 +47,7 @@ public static void init(){
 ### Texture
 
 You will need to make a texture for your lobster. If you choose to use one of the default models included with Dem Lobsters,
-your texture will need to be drawn on the same net. You can look at [Dem Lobster's assets on GitHub] to get the default textures and recolor them. 
+your texture will need to be drawn on the same net. You can look at [Dem Lobster's assets on GitHub](https://github.com/LukeGrahamLandry/lobsters-mod/tree/main/src/main/resources/assets/lobsters/textures/entity/lobsters) to get the default textures and recolor them. 
 Make sure to name your texture correctly based on the resource location used in your `LobsterTypeBuilder`.
 
 ### Lang

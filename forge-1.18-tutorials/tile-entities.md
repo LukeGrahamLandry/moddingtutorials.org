@@ -99,6 +99,7 @@ boolean isActive = true;
 
 Then in my tick method, I'll check that we're on the server side (because that's where logic like dealing damage should be processed) and that the tile should be active. Then, each tick I'll increment the timer and only if 20 ticks (1 second) has passed since last time, I'll reset the timer and call a `hurtMobs` method (that I haven't defined yet). 
     
+    // MobSlayerTile#tick
     if (!level.isClientSide() && tile.isActive){
         tile.timer++;
         if (tile.timer > 20){

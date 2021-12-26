@@ -1,12 +1,12 @@
 {
     "sections": [
         {
-        "folder": "forge-1.18-tutorials",
-        "url": "o18",
-        "title": "Forge 1.18.1",
-        "files": ["java-basics", "environment-setup", "basic-items", "advanced-items", "basic-blocks", 
-            "advanced-blocks", "tools-armor", "tile-entities", "enchantments", "recipes", "arrows"]
-        },
+            "folder": "forge-1.18-tutorials",
+            "url": "o18",
+            "title": "Forge 1.18.1",
+            "files": ["java-basics", "environment-setup", "basic-items", "advanced-items", "basic-blocks", 
+                "advanced-blocks", "tools-armor", "tile-entities", "enchantments", "recipes", "arrows"]
+            },
         {
             "folder": "forge-1.17-tutorials",
             "url": "o17",

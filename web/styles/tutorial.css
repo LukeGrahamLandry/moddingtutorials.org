@@ -96,6 +96,18 @@ body::-webkit-scrollbar-thumb {
   border: 3px solid rgb(200, 200, 200);
 }
 
+#index::-webkit-scrollbar {
+  width: 15px;               /* width of the entire scrollbar */
+}
+#index::-webkit-scrollbar-track {
+  background: rgb(200, 200, 200);        /* color of the tracking area */
+}
+#index::-webkit-scrollbar-thumb {
+  background-color: rgb(165, 165, 165);    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  border: 3px solid rgb(200, 200, 200);
+}
+
   /* FROM BOOTSTRAP */
 
 .btn-primary {

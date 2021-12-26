@@ -12,17 +12,20 @@ People who have made donations on [Patreon](https://www.patreon.com/LukeGrahamLa
 
 People who paid me to make mods. DM LukeGrahamLandry#6888 on discord to commission a mod! 
 
+- [Raffle](https://www.curseforge.com/members/raffle0/projects)
 - [Socksfor1](https://www.youtube.com/channel/UCsEgeyBfOnGGBpjIvkDJbWg)
+- [CheckPoint](https://www.youtube.com/c/TheCheckpoint)
 - [Laff](https://www.youtube.com/channel/UCCIwBjkmHagBindmrLb5c5A)
 - [Blaza](https://www.youtube.com/channel/UCiaRjc5me4e-rChdBh076dA)
 - [TbhHonest](https://www.youtube.com/channel/UCnwo3X3eCrUp7N1DZPc-MGQ)
 - [FatMemeGod](https://www.youtube.com/channel/UClqbG3xJmmQRWQIBPZV6s7A)
-- [CheckPoint](https://www.youtube.com/c/TheCheckpoint)
+- [Keaka](https://discord.gg/uUwCwZFR6v)
 - [LoKk1](https://www.youtube.com/c/LoKk1)
 - [Divine Gaming Inc](http://divine-gaming.com/)
 - [Cicoda](https://www.curseforge.com/members/cicoda/projects)
 - [Redrix](https://www.curseforge.com/members/redrixttv/projects)
 - [The Ult1mate Guy](https://www.curseforge.com/members/theu1t1mateguy/projects)
+- [viiizee](https://www.curseforge.com/members/shmoopsie/projects)
 - [Cammie](https://github.com/CammiePone)
 - Khaki
 - GTB
@@ -33,7 +36,9 @@ People who paid me to make mods. DM LukeGrahamLandry#6888 on discord to commissi
 
 ## Contributors 
 
-If you notice any mistakes in my tutorials, please submit a pull request on [the github page](https://github.com/LukeGrahamLandry/forge-modding-tutorial). When it's merged, I'll add your name to this list. 
+If you notice any mistakes in my tutorials, please submit a pull request on [the github page](https://github.com/LukeGrahamLandry/modding-tutorials). When it's merged, I'll add your name to this list. 
+
+- thedude
 
 ## Resources
 
