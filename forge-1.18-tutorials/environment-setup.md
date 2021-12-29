@@ -1,12 +1,12 @@
 # Environment Setup
 
-How to setup a forge development environment for 1.17.1 with the official mappings. We download java 16, forge and IntelliJ. We also rename our main package and class and update the mods.toml file.
+How to setup a forge development environment for 1.18.1 with the official mappings. We download java 17, forge and IntelliJ. We also rename our main package and class and update the mods.toml file.
 
 ## Downloading
 
-First, download the JDK (java 8 development kit). Go to [oracle.com](https://www.oracle.com/java/technologies/javase/jdk16-archive-downloads.html) and select your operating system. It will ask you to make an account but you can borrow someone else's credentials from [bugmenot.com](http://bugmenot.com/view/oracle.com). Just copy paste them in and if the first doesn't work, try the next one.
+First, download the JDK (java 17 development kit). Go to [oracle.com](https://www.oracle.com/java/technologies/downloads/#jdk17-windows) and select your operating system. It might ask you to make an account but you can borrow someone else's credentials from [bugmenot.com](http://bugmenot.com/view/oracle.com). Just copy paste them in and if the first doesn't work, try the next one.
 
-Next you need the Forge 1.17.1 MDK (mod development kit) from [files.minecraftforge.net](https://files.minecraftforge.net/net/minecraftforge/forge/index_1.17.1.html). Get the recommended version cause its the most likely to work.
+Next you need the Forge 1.18.1 MDK (mod development kit) from [files.minecraftforge.net](https://files.minecraftforge.net/net/minecraftforge/forge/index_1.18.1.html). Get the recommended version cause its the most likely to work.
 ![forge mdk download page](/img/download-forge.png)
 When you click the button to download the MDK it will send you to a page with ads. Very important not to click any of them (even if they look like pop ups from your OS), just wait a few seconds until the skip button appears in the top right and click that to download.
 
@@ -51,7 +51,7 @@ Make a public static string that holds your mod id. This is how the forge mod lo
 Open `src/main/resources/META-INF/mods.toml` It has a bunch of key value pairs that mostly set the information shown on the mods list in game. The only one you have to change is the modId (to whatever you had in your main class). You must keep the modLoader and loaderVersion the same but the fields lower down like display name can be whatever you want, they'll be displayed in the mods list ingame. You should also choose a license (I like the MIT license personally). 
 
     modLoader="javafml"
-    loaderVersion="[36,)"
+    loaderVersion="[39,)"
     
     license="MIT"
     
@@ -87,5 +87,5 @@ In the top level of your mod folder you'll find a few extra files about forge. I
 
 **If you are just starting to learn modding and followed the instructions above, this section does not apply to you. Skip ahead to the next tutorial :)**
 
-If you have an existing 1.16 modding environment that you would like to update to 1.17, follow [my updating to 1.17 tutorial](/o17/updating).
+If you have an existing 1.17 or 1.16 modding environment that you would like to update to 1.18, follow [my updating tutorial](updating).
 

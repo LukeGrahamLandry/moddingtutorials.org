@@ -52,7 +52,11 @@ def combile_md(source_folder, filename, target_folder, index_html, pages_list, v
     # meta tags
     meta = ""
     if True:
-        meta += "<!-- submit a fix to the content of this page: https://github.com/LukeGrahamLandry/modding-tutorials/{}/{} -->".format(source_folder.split("/")[-1], filename)
+        if title in site_data["un_versioned"]:
+            meta += "<!-- submit a fix to the content of this page: https://github.com/LukeGrahamLandry/modding-tutorials/blob/master/pages/{} -->".format(filename)
+        else:
+            meta += "<!-- submit a fix to the content of this page: https://github.com/LukeGrahamLandry/modding-tutorials/blob/master/{}/{} -->".format(source_folder.split("/")[-1], filename)
+        
         displayName = ""
         for part in filename.split(".")[0].split("-"):
             displayName += part[0].upper() + part[1:] + " "
