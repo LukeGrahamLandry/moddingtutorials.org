@@ -85,7 +85,8 @@ In the top level of your mod folder you'll find a few extra files about forge. I
 
 ## Alternative Setup
 
-**If you are just starting to learn modding and followed the instructions above, this section does not apply to you. Skip ahead to the next tutorial :)**
+## Alternative Setup
 
-If you have an existing 1.16 modding environment that you would like to update to 1.17, follow [my updating to 1.17 tutorial](updating).
+- If you are using an Apple Silicon (m1) computer, read the [Apple Silicon tutorial](m1)
+- If you have an existing 1.16 modding environment that you would like to update to 1.17, follow [my updating to 1.17 tutorial](updating).
 

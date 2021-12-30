@@ -85,6 +85,8 @@ In the top level of your mod folder you'll find a few extra files about forge. I
 
 ## Alternative Setup
 
+- If you are using an Apple Silicon (m1) computer, read the [Apple Silicon tutorial](m1)
+
 **If you are just starting to learn modding and followed the instructions above, this section does not apply to you. Skip ahead to the next tutorial :)**
 
 If you already have a 1.16 mod that you would like to follow these tutorials with, you should make sure you're using the same Minecraft and mappings version. Open your `build.gradle`. 
