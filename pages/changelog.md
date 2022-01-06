@@ -2,10 +2,13 @@
 
 If you're interested in a more detailed write up on the various formats my tutorials have taken, you can read [Why Long Videos?](why-long-video)
 
-- goal: events, mappings, sides, registries, loot tables
-- goal: patchouli, bows, potions. (videos that did well before)
-- goal: releasing your mod (gradlew build, github, curseforge)
-- goal: videos
+## January 6
+- start mixins
+- commissions page
+- default to dark mode
+
+## December 29
+- dev environemnt on m1 tutorial 
 
 ## December 26
 - horizontal scroll for planned tutorials on index page

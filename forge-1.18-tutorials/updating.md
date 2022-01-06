@@ -54,15 +54,15 @@ open your src/main/resources/META-INF/mods.toml file.
 
 change the forge loader version to  
 
-    loaderVersion="[39,)" 
+    loaderVersion="[38,)" 
 
 change the required version for the `minecraft` dependency to  
 
-    versionRange="[1.18.1,1.19)"
+    versionRange="[1.18,1.19)"
 
 and the required version for the `forge` dependency to  
 
-    versionRange="[39,)"
+    versionRange="[38,)"
 
 
 ## Code Fixes

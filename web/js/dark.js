@@ -32,7 +32,7 @@ function updateDarkmode(){
         sheet = "";
     }
     document.getElementById("theme").href = sheet;
-    setCookie("darkmode", sheet, 365);
+    setCookie("darkmode", dark, 365);
 }
 
 // set darkmode from cookie

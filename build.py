@@ -202,11 +202,20 @@ def buildSite():
     with open("my-mods.html", "w") as f:
         f.write(my_mods_html)
 
+    with open("web/commissions.html", "r") as f:
+        commissions_html = "".join(f.readlines())
+
+    commissions_html = commissions_html.replace("$VIDEOS", getVideosHTML(video_data["paid"])) # .replace("$FORGE1.15", getVideosHTML(video_data["1.15"]))
+
+    with open("commissions.html", "w") as f:
+        f.write(commissions_html)
+
     with open("web/index.html", "r") as f:
         index_html = "".join(f.readlines())
 
     for url, versions_html in versions_select.items():
         shutil.copy("my-mods.html", url + "/my-mods.html")
+        shutil.copy("commissions.html", url + "/commissions.html")
         with open(url + "/index.html", "w") as f:
             f.write(index_html.replace("$VERSIONS", versions_html))
 

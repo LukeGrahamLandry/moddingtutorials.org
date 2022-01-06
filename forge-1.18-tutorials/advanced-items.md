@@ -119,11 +119,11 @@ You can also play a sound. This will play the enderman's teleport sound that the
     world.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.ENDERMAN_TELEPORT, SoundSource.PLAYERS, 1.0F, 1.0F);
     
 
-If we want to give the players some help understanding our mod, we can add a tool tip when they hover over the item in their inventory. So override appendHoverText and add to the tooltip. The StringTextComponent class is just a string that Minecraft can render.
+If we want to give the players some help understanding our mod, we can add a tool tip when they hover over the item in their inventory. So override appendHoverText and add to the tooltip. The TextComponent class is just a string that Minecraft can render.
 
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
-        tooltip.add(new StringTextComponent("teleports you where you're looking"));
+        tooltip.add(new TextComponent("teleports you where you're looking"));
     
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
     }
@@ -152,7 +152,7 @@ If you want less clutter for the player, you can only show this when they're hol
 Then you can change your appendHoverText method to check if the player is holding shift.
 
     if (KeyboardHelper.isHoldingShift()){
-        tooltip.add(new StringTextComponent("teleports you where you're looking"));
+        tooltip.add(new TextComponent("teleports you where you're looking"));
     }
     
 
