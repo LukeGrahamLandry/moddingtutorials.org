@@ -46,6 +46,8 @@
         </div>
        
         <div id="nav">
+            <div class="embedstream"></div>
+
             $INDEX
         </div>
         
@@ -90,7 +92,7 @@
                 >
                 
                 <label for="bd-email">Want to get notified of new tutorials? </label> <br>
-                <input type="email" name="email" id="bd-email" placeholder="Enter your email" style="padding: 10px; width: 300px;"/>
+                <input type="email" name="email" id="bd-email" placeholder="Enter your email" style="padding: 10px; width: 250px;"/>
                 <input type="submit" value="Subscribe" style="padding: 10px; cursor: pointer; background-color: red; font-weight: bold; border-radius: 3px; border: none;" />
                 <br> or, <a href="https://buttondown.email/LukeGrahamLandry/rss" target="_blank">subscribe via RSS</a>
                 </form>
@@ -120,13 +122,7 @@
                     <div class="app">
                         <img src="/img/patreon.png" style="width: 70px">
                     </div>
-                </a>  
-                
-                <a href="https://buttondown.email/LukeGrahamLandry" class="img-link" target="_blank">
-                    <div class="app">
-                        <img src="/img/mail.png" style="width: 70px">
-                    </div>
-                </a>   
+                </a> 
              </div>
     
             <br> <br>
@@ -134,12 +130,14 @@
     </div>
 
     <script src="/js/dark.js"></script>
+
     <script>
         let tutorials = $TUTORIALS;
-
+        
         // forward back buttons
         let thisPage = window.location.pathname.split("/").pop().split(".")[0]
         let index = tutorials.indexOf(thisPage);
+
 
         if (index != -1){
             document.getElementById("foot").style.display = "block";
@@ -157,13 +155,13 @@
             }
         }
 
+
         // version select
         document.getElementById("dropdown").onchange = function (e){
             let new_url = e.target.value;
             window.location.href = "/" + new_url + "/" + thisPage;
         }
         
-
         // mobile nav expand button
         let showing = false;
         function toggle(){

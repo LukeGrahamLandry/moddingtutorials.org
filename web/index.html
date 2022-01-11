@@ -129,6 +129,7 @@
                 Sounds <br>
                 Commands <br>
                 Recipe Type <br>
+                Particles <br>
             </span>
         </div>
         <div>
@@ -141,7 +142,8 @@
                 Tinkers Construct <br> <!-- materials, traits, tools, parts -->
                 Connected Textures <br>
                 Better Questing <br>
-                Botania Mana <br>
+                Botania <br> <!-- items accepting mana from pools, blocks accepting mana from spreaders, blocks generating mana, custom spreaders, crafting recipes in mana pool (custom catalysts) -->
+                Critterpedia <br>
             </span>
         </div>
         <div>
@@ -157,22 +159,24 @@
         </div>
         <div>
             <b> Utilities </b>
+            <a href="mixins"> Mixins </a>
             <span>
                 Packets <br>
                 Config <br>
                 Key Binds <br>
-                Mixins <br>
                 Capabilities <br>
                 Forge Energy (RF) <br>
                 Access Transformers <br>
                 World Saved Data <br>
                 Global Loot Modifiers <br>
+                NBT Data <br> <!-- applications: WSD, entity, TE, capability-->
             </span>
         </div>
         <div>
             <b> Resources </b>
             <a href="recipes"> Recipes </a>
             <span>
+                About Datapacks <br>
                 3d Models <br>
                 Achievements <br>
                 Loot Tables <br>
@@ -184,13 +188,15 @@
         <div>
             <b> Rendering </b>
             <span>
-                Particles <br>
                 Tile Entity Renderers <br> <!-- also Item Stack TER -->
+                Item Stack TER <br>
+                Custom Model Properties <br>
                 Screens <br>
                 HUD <br>
                 Shaders <br>
                 Baked Models <br>
                 Obj Models <br>
+                Colors <br> <!-- https://mcforge.readthedocs.io/en/latest/models/color/#coloring-textures /give @p firstmod:color_block{color:12345} -->
             </span>
         </div>
         <div>
@@ -219,6 +225,7 @@
             <a href="https://buttondown.email/LukeGrahamLandry" target="_blank"><button style="padding: 5px; cursor: pointer;">Join the Email List</button></a>
             <a href="https://buttondown.email/LukeGrahamLandry/rss" target="_blank"><button style="padding: 5px; cursor: pointer;">RSS Feed</button></a>
         </div>
+        <div class="embedstream"></div>
     </div>
     <div class="centered">
         <div id="content" class="markdown-body">
@@ -243,12 +250,8 @@
     
             <h2> Commissions </h2>
             <p>
-                If you have an idea for a mod and would like to commission me to make it a reality, 
-                DM me on discord (LukeGrahamLandry#6888). Please prepare a detailed description of the 
-                features you want so I can give you a meaningful quote. I will require a 30% deposit before 
-                I begin work. Due to time constraints, no commissions under $75 will be taken. I'm happy 
-                to work in versions 1.18.x, 1.17.x or 1.16.x on Forge or Fabric. You can take a look at the <a href="my-mods">My Mods</a> page 
-                for some examples of my past work. 
+                I'm taking mod commissions for Forge or Fabric versions 1.18.x, 1.17.x or 1.16.x. 
+                DM me on discord (LukeGrahamLandry#6888) or read <a href="commissions"> the commissions page </a> for more info. 
                 <br> <br>
                 I also offer one-on-one tutoring. Want real time personalized help learning to make Minecraft mods? 
                 Get on a video call with me, share your screen and I'll guide you through making anything you can imagine. 
@@ -281,7 +284,7 @@
         >
         
         <label for="bd-email">Want to get notified of new tutorials? </label> <br>
-        <input type="email" name="email" id="bd-email" placeholder="Enter your email" style="padding: 10px; width: 300px;"/>
+        <input type="email" name="email" id="bd-email" placeholder="Enter your email" style="padding: 10px; width: 250px;"/>
         <input type="submit" value="Subscribe" style="padding: 10px; cursor: pointer; background-color: red; font-weight: bold; border-radius: 3px; border: none;" />
         <br> or, <a href="https://buttondown.email/LukeGrahamLandry/rss" target="_blank">subscribe via RSS</a>
         </form>
@@ -309,12 +312,6 @@
         <a href="https://www.patreon.com/LukeGrahamLandry" class="img-link" target="_blank">
             <div class="app">
                 <img src="/img/patreon.png" style="width: 70px">
-            </div>
-        </a>    
-
-        <a href="https://buttondown.email/LukeGrahamLandry" class="img-link" target="_blank">
-            <div class="app">
-                <img src="/img/mail.png" style="width: 70px">
             </div>
         </a>  
      </div>

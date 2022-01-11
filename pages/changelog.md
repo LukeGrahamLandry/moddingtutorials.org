@@ -2,6 +2,9 @@
 
 If you're interested in a more detailed write up on the various formats my tutorials have taken, you can read [Why Long Videos?](why-long-video)
 
+## January 10
+- show in nav bar if streaming on youtube
+
 ## January 6
 - start mixins
 - commissions page

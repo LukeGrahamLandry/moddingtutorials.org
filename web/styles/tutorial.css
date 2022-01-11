@@ -306,3 +306,37 @@ body {
 .mod:hover {
   box-shadow: inset 0 0 0 1000px rgb(221, 221, 221);
 }
+
+
+
+/* videos */
+.video {
+  display: inline-block;
+  color: black;
+  text-decoration: none;
+  width: 180px;
+  margin-bottom: 30x;
+  padding: 10px;
+  font-size: 1.25rem;
+  text-align: left;
+}
+
+.video:hover {
+  text-decoration: none;
+}
+
+.video img {
+  display: block;
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.video .title {
+  display: block;
+  font-size: 0.75rem;
+  font-family: monospace;
+}
+
+.embedstream {
+  position: relative;
+}
