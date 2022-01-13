@@ -274,7 +274,7 @@ def buildFetchedPages():
 
             full_content = template.replace("$CONTENT", html_content).replace("$META", meta).replace("$INDEX", page_index).replace("$VERSIONS", drop_down_list)
 
-            with open(directory + "/" + filename + ".md", "w") as f:
+            with open(directory + "/" + filename + ".html", "w") as f:
                 f.write(full_content)
 
             generateSlashRedirectFix(directory, filename)
