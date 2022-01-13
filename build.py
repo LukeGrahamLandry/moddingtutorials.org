@@ -250,7 +250,7 @@ def buildFetchedPages():
                 if not "branch" in page:
                     page["branch"] = "main"
 
-                url = "https://raw.githubusercontent.com/{}/{}/README.md".format(page["repo", page["branch"]])
+                url = "https://raw.githubusercontent.com/{}/{}/README.md".format(page["repo"], page["branch"])
             
             if url is None:
                 print("no page url found " + json.dumps(page))
