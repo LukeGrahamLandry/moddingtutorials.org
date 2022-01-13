@@ -244,11 +244,21 @@ def buildFetchedPages():
             page_index += '<a href="{}">{}</a>'.format(name, page["name"]) 
 
         for page in pages:
-            if "repo" in pages:
-                url = "https://raw.githubusercontent.com/{}/{}/README.md".format(page["repo", pages["branch"]])
+            url = None
+
+            if "repo" in page:
+                if not "branch" in page:
+                    page["branch"] = "main"
+
+                url = "https://raw.githubusercontent.com/{}/{}/README.md".format(page["repo", page["branch"]])
             
+            if url is None:
+                print("no page url found " + json.dumps(page))
+                continue
+
             r = requests.get(url)
             if not r.status_code == 200:
+                print("error " + str(r.status_code) + " " + url)
                 continue
 
             filename = page["name"].lower().replace(" ", "-")
@@ -261,7 +271,7 @@ def buildFetchedPages():
 
             if "curseforge" in page:
                 html_content += '<a href=' + page["curseforge"] + '> Download Mod On Curse Forge </a>'
-                
+
             full_content = template.replace("$CONTENT", html_content).replace("$META", meta).replace("$INDEX", page_index).replace("$VERSIONS", drop_down_list)
 
             with open(directory + "/" + filename + ".md", "w") as f:
