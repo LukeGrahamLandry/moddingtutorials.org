@@ -41,6 +41,63 @@
     "playlists": {
         "1.15": "PLxBLp3RqmUMEU5vrtMY6tgfP2lnJD0OUj"
     },
+    "fetched-pages" : {
+        "mods": [
+            {
+                "name": "Mercenaries",
+                "repo": "LukeGrahamLandry/mercenaries-mod",
+                "branch": "main", 
+                "curseforge": "mercenaries"
+            },
+            {
+                "name": "Mountables",
+                "repo": "LukeGrahamLandry/mountables-mod",
+                "branch": "main",
+                "curseforge": "mountables"
+            },
+            {
+                "name": "Find My Friends",
+                "repo": "LukeGrahamLandry/find-my-friends-mod",
+                "branch": "forge-1.18",
+                "curseforge": "find-my-friends"
+            },
+            {
+                "name": "Inclusive Enchanting",
+                "repo": "LukeGrahamLandry/inclusive-enchanting-mod",
+                "branch": "main",
+                "curseforge": "inclusive-enchanting"
+            },
+            {
+                "name": "Tribes",
+                "repo": "LukeGrahamLandry/tribes-mod",
+                "branch": "main",
+                "curseforge": "tribes"
+            },
+            {
+                "name": "Simple XP Config",
+                "repo": "LukeGrahamLandry/XpSpawnerControl",
+                "branch": "master",
+                "curseforge": "spawner-xp-config"
+            },
+            {
+                "name": "Harder Core",
+                "repo": "LukeGrahamLandry/harder-core-mod",
+                "branch": "main",
+                "curseforge": "harder-core"
+            },
+            {
+                "name": "Cultivated Snacks",
+                "repo": "LukeGrahamLandry/cultivated-snacks-mod",
+                "branch": "forge-1.16.5",
+                "curseforge": "cultivated-snacks"
+            },
+            {
+                "name": "Avatar",
+                "repo": "LukeGrahamLandry/avatar-mod",
+                "branch": "main"
+            }
+        ]
+    },
     "descriptions":{
         "index": "Detailed text tutorials for creating Minecraft mods with Forge 1.18.1, 1.17.1 or 1.16.5",
         "java-basics": "An overview of java programming language concepts required to create Minecraft mods.",

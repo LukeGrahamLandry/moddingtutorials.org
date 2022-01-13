@@ -159,7 +159,11 @@
         // version select
         document.getElementById("dropdown").onchange = function (e){
             let new_url = e.target.value;
-            window.location.href = "/" + new_url + "/" + thisPage;
+            if (new_url.includes("/")){
+                window.location.href = new_url;
+            } else {
+                window.location.href = "/" + new_url + "/" + thisPage;
+            }
         }
         
         // mobile nav expand button

@@ -1,5 +1,5 @@
 import os
-import markdown, json, shutil
+import markdown, json, shutil, requests
 from pygments import lexers
 from pygments import highlight 
 from pygments.formatters import HtmlFormatter
@@ -79,27 +79,14 @@ def combile_md(source_folder, filename, target_folder, index_html, pages_list, v
 
     full_content = template.replace("$CONTENT", html_syntax_highlighted).replace("$META", meta).replace("$INDEX", index_html).replace("$TUTORIALS", json.dumps(pages_list)).replace("$VERSIONS", versions_html)
 
+    generateSlashRedirectFix(target_folder, title)
+
     if target_folder is None:
         with open(filename_to_write, "w") as f:
             f.write(full_content)
-
-        # ugly hack
-        if (not os.path.isdir( title)):
-            os.mkdir(title)
-        with open(title + "/index.html", "w") as f:
-            f.write('<link rel="canonical" href="https://moddingtutorials.org/' + title + '"/>')
-            f.write('cloudflare pages can not deal with trailing slashes properly. redirecting to <a href="' + title + '">' + title + '</a> <script> window.location.href = "/' + title + '";</script>')
     else: 
         with open(target_folder + "/" + filename_to_write, "w") as f:
             f.write(full_content)
-
-        # ugly hack
-        if (not os.path.isdir(target_folder + "/" + title)):
-            os.mkdir(target_folder + "/" + title)
-        
-        with open(target_folder + "/" + title + "/index.html", "w") as f:
-            f.write('<link rel="canonical" href="https://moddingtutorials.org/' + target_folder + "/" + title + '"/>')
-            f.write('cloudflare pages can not deal with trailing slashes properly. redirecting to <a href="' + target_folder + "/" + title + '">' + title + '</a> <script> window.location.href = "/' + target_folder + "/" + title + '";</script>')
 
 def buildSite():
     versions_select = {}
@@ -222,7 +209,68 @@ def buildSite():
     shutil.copy(default_section_url + "/index.html", "index.html")
 
 
+def generateSlashRedirectFix(directory, filename):
+    # ugly hack
+
+    if directory is None:
+        if (not os.path.isdir(filename)):
+            os.mkdir(filename)
+        with open(filename + "/index.html", "w") as f:
+            f.write('<link rel="canonical" href="https://moddingtutorials.org/' + filename + '"/>')
+            f.write('cloudflare pages can not deal with trailing slashes properly. redirecting to <a href="/' + filename + '">' + filename + '</a> <script> window.location.href = "/' + filename + '";</script>')
+
+    else:
+        if (not os.path.isdir(directory + "/" + filename)):
+            os.mkdir(directory + "/" + filename)
+        with open(directory + "/" + filename + "/index.html", "w") as f:
+            f.write('<link rel="canonical" href="https://moddingtutorials.org/' + directory + "/" + filename + '"/>')
+            f.write('cloudflare pages can not deal with trailing slashes properly. redirecting to <a href="/' + directory + "/" + filename + '">' + filename + '</a> <script> window.location.href = "/' + directory + "/" + filename + '";</script>')
+
+
+def buildFetchedPages():
+    drop_down_list = """
+        <option value="" hidden selected> Change Site Section </option>
+        <option value="/o18"> Forge Modding Tutorials </option>
+        <option value="/commissions"> Mod Commissions </option>
+    """
+
+    for directory, pages in site_data["fetched-pages"].items():
+        if not os.path.isdir(directory):
+                os.mkdir(directory)
+
+        page_index = ""
+        for page in pages:
+            name = page["name"].lower().replace(" ", "-")
+            page_index += '<a href="{}">{}</a>'.format(name, page["name"]) 
+
+        for page in pages:
+            if "repo" in pages:
+                url = "https://raw.githubusercontent.com/{}/{}/README.md".format(page["repo", pages["branch"]])
+            
+            r = requests.get(url)
+            if not r.status_code == 200:
+                continue
+
+            filename = page["name"].lower().replace(" ", "-")
+
+            meta = "<title>" + page["name"] + "</title>"
+            meta += '<link rel="canonical" href="https://moddingtutorials.org/{}/{}"/>'.format(directory, filename)
+            meta += "<!-- the text on this page was fetched from " + url + " I'm fairly confident that I'm only getting my own content but if you feel I stole something, please DM me on discord: LukeGrahamLandry#6888 -->"
+            
+            html_content = markdown.markdown(r.text, extensions=['fenced_code'])
+
+            if "curseforge" in page:
+                html_content += '<a href=' + page["curseforge"] + '> Download Mod On Curse Forge </a>'
+                
+            full_content = template.replace("$CONTENT", html_content).replace("$META", meta).replace("$INDEX", page_index).replace("$VERSIONS", drop_down_list)
+
+            with open(directory + "/" + filename + ".md", "w") as f:
+                f.write(full_content)
+
+            generateSlashRedirectFix(directory, filename)
+
 buildSite()
+buildFetchedPages()
 
 # export PATH=$PATH:/opt/buildhome/.local/bin && pip3 install requests && pip3 install markdown && pip3 install pygments && python3 build.py
 # PYTHON_VERSION 3.7
