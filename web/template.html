@@ -28,8 +28,8 @@
 <body>
     <div id="side-nav">
         <div style="padding: 10px;">
-            <a href="index">About</a>
-            <a href="my-mods" style="float: right;">My Mods</a>
+            <a href="/">About</a>
+            <a href="/my-mods" style="float: right;">My Mods</a>
 
             <div style="text-align: center; padding-top: 10px;">
                 <label class="switch">
@@ -80,82 +80,57 @@
                     <button class="btn btn-primary" style="width: 80%;" id="next">Next Tutorial</button>
                 </a>
             </div>
-            <br><br>
-
-            <div style="display: inline-block; max-width: 800px;">
-                <form
-                    action="https://buttondown.email/api/emails/embed-subscribe/LukeGrahamLandry"
-                    method="post"
-                    target="popupwindow"
-                    onsubmit="window.open('https://buttondown.email/LukeGrahamLandry', 'popupwindow')"
-                    class="embeddable-buttondown-form"
-                >
-                
-                <label for="bd-email">Want to get notified of new tutorials? </label> <br>
-                <input type="email" name="email" id="bd-email" placeholder="Enter your email" style="padding: 10px; width: 250px;"/>
-                <input type="submit" value="Subscribe" style="padding: 10px; cursor: pointer; background-color: red; font-weight: bold; border-radius: 3px; border: none;" />
-                <br> or, <a href="https://buttondown.email/LukeGrahamLandry/rss" target="_blank">subscribe via RSS</a>
-                </form>
-            </div>
-            <br><br>
-
-             <div style="width: fit-content; display: inline-block;">
-                <a href="https://github.com/LukeGrahamLandry/modding-tutorials" class="img-link" target="_blank">
-                    <div class="app">
-                        <img src="/img/github.png" style="width: 70px">
-                    </div>
-                </a>
-        
-                <a href="https://discord.gg/VbZVnRd" class="img-link" target="_blank">
-                    <div class="app">
-                        <img src="/img/discord.png" style="width: 70px">
-                    </div>
-                </a>
-        
-                <a href="https://www.youtube.com/channel/UC8gYhA5SkhI1tajZ5JF2pbQ/playlists" class="img-link" target="_blank">
-                    <div class="app">
-                        <img src="/img/youtube.png" style="width: 70px">
-                    </div>
-                </a>
-        
-                <a href="https://www.patreon.com/LukeGrahamLandry" class="img-link" target="_blank">
-                    <div class="app">
-                        <img src="/img/patreon.png" style="width: 70px">
-                    </div>
-                </a> 
-             </div>
-    
-            <br> <br>
+            
         </div>
+        <br><br>
+        <div class="hide-for-print" style="display: inline-block; max-width: 800px;">
+            <form
+                action="https://buttondown.email/api/emails/embed-subscribe/LukeGrahamLandry"
+                method="post"
+                target="popupwindow"
+                onsubmit="window.open('https://buttondown.email/LukeGrahamLandry', 'popupwindow')"
+                class="embeddable-buttondown-form"
+            >
+            
+            <label for="bd-email">Want to get notified of new tutorials? </label> <br>
+            <input type="email" name="email" id="bd-email" placeholder="Enter your email" style="padding: 10px; width: 250px;"/>
+            <input type="submit" value="Subscribe" style="padding: 10px; cursor: pointer; background-color: red; font-weight: bold; border-radius: 3px; border: none;" />
+            <br> or, <a href="https://buttondown.email/LukeGrahamLandry/rss" target="_blank">subscribe via RSS</a>
+            </form>
+        </div>
+        <br><br>
+
+        <div class="hide-for-print" style="width: fit-content; display: inline-block;">
+            <a href="https://github.com/LukeGrahamLandry/modding-tutorials" class="img-link" target="_blank">
+                <div class="app">
+                    <img src="/img/github.png" style="width: 50px">
+                </div>
+            </a>
+
+            <a href="https://discord.gg/VbZVnRd" class="img-link" target="_blank">
+                <div class="app">
+                    <img src="/img/discord.png" style="width: 50px">
+                </div>
+            </a>
+
+            <a href="https://www.youtube.com/channel/UC8gYhA5SkhI1tajZ5JF2pbQ/playlists" class="img-link" target="_blank">
+                <div class="app">
+                    <img src="/img/youtube.png" style="width: 50px">
+                </div>
+            </a>
+
+            <a href="https://www.patreon.com/LukeGrahamLandry" class="img-link" target="_blank">
+                <div class="app">
+                    <img src="/img/patreon.png" style="width: 50px">
+                </div>
+            </a> 
+        </div>
+        <br> <br>
     </div>
 
     <script src="/js/dark.js"></script>
 
     <script>
-        let tutorials = $TUTORIALS;
-        
-        // forward back buttons
-        let thisPage = window.location.pathname.split("/").pop().split(".")[0]
-        let index = tutorials.indexOf(thisPage);
-
-
-        if (index != -1){
-            document.getElementById("foot").style.display = "block";
-
-            if (index == 0){
-                document.getElementById("back").disabled = true;
-            } else {
-                document.getElementById("back-a").href = tutorials[index - 1];
-            }
-
-            if (index == (tutorials.length - 1)){
-                document.getElementById("next").disabled = true;
-            } else {
-                document.getElementById("next-a").href = tutorials[index + 1]
-            }
-        }
-
-
         // version select
         document.getElementById("dropdown").onchange = function (e){
             let new_url = e.target.value;
@@ -176,6 +151,32 @@
             } else {
                 document.getElementById("side-nav").style.display = "none";
             }
+        }
+
+        try {
+            let tutorials = $TUTORIALS;
+        
+            // forward back buttons
+            let thisPage = window.location.pathname.split("/").pop().split(".")[0]
+            let index = tutorials.indexOf(thisPage);
+
+            if (index != -1){
+                document.getElementById("foot").style.display = "block";
+
+                if (index == 0){
+                    document.getElementById("back").disabled = true;
+                } else {
+                    document.getElementById("back-a").href = tutorials[index - 1];
+                }
+
+                if (index == (tutorials.length - 1)){
+                    document.getElementById("next").disabled = true;
+                } else {
+                    document.getElementById("next-a").href = tutorials[index + 1]
+                }
+            }
+        } catch (error) {
+            console.log("potential error $TUTORIALS not injected")
         }
     </script>
 </body>

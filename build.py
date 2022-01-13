@@ -229,7 +229,7 @@ def generateSlashRedirectFix(directory, filename):
 
 def buildFetchedPages():
     drop_down_list = """
-        <option value="" hidden selected> Change Site Section </option>
+        <option hidden selected> Change Site Section </option>
         <option value="/o18"> Forge Modding Tutorials </option>
         <option value="/commissions"> Mod Commissions </option>
     """
@@ -241,7 +241,7 @@ def buildFetchedPages():
         page_index = ""
         for page in pages:
             name = page["name"].lower().replace(" ", "-")
-            page_index += '<a href="{}">{}</a>'.format(name, page["name"]) 
+            page_index += '<a href="{}" class="post">{}</a>'.format(name, page["name"]) 
 
         for page in pages:
             url = None
@@ -270,7 +270,7 @@ def buildFetchedPages():
             html_content = markdown.markdown(r.text, extensions=['fenced_code'])
 
             if "curseforge" in page:
-                html_content += '<a href=' + page["curseforge"] + '> Download Mod On Curse Forge </a>'
+                html_content += '<br> <a href="https://www.curseforge.com/minecraft/mc-mods/' + page["curseforge"] + '" class="btn btn-primary" style="width: 100%;"> Download Mod On Curse Forge </a>'
 
             full_content = template.replace("$CONTENT", html_content).replace("$META", meta).replace("$INDEX", page_index).replace("$VERSIONS", drop_down_list)
 
