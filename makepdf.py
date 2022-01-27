@@ -1,4 +1,7 @@
-import requests
+import requests, json
+
+with open("web/pages.json", "r") as f:
+    site_data = json.loads("".join(f.readlines()))
 
 try:
     github_html = requests.get("https://github.com/LukeGrahamLandry/modding-tutorials").text

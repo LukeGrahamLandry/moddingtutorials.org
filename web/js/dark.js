@@ -96,4 +96,4 @@ function checkStream(){
         }
     }
 }
-setTimeout(checkStream, 1);
+// setTimeout(checkStream, 1);

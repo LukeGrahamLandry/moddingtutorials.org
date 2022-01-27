@@ -19,7 +19,7 @@
             "url": "o16",
             "title": "Forge 1.16.5",
             "files": ["java-basics", "environment-setup", "basic-items", "advanced-items", "basic-blocks", 
-                "advanced-blocks", "tools-armor", "tile-entities", "enchantments", "recipes", "arrows", "dem-lobsters"]
+                "advanced-blocks", "tools-armor", "tile-entities", "enchantments", "recipes", "arrows"]
         }
     ],
     "un_versioned": ["java-basics", "index", "changelog", "credits", "mappings", "my-mods", "my-work", "registries", "sides", "why-long-video"],

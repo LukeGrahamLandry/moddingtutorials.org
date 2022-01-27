@@ -1,6 +1,7 @@
 from googleapiclient.discovery import build
 import requests, json
 from PIL import Image
+import time
 
 with open("pages.json", "r") as f:
     site_data = json.loads("".join(f.readlines()))
@@ -72,6 +73,8 @@ for video_url in site_data["videos"]:
 
     data["paid"].append(getInfo(video_id))
 
+    time.sleep(1)
+
 for name, playlist_id in site_data["playlists"].items():
     data[name] = []
 
@@ -90,6 +93,8 @@ for name, playlist_id in site_data["playlists"].items():
     for vid in playlist_items:
         vid_id = vid["snippet"]["resourceId"]["videoId"]
         data[name].append(getInfo(vid_id))
+
+    time.sleep(1)
 
 youtube.close()
 
