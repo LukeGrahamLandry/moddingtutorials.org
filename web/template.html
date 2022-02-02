@@ -78,7 +78,6 @@
                     <button class="btn btn-primary" style="width: 80%;" id="next">Next Tutorial</button>
                 </a>
             </div>
-            
         </div>
         <br><br>
         <div class="hide-for-print" style="display: inline-block; max-width: 800px;">
@@ -99,7 +98,7 @@
         <br><br>
 
         <div class="hide-for-print" style="width: fit-content; display: inline-block;">
-            <a href="https://github.com/LukeGrahamLandry/modding-tutorials" class="img-link" target="_blank">
+            <a href="https://github.com/LukeGrahamLandryMC/modding-tutorials" class="img-link" target="_blank">
                 <div class="app">
                     <img src="/img/github.png" style="width: 50px">
                 </div>
@@ -129,6 +128,8 @@
     <script src="/js/dark.js"></script>
 
     <script>
+        let thisPage = window.location.pathname.split("/").pop().split(".")[0]
+
         // version select
         document.getElementById("dropdown").onchange = function (e){
             let new_url = e.target.value;
@@ -151,11 +152,9 @@
             }
         }
 
+        // forward back buttons
         try {
             let tutorials = $TUTORIALS;
-        
-            // forward back buttons
-            let thisPage = window.location.pathname.split("/").pop().split(".")[0]
             let index = tutorials.indexOf(thisPage);
 
             if (index != -1){

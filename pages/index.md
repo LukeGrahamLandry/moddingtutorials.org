@@ -1,6 +1,6 @@
 # Minecraft Modding Tutorials
 
-Welcome! This site has tutorials for making Minecraft mods with Forge 1.16.5 and Forge 1.17.1. You can use the yellow drop down menu on the left to switch versions. The source code for all my tutorials can be found on [GitHub](https://github.com/LukeGrahamLandry/modding-tutorials).
+Welcome! This site has tutorials for making Minecraft mods with Forge 1.16.5 and Forge 1.17.1. You can use the yellow drop down menu on the left to switch versions. The source code for all my tutorials can be found on [GitHub](https://github.com/LukeGrahamLandryMC/modding-tutorials).
 
 ## About
 

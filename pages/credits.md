@@ -36,7 +36,7 @@ People who paid me to make mods. DM LukeGrahamLandry#6888 on discord to commissi
 
 ## Contributors 
 
-If you notice any mistakes in my tutorials, please submit a pull request on [the github page](https://github.com/LukeGrahamLandry/modding-tutorials). When it's merged, I'll add your name to this list. 
+If you notice any mistakes in my tutorials, please submit a pull request on [the github page](https://github.com/LukeGrahamLandryMC/modding-tutorials). When it's merged, I'll add your name to this list. 
 
 - thedude
 

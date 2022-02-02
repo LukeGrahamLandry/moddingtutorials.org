@@ -44,7 +44,11 @@ function delCookie(cname){
 }
 
 function updateDarkmode(){
-    let dark = document.getElementById("dark") == undefined ? getCookie("darkmode") : document.getElementById("dark").checked;
+    let dark = document.getElementById("dark") == undefined ? true : document.getElementById("dark").checked;
+    if (getCookie("darkmode") != null) {
+        dark = getCookie("darkmode");
+    }
+
     let sheet;
     if (dark){
         sheet = "/styles/dark.css";
