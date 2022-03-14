@@ -111,7 +111,7 @@ If you want to limit how often the item can be used you can add a cool down. The
 
     player.getCooldowns().addCooldown(this, 60);
     
-    playerIn.fallDistance = 0F;
+    player.fallDistance = 0F;
     
 
 You can also play a sound. This will play the enderman's teleport sound that the player's position. The last two arguments are volume and pitch. 
