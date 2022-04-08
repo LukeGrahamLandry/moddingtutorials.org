@@ -12,8 +12,8 @@
     <meta property="og:site_name" content="Modding Tutorials">
 
     <link rel="shortcut icon" href="/img/logo.png">
-    <link rel="stylesheet" href="/styles/tutorial.css">
-    <link rel="stylesheet" href="/styles/md.css">
+    <link rel="stylesheet" href="styles/tutorial.css">
+    <link rel="stylesheet" href="styles/md.css">
     <link rel="stylesheet" href="/code.css">
     <link rel="stylesheet" id="theme" href="/styles/dark.css">
     
@@ -24,16 +24,43 @@
 
         .alert {
             font-weight: bolder;
-            color: #0f5132 !important;
-            background-color: #d1e7dd;
             border-radius: 5px;
             text-align: center;
-            border: 4px solid rgb(118, 190, 118);
+            border: 4px solid;
+            display: inline-block;
+        }
+
+        .sm {
             font-size: 1.25rem;
             width: 200px;
-            display: inline-block;
             padding-top: 10px;
             padding-bottom: 10px;
+        }
+
+        .full {
+            font-size: 2rem;
+            width: 100%;
+            max-width: 800px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        .green {
+            color: #0f5132 !important;
+            background-color: #d1e7dd;
+            border-color: rgb(118, 190, 118);
+        }
+
+        .blue {
+            color: #060e30 !important;
+            background-color: #5865F2;
+            border-color: #7289DA;
+        }
+
+        .black {
+            color: white !important;
+            background-color: black;
+            border-color: #3d3d3d;
         }
 
         .alert:hover {
@@ -80,14 +107,28 @@
             <div class="embedstream"></div>
 
             <div style="text-align: center; margin-top: 10px; margin-bottom: 15px;">
-                <a class="alert" href="/commissions" target="_blank">
+                <a class="alert green sm" href="/commissions" target="_blank">
                     Commissions are open! 
                 </a>
             </div>
 
             $INDEX 
         </div>
-        
+
+        <div style="text-align: center;">
+            <a href="https://discord.gg/VbZVnRd" class="img-link" target="_blank">
+                <div class="app">
+                    <img src="img/discord.png" style="width: 50px">
+                </div>
+            </a>
+
+            <a href="https://github.com/LukeGrahamLandryMC/modding-tutorials" class="img-link" target="_blank">
+                <div class="app">
+                    <img src="img/github.png" style="width: 50px">
+                </div>
+            </a>
+        </div>
+
         <div style="padding: 10px; font-size: 12px;">
             &copy; Luke Graham Landry, All Rights Reserved
         </div>
@@ -119,6 +160,19 @@
             </div>
         </div>
         <br><br>
+
+        <div class="hide-for-print" style="display: inline-block; max-width: 800px; width: 100%">
+            <a class="alert blue full" href="https://discord.gg/VbZVnRd" target="_blank">
+                Got Questions? Join the Discord!
+            </a>
+            <br> <br>
+            <a class="alert black full" href="https://github.com/LukeGrahamLandryMC/modding-tutorials" target="_blank">
+                View Full Tutorial Code on Github!
+            </a>
+            <br><br>
+        </div>
+
+        <br>
         <div class="hide-for-print" style="display: inline-block; max-width: 800px;">
             <form
                 action="https://buttondown.email/api/emails/embed-subscribe/LukeGrahamLandry"
@@ -133,27 +187,6 @@
             <input type="submit" value="Subscribe" style="padding: 10px; cursor: pointer; background-color: red; font-weight: bold; border-radius: 3px; border: none;" />
             <br> or, <a href="https://buttondown.email/LukeGrahamLandry/rss" target="_blank">subscribe via RSS</a>
             </form>
-        </div>
-        <br><br>
-
-        <div class="hide-for-print" style="width: fit-content; display: inline-block;">
-            <a href="https://github.com/LukeGrahamLandryMC/modding-tutorials" class="img-link" target="_blank">
-                <div class="app">
-                    <img src="/img/github.png" style="width: 50px">
-                </div>
-            </a>
-
-            <a href="https://discord.gg/VbZVnRd" class="img-link" target="_blank">
-                <div class="app">
-                    <img src="/img/discord.png" style="width: 50px">
-                </div>
-            </a>
-
-            <a href="https://www.youtube.com/channel/UC8gYhA5SkhI1tajZ5JF2pbQ/playlists" class="img-link" target="_blank">
-                <div class="app">
-                    <img src="/img/youtube.png" style="width: 50px">
-                </div>
-            </a>
 
             <a href="https://www.patreon.com/LukeGrahamLandry" class="img-link" target="_blank">
                 <div class="app">
@@ -161,7 +194,6 @@
                 </div>
             </a> 
         </div>
-        <br> <br>
     </div>
 
     <script src="/js/dark.js"></script>
