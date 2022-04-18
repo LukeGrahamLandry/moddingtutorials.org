@@ -1,6 +1,7 @@
 # Updating from 1.15 to 1.16
 
-If you are looking to update **from** 1.16 to a newer version, check out these tutorials. They have much more detailed information. 
+If you are looking to update **from** 1.16 to a newer version, check out these tutorials. They have much more detailed information.
+ 
 - [updating from 1.16 to 1.17](/o17/updating)
 - [updating from 1.17 to 1.18](/o18/updating)
 

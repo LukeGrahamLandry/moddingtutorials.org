@@ -1,5 +1,9 @@
 # Updating from 1.16 to 1.17
 
+If you are looking to update **from** 1.17 to a newer version, check out these tutorials.
+
+- [updating from 1.17 to 1.18](/o18/updating)
+
 Before you do anything, please **make a backup** so you can roll back if something goes wrong. Be careful to follow these steps in order!  
 
 First open the terminal / CMD and navigate to your mod folder with the command `cd /path/to/mod/folder`. 
