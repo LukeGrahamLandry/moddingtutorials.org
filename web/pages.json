@@ -5,24 +5,24 @@
             "url": "o18",
             "title": "Forge 1.18.1",
             "files": ["java-basics", "environment-setup", "basic-items", "advanced-items", "basic-blocks", 
-                "advanced-blocks", "tools-armor", "tile-entities", "enchantments", "recipes", "arrows"]
+                "advanced-blocks", "tools-armor", "tile-entities", "enchantments", "recipes", "arrows", "world-gen"]
             },
         {
             "folder": "forge-1.17-tutorials",
             "url": "o17",
             "title": "Forge 1.17.1",
             "files": ["java-basics", "environment-setup", "basic-items", "advanced-items", "basic-blocks", 
-                "advanced-blocks", "tools-armor", "tile-entities", "enchantments", "recipes", "arrows"]
+                "advanced-blocks", "tools-armor", "tile-entities", "enchantments", "recipes", "arrows", "world-gen"]
         },
         {
             "folder": "forge-1.16-tutorials",
             "url": "o16",
             "title": "Forge 1.16.5",
             "files": ["java-basics", "environment-setup", "basic-items", "advanced-items", "basic-blocks", 
-                "advanced-blocks", "tools-armor", "tile-entities", "enchantments", "recipes", "arrows"]
+                "advanced-blocks", "tools-armor", "tile-entities", "enchantments", "recipes", "arrows", "world-gen"]
         }
     ],
-    "un_versioned": ["java-basics", "index", "changelog", "credits", "mappings", "my-mods", "my-work", "registries", "sides", "why-long-video"],
+    "un_versioned": ["java-basics", "index", "changelog", "credits", "mappings", "my-mods", "my-work", "registries", "sides", "why-long-video", "mods-toml"],
     "videos": [
         "https://www.youtube.com/watch?v=jVzeGKbVLCc",
         "https://www.youtube.com/watch?v=lJp6rdELdu8",
@@ -67,7 +67,7 @@
             {
                 "name": "Tribes",
                 "repo": "LukeGrahamLandryMC/tribes-mod",
-                "branch": "main",
+                "branch": "forge-1.16.5",
                 "curseforge": "tribes"
             },
             {
@@ -91,7 +91,8 @@
             {
                 "name": "Travel Staff",
                 "repo": "LukeGrahamLandryMC/travel_anchors",
-                "branch": "1.18.x"
+                "branch": "1.18.x",
+                "curseforge": "staff-of-traveling"
             }
         ]
     },
