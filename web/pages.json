@@ -4,25 +4,25 @@
             "folder": "forge-1.18-tutorials",
             "url": "o18",
             "title": "Forge 1.18.1",
-            "files": ["java-basics", "environment-setup", "basic-items", "advanced-items", "basic-blocks", 
+            "files": ["intro", "java-basics", "environment-setup", "basic-items", "advanced-items", "basic-blocks", 
                 "advanced-blocks", "tools-armor", "tile-entities", "enchantments", "recipes", "arrows", "world-gen"]
             },
         {
             "folder": "forge-1.17-tutorials",
             "url": "o17",
             "title": "Forge 1.17.1",
-            "files": ["java-basics", "environment-setup", "basic-items", "advanced-items", "basic-blocks", 
+            "files": ["intro", "java-basics", "environment-setup", "basic-items", "advanced-items", "basic-blocks", 
                 "advanced-blocks", "tools-armor", "tile-entities", "enchantments", "recipes", "arrows", "world-gen"]
         },
         {
             "folder": "forge-1.16-tutorials",
             "url": "o16",
             "title": "Forge 1.16.5",
-            "files": ["java-basics", "environment-setup", "basic-items", "advanced-items", "basic-blocks", 
+            "files": ["intro", "java-basics", "environment-setup", "basic-items", "advanced-items", "basic-blocks", 
                 "advanced-blocks", "tools-armor", "tile-entities", "enchantments", "recipes", "arrows", "world-gen"]
         }
     ],
-    "un_versioned": ["java-basics", "index", "changelog", "credits", "mappings", "my-mods", "my-work", "registries", "sides", "why-long-video", "mods-toml"],
+    "un_versioned": ["intro", "java-basics", "index", "changelog", "credits", "mappings", "my-mods", "my-work", "registries", "sides", "why-long-video", "mods-toml"],
     "videos": [
         "https://www.youtube.com/watch?v=jVzeGKbVLCc",
         "https://www.youtube.com/watch?v=lJp6rdELdu8",
@@ -98,6 +98,7 @@
     },
     "descriptions":{
         "index": "Detailed text tutorials for creating Minecraft mods with Forge 1.18.1, 1.17.1 or 1.16.5",
+        "intro": "High level overview of everything you need to create your first Minecraft mod",
         "java-basics": "An overview of java programming language concepts required to create Minecraft mods.",
         "environment-setup": "Setup a development environment to create a Minecraft mod with the Forge API (1.18.1, 1.17.1 or 1.16.5)",
         "basic-items": "How to create a simple item in your Minecraft Forge mod (1.17.1 or 1.16.5)",
@@ -114,6 +115,7 @@
         "sides": "An in-depth explication of the difference between the Client Side and the Server Side when making Minecraft mods",
         "registries": "An in-depth explication of how Minecraft mods register game objects (like items, blocks, entities, etc)",
         "events": "An in-depth explication of how the Forge Events System allows your Minecraft mod to react to actions taken in game",
-        "dem-lobsters": "Add integration with Dem Lobsters to your mod. Easily create a new lobster type that produces your modded resources. "
+        "dem-lobsters": "Add integration with Dem Lobsters to your mod. Easily create a new lobster type that produces your modded resources.",
+        "world-gen": "Collection of resources for understanding world generation in Minecraft"
     }
 }

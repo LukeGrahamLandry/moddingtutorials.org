@@ -6,9 +6,9 @@ If you have questions specificlly about how world gen works, [the Minecraft Worl
 
 ## MC Wiki
 
-- [MC Wiki: json format for making a custom dimension](https://minecraft.fandom.com/wiki/Custom_dimension)
-- [MC Wiki: json format for making biomes](https://minecraft.fandom.com/wiki/Biome/JSON_format)
-- [MC Wiki: other world gen json formats](https://minecraft.fandom.com/wiki/Custom_world_generation). (Noise settings, carvers, surface builders, features, structure sets, jigsaw pools, structure sets)
+- [json format for making a custom dimension](https://minecraft.fandom.com/wiki/Custom_dimension)
+- [json format for making biomes](https://minecraft.fandom.com/wiki/Biome/JSON_format)
+- [other world gen json formats](https://minecraft.fandom.com/wiki/Custom_world_generation). (Noise settings, carvers, surface builders, features, structure sets, jigsaw pools, structure sets)
 
 ## Author: TelepathicGrunt
 

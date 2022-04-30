@@ -51,6 +51,7 @@ Then you can update the Item.Properties used when you create your item to refere
 
     new Item.Properties().tab(ModCreativeTab.instance)
     
+> NOTE: this replaces **only** the Item.Properties passed into the item constructor above. All you're changing is calling that extra `tab` method. 
 
 ## Main Class
 

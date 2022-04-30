@@ -59,7 +59,7 @@ function updateDarkmode(){
 // set darkmode from cookie
 if (getCookie("darkmode")) {
     if (document.getElementById("dark") != undefined){
-        document.getElementById("dark").checked = getCookie("darkmode");
+        document.getElementById("dark").checked = getCookie("darkmode") === "true";
     }
     
     updateDarkmode();

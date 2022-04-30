@@ -4,20 +4,29 @@ This is an index of the content covered on this site.
 
 ## Overview
 
-- [Java Basics](java-basics)
+- [Introduction to Modding](intro)
+    - an overview of what you should know before making your first mod
+    - the different mod loaders, mod distribution, lisencing, code concepts
+- [Java Basics](java-basics) **WIP**
     - summary of Java syntax 
-- [Mappings](mappings)
+- [Mappings](mappings) **WIP**
     - the deobfuscation of minecraft's code
-- [Registries](registries)
+- [Registries](registries) **WIP**
     - how minecraft handles game objects
-- [Server vs Client](sides)
+- [Server vs Client](sides) **WIP**
     - the separation of logic and rendering
+- [mods.toml File](mods-toml) **WIP**
+    - the meta data that lets forge recognise your mod
 
 ## Tutorials 
 
 - [Environment Setup](environment-setup)
     - install Java and an IDE
     - set up the forge mdk
+    - [Updating](updating) 
+        - how to port your mod to new versions
+    - [Apple Sillicon](m1)
+        - how to run a forge dev environment on an m1 MacOS computer 
 - [Basic Items](basic-items)
     - an item (with a texture)
     - a new creative tab
@@ -49,10 +58,13 @@ This is an index of the content covered on this site.
     - make your custom items enchantable 
 - [Recipes](recipes)
     - shaped and shapeless in the crafting table
-    - furnaces, smokers, camp fires and blast furnaces
-    - smithing table and stone cutter
+    - smelting in furnaces, smokers, camp fires and blast furnaces
+    - recipes for smithing table and stone cutter
     - use an event to craft in an anvil
+    - add recipes to the brewing stand
 - [Custom Arrows](arrows)
     - register a projectile entity that explodes when it hits someone
     - an arrow item that lets you shoot your custom projectile from a vanilla bow or crossbow
-
+- [World Generation](world-gen)
+    - a collection of resources that explain how to change how the world is generated 
+    - creating structures, ores, etc. 

@@ -6,9 +6,9 @@ If you have questions about world gen specificlly, [the Minecraft Worldgen Disco
 
 ## MC Wiki
 
-- [MC Wiki: json format for making a custom dimension](https://minecraft.fandom.com/wiki/Custom_dimension)
-- [MC Wiki: json format for making biomes](https://minecraft.fandom.com/wiki/Biome/JSON_format)
-- [MC Wiki: other world gen json formats](https://minecraft.fandom.com/wiki/Custom_world_generation). (Noise settings, carvers, surface builders, features, structure sets, jigsaw pools, structure sets)
+- [json format for making a custom dimension](https://minecraft.fandom.com/wiki/Custom_dimension)
+- [json format for making biomes](https://minecraft.fandom.com/wiki/Biome/JSON_format)
+- [other world gen json formats](https://minecraft.fandom.com/wiki/Custom_world_generation). (Noise settings, carvers, surface builders, features, structure sets, jigsaw pools, structure sets)
 
 ## Author: TelepathicGrunt
 
@@ -20,4 +20,4 @@ If you have questions about world gen specificlly, [the Minecraft Worldgen Disco
 
 ## Author: Commoble
 
-- [Add features defined with json to vanilla bioms](https://gist.github.com/Commoble/573ac69ac95818daf643d443bf67b260). 
+- [Add features defined with json to vanilla biomes](https://gist.github.com/Commoble/573ac69ac95818daf643d443bf67b260). 
