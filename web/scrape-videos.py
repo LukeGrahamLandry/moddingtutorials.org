@@ -15,6 +15,8 @@ data = {
 api_key = "AIzaSyD3YtUIi_m0OHp_fcZxLSInHPr2KWzuJKM"
 youtube = build('youtube', 'v3', developerKey=api_key)
 
+total = 0
+
 def getInfo(video_id):
     info = {}
 
@@ -72,9 +74,11 @@ for video_url in site_data["videos"]:
         video_id = video_url.split("be/")[1]
 
     data["paid"].append(getInfo(video_id))
+    total += int(data["paid"][-1]["views"])
 
     time.sleep(1)
 
+"""
 for name, playlist_id in site_data["playlists"].items():
     data[name] = []
 
@@ -95,8 +99,11 @@ for name, playlist_id in site_data["playlists"].items():
         data[name].append(getInfo(vid_id))
 
     time.sleep(1)
+"""
 
 youtube.close()
 
 with open("videos.json", "w") as f:
     f.write(json.dumps(data, indent=4))
+
+print("total views:", total)

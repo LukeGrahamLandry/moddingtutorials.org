@@ -84,7 +84,7 @@ The Integrated Development Environment (IDE) is the program you use to write you
 
 These programs are basiclly text editors but with extra features like code completion (bascilly really good context aware spell check for code), error detection and utilities for debuggin your code. The most important ability of your IDE is being able to look through minecraft's base code to see what you're interacting with and how they impliment things. In Intellij, you can just command/control click on a class or method to "go to definition" and see what code it corresponds to. The second most important thing is Hot Swapping. This lets you swap in changes to your code without needing to restart the entirety of minecraft so you can test out changes more quickly (this can be a bit tricky to setup).  
 
-#### Gradle
+### Gradle
 
 Gradle is the build system used for making minecraft mods. You write a special file called `build.gradle` that tells your computer how to download minecraft's base code and dependencies and then how to build your mod against that into one cohesive program. Whatever IDE you use should include support for gradle so it knows exactly how to interpret that file to do everything it needs to. Gradle is a very powerful tool that can seem a bit confusing at first so generally you'll just stick with the template `build.gradle` provided by your mod loader's example mod. 
 
@@ -92,7 +92,7 @@ Gradle is the build system used for making minecraft mods. You write a special f
 
 Congratulations! Now you're ready to make your own minecraft mod.  
 
-1. Make sure you learn the Java programming language. This is what you will be writing in to make your mod and making sure you have a strong understanding before you start will save a lot of headaches. I go over some of the basics in my [Java Tutorial](java-basics) but its far from complete and there are probably more entertaining resources available online anyway. 
+1. Make sure you **learn the Java programming language**. This is what you will be writing in to make your mod and making sure you have a strong understanding before you start will save a lot of headaches. I go over some of the basics in my [Java Tutorial](java-basics) but its far from complete and there are probably more entertaining resources available online anyway. 
 2. Read the [Environment Setup Tutorial](environment-setup). It will how you how to install the correct version of the Java, a program to help you write your code and a template for your mod that will install the minecraft dependencies. 
 3. Go through my other tutorials. If this is your first time doing something like this, its probably a good idea to go through them in order. However, if you're confident in your programming abilities, feel free to skip around. Read the [Topics Page](topics) for more details on the content of each tutorial. 
 4. Eventually you will reach something that won't have a specific tutorial to help you. Hopefully by then you'll be comfortable enough working with Minecraft's code that you'll be able to experiment on your own and figure out everything you need to know. Good luck :)
