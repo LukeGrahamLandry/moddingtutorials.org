@@ -35,9 +35,8 @@ Note that dispite the fact that the target method has a return type, your mixin 
 
 #### Remapping
 
-The method name in your descriptor is automaticlly remapped according to your project's mappings settings. This allows you to use the readable method names instead of the SRG names (ie. `addMix` instead of `func_193357_a`). This means there's an extra step if you are trying to mixin to a method that is not obfuscated and subsequently renamed by the mappings (anything outside of a vanilla class, for example something added by forge or another mod). 
+The method name in your descriptor is automaticlly remapped according to your project's mappings settings. This allows you to use the readable method names instead of the SRG names (ie. `addMix` instead of `func_193357_a`). This means there's an extra step if you are trying to mixin to a method that is not obfuscated and subsequently renamed by the mappings (anything outside of a vanilla class, for example something added by forge or another mod): uou must set `remap` to false in your inject annotation. 
 
-You must set `remap` to false in your inject annotation. 
 
     @Inject(method = "...", at = @At(...), remap = true)
     private void injected(...) {
@@ -71,7 +70,7 @@ When you need to access methods or fields on the target class from your mixin co
 
 #### `this`
 
-You may want to directly access the object you are mixing into. You may be frustraited to discover that when you use the `this` keyword, it is an instance of your mixin class, not of the target class. You can get around this by casting to `Object` and then to your target class. This often serves the same purpose as shadowing. 
+You may want to directly access the object you are mixing into. You may be frustrated to discover that when you use the `this` keyword, it is an instance of your mixin class, not of the target class. You can get around this by casting to `Object` and then to your target class. This often serves the same purpose as shadowing. 
 
 For example, in a method that targets the ItemEntity class, you could use the following code to get the actual object and then any public methods/fields will be available. 
 

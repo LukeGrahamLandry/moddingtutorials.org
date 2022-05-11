@@ -20,6 +20,59 @@ ignore = ["about.md", "support.md", "my-mods.md", "contact.md"]
 tutorials = ["java-basics", "environment-setup", "basic-items", "advanced-items", "basic-blocks", "advanced-blocks", "tools-armor", "tile-entities", "enchantments",
              "recipes"]
 
+# html gen from videos.json
+if True:
+    with open("web/videos.json", "r") as f:
+        video_data = json.loads("".join(f.readlines()))
+
+    def getViews(video):
+        return int(video["views"])
+
+    def formatViewNumber(views):
+        views = int(views)
+        if views >= 1000000000:
+            views = str(round(views / 1000000000, 2)) + "B"
+        elif views >= 1000000:
+            views = str(round(views / 1000000, 1)) + "M"
+                
+        elif views >= 1000:
+            views = str(views // 1000) + "K"
+        else:
+            views = str(views)
+        
+        return views
+
+    def getVideosHTML(videos):
+        videos.sort(reverse=True, key=getViews)
+
+        video_html = ""
+
+        for video in videos:
+            video_html += '<a class="video" target="_blank" href="https://www.youtube.com/watch?v=' + video["id"] + '"> \n' 
+            video_html += '<img src="/img/videos/' +  video["id"] + '.jpg" alt="video thumbnail"> \n'
+
+            video_html += '<b class="title">' + video["title"][0:45] + "</b> \n"
+            video_html += "<b>" + formatViewNumber(video["views"]) + ' Views </b> <b class="title"> by ' + video["channel"] + " </b> \n"
+            video_html += "</a>\n"
+        
+        return video_html
+
+    def getChannelsHTML(channels):
+        channels.sort(reverse=True, key=getViews)
+
+        html = '<link rel="stylesheet" href="/styles/channels.css">\n'
+
+        for channel in channels:
+            html += '<a class="channel" target="_blank" href="https://www.youtube.com/watch?v=' + channel["id"] + '"> \n' 
+            html += '<img src="/img/videos/' +  channel["id"] + '.jpg" alt="video thumbnail"> \n'
+
+            html += '<b class="title">' + channel["title"] + "</b> \n"
+            html += '<b class="subs">' + formatViewNumber(channel["subscribers"]) + ' Subscribers </b> \n'
+            html += '<b class="views">' + formatViewNumber(channel["views"]) + ' Views </b> \n'
+            html += "</a>\n"
+        
+        return html
+
 def combile_md(source_folder, filename, target_folder, index_html, pages_list, versions_html, can=None):
     with open(source_folder + "/" + filename, "r") as f:
          md_content = "".join(f.readlines())
@@ -77,7 +130,7 @@ def combile_md(source_folder, filename, target_folder, index_html, pages_list, v
         if title in site_data["descriptions"]:
             meta += '<meta name="description" content="' + site_data["descriptions"][title] + '">'
 
-    full_content = template.replace("$CONTENT", html_syntax_highlighted).replace("$META", meta).replace("$INDEX", index_html).replace("$TUTORIALS", json.dumps(pages_list)).replace("$VERSIONS", versions_html)
+    full_content = template.replace("$CONTENT", html_syntax_highlighted).replace("$META", meta).replace("$INDEX", index_html).replace("$TUTORIALS", json.dumps(pages_list)).replace("$VERSIONS", versions_html).replace("$CHANNELS", getChannelsHTML(video_data["yt-clients"]))
 
     generateSlashRedirectFix(target_folder, title)
 
@@ -152,35 +205,6 @@ def buildSite():
 
     shutil.copy("o16/index.html", "index.html")
 
-    with open("web/videos.json", "r") as f:
-        video_data = json.loads("".join(f.readlines()))
-
-    def getViews(video):
-        return int(video["views"])
-
-    def getVideosHTML(videos):
-        videos.sort(reverse=True, key=getViews)
-
-        video_html = ""
-
-        for video in videos:
-            video_html += '<a class="video" href="https://www.youtube.com/watch?v=' + video["id"] + '"> \n' 
-            video_html += '<img src="/img/videos/' +  video["id"] + '.jpg" alt="video thumbnail"> \n'
-
-            video["views"] = int(video["views"])
-            if video["views"] >= 1000000:
-                views = str(video["views"] / 1000000)[0:3] + "M"
-            elif video["views"] >= 1000:
-                views = str(video["views"] // 1000) + "K"
-            else:
-                views = str(video["views"])
-
-            video_html += '<b class="title">' + video["title"][0:45] + "</b> \n"
-            video_html += "<b>" + views + ' Views </b> <b class="title"> by ' + video["channel"] + " </b> \n"
-            video_html += "</a>\n"
-        
-        return video_html
-
     with open("web/my-mods.html", "r") as f:
         my_mods_html = "".join(f.readlines())
 
@@ -192,7 +216,7 @@ def buildSite():
     with open("web/commissions.html", "r") as f:
         commissions_html = "".join(f.readlines())
 
-    commissions_html = commissions_html.replace("$VIDEOS", getVideosHTML(video_data["paid"])) # .replace("$FORGE1.15", getVideosHTML(video_data["1.15"]))
+    commissions_html = commissions_html.replace("$VIDEOS", getVideosHTML(video_data["paid"])).replace("$CHANNELS", getChannelsHTML(video_data["yt-clients"])) # .replace("$FORGE1.15", getVideosHTML(video_data["1.15"]))
 
     with open("commissions.html", "w") as f:
         f.write(commissions_html)

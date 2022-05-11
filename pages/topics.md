@@ -68,3 +68,5 @@ This is an index of the content covered on this site.
 - [World Generation](world-gen)
     - a collection of resources that explain how to change how the world is generated 
     - creating structures, ores, etc. 
+- [Mixins](mixins) **WIP**
+- [MultiHitbox Entities](multihitbox) **WIP** (1.18+ only)
