@@ -10,7 +10,7 @@ If you're interested in the history of this site, you can read [The Changelog](c
 
 ## Contact
 
-If you have any questions or feedback about my tutorials, please [join my discord server](https://discord.com/invite/VbZVnRd). We've got a growing community that can help you out with any problems you may have. This is also where I notify people when new tutorials are released. 
+If you have any questions or feedback about my tutorials, please [join my discord server](https://discord.com/invite/uG4DewBcwV). We've got a growing community that can help you out with any problems you may have. This is also where I notify people when new tutorials are released. 
 
 ## Commissions 
 

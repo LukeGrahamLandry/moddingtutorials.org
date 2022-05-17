@@ -344,7 +344,7 @@ if (foo){
 
 # to be continued...
 
-Join [the discord server](https://discord.gg/VbZVnRd) or [the email list](https://buttondown.email/LukeGrahamLandry) to be notified when more of this tutorial is released.
+Join [the discord server](https://discord.gg/uG4DewBcwV) or [the email list](https://buttondown.email/LukeGrahamLandry) to be notified when more of this tutorial is released.
 
 - Objects
 

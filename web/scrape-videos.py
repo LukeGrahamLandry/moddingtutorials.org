@@ -33,6 +33,7 @@ def getInfo(video_id):
     
     im = Image.open(filename)
     im = im.crop((0, 45, im.size[0], im.size[1] - 45))
+    im = im.resize((180, 100))
     im.save(filename)
 
     print("start video_request")
@@ -118,10 +119,6 @@ def getChannelInfo(channel_id):
     with open(filename, 'wb') as handler:
         handler.write(img_data)
     
-    #im = Image.open(filename)
-    #im = im.crop((0, 45, im.size[0], im.size[1] - 45))
-    #im.save(filename)
-
     return info
 
 def processVideos():

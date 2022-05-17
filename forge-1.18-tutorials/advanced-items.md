@@ -19,7 +19,8 @@ Then on the Item.Properties, call the food function. This takes in a Food create
 To make your food grant a potion effect when eaten, call the `effect` function of your `FoodProperties.Builder` (before you call `build()`). This takes a supplier for an `MobEffectInstance` which takes the effect you want to give, the duration (in ticks so 20 is one second), and the amplifier (0 is level I). The effect method also takes the likelihood your effect will be applied (1.0F is always and 0F is never). So this code will have a 50% chance to give fire resistance I for 10 seconds.
 
     .effect(() -> new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 200, 0), 0.5F)
-    
+
+You can also call `.alwaysEat()` if you want to be able to eat the food even when your hunger is full (like golden apples).
 
 ## Fuel
 
@@ -191,7 +192,7 @@ If you run the game the items show up in the creative tab and have textures. You
 
 - [Tools & Armor](tools-armor): allow your item to be used as a tool or worn as armor
 - [Arrows](arrows): allow bows to use your item as ammo
-- Custom Bow tutorial coming soon. Join [the discord server](https://discord.gg/VbZVnRd) or [the email list](https://buttondown.email/LukeGrahamLandry) to be notified when it is released. 
+- Custom Bow tutorial coming soon. Join [the discord server](https://discord.gg/uG4DewBcwV) or [the email list](https://buttondown.email/LukeGrahamLandry) to be notified when it is released. 
 
 ## Practice
 

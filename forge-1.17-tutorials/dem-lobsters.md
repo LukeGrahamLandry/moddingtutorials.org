@@ -4,4 +4,4 @@
 and use their shells to craft resources instead of mining. It is similar to Mystical Agriculture. 
 You can improve your mod by adding compatibility with Dem Lobsters!
 
-Unfortunatly, Dem Lobsters has not been updated to 1.17 yet ([read 1.16.5 tutorial instead](/o16/dem-lobsters)). This may change in the future, thanks for your patience. Join [the discord server](https://discord.gg/VbZVnRd) or [the email list](https://buttondown.email/LukeGrahamLandry) to be notified when the mod is updated. 
+Unfortunatly, Dem Lobsters has not been updated to 1.17 yet ([read 1.16.5 tutorial instead](/o16/dem-lobsters)). This may change in the future, thanks for your patience. Join [the discord server](https://discord.gg/uG4DewBcwV) or [the email list](https://buttondown.email/LukeGrahamLandry) to be notified when the mod is updated. 

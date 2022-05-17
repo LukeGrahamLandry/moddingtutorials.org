@@ -1,6 +1,6 @@
 # Modding Questions and Answers (from discord)
 
-If there's something you want to learn how to do that i dont have a tutorial for and you can't figure out from vanilla's code, feel free to [join my discord server](https://discord.com/invite/VbZVnRd) to ask me. This page is a collection of information I've given people on that server so you can search it more easily. It will only be helpful if you're already comfortable with Java! These answers are for a mix of versions so you may have to do some translating, I'm generally using the 1.17+ classnames. 
+If there's something you want to learn how to do that i dont have a tutorial for and you can't figure out from vanilla's code, feel free to [join my discord server](https://discord.com/invite/uG4DewBcwV) to ask me. This page is a collection of information I've given people on that server so you can search it more easily. It will only be helpful if you're already comfortable with Java! These answers are for a mix of versions so you may have to do some translating, I'm generally using the 1.17+ classnames. 
 
 > I might add an index and split it into seperate pages to help the SEO at some point if i feel inspired
 
@@ -181,4 +181,73 @@ use global loot modifers! they run whenever minecraft gets items out of a loot t
 
 problem is that the `tick` method on blocks is for random ticks (https://minecraft.fandom.com/wiki/Tick#Random_tick) so its not called every tick. You also need to call `randomTicks()` on your `Block.Properties` to make it react to random ticks at all. To do something every tick you could have a tile entity (ive got a tutorial for that). if you just want a timer to do something a while after you place your block, it might be better to schedule a tick. if you do `world.getBlockTicks().scheduleTick(pos, this, delay)` in your `onPlace` method, it should call `tick` after `<delay>` ticks.
 
+## how do i make my item use the honey bottle gulping animation? 
 
+the HoneyBottleItem has a method that specifies the animation to play while its being used
+
+```
+@Override
+public UseAnim getUseAnimation(ItemStack pStack) {
+    return UseAnim.DRINK;
+}
+```
+
+and then theres a big switch statement that checks for that and renders it differently in ItemInHandRenderer#renderArmWithItem
+
+## how do i change the slipperiness of every block?
+
+You could use a mixin to change the return value of `Block#getSlipperiness` (there are two versions of that method with different parameters, should do both). Here's a good explanation of mixins: https://darkhax.net/2020/07/mixins  
+
+Alternatively, you could also use an access transformer to make `Block#slipperiness` public and then loop through every block and change the value after the blocks have been registered (ie. on `FMLCommonSetupEvent`)
+
+## how to do i make custom armor models (1.17+)
+
+- model class should extend HumanoidModel and have all the parts that should move with the player named correctly (same as 1.16 so probably already done).
+- make sure you're registering the model layer definition on the EntityRenderersEvent.RegisterLayerDefinitions event. (example: https://github.com/LukeGrahamLandryMC/AmbientAdditions/blob/forge-1.18/src/main/java/coda/ambientadditions/client/ClientEvents.java#L158)
+- on your custom item class that extends ArmorItem, you override the initializeClient method and add a IItemRenderProperties instance that has a getArmorModel method that returns an insteance of your custom  model class. here's an example: https://github.com/LukeGrahamLandryMC/AmbientAdditions/blob/forge-1.18/src/main/java/coda/ambientadditions/common/items/YetiArmWarmersItem.java#L46-L58 
+
+## my FMLClientSetupEvent isnt firing
+
+- make sure the method is static
+- make sure the method has the `@SubscribeEvent` annotation
+- make sure the class has the `@Mod.EventBusSubscriber(modid = ModMain.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)`. You must use `Bus.Mod`, NOT `Bus.FORGE`
+
+## how do i make key bindings?
+
+- Create a keybind `public static final KeyMapping OPEN = new KeyMapping("key.your_action_name", GLFW.GLFW_KEY_M, "key.categories." + ModMain.MOD_ID);` somewhere
+- Call `ClientRegistry.registerKeyBinding(YOUR_KEY);` on `FMLClientSetupEvent` 
+- checking `YOUR_KEY.isDown()` or `YOUR_KEY.consumeClick()` on `KeyInputEvent` should work. You'll have to send a packet if you want to react to it on the server side
+
+## What is the int parameter on `Level#setBlock`
+
+the third parameter is a flag about which block updates it should send. flags can be OR-ed (passing in `2 | 4` will have the effect of both)
+
+- 1 will cause a block update
+- 2 will send the change to clients
+- 4 will prevent the block from being re-rendered
+- 8 will force any re-renders to run on the main thread instead 
+- 16 will prevent neighbor reactions (e.g. fences connecting, observers pulsing)
+- 32 will prevent neighbor reactions from spawning drops
+- 64 will signify the block is being moved
+
+i think the fourth parameter is how many more layers of recursive block updates to allow. you can just use the version of the method that doesnt need this fourth parameter and just sets it to a reasonable default (512)
+
+## how do I make a mob say something in the chat when it is killed?
+
+There's an `LivingEntity#onDeath` method to override (make sure you still call the super of it) and then you can loop through `world.getPlayers()` and call `player.sendStatusMessage(new TextComponent("hello world"), false)` 
+
+## how do i make an entity that has multiple textures?
+
+whatever resource location is returned by the `getEntityTexture` method in your renderer will be used as the texture. but theres only ever one instance of the renderer so you cant do the random in its constructor. you have to have the entity know which texture it should have, check that from the `getEntityTexture` method and return the appropriate `ResourceLocation`. Note that you'll want to save which texture it chose in its nbt data (override `addAdditionalSaveData` and `readAdditionalSaveData`) as well as use a `EntityDataAccessor` (previously called `DataParameter`) to sync the chosen texture from the server to the client (forge docs: https://mcforge.readthedocs.io/en/1.18.x/networking/entities/#data-parameters). You can look at vanilla's `Cat` code for an example. 
+
+## does the order that deferred registers are used in the mod's constructor matter?
+
+nope, the whole point is that forge magically does it at the right time for you. 
+
+## how to make an item appear with blue letters under the name like a potion
+ 
+look at the `PotionItem#appendHoverText` which calls `PotionUtils#addPotionTooltip`. Example: `pTooltips.add((new TranslatableComponent("potion.whenDrank")).withStyle(ChatFormatting.DARK_PURPLE));`
+
+## how do i have different behaviour for specific players? 
+
+Each minecraft accound has a Universally Unique Identifier. There are websites to get these from a player's username (like https://mcuuid.net). Have a list of people's uuids (ie. `List<UUID> coolPeople = List.of(new UUID[]{UUID.fromString("bcb2252d-70de-4abc-9932-bc46bd5dc62f")});`) and then have an if statement that checks `coolPeople.contains(player.getUUID())`. You could even put that list on pastebin or equivilent and fetch it with an http request so you could update it without changing your mod's code. 

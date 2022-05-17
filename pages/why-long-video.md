@@ -16,4 +16,4 @@ After a while, I decided to make new tutorials for 1.16.5 but this time in text 
 - slow videos as well for new programmers or anyone who would prefer a visual aid
 - videos get more new people
 
-The best part of having a website like this is that I can quickly update tutorials or make pages that answer specific questions from [my discord server](https://discord.com/invite/VbZVnRd). If one person has a question, its quite likely that other people would benefit from answer as well. By putting them on the site in a searchable format, I can prevent them from getting lost in the discord message history and make sure they're available for anyone who goes looking.
+The best part of having a website like this is that I can quickly update tutorials or make pages that answer specific questions from [my discord server](https://discord.com/invite/uG4DewBcwV). If one person has a question, its quite likely that other people would benefit from answer as well. By putting them on the site in a searchable format, I can prevent them from getting lost in the discord message history and make sure they're available for anyone who goes looking.

@@ -61,7 +61,7 @@ You must do this in a class that implements `Tier`. The simplest way to do this 
         }
     }
 
-In 1.17, the system for checking if a block can be broken by a tier of tool moved to tags. Creating a tier higher than diamond and having blocks that can only be broken by it, is more complicated now. You must tell forge about it with the `TierSortingRegistry` class. More detailed explanation coming soon! Join [the discord server](https://discord.gg/VbZVnRd) or [the email list](https://buttondown.email/LukeGrahamLandry) to be notified when it is released. 
+In 1.17, the system for checking if a block can be broken by a tier of tool moved to tags. Creating a tier higher than diamond and having blocks that can only be broken by it, is more complicated now. You must tell forge about it with the `TierSortingRegistry` class. More detailed explanation coming soon! Join [the discord server](https://discord.gg/uG4DewBcwV) or [the email list](https://buttondown.email/LukeGrahamLandry) to be notified when it is released. 
 
 ### Init
 
@@ -104,7 +104,7 @@ Similar to tools, a piece armor is simply an item that uses `ArmorItem` instead 
 
 Start by defining the stats for your armor in an enum that implements `ArmorMaterial`. The code can be copied from vanilla's `ArmorMaterial` enum.
 
-The `name` string you use **must **start with your mod id, then a colon, then anything. The durability number is multiplied by the numbers in the `HEALTH_PER_SLOT` array to get the durability for each piece. `protection` is an array of the protection values of each piece (in the order boots, leggings, chest plate, helmet). A full armor bar is when those numbers add up to 20. It needs an [enchantability](https://minecraft.fandom.com/wiki/Enchanting_mechanics#How_enchantments_are_chosen) just like tools and a `SoundEvent` to play when you equip the item. I'm just using a vanilla sound but later we'll learn how to add a custom one ([join the discord server](https://discord.gg/VbZVnRd) to be notified when the sounds tutorial is released). Then you need a [toughness](https://minecraft.fandom.com/wiki/Armor#Armor_toughness) which increases how much protection it gives against stronger attacks (only used by diamond and netherite in vanilla). Then knockback resistance (only used by netherite, when all pieces add up to 1 that's no knockback) and finally a supplier for a repair ingredient to use in the anvil.  
+The `name` string you use **must **start with your mod id, then a colon, then anything. The durability number is multiplied by the numbers in the `HEALTH_PER_SLOT` array to get the durability for each piece. `protection` is an array of the protection values of each piece (in the order boots, leggings, chest plate, helmet). A full armor bar is when those numbers add up to 20. It needs an [enchantability](https://minecraft.fandom.com/wiki/Enchanting_mechanics#How_enchantments_are_chosen) just like tools and a `SoundEvent` to play when you equip the item. I'm just using a vanilla sound but later we'll learn how to add a custom one ([join the discord server](https://discord.gg/uG4DewBcwV) to be notified when the sounds tutorial is released). Then you need a [toughness](https://minecraft.fandom.com/wiki/Armor#Armor_toughness) which increases how much protection it gives against stronger attacks (only used by diamond and netherite in vanilla). Then knockback resistance (only used by netherite, when all pieces add up to 1 that's no knockback) and finally a supplier for a repair ingredient to use in the anvil.  
 
     public enum ModArmorMaterial implements ArmorMaterial {
         PINK(FirstModMain.MOD_ID + ":pink", 20, new int[]{4, 7, 9, 4}, 50, SoundEvents.ARMOR_EQUIP_DIAMOND, 3.0F, 0.1F, () -> { 
@@ -295,4 +295,4 @@ You can override `makesPiglinsNeutral` to return true if you want your armor to 
 
 ### Related Tutorials 
 
-- You can make armor with complex 3d models made in BlockBench. This will be covered in a future tutorial. Join [the discord server](https://discord.gg/VbZVnRd) or [the email list](https://buttondown.email/LukeGrahamLandry) to be notified when it is released. 
+- You can make armor with complex 3d models made in BlockBench. This will be covered in a future tutorial. Join [the discord server](https://discord.gg/uG4DewBcwV) or [the email list](https://buttondown.email/LukeGrahamLandry) to be notified when it is released. 

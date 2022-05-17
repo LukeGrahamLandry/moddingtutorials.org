@@ -29,7 +29,7 @@ Create a new class in your `init` (or `compat`) package. Create a `LobsterTypeIn
 Then create a `LobsterTypeBuilder` for each of your resources that should have an assosiated lobster. 
 There are many methods on the builder to set traits about your lobster.
 
-This section is unfinished. Join [the discord server](https://discord.gg/VbZVnRd) or [the email list](https://buttondown.email/LukeGrahamLandry) to be notified when it is released.  
+This section is unfinished. Join [the discord server](https://discord.gg/uG4DewBcwV) or [the email list](https://buttondown.email/LukeGrahamLandry) to be notified when it is released.  
 
 ### Register Lobster Types
 
