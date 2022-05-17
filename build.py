@@ -130,7 +130,7 @@ def combile_md(source_folder, filename, target_folder, index_html, pages_list, v
         if title in site_data["descriptions"]:
             meta += '<meta name="description" content="' + site_data["descriptions"][title] + '">'
 
-    full_content = template.replace("$CONTENT", html_syntax_highlighted).replace("$META", meta).replace("$INDEX", index_html).replace("$TUTORIALS", json.dumps(pages_list)).replace("$VERSIONS", versions_html).replace("$CHANNELS", getChannelsHTML(video_data["yt-clients"]))
+    full_content = template.replace("$CONTENT", html_syntax_highlighted).replace("$META", meta).replace("$INDEX", index_html).replace("$TUTORIALS", json.dumps(pages_list)).replace("$VERSIONS", versions_html).replace("\$CHANNELS", getChannelsHTML(video_data["yt-clients"]))
 
     generateSlashRedirectFix(target_folder, title)
 

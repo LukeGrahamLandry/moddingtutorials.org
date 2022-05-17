@@ -1,14 +1,15 @@
 .channel {
     display: inline-block;
-    color: black;
+    color: black !important;
     text-decoration: none;
     width: 100px;
     margin-bottom: 30x;
     padding: 5px;
+    text-align: center;
 }
 
 .channel:hover {
-    text-decoration: none;
+    text-decoration: none !important;
     /*
     background-color: rgb(41, 41, 41);
     color: white;
@@ -17,6 +18,7 @@
 }
 
 .channel img {
+    box-sizing: content-box !important;
     display: inline-block;
     width: 100%;
     margin-bottom: 5px;
@@ -25,7 +27,7 @@
 
 .channel .title {
     display: block;
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-family: monospace;
 }
 

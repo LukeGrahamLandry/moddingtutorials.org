@@ -5,24 +5,26 @@
             "url": "o18",
             "title": "Forge 1.18.1",
             "files": ["intro", "java-basics", "environment-setup", "basic-items", "advanced-items", "basic-blocks", 
-                "advanced-blocks", "tools-armor", "tile-entities", "enchantments", "recipes", "arrows", "world-gen"]
+                "advanced-blocks", "tools-armor", "tile-entities", "enchantments", "recipes", "arrows", "world-gen", "solutions"]
             },
         {
             "folder": "forge-1.17-tutorials",
             "url": "o17",
             "title": "Forge 1.17.1",
             "files": ["intro", "java-basics", "environment-setup", "basic-items", "advanced-items", "basic-blocks", 
-                "advanced-blocks", "tools-armor", "tile-entities", "enchantments", "recipes", "arrows", "world-gen"]
+                "advanced-blocks", "tools-armor", "tile-entities", "enchantments", "recipes", "arrows", "world-gen", "solutions"]
         },
         {
             "folder": "forge-1.16-tutorials",
             "url": "o16",
             "title": "Forge 1.16.5",
             "files": ["intro", "java-basics", "environment-setup", "basic-items", "advanced-items", "basic-blocks", 
-                "advanced-blocks", "tools-armor", "tile-entities", "enchantments", "recipes", "arrows", "world-gen"]
+                "advanced-blocks", "tools-armor", "tile-entities", "enchantments", "recipes", "arrows", "world-gen", "solutions"]
         }
     ],
-    "un_versioned": ["intro", "java-basics", "index", "changelog", "credits", "mappings", "my-mods", "my-work", "registries", "sides", "why-long-video", "mods-toml"],
+    "un_versioned": [
+        "intro", "index",  "topics", "changelog", "credits", "my-mods", "my-work", "why-long-video", 
+        "java-basics", "mappings", "registries", "sides", "mods-toml", "solutions"],
     "videos": [
         "https://www.youtube.com/watch?v=jVzeGKbVLCc",
         "https://www.youtube.com/watch?v=lJp6rdELdu8",
@@ -126,6 +128,7 @@
         "registries": "An in-depth explication of how Minecraft mods register game objects (like items, blocks, entities, etc)",
         "events": "An in-depth explication of how the Forge Events System allows your Minecraft mod to react to actions taken in game",
         "dem-lobsters": "Add integration with Dem Lobsters to your mod. Easily create a new lobster type that produces your modded resources.",
-        "world-gen": "Collection of resources for understanding world generation in Minecraft"
+        "world-gen": "Collection of resources for understanding world generation in Minecraft",
+        "solutions": "Answers to minecraft modding questions asked on my discord server"
     }
 }
