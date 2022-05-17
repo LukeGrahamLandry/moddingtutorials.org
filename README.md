@@ -12,5 +12,5 @@ The tutorial mod code is on the other branches.
 
 ## License 
 
-The tutorial text and site (this branch) are All Rights Reserved.  
-The tutorial mod code (branches forge-1.15.2, forge-1.16.5, forge-1.17.1, and forge-1.18.1) are MIT. 
+The tutorial text (found in md files) is available under the [Creative Commons Attribution-NonCommercial-ShareAlike License](https://creativecommons.org/licenses/by-nc-sa/4.0/). 
+The tutorial mod code (branches forge-1.15.2, forge-1.16.5, forge-1.17.1, and forge-1.18.1) are MIT.  

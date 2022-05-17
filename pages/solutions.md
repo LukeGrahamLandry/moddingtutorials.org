@@ -5,6 +5,7 @@ If there's something you want to learn how to do that i dont have a tutorial for
 > I might add an index and split it into seperate pages to help the SEO at some point if i feel inspired
 
 ## how scale and translate text on a gui? 
+
 > I’m using posestack.scale for the scale and just manually tweaking some math for the x and y to get it to look okay. It works but I’m thinking there must be a better way to translate the positions when doing non standard scales like 0.8**
 
 the thing that makes it weird is that when you scale the matrix it scales any translations you've done as well, including the position you told the text to be at. so really what you want is to draw the text centred at (0,0), then scale it, then translate it to where you actually want it. tho calling the translate/scale methods will move everything, not just the text you're trying to work with. it might work if you,
@@ -115,11 +116,11 @@ you could extend `ProjectileItemEntity` or just impliment `IRendersAsItem` and t
 
 instead of calling `player.setPos(...)`, try `((ServerPlayerEntity)player).connection.teleport(x, y, z, player.yRot, player.xRot, EnumSet.noneOf(SPlayerPositionLookPacket.Flags.class))` (make sure to do it in the if block that checks !isclientside). thats what the teleport command uses 
 
-## my custom cactus black just breaks when it grows 
+## my custom cactus block just breaks when it grows 
 
 If you made your cactus based on the vanilla CactusBlock, it breaks if the canSurvive method returns false. vanilla has that method call canSustainPlant on the block state below it, so you should make sure that your plant is a valid block for your plant to grow on. You can do that by overriding canSustainPlant on your custom cactus block and returning true if the state passed in is of your plant. I think this would work, 
 
-```java
+```
 @Override
 public boolean canSustainPlant(BlockState state, IBlockReader world, BlockPos pos, Direction facing, net.minecraftforge.common.IPlantable plantable) {
     BlockState plant = plantable.getPlant(world, pos.relative(facing));
@@ -140,7 +141,7 @@ for the sugar cane, i would think using the same randomTick method as vanilla's 
 
 vanilla ones use the OreBlock class which just overrides this method (you can return whatever number you want. can give more based on fortune level but should give 0 if they have silk touch)
 
-```java
+```
 @Override
 public int getExpDrop(BlockState state, net.minecraft.world.IWorldReader reader, BlockPos pos, int fortune, int silktouch) {
     return silktouch == 0 ? RANDOM.nextInt(7) : 0;
