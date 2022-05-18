@@ -76,7 +76,7 @@ if True:
 def combile_md(source_folder, filename, target_folder, index_html, pages_list, versions_html, can=None):
     with open(source_folder + "/" + filename, "r") as f:
          md_content = "".join(f.readlines())
-    html_content = markdown.markdown(md_content, extensions=['fenced_code'])
+    html_content = markdown.markdown(md_content, extensions=['fenced_code', "mdx_linkify"])
 
     # print(html_content)
 
@@ -306,7 +306,7 @@ def buildFetchedPages():
 buildSite()
 buildFetchedPages()
 
-# export PATH=$PATH:/opt/buildhome/.local/bin && pip3 install requests && pip3 install markdown && pip3 install pygments && python3 build.py
+# export PATH=$PATH:/opt/buildhome/.local/bin && pip3 install requests && pip3 install markdown && pip3 install pygments && pip3 install mdx_linkify && python3 build.py
 # PYTHON_VERSION 3.7
 
 # https://cf.way2muchnoise.eu/

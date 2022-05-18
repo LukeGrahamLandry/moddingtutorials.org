@@ -162,7 +162,7 @@ body, #content, .content {
   box-shadow: inset 0 0 0 1000px rgb(0, 0, 0) !important;
 }
 
-.video, .channel {
+.video {
   color: #c3c7cd !important;
 }
 
