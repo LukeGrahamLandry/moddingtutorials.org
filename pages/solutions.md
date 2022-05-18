@@ -6,7 +6,7 @@ If there's something you want to learn how to do that i dont have a tutorial for
 
 ## how scale and translate text on a gui? 
 
-> I’m using posestack.scale for the scale and just manually tweaking some math for the x and y to get it to look okay. It works but I’m thinking there must be a better way to translate the positions when doing non standard scales like 0.8**
+> QUESTION: I’m using posestack.scale for the scale and just manually tweaking some math for the x and y to get it to look okay. It works but I’m thinking there must be a better way to translate the positions when doing non standard scales like 0.8**
 
 the thing that makes it weird is that when you scale the matrix it scales any translations you've done as well, including the position you told the text to be at. so really what you want is to draw the text centred at (0,0), then scale it, then translate it to where you actually want it. tho calling the translate/scale methods will move everything, not just the text you're trying to work with. it might work if you,
 

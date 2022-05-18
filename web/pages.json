@@ -5,21 +5,21 @@
             "url": "o18",
             "title": "Forge 1.18.1",
             "files": ["intro", "java-basics", "environment-setup", "basic-items", "advanced-items", "basic-blocks", 
-                "advanced-blocks", "tools-armor", "tile-entities", "enchantments", "recipes", "arrows", "world-gen", "solutions"]
+                "advanced-blocks", "tools-armor", "tile-entities", "enchantments", "recipes", "arrows", "world-gen", "resources", "solutions"]
             },
         {
             "folder": "forge-1.17-tutorials",
             "url": "o17",
             "title": "Forge 1.17.1",
             "files": ["intro", "java-basics", "environment-setup", "basic-items", "advanced-items", "basic-blocks", 
-                "advanced-blocks", "tools-armor", "tile-entities", "enchantments", "recipes", "arrows", "world-gen", "solutions"]
+                "advanced-blocks", "tools-armor", "tile-entities", "enchantments", "recipes", "arrows", "world-gen", "resources", "solutions"]
         },
         {
             "folder": "forge-1.16-tutorials",
             "url": "o16",
             "title": "Forge 1.16.5",
             "files": ["intro", "java-basics", "environment-setup", "basic-items", "advanced-items", "basic-blocks", 
-                "advanced-blocks", "tools-armor", "tile-entities", "enchantments", "recipes", "arrows", "world-gen", "solutions"]
+                "advanced-blocks", "tools-armor", "tile-entities", "enchantments", "recipes", "arrows", "world-gen", "resources", "solutions"]
         }
     ],
     "un_versioned": [
