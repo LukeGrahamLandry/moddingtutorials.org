@@ -17,3 +17,4 @@ In the ender dragon's implimentation, the entities do not have a registered `Ent
 > Forge's changes to these methods seem to work fully on 1.18.2. Although 1.16.5 had forge's `PartEntity` and associated `IForgeEntity` additions, not all those methods were changed to support it. For example `Level#getEntities` didn't so projectiles would not be able to hit your part without some mixins. 
 
 > you probably want to override `Entity#isPickable` to return true on your part entity
+

@@ -91,6 +91,7 @@ Access transformers allow you to make vanilla code `public` and removing the `fi
 Mixins allow you to directly modify vanilla's bytecode. Generally try to avoid using this and do things through the proper api instead but sometimes there's no other way. Since mixin is a seperate library, it doesnt change much with minecraft versions so old tutorials (or even ones for fabric) are still useful. 
 
 - http://darkhax.net/2020/07/mixins
+- https://github.com/SpongePowered/Mixin/wiki/Mixins-on-Minecraft-Forge
 
 ## Dependencies
 
