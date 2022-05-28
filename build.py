@@ -63,13 +63,13 @@ if True:
         html = '<link rel="stylesheet" href="/styles/channels.css">\n'
 
         for channel in channels:
-            html += '<a class="channel" target="_blank" href="https://www.youtube.com/watch?v=' + channel["id"] + '"> \n' 
+            html += '<span class="channel"> \n' 
             html += '<img src="/img/videos/' +  channel["id"] + '.jpg" alt="video thumbnail"> \n'
 
             html += '<b class="title">' + channel["title"] + "</b> \n"
             html += '<b class="subs">' + formatViewNumber(channel["subscribers"]) + ' Subscribers </b> \n'
             html += '<b class="views">' + formatViewNumber(channel["views"]) + ' Views </b> \n'
-            html += "</a>\n"
+            html += "</span>\n"
         
         return html
 
