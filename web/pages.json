@@ -24,7 +24,7 @@
     ],
     "un_versioned": [
         "intro", "index",  "topics", "changelog", "credits", "my-mods", "my-work", "why-long-video", 
-        "java-basics", "mappings", "registries", "sides", "mods-toml", "solutions"],
+        "java-basics", "mappings", "registries", "sides", "mods-toml", "solutions", "bad-clients"],
     "videos": [
         "https://www.youtube.com/watch?v=jVzeGKbVLCc",
         "https://www.youtube.com/watch?v=lJp6rdELdu8",
