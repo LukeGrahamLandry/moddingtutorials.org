@@ -2,7 +2,7 @@
     display: inline-block;
     color: rgb(0, 255, 47) !important;
     text-decoration: none;
-    width: 100px;
+    width: 110px;
     margin-bottom: 30x;
     padding: 5px;
     text-align: center;
@@ -27,7 +27,7 @@
 
 .channel .title {
     display: block;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-family: monospace;
 }
 

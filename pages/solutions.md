@@ -250,4 +250,26 @@ look at the `PotionItem#appendHoverText` which calls `PotionUtils#addPotionToolt
 
 ## how do i have different behaviour for specific players? 
 
-Each minecraft accound has a Universally Unique Identifier. There are websites to get these from a player's username (like https://mcuuid.net). Have a list of people's uuids (ie. `List<UUID> coolPeople = List.of(new UUID[]{UUID.fromString("bcb2252d-70de-4abc-9932-bc46bd5dc62f")});`) and then have an if statement that checks `coolPeople.contains(player.getUUID())`. You could even put that list on pastebin or equivilent and fetch it with an http request so you could update it without changing your mod's code. 
+Each minecraft account has a Universally Unique Identifier. There are websites to get these from a player's username (like https://mcuuid.net). Have a list of people's uuids (ie. `List<UUID> coolPeople = List.of(new UUID[]{UUID.fromString("bcb2252d-70de-4abc-9932-bc46bd5dc62f")});`) and then have an if statement that checks `coolPeople.contains(player.getUUID())`. You could even put that list on pastebin or equivilent and fetch it with an http request so you could update it without changing your mod's code. 
+
+## how to make an http request
+
+its just part of the normal jdk libraries
+
+```
+public static String get(String url) {
+    try {
+        HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
+        InputStream responseStream = connection.getInputStream();
+
+        return new BufferedReader(
+                new InputStreamReader(responseStream, StandardCharsets.UTF_8))
+                .lines()
+                .collect(Collectors.joining("\n"));
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+    return null;
+}
+```
+
