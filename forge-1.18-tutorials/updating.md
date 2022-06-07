@@ -25,13 +25,13 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 Change to the 1.18 mappings
 
 ```
-mappings channel: 'official', version: '1.18.1'
+mappings channel: 'official', version: '1.18.2'
 ```
 
 Change to minecraft 1.18 and the newer version of forge in the dependencies block 
 
 ```
-minecraft 'net.minecraftforge:forge:1.18.1-39.0.0'
+minecraft 'net.minecraftforge:forge:1.18.2-40.1.48'
 ``` 
 
 You will have to run the gradle command to generate your IDE run configurations again (genIntellijRuns or genEclipseRuns).
@@ -64,6 +64,7 @@ and the required version for the `forge` dependency to
 
     versionRange="[38,)"
 
+> note, this states that your mod will run properly on 1.18, 1.18.1 and 1.18.2, that may or may not be what you want. 
 
 ## Code Fixes
 

@@ -48,7 +48,7 @@ Make a public static string that holds your mod id. This is how the forge mod lo
     }
     
 
-Open `src/main/resources/META-INF/mods.toml` It has a bunch of key value pairs that mostly set the information shown on the mods list in game. The only one you have to change is the modId (to whatever you had in your main class). You must keep the modLoader and loaderVersion the same but the fields lower down like display name can be whatever you want, they'll be displayed in the mods list ingame. You should also choose a license (I like the MIT license personally). 
+Open `src/main/resources/META-INF/mods.toml` It has a bunch of key value pairs that mostly set the information shown on the mods list in game. The only one you have to change is the modId (to whatever you had in your main class). You must keep the modLoader and loaderVersion the same but the fields lower down like display name can be whatever you want, they'll be displayed in the mods list ingame. You should also choose a license, go to https://choosealicense.com for more information. 
 
     modLoader="javafml"
     loaderVersion="[37,)"
