@@ -60,7 +60,7 @@ Modrinth is an open source competitor to CurseForge that is several orders of ma
 
 Github is a website for sharing source code with other developers. It makes it easy to put the code for your mod online to let other people learn from it. Almost all minecraft mods have thier code freely available on github for the world to enjoy. 
 
-Github uses a version control called Git. Git lets you easily track changes in your code as you update your mod and add new features, as well as roll back any mistakes easily. This is a ridiculously important tool to learn how to use! It shines most if you end up working with multiple other people on the same project and need to merge your changes together. You should really install the Github Desktop app at some point and play around with it. It may seem strange at first but it will make life so much easier in the long run. 
+Github uses a version control system called Git. Git lets you easily track changes in your code as you update your mod and add new features, as well as roll back any mistakes easily. This is a ridiculously important tool to learn how to use! It shines most if you end up working with multiple other people on the same project and need to merge your changes together. You should really install the Github Desktop app at some point and play around with it. It may seem strange at first but it will make life so much easier in the long run. 
 
 #### Licensing
 
@@ -93,6 +93,6 @@ Gradle is the build system used for making minecraft mods. You write a special f
 Congratulations! Now you're ready to make your own minecraft mod.  
 
 1. Make sure you **learn the Java programming language**. This is what you will be writing in to make your mod and making sure you have a strong understanding before you start will save a lot of headaches. I go over some of the basics in my [Java Tutorial](java-basics) but its far from complete and there are probably more entertaining resources available online anyway. 
-2. Read the [Environment Setup Tutorial](environment-setup). It will how you how to install the correct version of the Java, a program to help you write your code and a template for your mod that will install the minecraft dependencies. 
+2. Read the [Environment Setup Tutorial](environment-setup). It will how you how to install the correct version of the Java, a program to help you write your code, and a template for your mod that will install the minecraft dependencies. 
 3. Go through my other tutorials. If this is your first time doing something like this, its probably a good idea to go through them in order. However, if you're confident in your programming abilities, feel free to skip around. Read the [Topics Page](topics) for more details on the content of each tutorial. 
 4. Eventually you will reach something that won't have a specific tutorial to help you. Hopefully by then you'll be comfortable enough working with Minecraft's code that you'll be able to experiment on your own and figure out everything you need to know. Good luck :)

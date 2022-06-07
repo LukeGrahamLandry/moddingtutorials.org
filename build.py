@@ -73,7 +73,7 @@ if True:
         
         return html
 
-def combile_md(source_folder, filename, target_folder, index_html, pages_list, versions_html, can=None):
+def combile_md(source_folder, filename, target_folder, pages_list, can=None):
     with open(source_folder + "/" + filename, "r") as f:
          md_content = "".join(f.readlines())
     html_content = markdown.markdown(md_content, extensions=['fenced_code', "mdx_linkify"])
@@ -130,7 +130,7 @@ def combile_md(source_folder, filename, target_folder, index_html, pages_list, v
         if title in site_data["descriptions"]:
             meta += '<meta name="description" content="' + site_data["descriptions"][title] + '">'
 
-    full_content = template.replace("$CONTENT", html_syntax_highlighted).replace("$META", meta).replace("$INDEX", index_html).replace("$TUTORIALS", json.dumps(pages_list)).replace("$VERSIONS", versions_html).replace("\$CHANNELS", getChannelsHTML(video_data["yt-clients"]))
+    full_content = template.replace("$CONTENT", html_syntax_highlighted).replace("$META", meta).replace("$TUTORIALS", json.dumps(pages_list)).replace("\$CHANNELS", getChannelsHTML(video_data["yt-clients"]))
 
     generateSlashRedirectFix(target_folder, title)
 
@@ -142,7 +142,6 @@ def combile_md(source_folder, filename, target_folder, index_html, pages_list, v
             f.write(full_content)
 
 def buildSite():
-    versions_select = {}
     default_section_url = "o18"
 
     for section_data in site_data["sections"]:
@@ -150,39 +149,22 @@ def buildSite():
             if not os.path.isdir(section_data["url"]):
                 os.mkdir(section_data["url"])
 
-            index_html = ""
-            for page_name in section_data["files"]:
-                displayName = ""
-                for part in page_name.split("-"):
-                    displayName += part[0].upper() + part[1:] + " "
-            
-                index_html += '<a href="/' + section_data["url"] + "/" + page_name + '" class="post">' + displayName + '</a>'
-
-            versions_html = ""
-            for s in site_data["sections"]:
-                versions_html += '<option value="' + s["url"] + '"'
-                if s["url"] == section_data["url"]:
-                    versions_html += " selected"
-                versions_html += '>' + s["title"] + "</option>"
-
-            versions_select[section_data["url"]] = versions_html
-
             for rooti, dirsi, filesi in os.walk("pages", topdown=False):
                 for namei in filesi:
                     if (".md" in namei):
                         print(section_data["url"], namei)
-                        combile_md(rooti, namei, section_data["url"], index_html, section_data["files"], versions_html)
+                        combile_md(rooti, namei, section_data["url"], section_data["files"])
 
                         if section_data["url"] == default_section_url:
-                            combile_md(rooti, namei, None, index_html, section_data["files"], versions_html, default_section_url)
+                            combile_md(rooti, namei, None, section_data["files"], default_section_url)
 
             for name in files:
                 if (".md" in name):
                     print(section_data["url"], name)
-                    combile_md(root, name, section_data["url"], index_html, section_data["files"], versions_html)
+                    combile_md(root, name, section_data["url"], section_data["files"])
 
                     if section_data["url"] == default_section_url:
-                        combile_md(root, name, None, index_html, section_data["files"], versions_html, default_section_url)
+                        combile_md(root, name, None, section_data["files"], default_section_url)
 
     for root, dirs, files in os.walk("web", topdown=True):
         for dir in dirs:
@@ -224,11 +206,12 @@ def buildSite():
     with open("web/index.html", "r") as f:
         index_html = "".join(f.readlines())
 
-    for url, versions_html in versions_select.items():
+    for section_info in site_data["sections"]:
+        url = section_info["url"]
         shutil.copy("my-mods.html", url + "/my-mods.html")
         shutil.copy("commissions.html", url + "/commissions.html")
         with open(url + "/index.html", "w") as f:
-            f.write(index_html.replace("$VERSIONS", versions_html))
+            f.write(index_html)
 
     shutil.copy(default_section_url + "/index.html", "index.html")
 
@@ -296,7 +279,7 @@ def buildFetchedPages():
             if "curseforge" in page:
                 html_content += '<br> <a href="https://www.curseforge.com/minecraft/mc-mods/' + page["curseforge"] + '" class="btn btn-primary" style="width: 100%;"> Download Mod On Curse Forge </a>'
 
-            full_content = template.replace("$CONTENT", html_content).replace("$META", meta).replace("$INDEX", page_index).replace("$VERSIONS", drop_down_list)
+            full_content = template.replace("$CONTENT", html_content).replace("$META", meta).replace("$INDEX", page_index)
 
             with open(directory + "/" + filename + ".html", "w") as f:
                 f.write(full_content)

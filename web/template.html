@@ -12,8 +12,8 @@
     <meta property="og:site_name" content="Modding Tutorials">
 
     <link rel="shortcut icon" href="/img/logo.png">
-    <link rel="stylesheet" href="/styles/tutorial.css">
-    <link rel="stylesheet" href="/styles/md.css">
+    <link rel="stylesheet" href="styles/tutorial.css">
+    <link rel="stylesheet" href="styles/md.css">
     <link rel="stylesheet" href="/code.css">
     <link rel="stylesheet" id="theme" href="/styles/dark.css">
     
@@ -71,6 +71,10 @@
         }
 
 
+        .section {
+            border: 1px solid black;
+            margin-bottom: 5px;
+        }
     </style>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -87,7 +91,7 @@
     <div id="side-nav">
         <div style="padding: 10px;">
             <a href="/">About</a>
-            <a href="/my-mods" style="float: right;">My Mods</a>
+            <a href="https://discord.gg/uG4DewBcwV" target="_blank" style="float: right;">Contact</a>
 
             <div style="text-align: center; padding-top: 10px;">
                 <label class="switch">
@@ -98,7 +102,9 @@
             <br>
             <div>
                 <select id="dropdown" style="color: black; text-align: center; padding: 5px; width: 100%; font-weight: bold;">
-                    $VERSIONS
+                    <option value="o18" id="o18"> Forge 1.18.2 </option>
+                    <option value="o17" id="o17"> Forge 1.17.1 </option>
+                    <option value="o16" id="o16"> Forge 1.16.5 </option>
                 </select>
             </div>
         </div>
@@ -112,7 +118,29 @@
                 </a>
             </div>
 
-            $INDEX 
+            <div class="section">
+                <a href="intro" class="post">Intro </a>
+                <a href="java-basics" class="post">Java Basics </a>
+                <a href="environment-setup" class="post">Environment Setup </a>
+            </div>
+
+            <div class="section">
+                <a href="basic-items" class="post">Basic Items </a>
+                <a href="advanced-items" class="post">Advanced Items </a>
+                <a href="basic-blocks" class="post">Basic Blocks </a>
+                <a href="advanced-blocks" class="post">Advanced Blocks </a>
+                <a href="tools-armor" class="post">Tools Armor </a>
+                <a href="tile-entities" class="post">Tile Entities </a>
+                <a href="enchantments" class="post">Enchantments </a>
+                <a href="recipes" class="post">Recipes </a>
+                <a href="arrows" class="post">Arrows </a>
+            </div>
+
+            <div class="section">
+                <a href="world-gen" class="post">World Gen </a>
+                <a href="resources" class="post">Resources </a>
+                <a href="solutions" class="post">Solutions </a>
+            </div>
         </div>
 
         <div style="text-align: center;">
@@ -207,6 +235,20 @@
                 document.getElementById("side-nav").style.display = "block";
             } else {
                 document.getElementById("side-nav").style.display = "none";
+            }
+        }
+
+        let versionId = window.location.pathname.split("/")[1]
+        if (versionId == "mods"){
+            document.getElementById("dropdown").innerHTML = ""
+        } else {
+            if (["o19", "o18", "o17", "o16"].indexOf(versionId) == -1){
+                versionId = "o18";
+            }
+            try {
+                document.getElementById(versionId).selected = true;
+            } catch (error) {
+                console.log("failed to mark selected #" + versionId);
             }
         }
 
