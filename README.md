@@ -2,9 +2,10 @@
 
 The source code for my Minecraft Forge modding tutorials. View the tutorials online at https://moddingtutorials.org 
 
-New tutorials are made for 1.18.2, 1.17.1 and 1.16.5.  
+New tutorials are made for 1.19, 1.18.2, 1.17.1 and 1.16.5.  
 
 The tutorial mod code is on the other branches. 
+- [Forge 1.19](https://github.com/LukeGrahamLandryMC/modding-tutorials/tree/forge-1.19.x)
 - [Forge 1.18.2](https://github.com/LukeGrahamLandryMC/modding-tutorials/tree/forge-1.18.x)
 - [Forge 1.17.1](https://github.com/LukeGrahamLandryMC/modding-tutorials/tree/forge-1.17.1)
 - [Forge 1.16.5](https://github.com/LukeGrahamLandryMC/modding-tutorials/tree/forge-1.16.5)
@@ -13,4 +14,4 @@ The tutorial mod code is on the other branches.
 ## License 
 
 The tutorial text (found in md files) is available under the [Creative Commons Attribution-NonCommercial-ShareAlike License](https://creativecommons.org/licenses/by-nc-sa/4.0/). 
-The tutorial mod code (branches forge-1.15.2, forge-1.16.5, forge-1.17.1, and forge-1.18.x) are MIT.  
+The tutorial mod code (branches forge-1.15.2, forge-1.16.5, forge-1.17.1, forge-1.18.x, and forge-1.19.x) are MIT.  

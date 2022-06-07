@@ -91,7 +91,10 @@
         </div>
         <div>
             <select id="dropdown" style="color: black; text-align: center; padding: 5px; width: 100%; font-weight: bold;">
-                $VERSIONS
+                <option value="o19" id="o19" selected> Forge 1.19 </option>
+                <option value="o18" id="o18"> Forge 1.18.2 </option>
+                <option value="o17" id="o17"> Forge 1.17.1 </option>
+                <option value="o16" id="o16"> Forge 1.16.5 </option>
             </select>
         </div>
     </div>
@@ -352,6 +355,24 @@
             window.location.href = "/" + new_url;
         }
 
+
+        let versionId = window.location.pathname.split("/")[1]
+        if (versionId == "mods"){
+            document.getElementById("dropdown").innerHTML = ""
+        } else {
+            if (["o19", "o18", "o17", "o16"].indexOf(versionId) == -1){
+                versionId = "o19";
+            }
+            try {
+                if (versionId != "o19"){
+                    document.getElementById("o19").selected = false;
+                    document.getElementById(versionId).selected = true;
+                }
+                
+            } catch (error) {
+                console.log("failed to mark selected #" + versionId);
+            }
+        }
         /*
         // disable tutorials that dont exist yet for this version
         // this only becomes relevant when i want to slowly port to 1.18 but still put them on the site
