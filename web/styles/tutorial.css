@@ -343,3 +343,10 @@ body {
 .embedstream {
   position: relative;
 }
+
+
+
+.section {
+  border: 1px solid black;
+  margin-bottom: 5px;
+}

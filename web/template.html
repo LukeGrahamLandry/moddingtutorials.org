@@ -69,12 +69,6 @@
             color: black !important;
             text-decoration: underline;
         }
-
-
-        .section {
-            border: 1px solid black;
-            margin-bottom: 5px;
-        }
     </style>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -102,6 +96,7 @@
             <br>
             <div>
                 <select id="dropdown" style="color: black; text-align: center; padding: 5px; width: 100%; font-weight: bold;">
+                    <option value="o19" id="o19"> Forge 1.19 </option>
                     <option value="o18" id="o18"> Forge 1.18.2 </option>
                     <option value="o17" id="o17"> Forge 1.17.1 </option>
                     <option value="o16" id="o16"> Forge 1.16.5 </option>
@@ -243,7 +238,7 @@
             document.getElementById("dropdown").innerHTML = ""
         } else {
             if (["o19", "o18", "o17", "o16"].indexOf(versionId) == -1){
-                versionId = "o18";
+                versionId = "o19";
             }
             try {
                 document.getElementById(versionId).selected = true;
