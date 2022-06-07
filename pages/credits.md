@@ -30,6 +30,8 @@ People who paid me to make mods.
 - spiderking23
 - foxtrot1547
 - loopenami
+- suku
+- [Armegon](https://www.youtube.com/Armegon)
 - [Cammie](https://github.com/CammiePone)
 - Khaki
 - GTB
