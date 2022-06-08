@@ -20,10 +20,6 @@ I also offer one-on-one tutoring. Want real time personalized help learning to m
 Get on a video call with me, share your screen and I'll guide you through making anything you can imagine. 
 DM me on discord (LukeGrahamLandry#6888) and we'll find a time that works for both of us. Fee: $30/hour
 
-## Donate 
-
-If you found my tutorials helpful and want more, donating is a great way to encourage their creation. Consider making a recurring donation on [Patreon](https://www.patreon.com/LukeGrahamLandry) or a one time donation via [PayPal](https://www.paypal.me/LukeGrahamLandry).
-
 ## Topics 
 
 This is an index of the content covered on this site.

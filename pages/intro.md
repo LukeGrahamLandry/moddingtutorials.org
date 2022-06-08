@@ -6,7 +6,7 @@ Minecraft is a fun game with a world made of cubes. Over time, dedicated players
 
 Over time, Mojang/Microsoft releases updates to Minecraft that add new content. Unfortunatly, they also change lots of things about how Minecraft's code works internally each update as well. This means that any given mod is only compateble with the version of minecraft it was made for. Porting mods between versions is sometimes trivial but often quite diffucult, depending on how much has changed in the vanilla code that the mod must interact with.
 
-This site has tutorials for versions 1.18.2, 1.17.1, and 1.16.5. You can switch between them by using the drop down menu at the top of the nav bar on the left of each tutorial page. 
+This site has tutorials for versions 1.19, 1.18.2, 1.17.1, and 1.16.5. You can switch between them by using the drop down menu at the top of the nav bar on the left of each tutorial page. 
 
 ## Mod Loaders
 

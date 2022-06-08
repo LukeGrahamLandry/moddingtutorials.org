@@ -1,6 +1,6 @@
 // AUTHOR  : LukeGrahamLandry#6888
 // LICENSE : MIT
-// README  : https://moddingtutorials.org/o18/m1
+// README  : https://moddingtutorials.org/o19/m1
 // NOTE    : you MUST set mc_version in your gradle.properties file
 
 import java.nio.charset.StandardCharsets
@@ -8,6 +8,9 @@ import java.nio.file.Files
 
 if (System.getProperty("os.arch").equals("aarch64") && System.getProperty("os.name").equals("Mac OS X")){
     project.ext.lwjglVersion = "3.3.0"
+    if (project.mc_version.contains("1.19")){
+        project.ext.lwjglVersion = "3.3.1" // minecraft uses a newer version as of 1.19
+    }
     project.ext.lwjglNatives = "natives-macos-arm64"
 
     configurations.all {
