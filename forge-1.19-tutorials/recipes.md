@@ -205,4 +205,4 @@ private void setup(final FMLCommonSetupEvent event) {
 }
 ```
 
-Of course, this can also be used to create recipes for your own custom potions once they've been registered. This will be covered in the Effects tutorial. Join [the discord server](https://discord.gg/uG4DewBcwV) or [the email list](https://buttondown.email/LukeGrahamLandry) to be notified when it is released.  
+Of course, this can also be used to create recipes for your own custom potions once they've been registered. This will be covered in the Effects tutorial. Join [the discord server](https://discord.gg/uG4DewBcwV) to be notified when it is released.  

@@ -1,6 +1,6 @@
 # Java Basics 
 
-Before you begin trying to make a Minecraft mod, it is important that you are comfortable with the Java programming language. There exist better ways to learn Java for beginners than this document but I'll make an attempt. If you've already got a good understanding of Java, I encourage you to skip this and get started making your mod. Otherwise, if you're already comfortable with another programming language, this will be trivial to learn, if not might be kinda difficult. 
+Before you begin trying to make a Minecraft mod, it is important that you are comfortable with the Java programming language. There exist much better ways to learn Java for beginners than this document but I'll make an attempt. If you've already got a good understanding of Java, I encourage you to skip this and get started making your mod. Otherwise, if you're already comfortable with another programming language, this will be trivial to learn, if not might be kinda difficult. 
 
 If you're new to programming, I recommend you follow along and experiment with my examples. If you don't have java installed on your computer yet, you can use an [online compiler](https://www.onlinegdb.com/online_java_compiler) to run your programs without leaving your web browser. 
 
@@ -29,7 +29,7 @@ When you declare a variable, you first state the type you want to use and then t
 
     int foo;
 
-To declare multiple variables with the same type:
+You can declare multiple variables with the same type at the same time.
 
 ```
 int foo, foo1, foo2;
@@ -317,6 +317,7 @@ for (int x=0;x<4;x++){
 ```
 
 Instead of the first set of brackets just containing a condition, it has 3 statements. 
+
 1. called at the beginning, the first time the loop runs. commonly to initialize a counter variable
 2. the condition checked before each iteration. the loop ends if this is false
 3. called at the end of each iteration. commonly to increment the counter variable
@@ -340,36 +341,82 @@ if (foo){
 }
 ```
 
+## Arrays
+
+An array contains several values of a certain type in order. The array type is denoted by square brackets, [], after a normal type. You can reference values in the array by putting an index in [square brackets]. Note that everything is "0-indexed", which means the first item in an array is referenced as index 0, the second is index 1 and so on. You can get the length of an array by accessing the `length` property. 
+
+```
+int[] oddNumbers = new Integer[]{1, 3, 5, 7, 9};
+int five = oddNumbers[2];
+five == oddNumbers.length; // true
+```
+
+You can also use a for loop to go through all values in an array. 
+
+```
+for (int n : oddNumbers){
+    System.out.println(n);
+}
+```
+
+is a shorter way of writing, 
+
+```
+for (int i=0; i<oddNumbers.length; i++){
+    int n = oddNumbers[i];
+    System.out.println(n);
+}
+```
+
+## Strings
+
+The class `String` holds an immutable sequence of characters that represent some text, like a word or a paragraph. You create them by wrapping some text in "quotes" and they can be concatonated with the `+` opperator. 
+
+You can use the `String#split` method to break a string into an array of substrings. The arument passed in is how it decides where to split the string. 
+
+```
+String groceries = "apple,pear,bannana,lime";
+String[] fruits = groceries.split(",");
+// fruits contains ["apple", "pear", "bannana", "lime"]
+```
+
+You can use [square brackets] to index a certain character of a string. For example, `"thing"[0] == "t"`. Since strings are immutable, you cannot change a character this way, you must create a new string instead. Running `"thing"[1] = "a"` will crash. 
+
+The method `String#contains` will tell you if a string has a certain substring.  
+
+```
+String thing = "whatever";
+System.out.println(thing.contains("hate")); // true
+System.out.println(thing.contains("apple")); // false
+```
+
+The method `String#substring` will return the string beginning at the index passed in. In other words, it removes the n characters. 
+
+```
+String groceries = "apple,pear,bannana,lime";
+System.out.println(groceries.substring(5)); // ,pear,bannana,lime
+System.out.println(groceries.substring(15)); // ana,lime
+```
+
 ---
 
 # to be continued...
 
-Join [the discord server](https://discord.gg/uG4DewBcwV) or [the email list](https://buttondown.email/LukeGrahamLandry) to be notified when more of this tutorial is released.
+Join [the discord server](https://discord.gg/uG4DewBcwV) to be notified when more of this tutorial is released.
 
 - Objects
-
 - Methods
-
 - Classes
-
 - Inheritance
-
 - Interfaces
-
 - Exceptions
     - the most common exception is a NullPointerException
-
-- Example Type: String
-    - which holds an immutable sequence of characters like a word or a paragraph
 - Example Type: ArrayList 
     - which holds a dynamic sequence of any type
     - compared to an array 
-    - list interface 
-
+    - List interface 
 - Example Type: HashMap
-    - Maps keys to values 
-
+    - maps keys to values 
     - Map interface 
-
 - Example Type: Supplier
 - Generics

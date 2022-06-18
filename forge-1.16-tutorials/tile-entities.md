@@ -165,7 +165,7 @@ Note that the nbt keys `id`, `x`, `y`, `z`, `ForgeData`, `ForgeCaps` and the reg
 
 ### Syncing Data
 
-With my tile entity, I've been careful to do everything on the server side. If you're doing something more complex, you may have to sync data between the client and the server. There are a few ways to do this. I will cover examples where you need to use these in a later tutorial on doing custom rendering with a tile entity. Join [the discord server](https://discord.gg/uG4DewBcwV) or [the email list](https://buttondown.email/LukeGrahamLandry) to be notified when it is released. 
+With my tile entity, I've been careful to do everything on the server side. If you're doing something more complex, you may have to sync data between the client and the server. There are a few ways to do this. I will cover examples where you need to use these in a later tutorial on doing custom rendering with a tile entity. Join [the discord server](https://discord.gg/uG4DewBcwV) to be notified when it is released. 
 
 **On chunk load: **`getUpdateTag()` returns the data that the server wants to send as a `CompoundNBT`. `handleUpdateTag(BlockState state, CompoundNBT tag)` reads it back on the client side.
 
@@ -186,7 +186,7 @@ With my tile entity, I've been careful to do everything on the server side. If y
 
 To trigger that you can call `world.notifyBlockUpdate(BlockPos pos, BlockState oldState, BlockState newState, int flags)`
 
-**Custom packet:** a more versatile solution would be to make your own packets that you can send whenever you want (not just for block updates). I will cover packets in a future tutorial. Join [the discord server](https://discord.gg/uG4DewBcwV) or [the email list](https://buttondown.email/LukeGrahamLandry) to be notified when it is released. 
+**Custom packet:** a more versatile solution would be to make your own packets that you can send whenever you want (not just for block updates). I will cover packets in a future tutorial. Join [the discord server](https://discord.gg/uG4DewBcwV) to be notified when it is released. 
 
 ## Assets
 

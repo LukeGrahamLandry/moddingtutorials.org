@@ -4,4 +4,7 @@ Since 1.16, the way minecraft handles world generation has been shifting towards
 
 If you have questions about world gen specificlly, [the Minecraft Worldgen Discord Server](https://discord.gg/BuBGds9) might have someone who can help.  
 
-I'm not sure how much has changed since 1.18 so you may be able to consult the list of links for [1.19 World Gen Resources](/o18/world-gen). I'll try to update this page at some point.
+I'm not sure how much has changed since 1.18 so you may be able to consult the list of links for [1.18 World Gen Resources](/o18/world-gen). I'll try to update this page at some point.
+
+In 1.19, the BiomeLoadingEvent has been removed, use [Biome Modifiers](https://forge.gemwire.uk/wiki/Biome_Modifiers) instead.
+

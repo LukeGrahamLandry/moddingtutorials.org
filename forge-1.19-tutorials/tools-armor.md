@@ -61,7 +61,7 @@ You must do this in a class that implements `Tier`. The simplest way to do this 
         }
     }
 
-In 1.17, the system for checking if a block can be broken by a tier of tool moved to tags. Creating a tier higher than diamond and having blocks that can only be broken by it, is more complicated now. You must tell forge about it with the `TierSortingRegistry` class. More detailed explanation coming soon! Join [the discord server](https://discord.gg/uG4DewBcwV) or [the email list](https://buttondown.email/LukeGrahamLandry) to be notified when it is released. 
+In 1.17, the system for checking if a block can be broken by a tier of tool moved to tags. Creating a tier higher than diamond and having blocks that can only be broken by it, is more complicated now. You must tell forge about it with the `TierSortingRegistry` class. More detailed explanation coming soon! Join [the discord server](https://discord.gg/uG4DewBcwV) to be notified when it is released. 
 
 ### Init
 
@@ -295,4 +295,4 @@ You can override `makesPiglinsNeutral` to return true if you want your armor to 
 
 ### Related Tutorials 
 
-- You can make armor with complex 3d models made in BlockBench. This will be covered in a future tutorial. Join [the discord server](https://discord.gg/uG4DewBcwV) or [the email list](https://buttondown.email/LukeGrahamLandry) to be notified when it is released. 
+- You can make armor with complex 3d models made in BlockBench. This will be covered in a future tutorial. Join [the discord server](https://discord.gg/uG4DewBcwV) to be notified when it is released. 

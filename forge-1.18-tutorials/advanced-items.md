@@ -192,7 +192,7 @@ If you run the game the items show up in the creative tab and have textures. You
 
 - [Tools & Armor](tools-armor): allow your item to be used as a tool or worn as armor
 - [Arrows](arrows): allow bows to use your item as ammo
-- Custom Bow tutorial coming soon. Join [the discord server](https://discord.gg/uG4DewBcwV) or [the email list](https://buttondown.email/LukeGrahamLandry) to be notified when it is released. 
+- Custom Bow tutorial coming soon. Join [the discord server](https://discord.gg/uG4DewBcwV) to be notified when it is released. 
 
 ## Practice
 

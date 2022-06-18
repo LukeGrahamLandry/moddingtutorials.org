@@ -35,24 +35,19 @@ People who paid me to make mods.
 - kammcorder [❗️](/bad-clients)
 - dummy_fan_svenska [❗️](/bad-clients)
 
-## Contributors 
+## Tutorial Contributors 
 
 If you notice any mistakes in my tutorials, please submit a pull request on [the github page](https://github.com/LukeGrahamLandryMC/modding-tutorials). When it's merged, I'll add your name to this list. 
 
 - thedude
 - Matthew
 
-## My patrons
+## Mod Contributors 
+
+- Tribes: GreenOne
+
+## Patrons
 
 - Dalton Pratt
 - SpottyTheTurtle
 - CiaoRobban
-
-## Resources
-
-- I originally learned how to make mods from TurtyWurty's (almost unbearably slow) [1.15 tutorial videos](https://www.youtube.com/playlist?list=PLaevjqy3XufYmltqo0eQusnkKVN7MpTUe)
-- The class name update script that makes it easy to update from 1.16 to 1.17 is by [SizableShrimp](https://github.com/SizableShrimp)
-- Learn about the 1.16 changes to world gen from [TelepathicGrunt](https://github.com/TelepathicGrunt)
-- The [forge docs](https://mcforge.readthedocs.io/en/1.16.x/) don't cover everything but they're where I learned networking, loot modifiers, and capabilities
-- I learned how to do configs and GUIs from GreenOne
-- If you're interested in making Fabric mods instead, [the fabric wiki](https://fabricmc.net/wiki) is a great place to start. If I have time, I plan to make tutorials on this eventually. 
