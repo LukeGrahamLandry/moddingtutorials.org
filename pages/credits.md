@@ -46,7 +46,7 @@ If you notice any mistakes in my tutorials, please submit a pull request on [the
 
 - Tribes: GreenOne
 
-## Patrons
+## Donations
 
 - Dalton Pratt
 - SpottyTheTurtle

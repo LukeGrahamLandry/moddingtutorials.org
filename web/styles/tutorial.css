@@ -344,16 +344,6 @@ body {
   position: relative;
 }
 
-
-
-.section {
-  border: 1px solid black;
-  margin-bottom: 5px;
-}
-
-
-
-
 .alert {
   font-weight: bolder;
   border-radius: 5px;

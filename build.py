@@ -233,12 +233,9 @@ def generateSlashRedirectFix(directory, filename):
 
 
 def buildFetchedPages():
-    drop_down_list = """
-        <option hidden selected> Change Site Section </option>
-        <option value="/o18"> Forge Modding Tutorials </option>
-        <option value="/commissions"> Mod Commissions </option>
-    """
-
+    with open("web/mod_docs_template.html", "r") as f:
+        template = "".join(f.readlines())
+    
     for directory, pages in site_data["fetched-pages"].items():
         if not os.path.isdir(directory):
                 os.mkdir(directory)

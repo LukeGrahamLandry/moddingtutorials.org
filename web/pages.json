@@ -112,6 +112,12 @@
                 "repo": "LukeGrahamLandryMC/travel_anchors",
                 "branch": "1.18.x",
                 "curseforge": "staff-of-traveling"
+            },
+            {
+                "name": "Tiered Shulkers",
+                "repo": "LukeGrahamLandryMC/tieredshulkers",
+                "branch": "1.18",
+                "curseforge": "tiered-shulkers"
             }
         ]
     },

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    $META
+    <meta name="keywords" content="Minecraft, Modding, Tutorial, Forge">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Modding Tutorials">
+
+    <link rel="shortcut icon" href="/img/logo.png">
+    <link rel="stylesheet" href="/styles/tutorial.css">
+    <link rel="stylesheet" href="/styles/md.css">
+    <link rel="stylesheet" href="/code.css">
+    <link rel="stylesheet" id="theme" href="/styles/dark.css">
+    
+    <style>
+        .err {
+            border: none;
+        }
+    </style>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EL4H9KVP7T"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EL4H9KVP7T');
+    </script>
+</head>
+<body>
+    <div id="side-nav">
+        <div style="padding: 10px;">
+            <a href="/">Tutorials</a>
+            <a href="https://discord.gg/uG4DewBcwV" target="_blank" style="float: right;">Contact</a>
+
+            <div style="text-align: center; padding-top: 10px;">
+                <label class="switch">
+                    <input type="checkbox" id="dark" onclick="updateDarkmode()" checked>
+                    <span class="slider round"></span>
+                </label>
+            </div>
+            <br>
+        </div>
+       
+        <div id="nav">
+            <div class="embedstream"></div>
+
+            <div style="text-align: center; margin-top: 10px; margin-bottom: 15px;">
+                <a class="alert green sm" href="/commissions" target="_blank">
+                    Commissions are open! 
+                </a>
+            </div>
+
+            <div class="section">
+                <a href="mercenaries" class="post">Mercenaries</a>
+                <a href="tribes" class="post">Tribes</a>
+                <a href="tiered-shulkers" class="post">Tiered Shulkers</a>
+                <a href="find-my-friends" class="post">Find My Friends</a>
+                <a href="inclusive-enchanting" class="post">Inclusive Enchanting</a>
+                <a href="mountables" class="post">Mountables</a>
+                <a href="travel-staff" class="post">Staff of Travelling</a>
+                <a href="simple-xp-config" class="post">Simple Xp Config</a>
+                <a href="harder-core" class="post">Harder Core</a>
+            </div>
+        </div>
+
+        <div style="text-align: center;">
+            <a href="https://discord.gg/uG4DewBcwV" class="img-link" target="_blank">
+                <div class="app">
+                    <img src="/img/discord.png" style="width: 50px">
+                </div>
+            </a>
+
+            <a href="https://github.com/LukeGrahamLandryMC" class="img-link" target="_blank">
+                <div class="app">
+                    <img src="/img/github.png" style="width: 50px">
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div id="container">
+        <div id="phone-header" class="hide-for-print centered">
+            <div onclick="toggle()" style="float: right; cursor: pointer;">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+            <br>
+        </div>
+
+        <div id="content" class="markdown-body centered">
+            $CONTENT
+        </div>
+
+        <div class="hide-for-print" style="display: inline-block; max-width: 800px; width: 100%">
+            <a class="alert blue full" href="https://discord.gg/uG4DewBcwV" target="_blank">
+                Got Questions? Join the Discord!
+            </a>
+            <br> <br>
+            <a class="alert black full" href="https://github.com/LukeGrahamLandryMC" target="_blank">
+                Mod Code Available on Github!
+            </a>
+            <br><br>
+        </div>
+    </div>
+
+    <script src="/js/dark.js"></script>
+
+    <script>
+        // mobile nav expand button
+        let showing = false;
+        function toggle(){
+            showing = !showing;
+
+            if (showing){
+                document.getElementById("side-nav").style.display = "block";
+            } else {
+                document.getElementById("side-nav").style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
