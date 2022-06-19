@@ -50,28 +50,32 @@
             color: rgb(97, 97, 97);
         }
 
-        .alert {
-            color: #0f5132 !important;
-            background-color: #d1e7dd !important;
-            padding: 0.5rem;
+        .button {
+            background-color: #007bff;
             border-radius: 5px;
-            text-align: center;
-            border: 4px solid rgb(118, 190, 118);
-            font-weight: bolder;
-            font-size: 2rem;
-            text-decoration: none !important;
-
+            margin: 5px;
+            padding: 5px;
+            color: white !important;
+            font-weight: bold;
             display: inline-block;
-            width: 100%;
-            max-width: 800px;
+            text-decoration: none;
+            cursor: pointer;
         }
 
-        .alert:hover {
-            border: 4px solid rgb(255, 81, 0);
-            background-color: white !important;
-            color: black !important;
-            text-decoration: underline;
+        .button:hover {
+            background-color: blue;
         }
+
+        .halfb {
+            width: 45%;
+            font-size: 1.65rem;
+        }
+
+        .thirdb {
+            width: 30%;
+            font-size: 1.25rem;
+        }
+
     </style>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -86,11 +90,9 @@
 </head>
 <body>
     <div class="centered">
-        <div class="markdown-body content">
-            <h1> Minecraft Modding Tutorials </h1>
-        </div>
+        <h1> Minecraft Forge Modding Tutorials </h1>
         <div>
-            <select id="dropdown" style="color: black; text-align: center; padding: 5px; width: 100%; font-weight: bold;">
+            <select id="dropdown" style="color: black; text-align: center; padding: 5px; width: 500px; font-weight: bold; font-size: 1.25rem;">
                 <option value="o19" id="o19" selected> Forge 1.19 </option>
                 <option value="o18" id="o18"> Forge 1.18.2 </option>
                 <option value="o17" id="o17"> Forge 1.17.1 </option>
@@ -98,242 +100,63 @@
             </select>
         </div>
     </div>
-    <br>
-    <div>
-    <div id="index">
-        <div>
-            <b> Start </b>
-            <a href="intro"> Intro to Modding </a>
-            <a href="java-basics"> Java Basics </a>
-            <a href="environment-setup"> Environment Setup </a>
-            <a href="updating"> Updating </a>
-            <span>
-                Github & CurseForge <br>
-            </span>
-        </div>
-        <div>
-            <b> Concepts </b>
-            <span>
-                Mappings <br>
-                Registries <br>
-                Client vs Server <br>
-                Events <br>
-                Using Gradle <br> <!-- how to depend on other mods -->
-            </span>
-        </div>
-        <div>
-            <b> Items </b>
-            <a href="basic-items"> Basic Items </a>
-            <a href="advanced-items"> Advanced Items </a>
-            <a href="tools-armor"> Tools and Armor </a>
-            <span> 
-                Bows <br> 
-                Tridents <br>
-                Stacks & NBT <br>
-                Backpack <br>
-                Compass <br>
-            </span> 
-        </div>
-        <div>
-            <b> Blocks </b>
-            <a href="basic-blocks"> Basic Blocks </a>
-            <a href="advanced-blocks"> Advanced Blocks </a>
-            <a href="tile-entities"> Tile Entities </a>
-            <span>
-                Crops <br>
-                Containers <br>
-                Custom Furnace <br>
-                Misc Block Types <br> <!-- Stairs, Slabs, Buttons, Doors, fences, torches, ladders -->
-            </span>
-        </div>
-        <div>
-            <b> Entities </b>
-            <a href="arrows"> Arrows </a>
-            <span>
-                Animals <br>
-                Hostile Entities <br>
-                AI Goals <br>
-                Geckolib Animations <br>
-                Mounts <br>
-            </span>
-        </div>
-        <div>
-            <b> Other Objects </b>
-            <a href="enchantments"> Enchantments </a>
-            <span>
-                Potion Effects <br>
-                Villager Profession <br>
-                Fluids <br>
-                Sounds <br>
-                Commands <br>
-                Recipe Type <br>
-                Particles <br>
-            </span>
-        </div>
-        <div>
-            <b> Integration </b>
-            <span>
-                Introduction <br>
-                Curios <br>
-                Patchouli (Guide Book) <br>
-                Tinkers Construct <br> <!-- materials, traits, tools, parts -->
-                Connected Textures <br>
-                Better Questing <br>
-                Botania <br> <!-- items accepting mana from pools, blocks accepting mana from spreaders, blocks generating mana, custom spreaders, crafting recipes in mana pool (custom catalysts) -->
-                Critterpedia <br>
-            </span>
-        </div>
-        <div>
-            <b> World Gen </b>
-            <a href="world-gen">Recommended Tutorials</a>
-            <span>
-                Features & Decorators <br>
-                Ore Gen <br>
-                Structures <br>
-                Trees <br>
-                Biomes <br>
-                Dimensions <br>
-            </span>
-        </div>
-        <div>
-            <b> Utilities </b>
-            <span>
-                Mixins <br>
-                Packets <br>
-                Config <br>
-                Key Binds <br>
-                Capabilities <br>
-                Forge Energy (RF) <br>
-                Access Transformers <br>
-                World Saved Data <br>
-                Global Loot Modifiers <br>
-                NBT Data <br> <!-- applications: WSD, entity, TE, capability-->
-            </span>
-        </div>
-        <div>
-            <b> Resources </b>
-            <a href="recipes"> Recipes </a>
-            <span>
-                3d Models <br>
-                Data Gen <br>
-                About Datapacks <br>
-                Achievements <br>
-                Loot Tables <br>
-                Block States <br> <!-- include custom properties code --> 
-                Item Models <br> <!-- layers, colors, properties --> 
-            </span>
-        </div>
-        <div>
-            <b> Rendering </b>
-            <span>
-                Tile Entity Renderers <br> <!-- also Item Stack TER -->
-                Item Stack TER <br>
-                Custom Model Properties <br>
-                Screens <br>
-                HUD <br>
-                Shaders <br>
-                Baked Models <br>
-                Obj Models <br>
-                Colors <br> <!-- https://mcforge.readthedocs.io/en/latest/models/color/#coloring-textures /give @p firstmod:color_block{color:12345} -->
-            </span>
-        </div>
-        <div>
-            <b> Example Mods </b>
-            <span>
-                Gravestones <br> <!-- holds your items when you die -->
-                Mob Capture Net <br> <!-- Right click a mob to grab it, left click to throw the net. Craft with an egg to get spawn egg -->
-                Bundled Items <br> <!-- craft 4 totems/potions/golden apples together. have 150 durability, each use takes 50 (so 4 uses). Unbreaking and mending work. Compat with popular totem mods, curios. -->
-                Ghosts <br> <!-- Fly through walls and chase living mobs but dont attack. Just scares things like creepers are scared of cats. Craft sythe that shoots projectiles that go through walls. Call it spooked. Compatibility to drop ectoplasm. Config for only taking magic damage -->
-                Coins <br> <!-- mobs drop coins, special looting enchant, show your balance on HUD, drop some on death, merchant that sells things for coins -->
-            </span>
-        </div>
-        <div>
-            <!-- take people off this list once i cover everything they do -->
-            <b> Further Reading </b>
-            <a href="resources">Other documentation</a>
-            <a href="solutions">Solutions from Discord</a>
-            <!--
-            <a href="https://wiki.mcjty.eu/modding/index.php?title=Main_Page" target="_blank" style="color: rgba(0, 162, 255, 0.6) !important;"> mcjty Tutorials </a>
-            <a href="https://github.com/TheGreyGhost/MinecraftByExample" target="_blank" style="color: rgba(0, 162, 255, 0.6) !important;"> MC By Example 1.16 </a> 
-            <a href="https://www.youtube.com/playlist?list=PLaevjqy3XufYmltqo0eQusnkKVN7MpTUe" target="_blank" style="color: rgba(0, 162, 255, 0.6) !important;">TurtyWurty 1.15</a>
-            -->
-        </div>
+
+    <br> <br>
+
+    <span style="font-size: 1.5rem;">Learn to make your first minecraft mod with detailed text tutorials!</span>
+    <br> <br>
+    <div style="display: block;">
+        <a href="intro" class="button halfb"> Introduction to Modding </a>
+        <a href="environment-setup" class="button halfb"> Environment Setup </a>
+        <br>
+        <a href="basic-items" class="button thirdb">Items</a>
+        <a href="basic-blocks" class="button thirdb">Blocks</a>
+        <a href="tile-entities" class="button thirdb">Tiles</a>
+        <br>
+        <a href="recipes" class="button thirdb">Recipes</a>
+        <a href="enchantments" class="button thirdb">Enchants</a>
+        <a href="arrows" class="button thirdb">Projectiles</a>
+        <br> <br>
+        <a href="topics">See More...</a>
     </div>
-    </div>
+
+
+    <br> <br>
     <div class="centered">
         <div id="content" class="markdown-body">
             <h2> About </h2>
             <p>
                 If you're new to modding, make sure to read <a href="intro">The Introduction to Modding</a> for an overview of everything you need to know. 
-                For a more detailed description of the content in each tutorial, read the <a href="topics">Topics Page</a>. Good luck :)
+                For a more detailed description of the content in each tutorial, read the <a href="topics">Topics Page</a>. Good luck! 
                 <br> <br>
                 I make these because I was frustrated by the lack of documentation and useable tutorials for Forge. 
                 All the tutorials I could find were long videos of someone talking extremely slowly. 
                 I hope to offer an alternative: text tutorials for those who don't need a visual to follow along. 
                 Hopefully my tutorials will be less painful to refer to if you happen to forget something.
                 <br> <br>
-                My goal is to continue support for all versions above 1.16. It's entirely possible that there will be small mistakes in porting 
+                My goal is to continue support for all versions, 1.16 and above. Use the yellow drop down menu to switch between versions. It's entirely possible that there will be small mistakes in porting 
                 the tutorial text between versions. If you notice any, please let me know! 
                 The source code for all my tutorials can be found on <a href="https://github.com/LukeGrahamLandryMC/modding-tutorials">GitHub</a>. 
-                
-            </p>
-    
-            <h2> Contact </h2>
-            <p>
-                If you have any questions or feedback about my tutorials, please <a href="https://discord.com/invite/uG4DewBcwV">join my discord server</a>. 
-                We've got a growing community that can help you out with any problems you may have. 
-                This is also where I notify people when new tutorials are released. 
-            </p>
-    
-            <h2> Commissions </h2>
-            <p>
-                I'm taking mod commissions for Forge or Fabric versions 1.19.x, 1.18.x, 1.17.x or 1.16.x. 
-                DM me on discord (LukeGrahamLandry#6888) or read <a href="commissions"> the commissions page </a> for more info. 
-                <br> <br>
-                <a href="commissions" class="alert">
-                    Commissions are open! 
-                </a>
-            </p>
-
-            <h2> Thanks </h2>
-            <p>
-                This site is made possible by my wonderful <a href="credits">patrons, clients, and contributors</a>
             </p>
         </div>
     </div>
     
-    <br> 
-    <br>
-    <div style="width: fit-content; display: inline-block;">
-        <a href="https://github.com/LukeGrahamLandryMC/modding-tutorials" class="img-link" target="_blank">
-            <div class="app">
-                <img src="/img/github.png" style="width: 50px">
-            </div>
+    <br> <br> 
+    <div class="hide-for-print" style="display: inline-block; max-width: 800px; width: 100%">
+        <a class="alert blue full" href="https://discord.gg/uG4DewBcwV" target="_blank">
+            Got Questions? Join the Discord!
         </a>
-
-        <a href="https://discord.gg/uG4DewBcwV" class="img-link" target="_blank">
-            <div class="app">
-                <img src="/img/discord.png" style="width: 50px">
-            </div>
+        <br> <br>
+        <a class="alert black full" href="https://github.com/LukeGrahamLandryMC/modding-tutorials" target="_blank">
+            View Full Tutorial Code on Github!
         </a>
-
-        <!--
-        <a href="https://www.youtube.com/channel/UC8gYhA5SkhI1tajZ5JF2pbQ/playlists" class="img-link" target="_blank">
-            <div class="app">
-                <img src="/img/youtube.png" style="width: 50px">
-            </div>
-        </a>
-        -->
-     </div>
-
-     <div style="text-align: center; position: absolute; top: 5px; right: 5px">
-        <label class="switch">
-            <input type="checkbox" id="dark" onclick="updateDarkmode()" checked>
-            <span class="slider round"></span>
-        </label>
     </div>
 
-    <!-- TODO: add back / -->
+    <div style="text-align: center;">
+        <br>
+        This site is made possible by my <a href="credits">clients & contributors</a>
+    </div>
+
     <script src="/js/dark.js"></script>
     <script>
         // version select

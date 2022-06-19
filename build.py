@@ -185,8 +185,6 @@ def buildSite():
     with open("code.css", "w") as f:
         f.write(formatter.get_style_defs())
 
-    shutil.copy("o16/index.html", "index.html")
-
     with open("web/my-mods.html", "r") as f:
         my_mods_html = "".join(f.readlines())
 

@@ -65,7 +65,7 @@ In 1.17, the system for checking if a block can be broken by a tier of tool move
 
 ### Init
 
-Now you have to register your tools in `ItemInit` just like any other item. Each type of tool has its own class (`SwordItem`, `PickaxeItem`, etc). The item constructor takes a reference to the `IItemTier` you defined earlier, a damage value to add to the base damage from the tier, an attack speed value which is added to a default of 4 to get the final speed of the item's swings (so should probably be negative, -2 is faster than -1) and finally an `Item.Properties` just like your other items. 
+Now you have to register your tools in `ItemInit` just like any other item. Each type of tool has its own class (`SwordItem`, `PickaxeItem`, etc). The item constructor takes a reference to the `Tier` you defined earlier, a damage value to add to the base damage from the tier, an attack speed value which is added to a default of 4 to get the final speed of the item's swings (so should probably be negative, -2 is faster than -1) and finally an `Item.Properties` just like your other items. 
 
     public static final RegistryObject<Item> PINK_SWORD = ITEMS.register("pink_sword",
                 () -> new SwordItem(ModItemTier.PINK, 3, -2.4F, new Item.Properties().tab(ModCreativeTab.instance)));
