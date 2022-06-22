@@ -60,10 +60,22 @@
     "fetched-pages" : {
         "mods": [
             {
+                "name": "Torcherino",
+                "repo": "LukeGrahamLandryMC/Torcherino",
+                "branch": "1.19",
+                "curseforge": "torcherino"
+            },
+            {
                 "name": "Mercenaries",
                 "repo": "LukeGrahamLandryMC/mercenaries-mod",
                 "branch": "main", 
                 "curseforge": "mercenaries"
+            },
+            {
+                "name": "Tiered Shulkers",
+                "repo": "LukeGrahamLandryMC/tieredshulkers",
+                "branch": "1.18",
+                "curseforge": "tiered-shulkers"
             },
             {
                 "name": "Mountables",
@@ -96,6 +108,12 @@
                 "curseforge": "spawner-xp-config"
             },
             {
+                "name": "Travel Staff",
+                "repo": "LukeGrahamLandryMC/travel_anchors",
+                "branch": "1.18.x",
+                "curseforge": "staff-of-traveling"
+            },
+            {
                 "name": "Harder Core",
                 "repo": "LukeGrahamLandryMC/harder-core-mod",
                 "branch": "main",
@@ -106,18 +124,6 @@
                 "repo": "LukeGrahamLandryMC/cultivated-snacks-mod",
                 "branch": "forge-1.16.5",
                 "curseforge": "cultivated-snacks"
-            },
-            {
-                "name": "Travel Staff",
-                "repo": "LukeGrahamLandryMC/travel_anchors",
-                "branch": "1.18.x",
-                "curseforge": "staff-of-traveling"
-            },
-            {
-                "name": "Tiered Shulkers",
-                "repo": "LukeGrahamLandryMC/tieredshulkers",
-                "branch": "1.18",
-                "curseforge": "tiered-shulkers"
             }
         ]
     },

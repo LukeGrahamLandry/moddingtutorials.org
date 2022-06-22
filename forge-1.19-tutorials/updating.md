@@ -40,7 +40,7 @@ and the required version for the `forge` dependency to
 
 There are a few changes to make in your code. For example,
 
-- the `TextComponent` class is gone. instead of using `new TextComponent("string")`, use `Component.literal("String")`
+- the `Component` class hierarchy has is changed. `new TextComponent("string")` -> `Component.literal("string")`. `new TranslatableComponent("thing.name")` -> `Component.translatable("thing.name")`
 - registry events have changed. If you're automaticlly registering block items, as i do, revisit the relivent section of the [blocks tutorial](basic-blocks)
 - Some methods that previously took a `Random` instance, now want a `RandomSource` (it just became an interface). `Block#randomTick(BlockState, ServerLevel, BlockPos, Random)` becomes `Block#randomTick(BlockState, ServerLevel, BlockPos, RandomSource)`
 - if you're using an apple silicon computer, you need to add a new mixin, read [apple silicon tutorial](m1) or you will get an `UnsatisfiedLinkError`

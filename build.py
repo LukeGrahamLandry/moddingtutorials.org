@@ -6,6 +6,7 @@ from pygments.formatters import HtmlFormatter
 import re
 from xml.sax import saxutils as su
 from datetime import datetime
+import frontmatter
 
 with open("web/pages.json", "r") as f:
     site_data = json.loads("".join(f.readlines()))
@@ -141,7 +142,7 @@ def combile_md(source_folder, filename, target_folder, pages_list, can=None):
         with open(target_folder + "/" + filename_to_write, "w") as f:
             f.write(full_content)
 
-def buildSite():
+def buildMainTutorialSite():
     default_section_url = "o19"
 
     for section_data in site_data["sections"]:
@@ -232,18 +233,13 @@ def generateSlashRedirectFix(directory, filename):
             f.write('cloudflare pages can not deal with trailing slashes properly. redirecting to <a href="/' + directory + "/" + filename + '">' + filename + '</a> <script> window.location.href = "/' + directory + "/" + filename + '";</script>')
 
 
-def buildFetchedPages():
+def buildFetchedPages(extra_nav_html):
     with open("web/mod_docs_template.html", "r") as f:
         template = "".join(f.readlines())
     
     for directory, pages in site_data["fetched-pages"].items():
         if not os.path.isdir(directory):
                 os.mkdir(directory)
-
-        page_index = ""
-        for page in pages:
-            name = page["name"].lower().replace(" ", "-")
-            page_index += '<a href="{}" class="post">{}</a>'.format(name, page["name"]) 
 
         for page in pages:
             url = None
@@ -274,17 +270,130 @@ def buildFetchedPages():
             if "curseforge" in page:
                 html_content += '<br> <a href="https://www.curseforge.com/minecraft/mc-mods/' + page["curseforge"] + '" class="btn btn-primary" style="width: 100%;"> Download Mod On Curse Forge </a>'
 
-            full_content = template.replace("$CONTENT", html_content).replace("$META", meta).replace("$INDEX", page_index)
+            html_content += """
+            <a class="alert black full" href="https://github.com/$PATH" target="_blank">
+                Mod Code Available on Github!
+            </a>
+            <br><br>
+            """.replace("$PATH", page["repo"])
+
+            license_html = """
+            This content is available under the <a href="$PATH" target="_blank">$NAME mod's license</a>. 
+            """.replace("$PATH", "https://github.com/" + page["repo"]).replace("$NAME", page["name"])
+
+            full_content = template.replace("$CONTENT", html_content).replace("$META", meta).replace("$LICENSE", license_html).replace("$NAV", extra_nav_html)
 
             with open(directory + "/" + filename + ".html", "w") as f:
                 f.write(full_content)
 
             generateSlashRedirectFix(directory, filename)
 
-buildSite()
-buildFetchedPages()
+def generateModDocsIndexHtml():
+    # my mods
+    index_html = ""
+    for page in site_data["fetched-pages"]["mods"]:
+        name = page["name"].lower().replace(" ", "-")
+        index_html += '<a href="{}" class="post">{}</a>'.format(name, page["name"])
 
-# export PATH=$PATH:/opt/buildhome/.local/bin && pip3 install requests && pip3 install markdown && pip3 install pygments && pip3 install mdx_linkify && python3 build.py
+    # md files
+    for root, dirs, files in os.walk("mod-documentation", topdown=True):
+        for filename in files:
+            if filename == "index.md" or ".md" not in filename:
+                continue
+            
+            name = filename.split(".")[0]
+            displayName = ""
+            for part in name.split("-"):
+                displayName += part[0].upper() + part[1:] + " "
+
+            index_html += '<a href="{}" class="post">{}</a>'.format(name, displayName)
+
+        break;
+
+    return index_html
+
+
+# valid front matter keys: author, version, source, download, contact
+def buildDocsPages(extra_nav_html):
+    with open("web/mod_docs_template.html", "r") as f:
+        template = "".join(f.readlines())
+        
+    for root, dirs, files in os.walk("mod-documentation", topdown=True):
+        for filename in files:
+            if ".md" not in filename:
+                continue
+            
+            name = filename.split(".")[0]
+            displayName = ""
+            for part in name.split("-"):
+                displayName += part[0].upper() + part[1:] + " "
+            
+            meta = "<title>" + displayName + "</title>"
+            meta += '<link rel="canonical" href="https://moddingtutorials.org/{}/{}"/>'.format("mods", name)
+
+            post = frontmatter.load("mod-documentation/" + filename)
+
+            html_content = ""
+            if filename != "index.md":
+
+                html_content += """
+                    <div style="text-align: center; margin-top: 10px;">
+                """
+                
+                if "author" in post.keys():
+                    html_content += """
+                        
+                        <h1 style="margin-bottom: 0px"> $NAME by $AUTHOR </h1>
+                    """.replace("$NAME", displayName).replace("$AUTHOR", post["author"])
+
+                if "version" in post.keys():
+                    html_content += """
+                        <span style="font-size: 0.75rem"> version $VERSION </span> <br>
+                    """.replace("$VERSION", post["version"])
+
+                if "download" in post.keys():
+                    html_content += """
+                        <a class="alert orange sm" style="display: inline-block;" href="$LINK" target="_blank">
+                            Download Mod
+                        </a>
+                    """.replace("$LINK", post["download"])
+                
+                if "source" in post.keys():
+                    html_content += """
+                        <a class="alert black sm" style="display: inline-block;" href="$LINK" target="_blank">
+                            Source Code
+                        </a>
+                    """.replace("$LINK", post["source"])
+
+                if "contact" in post.keys():
+                    html_content += """
+                        <a class="alert blue sm" style="display: inline-block;" href="$LINK" target="_blank">
+                            Contact Author
+                        </a>
+                    """.replace("$LINK", post["contact"])
+
+                html_content += "<br><br></div>"
+            
+            html_content += markdown.markdown(post.content, extensions=['fenced_code'])
+
+            license_html = """
+            This content is available under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0 License</a>.
+            """
+
+            full_content = template.replace("$CONTENT", html_content).replace("$META", meta).replace("$LICENSE", license_html).replace("$NAV", extra_nav_html)
+
+            with open("mods/" + name + ".html", "w") as f:
+                f.write(full_content)
+
+            generateSlashRedirectFix("mods", name)
+
+
+buildMainTutorialSite()
+mod_docs_index = generateModDocsIndexHtml()
+buildFetchedPages(mod_docs_index)
+buildDocsPages(mod_docs_index)
+
+# export PATH=$PATH:/opt/buildhome/.local/bin && pip3 install requests && pip3 install markdown && pip3 install pygments && pip3 install mdx_linkify && pip3 install python-frontmatter && python3 build.py
 # PYTHON_VERSION 3.7
 
 # https://cf.way2muchnoise.eu/
