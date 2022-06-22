@@ -265,17 +265,22 @@ def buildFetchedPages(extra_nav_html):
             meta += '<link rel="canonical" href="https://moddingtutorials.org/{}/{}"/>'.format(directory, filename)
             meta += "<!-- the text on this page was fetched from " + url + " I'm fairly confident that I'm only getting my own content but if you feel I stole something, please DM me on discord: LukeGrahamLandry#6888 -->"
             
-            html_content = markdown.markdown(r.text, extensions=['fenced_code'])
+            html_content = """
+                <div style="text-align: center; margin-top: 10px;">
+                <a class="alert orange sm" style="display: inline-block;" href="https://www.curseforge.com/minecraft/mc-mods/$CF" target="_blank">
+                    Download Mod
+                </a>
+                <a class="alert black sm" style="display: inline-block;" href="https://github.com/$PATH" target="_blank">
+                    Source Code
+                </a>
+                <a class="alert blue sm" style="display: inline-block;" href="$LINK" target="_blank">
+                    Contact Author
+                </a>
+                </div> 
+                <br> <br>
+            """.replace("$PATH", page["repo"]).replace("$CF", page["curseforge"])
 
-            if "curseforge" in page:
-                html_content += '<br> <a href="https://www.curseforge.com/minecraft/mc-mods/' + page["curseforge"] + '" class="btn btn-primary" style="width: 100%;"> Download Mod On Curse Forge </a>'
-
-            html_content += """
-            <a class="alert black full" href="https://github.com/$PATH" target="_blank">
-                Mod Code Available on Github!
-            </a>
-            <br><br>
-            """.replace("$PATH", page["repo"])
+            html_content += markdown.markdown(r.text, extensions=['fenced_code'])
 
             license_html = """
             This content is available under the <a href="$PATH" target="_blank">$NAME mod's license</a>. 
@@ -317,7 +322,7 @@ def generateModDocsIndexHtml():
 def buildDocsPages(extra_nav_html):
     with open("web/mod_docs_template.html", "r") as f:
         template = "".join(f.readlines())
-        
+
     for root, dirs, files in os.walk("mod-documentation", topdown=True):
         for filename in files:
             if ".md" not in filename:
@@ -348,7 +353,7 @@ def buildDocsPages(extra_nav_html):
 
                 if "version" in post.keys():
                     html_content += """
-                        <span style="font-size: 0.75rem"> version $VERSION </span> <br>
+                        <span style="font-size: 1rem"> version $VERSION </span> <br>
                     """.replace("$VERSION", post["version"])
 
                 if "download" in post.keys():
