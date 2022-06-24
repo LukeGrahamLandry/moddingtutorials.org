@@ -273,11 +273,10 @@ def buildFetchedPages(extra_nav_html):
                 <a class="alert black sm" style="display: inline-block;" href="https://github.com/$PATH" target="_blank">
                     Source Code
                 </a>
-                <a class="alert blue sm" style="display: inline-block;" href="$LINK" target="_blank">
+                <a class="alert blue sm" style="display: inline-block;" href="https://discord.gg/uG4DewBcwV" target="_blank">
                     Contact Author
                 </a>
-                </div> 
-                <br> <br>
+                </div>
             """.replace("$PATH", page["repo"]).replace("$CF", page["curseforge"])
 
             html_content += markdown.markdown(r.text, extensions=['fenced_code'])
@@ -299,6 +298,8 @@ def generateModDocsIndexHtml():
     for page in site_data["fetched-pages"]["mods"]:
         name = page["name"].lower().replace(" ", "-")
         index_html += '<a href="{}" class="post">{}</a>'.format(name, page["name"])
+    
+    index_html += "<hr/>"
 
     # md files
     for root, dirs, files in os.walk("mod-documentation", topdown=True):
