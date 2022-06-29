@@ -273,3 +273,17 @@ public static String get(String url) {
 }
 ```
 
+## how to change the enchantment glint colour 
+
+its not easy. here's an overview of i did for 1.18.2, 
+
+I was hoping this would be defined as a hex value in the code but it's actually a texture: minecraft:textures/misc/enchanted_item_glint.png.
+This texture is at ItemRenderer.ENCHANT_GLINT_LOCATION but that variable is not actually referenced
+at render time so changing it back and forth wouldnt work. Instead, the texture is used as a
+RenderStateShard.TextureStateShard to create a RenderType. (the specific one i care about changing
+in this case is ARMOR_ENTITY_GLINT). I use a mixin to HumanoidArmorLayer that runs before and after
+renderArmorPiece is called. This allows me to access the actual item stack and then react to it in
+another mixin to a method that wouldn't have that context available. Then I mixin to ItemRenderer#getArmorFoilBuffer
+to change the render type that is used to create the vertex consumer to be rendered.
+
+here's the code, dont forget the mixins and access transformers, https://github.com/LukeGrahamLandryMC/herobrine-thing/blob/main/src/main/java/ca/lukegrahamlandry/herobrinething/client/WhiteArmorGlintHelper.java 

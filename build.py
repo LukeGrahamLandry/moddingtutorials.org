@@ -383,7 +383,7 @@ def buildDocsPages(extra_nav_html):
             html_content += markdown.markdown(post.content, extensions=['fenced_code'])
 
             license_html = """
-            This content is available under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0 License</a>.
+            This content is available under the <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0 License</a>.
             """
 
             full_content = template.replace("$CONTENT", html_content).replace("$META", meta).replace("$LICENSE", license_html).replace("$NAV", extra_nav_html)
