@@ -10,8 +10,3 @@ The tutorial mod code is on the other branches.
 - [Forge 1.17.1](https://github.com/LukeGrahamLandryMC/modding-tutorials/tree/forge-1.17.1)
 - [Forge 1.16.5](https://github.com/LukeGrahamLandryMC/modding-tutorials/tree/forge-1.16.5)
 - [Forge 1.15.2](https://github.com/LukeGrahamLandryMC/modding-tutorials/tree/forge-1.15.2)
-
-## License 
-
-The tutorial text (found in md files) is available under the [Creative Commons Attribution-NonCommercial-ShareAlike License](https://creativecommons.org/licenses/by-nc-sa/4.0/). 
-The tutorial mod code (branches forge-1.15.2, forge-1.16.5, forge-1.17.1, forge-1.18.x, and forge-1.19.x) are MIT.  

@@ -58,7 +58,7 @@ At the top of your class add this line to allow it to subscribe to events.
     }
 
 
-Then make a static function with the SubscribeEvent annotation. Its argument will be the RegisterEvent so it fires when things are supposed to be registered. Each registry is processed seperatly so we make sure that this event fired for items. 
+Then make a static function with the SubscribeEvent annotation. Its argument will be the RegisterEvent so it fires when things are supposed to be registered. Each registry is processed severalty so we make sure that this event fired for items. 
 
 In that function get the Item registry and loop through all the blocks. For each block, we make an Item.Properties that puts it in our creative tab. Then we make a BlockItem with those properties to place our block. We register the BlockItem with the same registry name as the block.
 

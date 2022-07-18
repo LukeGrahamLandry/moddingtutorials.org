@@ -136,7 +136,7 @@ You also need to tell the block about the properties it is allowed to use by add
 You'll have to override `getStateForPlacement` to have it face the player when placed. This snippet is taken from the vanilla furnace. If you want to to face forwards from the player instead of towards them, take out the `.getOpposite()`.
 
     @Override
-    public BlockState getStateForPlacement(BlockItemUseContext context) {
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
     	return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
     }
 

@@ -1,8 +1,8 @@
 # Additional Resources
 
-There are some useful concepts that i havent had time to write tutorials for yet but are reasonably well documented online already. This page has a collection of resources that will prove helpful. These may be less detailed than my tutorials and thus require a strong understanding of Java. 
+There are some useful concepts that i haven't had time to write tutorials for yet but are reasonably well documented online already. This page has a collection of resources that will prove helpful. These may be less detailed than my tutorials and thus require a strong understanding of Java. 
 
-The wikis havent updated to 1.19 at the time of writing but very little has changed since 1.18 so most of the information below remains true. 
+The wikis haven't updated to 1.19 at the time of writing but very little has changed since 1.18 so most of the information below remains true. 
 
 ## Packets
 
@@ -48,7 +48,7 @@ If you want many variations of a block or item texture that just changes the col
 
 ## Capabilities
 
-Capabilities allow attaching data to lots of different entities, tile entities or item stacks while allowing easy compatability between them. They're basiclly an over complicated version of Java's Interfaces designed to make mod compatability easier. Forge gives you a few for storing items, fluids and RF but you can make your own as well. 
+Capabilities allow attaching data to lots of different entities, tile entities or item stacks while allowing easy compatibility between them. They're basically an over complicated version of Java's Interfaces designed to make mod compatibility easier. Forge gives you a few for storing items, fluids and RF but you can make your own as well. 
 
 - https://forge.gemwire.uk/wiki/Capabilities
 - https://mcforge.readthedocs.io/en/1.18.x/datastorage/capabilities/
@@ -90,13 +90,13 @@ Access transformers allow you to make vanilla code `public` and removing the `fi
 
 ## Mixins
 
-Mixins allow you to directly modify vanilla's bytecode. Generally try to avoid using this and do things through the proper api instead but sometimes there's no other way. Since mixin is a seperate library, it doesnt change much with minecraft versions so old tutorials (or even ones for fabric) are still useful. 
+Mixins allow you to directly modify vanilla's bytecode. Generally try to avoid using this and do things through the proper api instead but sometimes there's no other way. Since mixin is a separate library, it doesn't change much with minecraft versions so old tutorials (or even ones for fabric) are still useful. 
 
 - http://darkhax.net/2020/07/mixins
 - https://github.com/SpongePowered/Mixin/wiki/Mixins-on-Minecraft-Forge
 
 ## Dependencies
 
-You can add integration with other mods and have them as a required or optional dependency. If a mod doesnt provide an api for what you are trying to do, note that it is possible to mixin to another mod's code (tho thats dangerous as modded code will likey change frequently). 
+You can add integration with other mods and have them as a required or optional dependency. If a mod doesn't provide an api for what you are trying to do, note that it is possible to mixin to another mod's code (tho thats dangerous as modded code will likey change frequently). 
 
 - https://forge.gemwire.uk/wiki/Dependencies

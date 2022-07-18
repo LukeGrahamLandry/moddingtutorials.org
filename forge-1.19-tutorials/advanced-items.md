@@ -164,7 +164,7 @@ If you want it to use durability you can get the item stack being used, increase
     if (stack.getDamageValue() >= stack.getMaxDamage()) stack.setCount(0);
     
 
-Then you can go back to ItemInit. Dont forget to import your special item class. If you did the durability thing you have to set the durability to something in the `Item.Properties`. Giving it durability automatically makes the max stack size one (normally set by the `stacksTo` method on the properties builder).
+Then you can go back to ItemInit. Don't forget to import your special item class. If you did the durability thing you have to set the durability to something in the `Item.Properties`. Giving it durability automatically makes the max stack size one (normally set by the `stacksTo` method on the properties builder).
 
     new Item.Properties().tab(ModCreativeTab.instance).durability(50)
     

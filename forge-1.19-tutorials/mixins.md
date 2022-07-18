@@ -28,14 +28,14 @@ Create a new package called `mixins` and create a class called
 ### Mixin Method
 
 
-Note that dispite the fact that the target method has a return type, your mixin method returns void. The extra perameter (`CallbackInfo` or `CallbackInfoReturnable`) allows us to effect the return value of the target method. 
+Note that dispite the fact that the target method has a return type, your mixin method returns void. The extra parameter (`CallbackInfo` or `CallbackInfoReturnable`) allows us to effect the return value of the target method. 
 
 ### Method Descriptors 
 
 
 #### Remapping
 
-The method name in your descriptor is automaticlly remapped according to your project's mappings settings. This allows you to use the readable method names instead of the SRG names (ie. `addMix` instead of `func_193357_a`). This means there's an extra step if you are trying to mixin to a method that is not obfuscated and subsequently renamed by the mappings (anything outside of a vanilla class, for example something added by forge or another mod): uou must set `remap` to false in your inject annotation. 
+The method name in your descriptor is automatically remapped according to your project's mappings settings. This allows you to use the readable method names instead of the SRG names (ie. `addMix` instead of `func_193357_a`). This means there's an extra step if you are trying to mixin to a method that is not obfuscated and subsequently renamed by the mappings (anything outside of a vanilla class, for example something added by forge or another mod): uou must set `remap` to false in your inject annotation. 
 
 
     @Inject(method = "...", at = @At(...), remap = true)
@@ -49,7 +49,7 @@ The method name in your descriptor is automaticlly remapped according to your pr
 
 If you want to change the return value of the target method (or just cancel the rest of the method call), you must set `cancellable` to true in your mixin method annotation. 
 
-The last perameter of your mixin method will be of the type `CallbackInfoReturnable<T>` with `T` being the type returned by the target method. You can call `setReturnValue(value);` to change the return value of the target method. Note that this does not immediatly exit your method the way a `return;` statement would.
+The last parameter of your mixin method will be of the type `CallbackInfoReturnable<T>` with `T` being the type returned by the target method. You can call `setReturnValue(value);` to change the return value of the target method. Note that this does not immediately exit your method the way a `return;` statement would.
 
 
     @Inject(method = "...", at = @At(...), cancellable = true)

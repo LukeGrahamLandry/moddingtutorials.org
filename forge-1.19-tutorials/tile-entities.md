@@ -218,6 +218,6 @@ Coming soon, join [the discord server](https://discord.gg/uG4DewBcwV) to be noti
 
 ## Practice
 
-- Make the mob slayer we made in this tutorial directional. That is, instead of the area of effect being centered on the block, have the block rotateable from like the last tutorial and only attack mobs in the forwards direction.
+- Make the mob slayer we made in this tutorial directional. That is, instead of the area of effect being centered on the block, have the block rotatable from like the last tutorial and only attack mobs in the forwards direction.
 - Make a block entity that teleports nearby mobs on top of it
     - hint: `entity.setPos(x, y, z);`
