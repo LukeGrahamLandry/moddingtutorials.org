@@ -1,5 +1,5 @@
 # Events: coming soon...   
-Join [the discord server](https://discord.gg/uG4DewBcwV) to be notified when it is released. 
+Join [the discord server](/discord) to be notified when it is released. 
 
 Forge events are an extremely versatile system that you will likely use quite often. If your mod only changes behavior instead of adding new content, your whole mod can be events. We've used events in several other tutorials but this tutorial will give a more detailed overview of how the system works. 
 

@@ -189,7 +189,7 @@ You should now have a fully functional block with custom functionality!
 ## Related Tutorials
 
 - [Tile Entities](tile-entities): Allows your block to save data and react to every tick. I made mine kill nearby mobs!
-- You can also make your block a point of interest for a custom villager profession. Tutorial for this coming soon! Join [the discord server](https://discord.gg/uG4DewBcwV) to be notified when they are released. 
+- You can also make your block a point of interest for a custom villager profession. Tutorial for this coming soon! Join [the discord server](/discord) to be notified when they are released. 
 
 ## Practice
 

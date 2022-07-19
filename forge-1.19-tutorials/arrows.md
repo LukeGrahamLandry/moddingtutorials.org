@@ -166,7 +166,7 @@ We will need to make the texture image for our arrow. I will use an [online pixe
 
 Once you're happy with your texture image, you can make a folder called `entity` in `src/main/resources/mod_id/assets/textures` and put your image file in it. Make sure to name the file the same as used in the texture resource location (for me that's `explosive_arrow.png`). 
 
-You can also have multiple textures and switch between them based on properties of the projectile object passed to `getTextureLocation`. For example, you could check the value of `arrow.tickCount` and cycle between different textures every second. Note that you can only access values present on the client side so you may need to use a `DataParameter` to sync data from the server. This will be covered in more detail in the entities tutorial. Join [the discord server](https://discord.gg/uG4DewBcwV) to be notified when it is released. 
+You can also have multiple textures and switch between them based on properties of the projectile object passed to `getTextureLocation`. For example, you could check the value of `arrow.tickCount` and cycle between different textures every second. Note that you can only access values present on the client side so you may need to use a `DataParameter` to sync data from the server. This will be covered in more detail in the entities tutorial. Join [the discord server](/discord) to be notified when it is released. 
 
 ### Bind Renderer
 
@@ -186,7 +186,7 @@ public class ClientSetup {
 
 ## Using Your Arrow
 
-You can add your arrow to the world whenever you want. The next section of this tutorial will cover creating a custom arrow item so vanilla bows can shoot your projectile. You could also create a custom bow (by extending `BowItem`) that specificity shoots the projectile we just made. A tutorial for this is coming soon. Join [the discord server](https://discord.gg/uG4DewBcwV) to be notified when it is released. 
+You can add your arrow to the world whenever you want. The next section of this tutorial will cover creating a custom arrow item so vanilla bows can shoot your projectile. You could also create a custom bow (by extending `BowItem`) that specificity shoots the projectile we just made. A tutorial for this is coming soon. Join [the discord server](/discord) to be notified when it is released. 
 
 Example of summoning your arrow entity that could be used anywhere you have access to a player (ie, on item right click):
 

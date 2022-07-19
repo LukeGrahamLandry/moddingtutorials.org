@@ -2,7 +2,7 @@
 author: LukeGrahamLandry
 version: 1.1.15
 source: https://github.com/LukeGrahamLandryMC/modding-tutorials
-contact: https://discord.gg/uG4DewBcwV
+contact: /discord
 ---
 
 This is the mod created during the modding tutorials on this site. It has the same features for 1.16.5, 1.17.1, 1.18.2, and 1.19 so you can see the differences in code between these versions. 

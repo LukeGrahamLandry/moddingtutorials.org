@@ -1,5 +1,5 @@
 coming soon...   
-Join [the discord server](https://discord.gg/uG4DewBcwV) to be notified when it is released. 
+Join [the discord server](/discord) to be notified when it is released. 
 
 ## Switching Mappings
 

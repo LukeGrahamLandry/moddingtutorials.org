@@ -140,7 +140,7 @@ You should end up with a file structure like this:
 
 ### Data Generators 
 
-If your mod has a lot of blocks that just use their own basic texture, it can be tedious (and error prone) to repeatedly copy the model/blockstate/loot_table json file, just changing a single line each time. Luckily, Minecraft provides a way to generate these files from code. This will be covered in detail in a future tutorial. Join [the discord server](https://discord.gg/uG4DewBcwV) to be notified when it is released. 
+If your mod has a lot of blocks that just use their own basic texture, it can be tedious (and error prone) to repeatedly copy the model/blockstate/loot_table json file, just changing a single line each time. Luckily, Minecraft provides a way to generate these files from code. This will be covered in detail in a future tutorial. Join [the discord server](/discord) to be notified when it is released. 
 
 ## Run the game
 

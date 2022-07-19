@@ -273,7 +273,7 @@ def buildFetchedPages(extra_nav_html):
                 <a class="alert black sm" style="display: inline-block;" href="https://github.com/$PATH" target="_blank">
                     Source Code
                 </a>
-                <a class="alert blue sm" style="display: inline-block;" href="https://discord.gg/uG4DewBcwV" target="_blank">
+                <a class="alert blue sm" style="display: inline-block;" href="/discord" target="_blank">
                     Contact Author
                 </a>
                 </div>

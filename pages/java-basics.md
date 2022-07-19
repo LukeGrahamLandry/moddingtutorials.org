@@ -402,7 +402,7 @@ System.out.println(groceries.substring(15)); // ana,lime
 
 # to be continued...
 
-Join [the discord server](https://discord.gg/uG4DewBcwV) to be notified when more of this tutorial is released.
+Join [the discord server](/discord) to be notified when more of this tutorial is released.
 
 - Objects
 - Methods

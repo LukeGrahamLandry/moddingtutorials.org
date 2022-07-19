@@ -181,7 +181,7 @@ Note that the nbt keys `id`, `x`, `y`, `z`, `ForgeData`, `ForgeCaps` and the reg
 
 ### Syncing Data
 
-With my block entity, I've been careful to do everything on the server side. If you're doing something more complex, you may have to sync data between the client and the server. There are a few ways to do this. I will cover examples where you need to use these in a later tutorial on doing custom rendering with a block entity. Join [the discord server](https://discord.gg/uG4DewBcwV) to be notified when it is released. 
+With my block entity, I've been careful to do everything on the server side. If you're doing something more complex, you may have to sync data between the client and the server. There are a few ways to do this. I will cover examples where you need to use these in a later tutorial on doing custom rendering with a block entity. Join [the discord server](/discord) to be notified when it is released. 
 
 **On chunk load: **`getUpdateTag()` returns the data that the server wants to send as a `CompoundTag`. `handleUpdateTag(CompoundTag tag)` reads it back on the client side.
 
@@ -202,13 +202,13 @@ With my block entity, I've been careful to do everything on the server side. If 
 
 To trigger that you can call `world.notifyBlockUpdate(BlockPos pos, BlockState oldState, BlockState newState, int flags)`
 
-**Custom packet:** a more versatile solution would be to make your own packets that you can send whenever you want (not just for block updates). I will cover packets in a future tutorial. Join [the discord server](https://discord.gg/uG4DewBcwV) to be notified when it is released. 
+**Custom packet:** a more versatile solution would be to make your own packets that you can send whenever you want (not just for block updates). I will cover packets in a future tutorial. Join [the discord server](/discord) to be notified when it is released. 
 
 ## Assets
 
 The block to which you bound your block entity is a block like any other. Don't forget to give it a block model, item model, block state definition, loot table and lang entry.
 
-You can also use code to do more complex rendering logic for your block entity. This will be covered in a future tutorial. Join [the discord server](https://discord.gg/uG4DewBcwV) to be notified when it is released. 
+You can also use code to do more complex rendering logic for your block entity. This will be covered in a future tutorial. Join [the discord server](/discord) to be notified when it is released. 
 
 ## Practice
 
