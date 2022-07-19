@@ -265,11 +265,16 @@ def buildFetchedPages(extra_nav_html):
             meta += '<link rel="canonical" href="https://moddingtutorials.org/{}/{}"/>'.format(directory, filename)
             meta += "<!-- the text on this page was fetched from " + url + " I'm fairly confident that I'm only getting my own content but if you feel I stole something, please DM me on discord: LukeGrahamLandry#6888 -->"
             
-            html_content = """
-                <div style="text-align: center; margin-top: 10px;">
-                <a class="alert orange sm" style="display: inline-block;" href="https://www.curseforge.com/minecraft/mc-mods/$CF" target="_blank">
+            html_content = """<div style="text-align: center; margin-top: 10px;">"""
+
+            if "curseforge" in page:
+                html_content += """
+                    <a class="alert orange sm" style="display: inline-block;" href="https://www.curseforge.com/minecraft/mc-mods/$CF" target="_blank">
                     Download Mod
-                </a>
+                    </a>
+                """.replace("$CF", page["curseforge"])
+            
+            html_content += """"
                 <a class="alert black sm" style="display: inline-block;" href="https://github.com/$PATH" target="_blank">
                     Source Code
                 </a>
@@ -277,7 +282,7 @@ def buildFetchedPages(extra_nav_html):
                     Contact Author
                 </a>
                 </div>
-            """.replace("$PATH", page["repo"]).replace("$CF", page["curseforge"])
+            """.replace("$PATH", page["repo"])
 
             html_content += markdown.markdown(r.text, extensions=['fenced_code'])
 

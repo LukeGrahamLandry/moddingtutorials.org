@@ -84,6 +84,11 @@
                 "curseforge": "mountables"
             },
             {
+                "name": "Entity Rain",
+                "repo": "LukeGrahamLandryMC/smells-fishy-mod",
+                "branch": "main"
+            },
+            {
                 "name": "Find My Friends",
                 "repo": "LukeGrahamLandryMC/find-my-friends-mod",
                 "branch": "forge-1.18",

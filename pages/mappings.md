@@ -1,9 +1,21 @@
 coming soon...   
 Join [the discord server](/discord) to be notified when it is released. 
 
+## Different Mappings Projects
+
+- MCP
+- yarn
+- official
+- quilt
+
+The names of classes and organization of packages are also obfuscated and remapped. 
+In 1.17, forge switched from using the MCP data for this to the official mappings so all the class names changed between these versions. Fabric of course defaults to the Yarn class names but if you choose to use the official mappings, that will apply to the class names as well.  
+
 ## Switching Mappings
 
-### Discord Bot
+### Linkie
+
+started as a discord bot, now a website as well 
 
 ### Gradle Script
 
