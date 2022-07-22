@@ -274,7 +274,7 @@ def buildFetchedPages(extra_nav_html):
                     </a>
                 """.replace("$CF", page["curseforge"])
             
-            html_content += """"
+            html_content += """
                 <a class="alert black sm" style="display: inline-block;" href="https://github.com/$PATH" target="_blank">
                     Source Code
                 </a>

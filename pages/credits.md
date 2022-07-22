@@ -9,7 +9,7 @@ People who paid me to make mods.
 - [Meta Island](https://meta-island.io)
 - [Divine Gaming Inc](http://divine-gaming.com/)
 - [Adam](https://www.curseforge.com/members/adam98991/projects)
-- [Cicoda](https://www.curseforge.com/members/cicoda/projects)
+- [coda](https://www.curseforge.com/members/coda1552/projects)
 - [viiizee](https://www.curseforge.com/members/shmoopsie/projects)
 - [Redrix](https://www.curseforge.com/members/redrixttv/projects)
 - [The Ult1mate Guy](https://www.curseforge.com/members/theu1t1mateguy/projects)
