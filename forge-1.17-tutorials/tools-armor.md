@@ -25,7 +25,7 @@ You must do this in a class that implements `Tier`. The simplest way to do this 
         private final float speed;
         private final float damage;
         private final int enchantmentValue;
-        private final LazyValue<Ingredient> repairIngredient;
+        private final LazyLoadedValue<Ingredient> repairIngredient;
     
         ModItemTier(int level, int durability, float miningSpeed, float damage, int enchantability, Supplier<Ingredient> repairIngredient) {
             this.level = level;
@@ -33,7 +33,7 @@ You must do this in a class that implements `Tier`. The simplest way to do this 
             this.speed = miningSpeed;
             this.damage = damage;
             this.enchantmentValue = enchantability;
-            this.repairIngredient = new LazyValue<>(repairIngredient);
+            this.repairIngredient = new LazyLoadedValue<>(repairIngredient);
         }
     
         public int getUses() {
@@ -119,7 +119,7 @@ The `name` string you use **must **start with your mod id, then a colon, then an
         private final SoundEvent sound;
         private final float toughness;
         private final float knockbackResistance;
-        private final LazyValue<Ingredient> repairIngredient;
+        private final LazyLoadedValue<Ingredient> repairIngredient;
     
         ModArmorMaterial(String name, int durability, int[] protection, int enchantability, SoundEvent sound, float toughness, float knockbackResistance, Supplier<Ingredient> repairIngredient) {
             this.name = name;
@@ -129,7 +129,7 @@ The `name` string you use **must **start with your mod id, then a colon, then an
             this.sound = sound;
             this.toughness = toughness;
             this.knockbackResistance = knockbackResistance;
-            this.repairIngredient = new LazyValue<>(repairIngredient);
+            this.repairIngredient = new LazyLoadedValue<>(repairIngredient);
         }
     
         public int getDurabilityForSlot(EquipmentSlot slot) {
@@ -211,7 +211,7 @@ Make a class for your `ArmorItem` and override the `onArmorTick` method. I'll gi
         }
     
         @Override
-        public void onArmorTick(ItemStack stack, Level world, PlayerEntity player) {
+        public void onArmorTick(ItemStack stack, Level world, Player player) {
             if (!world.isClientSide()){
                 player.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 200));
             }

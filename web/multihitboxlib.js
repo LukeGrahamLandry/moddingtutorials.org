@@ -1,4 +1,4 @@
-// this file is part of https://github.com/LukeGrahamLandryMC/MultiHitboxLib under the MIT License 
+// this file is part of MultiHitboxLib under the MIT License 
 
 (function() {
     let generateHitboxDataAction = new Action({
@@ -90,7 +90,7 @@
     
     Plugin.register('multihitboxlib', {
         title: 'MultiHiboxLib',
-        author: 'LukeGrahamLandry#6888',
+        author: 'nulll',
         icon: 'fa-cubes',
         description: 'Generate jsons for MultiHitboxLib to define entity part positioning for complex modded entities',
         tags: ["Minecraft: Java Edition"],

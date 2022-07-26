@@ -36,7 +36,7 @@ You can do anything you want here but I want my block to be explosive so I'll st
         if (!world.isClientSide() && held.getItem() == Items.GUNPOWDER){
         	world.explode(player, pos.getX(), pos.getY(), pos.getZ(), 4.0F, true, Explosion.Mode.DESTROY);
         	held.shrink(1);
-        return ActionResultType.CONSUME;
+        return InteractionResult.CONSUME;
         }
     
         return super.use(state, world, pos, player, hand, hit);
@@ -55,7 +55,7 @@ This means that you have to manually check which side you're on if you plan to d
 There are four different `InteractionResult`s you can return from this method (also used in several others involving players interacting with things).
 
 - `SUCCESS`: Use this when your item/block/entity has met all the requirements for the interaction, and you have completed everything that needs to be done. This will prevent any further action from being taken with the interaction.
-- `CONSUME`: You can use this when you meet the same conditions as SUCCESS, but additionally are consuming an item/block as part of the interaction. This ActionResultType isn't explicitly checked as of 1.15.2, and so using this is mostly optional. 
+- `CONSUME`: You can use this when you meet the same conditions as SUCCESS, but additionally are consuming an item/block as part of the interaction. This InteractionResult isn't explicitly checked as of 1.15.2, and so using this is mostly optional. 
 - `PASS`: Use this when you do not meet any of the requirements for the interaction (not holding the right item, etc.). This signals for the game to attempt to interact with the other hand, and also try to use the item's interaction methods and other similar methods.
 - `FAIL`: Use this when you have met the minimum requirements for the interaction (holding the right block, etc.), but fail to meet further criteria. This should be used when you want to indicate that the player intended to interact with your object, but failed to meet further criteria. This will prevent any further action from being taken with the interaction.
 

@@ -1,6 +1,6 @@
 # Modding Questions and Answers (from discord)
 
-If there's something you want to learn how to do that i dont have a tutorial for and you can't figure out from vanilla's code, feel free to [join my discord server](https://discord.com/invite/uG4DewBcwV) to ask me. This page is a collection of information I've given people on that server so you can search it more easily. It will only be helpful if you're already comfortable with Java! These answers are for a mix of versions so you may have to do some translating, I'm generally using the 1.17+ classnames. 
+If there's something you want to learn how to do that i dont have a tutorial for and you can't figure out from vanilla's code, feel free to [join my discord server](https://discord.com/invite/uG4DewBcwV) to ask me. This page is a collection of information I've given people on that server so you can search it more easily. It will only be helpful if you're already comfortable with Java! These answers are for a mix of versions so you will have to do some translating. 
 
 > I might add an index and split it into seperate pages to help the SEO at some point if i feel inspired
 
