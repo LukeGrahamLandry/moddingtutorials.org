@@ -188,14 +188,6 @@ def buildMainTutorialSite():
     with open("code.css", "w") as f:
         f.write(formatter.get_style_defs())
 
-    with open("web/my-mods.html", "r") as f:
-        my_mods_html = "".join(f.readlines())
-
-    my_mods_html = my_mods_html.replace("$VIDEOS", getVideosHTML(video_data["paid"])) # .replace("$FORGE1.15", getVideosHTML(video_data["1.15"]))
-
-    with open("my-mods.html", "w") as f:
-        f.write(my_mods_html)
-
     with open("web/commissions.html", "r") as f:
         commissions_html = "".join(f.readlines())
 
@@ -209,7 +201,6 @@ def buildMainTutorialSite():
 
     for section_info in site_data["sections"]:
         url = section_info["url"]
-        shutil.copy("my-mods.html", url + "/my-mods.html")
         shutil.copy("commissions.html", url + "/commissions.html")
         with open(url + "/index.html", "w") as f:
             f.write(index_html)
