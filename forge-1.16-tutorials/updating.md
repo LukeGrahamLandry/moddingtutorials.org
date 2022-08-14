@@ -10,7 +10,7 @@ If you are looking to update **from** 1.16 to a newer version, check out these t
 The main difference between 1.15 and 1.16 is that a lot of the world gen code moved to [data packs](https://minecraft.fandom.com/wiki/Data_pack). Instead of simply extending classes like Biome, Dimension, etc, they are loaded dynamiclly from json files. 
 
 
-This page is a stub. If you would like to add specific instructions to update a mod to 1.16, please [submit a pull request](https://github.com/LukeGrahamLandryMC/modding-tutorials). 
+This page is a stub. If you would like to add specific instructions to update a mod to 1.16, please [submit a pull request](https://github.com/LukeGrahamLandry/modding-tutorials). 
 
 ### Resources
 

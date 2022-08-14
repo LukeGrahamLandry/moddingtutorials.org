@@ -107,9 +107,11 @@ def combile_md(source_folder, filename, target_folder, pages_list, can=None):
     meta = ""
     if True:
         if title in site_data["un_versioned"]:
-            meta += "<!-- submit a fix to the content of this page: https://github.com/LukeGrahamLandryMC/modding-tutorials/blob/master/pages/{} -->".format(filename)
+            dataUrl = "https://github.com/LukeGrahamLandry/modding-tutorials/blob/master/pages/{} -->".format(filename)
         else:
-            meta += "<!-- submit a fix to the content of this page: https://github.com/LukeGrahamLandryMC/modding-tutorials/blob/master/{}/{} -->".format(source_folder.split("/")[-1], filename)
+            dataUrl = "https://github.com/LukeGrahamLandry/modding-tutorials/blob/master/{}/{}".format(source_folder.split("/")[-1], filename)
+        
+        meta += "<!-- submit a fix to the content of this page: {} -->".format(dataUrl)
         
         displayName = ""
         for part in filename.split(".")[0].split("-"):
@@ -131,7 +133,7 @@ def combile_md(source_folder, filename, target_folder, pages_list, can=None):
         if title in site_data["descriptions"]:
             meta += '<meta name="description" content="' + site_data["descriptions"][title] + '">'
 
-    full_content = template.replace("$CONTENT", html_syntax_highlighted).replace("$META", meta).replace("$TUTORIALS", json.dumps(pages_list)).replace("\$CHANNELS", getChannelsHTML(video_data["yt-clients"]))
+    full_content = template.replace("$CONTENT", html_syntax_highlighted).replace("$META", meta).replace("$TUTORIALS", json.dumps(pages_list)).replace("\$CHANNELS", getChannelsHTML(video_data["yt-clients"])).replace("$HISTORY", dataUrl.replace("blob", "commits"))
 
     generateSlashRedirectFix(target_folder, title)
 

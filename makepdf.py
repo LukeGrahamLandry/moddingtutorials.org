@@ -4,7 +4,7 @@ with open("web/pages.json", "r") as f:
     site_data = json.loads("".join(f.readlines()))
 
 try:
-    github_html = requests.get("https://github.com/LukeGrahamLandryMC/modding-tutorials").text
+    github_html = requests.get("https://github.com/LukeGrahamLandry/modding-tutorials").text
     commit_count = github_html.split("<span class=\"d-none d-sm-inline\">")[2].split("</strong>")[0].split("\n                    <strong>")[1]
 except:
     print("commit count error")

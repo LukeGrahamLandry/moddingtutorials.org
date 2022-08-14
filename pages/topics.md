@@ -9,8 +9,6 @@ This is an index of the content covered on this site.
     - the different mod loaders, mod distribution, lisencing, code concepts
 - [Java Basics](java-basics) **WIP**
     - summary of Java syntax 
-- [Mappings](mappings) **WIP**
-    - the deobfuscation of minecraft's code
 - [Registries](registries) **WIP**
     - how minecraft handles game objects
 - [Server vs Client](sides) **WIP**
@@ -65,6 +63,7 @@ This is an index of the content covered on this site.
 - [Custom Arrows](arrows)
     - register a projectile entity that explodes when it hits someone
     - an arrow item that lets you shoot your custom projectile from a vanilla bow or crossbow
+- [Depending on Other Mods](dependencies)
 - [MultiHitbox Entities](multihitbox) **WIP** (1.18+ only)
 
 ## Resources

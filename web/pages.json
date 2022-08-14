@@ -30,7 +30,7 @@
         }
     ],
     "un_versioned": [
-        "intro", "index",  "topics", "changelog", "credits", "my-mods", "my-work", "why-long-video", 
+        "intro", "index",  "topics", "changelog", "credits", "my-mods", "my-work", "history", 
         "java-basics", "mappings", "registries", "sides", "mods-toml", "solutions", "bad-clients"],
     "videos": [
         "https://www.youtube.com/watch?v=jVzeGKbVLCc",
@@ -61,36 +61,37 @@
         "mods": [
             {
                 "name": "Torcherino",
-                "repo": "LukeGrahamLandryMC/Torcherino",
+                "repo": "LukeGrahamLandry/Torcherino",
                 "branch": "1.19",
                 "curseforge": "torcherino"
             },
             {
                 "name": "Mercenaries",
-                "repo": "LukeGrahamLandryMC/mercenaries-mod",
+                "repo": "LukeGrahamLandry/mercenaries-mod",
                 "branch": "main", 
                 "curseforge": "mercenaries"
             },
             {
                 "name": "Tiered Shulkers",
-                "repo": "LukeGrahamLandryMC/tieredshulkers",
+                "repo": "LukeGrahamLandry/tieredshulkers",
                 "branch": "1.18",
                 "curseforge": "tiered-shulkers"
             },
             {
                 "name": "Mountables",
-                "repo": "LukeGrahamLandryMC/mountables-mod",
+                "repo": "LukeGrahamLandry/mountables-mod",
                 "branch": "main",
                 "curseforge": "mountables"
             },
             {
                 "name": "Entity Rain",
-                "repo": "LukeGrahamLandryMC/smells-fishy-mod",
-                "branch": "main"
+                "repo": "LukeGrahamLandry/smells-fishy-mod",
+                "branch": "main", 
+                "curseforge":" smells-fishy"
             },
             {
                 "name": "Find My Friends",
-                "repo": "LukeGrahamLandryMC/find-my-friends-mod",
+                "repo": "LukeGrahamLandry/find-my-friends-mod",
                 "branch": "forge-1.18",
                 "curseforge": "find-my-friends"
             },
@@ -102,31 +103,31 @@
             },
             {
                 "name": "Tribes",
-                "repo": "LukeGrahamLandryMC/tribes-mod",
+                "repo": "LukeGrahamLandry/tribes-mod",
                 "branch": "forge-1.16.5",
                 "curseforge": "tribes"
             },
             {
                 "name": "Simple XP Config",
-                "repo": "LukeGrahamLandryMC/XpSpawnerControl",
+                "repo": "LukeGrahamLandry/XpSpawnerControl",
                 "branch": "master",
                 "curseforge": "spawner-xp-config"
             },
             {
                 "name": "Travel Staff",
-                "repo": "LukeGrahamLandryMC/travel_anchors",
+                "repo": "LukeGrahamLandry/travel_anchors",
                 "branch": "1.18.x",
                 "curseforge": "staff-of-traveling"
             },
             {
                 "name": "Harder Core",
-                "repo": "LukeGrahamLandryMC/harder-core-mod",
+                "repo": "LukeGrahamLandry/harder-core-mod",
                 "branch": "main",
                 "curseforge": "harder-core"
             },
             {
                 "name": "Cultivated Snacks",
-                "repo": "LukeGrahamLandryMC/cultivated-snacks-mod",
+                "repo": "LukeGrahamLandry/cultivated-snacks-mod",
                 "branch": "forge-1.16.5",
                 "curseforge": "cultivated-snacks"
             }

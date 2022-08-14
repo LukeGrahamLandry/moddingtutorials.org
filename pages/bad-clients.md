@@ -5,7 +5,7 @@ This is a record of people who commissioned something from me, got the work, and
 ### dummy_fan_svenska 203183101873094657
 
 wanted a custom origin  
-https://github.com/LukeGrahamLandryMC/sun-wukong-origin (**private repo**)  
+https://github.com/LukeGrahamLandry/sun-wukong-origin (**private repo**)  
 I sent videos of everything working and asked for remaining payment (04/09/2022), they never responded.  
 owed $75 
 

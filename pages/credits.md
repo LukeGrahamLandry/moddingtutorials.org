@@ -6,8 +6,8 @@ People who paid me to make mods.
 
 \$CHANNELS
 
-- [Meta Island](https://meta-island.io)
 - [Divine Gaming Inc](http://divine-gaming.com/)
+- [Armegon](https://www.youtube.com/Armegon)
 - [Adam](https://www.curseforge.com/members/adam98991/projects)
 - [coda](https://www.curseforge.com/members/coda1552/projects)
 - [viiizee](https://www.curseforge.com/members/shmoopsie/projects)
@@ -23,7 +23,6 @@ People who paid me to make mods.
 - foxtrot1547
 - loopenami
 - suku
-- [Armegon](https://www.youtube.com/Armegon)
 - [Cammie](https://github.com/CammiePone)
 - Khaki
 - GTB
@@ -37,7 +36,7 @@ People who paid me to make mods.
 
 ## Tutorial Contributors 
 
-If you notice any mistakes in my tutorials, please submit a pull request on [the github page](https://github.com/LukeGrahamLandryMC/modding-tutorials). When it's merged, I'll add your name to this list. 
+If you notice any mistakes in my tutorials, please submit a pull request on [the github page](https://github.com/LukeGrahamLandry/modding-tutorials). When it's merged, I'll add your name to this list. 
 
 - thedude
 - Matthew
@@ -45,9 +44,12 @@ If you notice any mistakes in my tutorials, please submit a pull request on [the
 ## Mod Contributors 
 
 - Tribes: GreenOne
+- Inclusive Enchanting: [FnControlOption](https://github.com/FnControlOption)
+- Staff of Traveling: [MSandro](https://github.com/MSandro)
 
-## Donations
+## Patrons
 
 - Dalton Pratt
+- **PsycoNova**
+- **CiaoRobban**
 - SpottyTheTurtle
-- CiaoRobban

@@ -28,16 +28,15 @@ Create a new package called `mixins` and create a class called
 ### Mixin Method
 
 
-Note that dispite the fact that the target method has a return type, your mixin method returns void. The extra perameter (`CallbackInfo` or `CallbackInfoReturnable`) allows us to effect the return value of the target method. 
+Note that dispite the fact that the target method has a return type, your mixin method returns void. The extra parameter (`CallbackInfo` or `CallbackInfoReturnable`) allows us to effect the return value of the target method. 
 
 ### Method Descriptors 
 
+Use the [Minecraft Development Intellij Plugin](https://plugins.jetbrains.com/plugin/8327-minecraft-development) to generate.
 
 #### Remapping
 
-The method name in your descriptor is automaticlly remapped according to your project's mappings settings. This allows you to use the readable method names instead of the SRG names (ie. `addMix` instead of `func_193357_a`). This means there's an extra step if you are trying to mixin to a method that is not obfuscated and subsequently renamed by the mappings (anything outside of a vanilla class, for example something added by forge or another mod). 
-
-You must set `remap` to false in your inject annotation. 
+The method name in your descriptor is automatically remapped according to your project's mappings settings. This allows you to use the readable method names instead of the SRG names (ie. `addMix` instead of `func_193357_a`). This means there's an extra step if you are trying to mixin to a method that is not obfuscated and subsequently renamed by the mappings (anything outside of a vanilla class, for example something added by forge or another mod). You must set `remap` to false in your inject annotation. 
 
     @Inject(method = "...", at = @At(...), remap = true)
     private void injected(...) {
@@ -46,11 +45,14 @@ You must set `remap` to false in your inject annotation.
 
 ### Injection Point 
 
+HEAD
+RETURN
+
 ### Return a Value
 
 If you want to change the return value of the target method (or just cancel the rest of the method call), you must set `cancellable` to true in your mixin method annotation. 
 
-The last perameter of your mixin method will be of the type `CallbackInfoReturnable<T>` with `T` being the type returned by the target method. You can call `setReturnValue(value);` to change the return value of the target method. Note that this does not immediatly exit your method the way a `return;` statement would.
+The last perameter of your mixin method will be of the type `CallbackInfoReturnable<T>` with `T` being the type returned by the target method. You can call `setReturnValue(value);` to change the return value of the target method. Note that this does not immediately exit your method the way a `return;` statement would.
 
 
     @Inject(method = "...", at = @At(...), cancellable = true)
@@ -79,7 +81,7 @@ For example, in a method that targets the ItemEntity class, you could use the fo
 ItemEntity item = (ItemEntity) (Object) this; 
 ```
 
-> Also note that the mixin class is not actually present at runtime. It's bytecode is just added to vanilla's. You should not have static fields on the mixin class that you try to reference from other places in your mod's code. However, the code in your mixin methods can access the rest of your mod's classes.  
+> Also note that the mixin class is not actually present at runtime. Its bytecode is just added to vanilla's. You should not have static fields on the mixin class that you try to reference from other places in your mod's code. However, the code in your mixin methods can access the rest of your mod's classes.  
 
 
 ## Resources 

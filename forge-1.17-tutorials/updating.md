@@ -10,7 +10,7 @@ First open the terminal / CMD and navigate to your mod folder with the command `
 
 ## Mappings
 
-First make sure you are using the official mappings. Find the mappings line in your build.gradle and if it already has `channel: 'official'`, you can skip this step. Read [the mappings tutorial](mappings) if you want a more detailed explanation of how they work.
+First make sure you are using the official mappings. Find the mappings line in your build.gradle and if it already has `channel: 'official'`, you can skip this step. Read [Mappings Explainer](http://blog.minecraftforge.net/personal/sciwhiz12/what-are-mappings/) if you want a more detailed explanation of how they work.
 
 1. run the command in the terminal / CMD `./gradlew updateMappings -PUPDATE_MAPPINGS="1.16.5" -PUPDATE_MAPPINGS_CHANNEL="official"`. this will change your code to use the new mappings (on windows, remove the `./` prefix)
 2. go back to your build.gradle file and change the mappings line to `mappings channel: 'official', version: '1.16.5'`

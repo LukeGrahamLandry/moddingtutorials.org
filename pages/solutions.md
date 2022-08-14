@@ -49,7 +49,7 @@ for doing something that tints based on the biome colour (like grass and leaves)
 
 ## how do i make a geckolib animation sync with an attack
 
-geckolib has a pretty good wiki (https://github.com/bernie-g/geckolib/wiki/Home) for the details of making animations play at all. for an attack animation specificly, you'd have a dataparameter on your entity that syncs an int from server to client and then when your attack starts you set that to the length of your animation (in ticks) and decrement it every tick until its 0 and check it on the client (in your animation predicate) to play your animation while its ticking down. my mimic mod has an example you can look at https://github.com/LukeGrahamLandryMC/mimic-mod (look in the `MimicEntity` and `MimicAttackGoal` classes)
+geckolib has a pretty good wiki (https://github.com/bernie-g/geckolib/wiki/Home) for the details of making animations play at all. for an attack animation specificly, you'd have a dataparameter on your entity that syncs an int from server to client and then when your attack starts you set that to the length of your animation (in ticks) and decrement it every tick until its 0 and check it on the client (in your animation predicate) to play your animation while its ticking down. my mimic mod has an example you can look at https://github.com/LukeGrahamLandry/mimic-mod (look in the `MimicEntity` and `MimicAttackGoal` classes)
 
 ## how do i make the dev environment work on apple silicon for 1.12
 
@@ -203,8 +203,8 @@ Alternatively, you could also use an access transformer to make `Block#slipperin
 ## how to do i make custom armor models (1.17+)
 
 - model class should extend HumanoidModel and have all the parts that should move with the player named correctly (same as 1.16 so probably already done).
-- make sure you're registering the model layer definition on the EntityRenderersEvent.RegisterLayerDefinitions event. (example: https://github.com/LukeGrahamLandryMC/AmbientAdditions/blob/forge-1.18/src/main/java/coda/ambientadditions/client/ClientEvents.java#L158)
-- on your custom item class that extends ArmorItem, you override the initializeClient method and add a IItemRenderProperties instance that has a getArmorModel method that returns an insteance of your custom  model class. here's an example: https://github.com/LukeGrahamLandryMC/AmbientAdditions/blob/forge-1.18/src/main/java/coda/ambientadditions/common/items/YetiArmWarmersItem.java#L46-L58 
+- make sure you're registering the model layer definition on the EntityRenderersEvent.RegisterLayerDefinitions event. (example: https://github.com/LukeGrahamLandry/AmbientAdditions/blob/forge-1.18/src/main/java/coda/ambientadditions/client/ClientEvents.java#L158)
+- on your custom item class that extends ArmorItem, you override the initializeClient method and add a IItemRenderProperties instance that has a getArmorModel method that returns an insteance of your custom  model class. here's an example: https://github.com/LukeGrahamLandry/AmbientAdditions/blob/forge-1.18/src/main/java/coda/ambientadditions/common/items/YetiArmWarmersItem.java#L46-L58 
 
 ## my FMLClientSetupEvent isnt firing
 
@@ -286,4 +286,4 @@ renderArmorPiece is called. This allows me to access the actual item stack and t
 another mixin to a method that wouldn't have that context available. Then I mixin to ItemRenderer#getArmorFoilBuffer
 to change the render type that is used to create the vertex consumer to be rendered.
 
-here's the code, dont forget the mixins and access transformers, https://github.com/LukeGrahamLandryMC/herobrine-thing/blob/main/src/main/java/ca/lukegrahamlandry/herobrinething/client/WhiteArmorGlintHelper.java 
+here's the code, dont forget the mixins and access transformers, https://github.com/LukeGrahamLandry/herobrine-thing/blob/main/src/main/java/ca/lukegrahamlandry/herobrinething/client/WhiteArmorGlintHelper.java 

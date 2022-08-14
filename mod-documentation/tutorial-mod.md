@@ -1,7 +1,7 @@
 ---
 author: LukeGrahamLandry
 version: 1.1.15
-source: https://github.com/LukeGrahamLandryMC/modding-tutorials
+source: https://github.com/LukeGrahamLandry/modding-tutorials
 contact: /discord
 ---
 

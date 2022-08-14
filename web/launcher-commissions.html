@@ -42,8 +42,28 @@
         img {
             width: 100%;
         }
+
+        .info-block {
+            text-align: left; 
+            display: inline-block; 
+            padding: 5px; 
+            border: 4px solid;
+            margin: 5px
+        }
+
+        .info-block h2, .info-block ul {
+            margin: 0px;
+        }
+
+        .sml-img {
+            width: 32%;
+        }
+
+        .nolinkunderline a {
+            text-decoration: none;
+        }
     </style>
-    <link rel="stylesheet" href="/styles/dark.css">
+    <link rel="stylesheet" id="theme" href="styles/dark.css">
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-EL4H9KVP7T"></script>
     <script>
@@ -55,23 +75,36 @@
     </script>
 </head>
 <body>
-    <h1> Custom Minecraft Launcher/Client Commissions </h1>
+    <h1 style="margin-bottom: 0px;"> Custom Minecraft Launcher/Client Commissions </h1>
 
-    <div style="text-align: left; display: inline-block; padding: 5px; border: 4px solid greenyellow; margin: 5px;">
-        <h2 style="margin: 0px;"> Contact </h2>
-        <ul style="margin-top: 0px;">
+    <p style="display: inline-block; text-align: left; max-width: 800px; width: 100%;">
+        Allow players to download your modpack as a single executable and connect to your server in one click. 
+        Monetize your project by selling cosmetics. Commission custom mods to shape your players' experience. 
+        Your launcher's interface will be hand styled according to your specifications to match your project's branding. 
+        <br> <br>
+        Below are some features to choose from and examples of what your launcher might look like. 
+        Anything else you want can probably be done, just ask! 
+        Contact me for a quote (please have a detailed description of what you're looking for ready). 
+        Your choice of <b>Forge 1.16, 1.17, 1.18, 1.19</b>.
+    </p> <br>
+
+    <div class="info-block" style="border-color: greenyellow;">
+        <h2> Contact </h2>
+        <ul>
             <li> <a href="/discord">Join my discord server</a> </li>
             <li> DM me on Discord: LukeGrahamLandry#6888 </li>
             <li> Send me an email: <a href="mailto:graham11000@gmail.com">graham11000@gmail.com</a> </li>
+            <br>
         </ul>
     </div>
     
-    <div style="text-align: left; display: inline-block; padding: 5px; border: 4px solid purple;margin: 5px;">
-        <h2 style="margin: 0px;">I will not help you break Minecraft's EULA</h2>
-        <ul style="margin-top: 0px;">
+    <div class="info-block" style="border-color: purple;">
+        <h2>I will not help you break Minecraft's EULA</h2>
+        <ul>
             <li>no selling capes (any other cosmetics are allowed!)</li>
             <li>no selling game play advantages (like stronger weapons or flight)</li>
-            <li>players must own a valid copy of minecraft and log in with their microsoft account</li>
+            <li>players must own minecraft and log in with their microsoft account</li>
+            <li>no nfts</li>
         </ul>
     </div>
 
@@ -107,7 +140,7 @@
             <b> Custom Mods </b>
             <ul>
                 <li>any client mods you want while using your launcher, that you can't find on CurseForge, I can code for you</li>
-                <li><a href="/commissions" target="_blank">see previous commissioned mods</a></li>
+                <li><a href="/commissions" target="_blank">learn more about mod commissions</a></li>
             </ul>
         </div>
     </div>
@@ -126,12 +159,12 @@
             <p>java does not need to be installed to run the launcher</p>
         </div>
         <div class="mod">
-            <b> Modrinth Integration </b>
-            <p>allow users to search and download mods</p>
+            <b> Require Launcher </b>
+            <p>block players from connecting to your server if not using the launcher. this is useful to force challenging client mods, like total darkness, to make it fair</p>
         </div>
         <div class="mod">
-            <b> Versions </b>
-            <p>support your choice of Forge versions 1.12, 1.15, 1.16, 1.17, 1.18, 1.19</p>
+            <b> Modrinth Integration </b>
+            <p>allow users to search and download mods</p>
         </div>
         <div class="mod">
             <b> News </b>
@@ -152,11 +185,32 @@
     </div>
     
     <br>
-    <a href="https://github.com/LukeGrahamLandryMC/CommissionReviews/issues" target="_blank">read customer reviews</a>
+    <a href="https://github.com/LukeGrahamLandry/CommissionReviews/issues" target="_blank">read customer reviews</a>
 
-    <img src="/img/launch/main.png" alt="launcher main screen">
-    <img src="/img/launch/mods.png" alt="launcher mods screen">
-    <img src="/img/launch/java.png" alt="launcher java settings screen">
+    <div>
+        <img src="/img/launch/main.png" alt="launcher main screen" class="sml-img">
+        <img src="/img/launch/mods.png" alt="launcher mods screen" class="sml-img">
+        <img src="/img/launch/java.png" alt="launcher java settings screen" class="sml-img">
+    </div>
+
+    <div class="cards nolinkunderline">
+        <a href="#" class="mod">
+            <img src="/img/my-mods/" alt="Mod Icon">
+            <b> GTB Cosmetics </b>
+            <p>
+                Forge 1.12 client mod that displays cosmetics (BB Modded Entity or Geckolib), sends packets to spigot plugin for permission to use each cosmetic
+            </p>
+        </a>
+
+        <a href="#" class="mod">
+            <img src="/img/my-mods/" alt="Mod Icon">
+            <b> MCBG Cosmetics </b>
+            <p>
+                Forge 1.16.5 client/server mod that displays cosmetics (Geckolib). OP commands to unlock cosmetics for specific players. GUI for players to select active cosmetic
+            </p>
+        </a>
+    </div>
+    
 
     <script src="/js/dark.js"></script>
 </body>
