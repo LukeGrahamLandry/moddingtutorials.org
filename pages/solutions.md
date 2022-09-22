@@ -1,6 +1,6 @@
 # Modding Questions and Answers (from discord)
 
-If there's something you want to learn how to do that i dont have a tutorial for and you can't figure out from vanilla's code, feel free to [join my discord server](https://discord.com/invite/uG4DewBcwV) to ask me. This page is a collection of information I've given people on that server so you can search it more easily. It will only be helpful if you're already comfortable with Java! These answers are for a mix of versions so you will have to do some translating. 
+If there's something you want to learn how to do that i dont have a tutorial for and you can't figure out from vanilla's code, feel free to [join my discord server](https://discord.com/invite/uG4DewBcwV) to ask me. This page is a collection of information I've given people on that server so you can search it more easily. It will only be helpful if you're already comfortable with Java! These answers are for a mix of versions so you will have to do some translating but they should point you in the right direction. 
 
 > I might add an index and split it into seperate pages to help the SEO at some point if i feel inspired
 
@@ -286,4 +286,8 @@ renderArmorPiece is called. This allows me to access the actual item stack and t
 another mixin to a method that wouldn't have that context available. Then I mixin to ItemRenderer#getArmorFoilBuffer
 to change the render type that is used to create the vertex consumer to be rendered.
 
-here's the code, dont forget the mixins and access transformers, https://github.com/LukeGrahamLandry/herobrine-thing/blob/main/src/main/java/ca/lukegrahamlandry/herobrinething/client/WhiteArmorGlintHelper.java 
+here's the code, dont forget the mixins and access transformers, https://github.com/LukeGrahamLandry/herobrine-thing/blob/main/src/main/java/ca/lukegrahamlandry/herobrinething/client/WhiteArmorGlintHelper.java
+
+## how to play a gif as an overlay in game
+
+https://gist.github.com/gigaherz/56b259126f715807c8e6c3dc055b924b

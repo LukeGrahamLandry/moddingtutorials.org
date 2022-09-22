@@ -46,6 +46,8 @@ For example, I'll make the file `needs_iron_tool.json`. The `mineable` folder wi
 
 This will make my block mine quickly with a pickaxe and only drop when using a pickaxe of iron or higher. Remember you must also call `requiresCorrectToolForDrops()` on your block properties object for this to work. 
 
+More info about this system: https://gist.github.com/gigaherz/691f528a61f631af90c9426c076a298a
+
 ## Block Item
 
 You need a BlockItem to place your block. You can register it manually like your other items but that's tedious so lets make it automatic. We will use the events system to run some code when the game registers all the other items. You can just copy this code for now or read the [events tutorial](/events) for a more detailed explanation of how events work.

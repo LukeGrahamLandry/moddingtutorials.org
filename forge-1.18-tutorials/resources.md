@@ -93,8 +93,8 @@ Mixins allow you to directly modify vanilla's bytecode. Generally try to avoid u
 - http://darkhax.net/2020/07/mixins
 - https://github.com/SpongePowered/Mixin/wiki/Mixins-on-Minecraft-Forge
 
-## Dependencies
+## Game Test Framework
 
-You can add integration with other mods and have them as a required or optional dependency. If a mod doesnt provide an api for what you are trying to do, note that it is possible to mixin to another mod's code (tho thats dangerous as modded code will likey change frequently). 
+Automatically run unit tests that interact with a minecraft game instance. 
 
-- https://forge.gemwire.uk/wiki/Dependencies
+- https://gist.github.com/SizableShrimp/60ad4109e3d0a23107a546b3bc0d9752s

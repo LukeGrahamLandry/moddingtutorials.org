@@ -1,3 +1,5 @@
+# Adding Dependencies to Your Minecraft Mod
+
 Sometimes you'll want gradle to load other libraries or mods so you can access their code. Most of the work will be done in your build.gradle file. 
 
 ## Dependencies Block
@@ -105,10 +107,11 @@ Shading has a few disadvantages:
 - prevents library authors from getting income from curse points if players don't have to severalty download their mod
 - challenging to get right since shaded jars are not loaded as mods. It's intended for java libraries whose code you need to access rather than other mods that need to access forge events or mixins (which should be downloaded separately).
 
-Example doing it for Geckolib:
+How To:
 
-- geo wiki: https://github.com/bernie-g/geckolib/wiki/Shadowing
+- https://gist.github.com/SizableShrimp/949e7c219bfc94487a45226b64ac7749
 - shade docs: https://imperceptiblethoughts.com/shadow/introduction/
+- geo wiki: https://github.com/bernie-g/geckolib/wiki/Shadowing
 - geo example: https://gist.github.com/AzureDoom/3f0df105ac480c058a486879ebc86520
 
 ## Mixins
@@ -139,6 +142,14 @@ property 'mixin.env.remapRefMap', 'true'
 property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
 ```
 
+## Class Loading 
+
+For soft dependencies you should check that the mod is loaded before trying to reference any of its code so it doesn't crash when the dependency isn't available. 
+
+TODO: example
+
 ## Final Thoughts
 
-Please don't be one of those people that makes a bullshit library mod just to farm ad income on curse forge. It's so fucking annoying. It makes it that much more of a pain in the ass for other people to work with your mod's code (they have to setup two projects to actually be able to change anything). It's also a waste of time for players that don't use the curse forge launcher since they have to go install the library as well. This extra time adds up if every mod author makes the genius discovery that you earn a couple extra cents if you split up all your mods into several. Take a look at [serilum's mods](https://www.curseforge.com/members/serilum/projects), I'll give you a hint, despite having almost a hundred projects, they only have one mod there. The majority of the functionality is in the library and they use many tiny mods to enable features instead of just having a fucking config like a sane person.
+Please don't be one of those people that makes a bullshit library mod just to farm ad income on curse forge. It's so fucking annoying. It makes it that much more of a pain in the ass for other people to work with your mod's code (they have to setup two projects to actually be able to change anything). It's also a waste of time for players that don't use the curse forge launcher since they have to go install the library as well. This extra time adds up if every mod author makes the genius discovery that you earn a couple extra cents if you split up all your mods into several. Take a look at [serilum's mods](https://www.curseforge.com/members/serilum/projects), I'll give you a hint, despite having almost a hundred projects, they only have one mod there. The majority of the functionality is in the library and they use many tiny mods to enable features instead of just having a fucking config like a sane person. Or for a more direct example, [extreme reactors](https://www.curseforge.com/minecraft/mc-mods/extreme-reactors) depends on [zero core](https://www.curseforge.com/minecraft/mc-mods/zerocore), a library that you can tell is really useful because... nothing else depends on it. Let's take a wild guess at why the author choose to do that. 
+
+That's not to say there are no good library mods. Geckolib, Patchouli, Curios, and Architectury, to name a few, single handedly save developers hundreds of hours. Just try to be one of the useful ones. 

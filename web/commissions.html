@@ -65,8 +65,8 @@
         }
 
         .alertt {
-            color: #0f5132;
-            background-color: #d1e7dd;
+            color: #000000; /* #0f5132 */
+            background-color: #e7d4d1; /* #d1e7dd */
             padding: 0.5rem;
             border-radius: 5px;
             text-align: center;
@@ -101,14 +101,25 @@
             margin: 2px 0 0 0;
         }
 
-        .reviews {
+        #reviews {
             display: inline-block;
             max-width: 800px;
             width: 100%;
         }
 
-        .reviews img {
+        #reviews img {
             width: 100%;
+        }
+
+        .lib {
+            display: inline-block;
+            padding: 5px;
+            background-color: black;
+            color: white !important;
+            max-width: 600px;
+            width: 100%;
+            margin-bottom: 5px;
+            border-radius: 5px;
         }
     </style>
     <link rel="stylesheet" id="theme" href="/styles/dark.css">
@@ -151,9 +162,9 @@
         </ul>
 
         <div class="alertt">
-            Commissions are open! 
+            Commissions are temporarily closed. 
 
-            <span style="font-size: 1rem; color: black; display: block;"> UPDATED JULY 2022 </span>
+            <span style="font-size: 1rem; color: black; display: block;"> UPDATED SEPTEMBER 2022 </span>
         </div>
 
         <h2> Info </h2>
@@ -180,15 +191,25 @@
                 I also take custom launcher/client commissions. <a href="/launcher-commissions" target="_blank">Learn More...</a>
             </li>
             <li>
-                Scroll down to see examples of my work. 
-            </li>
-            <li>
-                Scroll down even more to see <a href="https://github.com/LukeGrahamLandry/CommissionReviews/issues" target="_blank">reviews from past clients</a>.
+                Scroll down to see examples of my work and reviews from past clients. 
             </li>
         </ul>
     </div>
     
-    <br> <br> <br>
+    <br> 
+
+    <div id="reviews">
+        <a href="https://github.com/LukeGrahamLandry/CommissionReviews/issues" target="_blank">
+            <img src="/img/reviews/1.png" alt="Luke worked very quickly and exceeded expectations. He went above and beyond to create a fantastic mod that works incredibly well, I would definitely recommend :)">
+            <img src="/img/reviews/2.png" alt="I really like working with him, he's professional understanding a genuine person. He is flexible with what I need and want. He is a great coder and anyone would be lucky to have him as part of their project. I highly recommend him.">
+            <img src="/img/reviews/3.png" alt="I am pleased to say that my experience during commissions with Graham has been fantastic. He is extremely fast in determining how much work is required to get the job done. He or she has also been extremely patient when changes need to be made or bugs need to be fixed. Graham has been punctual with delivery times and professional in dialogue and delivery of final product. The mod I had made previously was https://www.curseforge.com/minecraft/mc-mods/spawner-xp-config . . . however, I've decided to use Graham for a number of commissions this year for my new mod-pack :)">
+            <img src="/img/reviews/4.png" alt="https://www.curseforge.com/minecraft/mc-mods/mountables I commissioned this mod as a substitute for Animal Bikes for 1.16, with further emphasis on making every type viable instead of just a few being the best. Overall it worked perfectly and was done in a reasonable time frame. There was a second update planned but due to outside issues it was never completed.">
+            <img src="/img/reviews/5.png" alt="After finding them via Google, I had Luke write me a mod to convert player heads to the corresponding player head when renamed in an anvil, and he had it done for me in about half a day working exactly how I'd hoped. I think it was a fairly straightforward ask, but I'm still exceedingly pleased with the cost, the communication, and the quality of the product and cannot recommend them strongly enough.">
+            <img src="/img/reviews/6.png" alt="Thanks for the phone mod man, worked exactly as I wanted and perfect for the gamemode we're making.">
+    </a>
+    </div>
+
+    <br>
    
     <div id="curse" class="contributions" style="text-align: center;">
         <a href="https://www.curseforge.com/minecraft/mc-mods/mimic-mod" class="mod">
@@ -267,6 +288,14 @@
             </p>
         </a>
 
+        <a href="https://www.curseforge.com/minecraft/mc-mods/better-combat-by-daedelus" class="mod">
+            <img src="/img/my-mods/bettercombat.png" alt="Mod Icon">
+            <b> Better Combat </b>
+            <p>
+                Player attack animations. Ported to Forge
+            </p>
+        </a>
+
         <a href="https://www.curseforge.com/minecraft/mc-mods/tiered-shulkers" class="mod">
             <img src="/img/my-mods/iron-shulker-box.png" alt="Mod Icon">
             <b> Tiered Shulkers </b>
@@ -341,16 +370,12 @@
     </div>
     <br>
 
-    <div id="reviews">
-        <a href="https://github.com/LukeGrahamLandry/CommissionReviews/issues" target="_blank">
-            <img src="/img/reviews/1.png" alt="Luke worked very quickly and exceeded expectations. He went above and beyond to create a fantastic mod that works incredibly well, I would definitely recommend :)">
-            <img src="/img/reviews/2.png" alt="I really like working with him, he's professional understanding a genuine person. He is flexible with what I need and want. He is a great coder and anyone would be lucky to have him as part of their project. I highly recommend him.">
-            <img src="/img/reviews/3.png" alt="I am pleased to say that my experience during commissions with Graham has been fantastic. He is extremely fast in determining how much work is required to get the job done. He or she has also been extremely patient when changes need to be made or bugs need to be fixed. Graham has been punctual with delivery times and professional in dialogue and delivery of final product. The mod I had made previously was https://www.curseforge.com/minecraft/mc-mods/spawner-xp-config . . . however, I've decided to use Graham for a number of commissions this year for my new mod-pack :)">
-            <img src="/img/reviews/4.png" alt="https://www.curseforge.com/minecraft/mc-mods/mountables I commissioned this mod as a substitute for Animal Bikes for 1.16, with further emphasis on making every type viable instead of just a few being the best. Overall it worked perfectly and was done in a reasonable time frame. There was a second update planned but due to outside issues it was never completed.">
-            <img src="/img/reviews/5.png" alt="After finding them via Google, I had Luke write me a mod to convert player heads to the corresponding player head when renamed in an anvil, and he had it done for me in about half a day working exactly how I'd hoped. I think it was a fairly straightforward ask, but I'm still exceedingly pleased with the cost, the communication, and the quality of the product and cannot recommend them strongly enough.">
-        </a>
+    <div>
+        <a href="https://github.com/LukeGrahamLandry/ForgedFabric" class="lib"> ForgedFabric: fabric api reimplemented on forge </a>
+        <a href="https://github.com/LukeGrahamLandry/CosmetologyLib" class="lib"> CosmetologyLib: render geckolib cosmetics on the player </a>
     </div>
-    
+
+    <br>
     <div style="text-align: center;">
         <div class="stat">
             <img src="img/download.svg" alt="" >

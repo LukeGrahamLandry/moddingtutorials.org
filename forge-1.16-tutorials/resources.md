@@ -92,9 +92,3 @@ Mixins allow you to directly modify vanilla's bytecode. Generally try to avoid u
 
 - http://darkhax.net/2020/07/mixins
 - https://github.com/SpongePowered/Mixin/wiki/Mixins-on-Minecraft-Forge
-
-## Dependencies
-
-You can add integration with other mods and have them as a required or optional dependency. If a mod doesnt provide an api for what you are trying to do, note that it is possible to mixin to another mod's code (tho thats dangerous as modded code will likey change frequently). 
-
-- https://forge.gemwire.uk/wiki/Dependencies/1.16

@@ -1,6 +1,8 @@
 coming soon...   
 Join [the discord server](/discord) to be notified when it is released. 
 
+WAY BETTER EXPLANATION THAN I COULD EVER WRITE: http://blog.minecraftforge.net/personal/sciwhiz12/what-are-mappings/
+
 ## Different Mappings Projects
 
 - MCP

@@ -107,7 +107,7 @@ def combile_md(source_folder, filename, target_folder, pages_list, can=None):
     meta = ""
     if True:
         if title in site_data["un_versioned"]:
-            dataUrl = "https://github.com/LukeGrahamLandry/modding-tutorials/blob/master/pages/{} -->".format(filename)
+            dataUrl = "https://github.com/LukeGrahamLandry/modding-tutorials/blob/master/pages/{}".format(filename)
         else:
             dataUrl = "https://github.com/LukeGrahamLandry/modding-tutorials/blob/master/{}/{}".format(source_folder.split("/")[-1], filename)
         

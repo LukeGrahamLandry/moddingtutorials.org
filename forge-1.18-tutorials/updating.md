@@ -87,4 +87,7 @@ Then if you restart intellij and go to Refactor > Migrate, select `FMLLagacy ref
 There are a few other changes to make in your code. For example,
 
 - on your block entities, do **not** override `save`. Instead, override `saveAdditional` (which now returns `void`)
+- info about changes to tags and registries: https://gist.github.com/SizableShrimp/ddcbe9a9862cc4a0f526c42ae49b2c1d
+- info about changes to entity model rendering : https://gist.github.com/gigaherz/7115024820f55717bc40a6e2247c6aca
+- info about changes to tool system: https://gist.github.com/gigaherz/691f528a61f631af90c9426c076a298a
 - heres a tool that can help you update world gen data packs: https://misode.github.io/upgrader/
