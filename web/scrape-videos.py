@@ -130,8 +130,11 @@ def processVideos():
         else:
             video_id = video_url.split("be/")[1]
 
-        data["paid"].append(getInfo(video_id))
-        total += int(data["paid"][-1]["views"])
+        try:
+            data["paid"].append(getInfo(video_id))
+            total += int(data["paid"][-1]["views"])
+        except:
+            print("Failed video: " + video_id)
 
         time.sleep(1)
     

@@ -105,6 +105,8 @@ Then you can override `randomTick` to do something interesting. I'll make mine c
         }
     }
 
+You can use the command `/gamerule randomTickSpeed 9999` to increase the tick rate while testing.
+
 ### Other Methods 
 
 The `Block` class has lots more methods to play with. Here's a description of a few of them:
