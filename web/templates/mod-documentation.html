@@ -12,9 +12,9 @@
     <meta property="og:site_name" content="Modding Tutorials">
 
     <link rel="shortcut icon" href="/img/logo.png">
-    <link rel="stylesheet" href="styles/tutorial.css">
+    <link rel="stylesheet" href="/styles/tutorial.css">
     <link rel="stylesheet" href="/styles/md.css">
-    <link rel="stylesheet" href="/code.css">
+    <link rel="stylesheet" href="/styles/code.css">
     <link rel="stylesheet" id="theme" href="/styles/dark.css">
     
     <style>
@@ -35,8 +35,11 @@
 </head>
 <body>
     <div id="side-nav">
-        <div>
-            <div style="text-align: center;">
+        <div style="padding: 10px;">
+            <a href="/mods">About</a>
+            <a href="/discord" target="_blank" style="float: right;">Contact</a>
+
+            <div style="text-align: center; padding-top: 10px;">
                 <label class="switch">
                     <input type="checkbox" id="dark" onclick="updateDarkmode()" checked>
                     <span class="slider round"></span>
@@ -52,38 +55,35 @@
                     Modding Tutorials
                 </a>
             </div>
+
             <!--
             <div style="text-align: center; margin-top: 10px; margin-bottom: 15px;">
                 <a class="alert green sm" href="/commissions" target="_blank">
-                    Minecraft Mod Commissions open! 
-                </a>
-            </div>
-            <div style="text-align: center; margin-top: 10px; margin-bottom: 15px;">
-                <a class="alert green sm" href="/launcher-commissions" target="_blank">
-                    Custom Launcher Commissions! 
+                    Commissions are open! 
                 </a>
             </div>
             -->
-            <div style="text-align: center; margin-top: 10px; margin-bottom: 15px;">
-                <a class="alert blue sm" href="/discord" target="_blank">
-                    Modding Discord Community
-                </a>
+            <div class="section">
+                $NAV
             </div>
-            <div style="text-align: center; margin-top: 10px; margin-bottom: 15px;">
-                <a class="alert sm" href="/mods" target="_blank">
-                    Mod Documentation
-                </a>
-            </div>
+            
+        </div>
 
-            <div style="text-align: center;">
-                <a href="how-to-monetize-a-minecraft-server" class="post">Server Monetization</a>
-                <a href="custom-launcher-pros-and-cons" class="post">Custom Launcher Pros & Cons</a>
-                <a href="how-to-make-money-making-minecraft-mods" class="post">Mod Dev Make Money</a>
-                <a href="share-alike-licenses" class="post">ShareAlike Licenses</a>
+        <div style="text-align: center;">
+            <a href="/discord" class="img-link" target="_blank">
+                <div class="app">
+                    <img src="/img/discord.png" style="width: 50px">
+                </div>
+            </a>
 
-                <br>
-                <a href="/discord" target="_blank">Contact</a>
-            </div>
+            <a href="https://github.com/LukeGrahamLandry/modding-tutorials" class="img-link" target="_blank">
+                <div class="app">
+                    <img src="/img/github.png" style="width: 50px">
+                </div>
+            </a>
+        </div>
+        <div style="padding: 10px; font-size: 12px; font-weight: bolder;">
+            $LICENSE
         </div>
     </div>
 

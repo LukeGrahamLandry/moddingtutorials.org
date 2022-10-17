@@ -13,5 +13,5 @@ The tutorial mod code is in branches of another repo.
 
 ## Build
 
-- `python3 build.py`
-- PYTHON_VERSION=3.7
+- `python3 build.py` (PYTHON_VERSION=3.7)
+- then serve the `dist` directory

@@ -14,21 +14,28 @@ with open("web/pages.json", "r") as f:
 lex = lexers.get_lexer_by_name("java")
 formatter = HtmlFormatter()
 
-with open("web/template.html", "r") as f:
-    template = "".join(f.readlines())
+OUTPUT_DIRECTORY = "dist"
 
-ignore = ["about.md", "support.md", "my-mods.md", "contact.md"]
-tutorials = ["java-basics", "environment-setup", "basic-items", "advanced-items", "basic-blocks", "advanced-blocks", "tools-armor", "tile-entities", "enchantments",
-             "recipes"]
+class CommissionsHelper:
+    @staticmethod
+    def processCommissionsPage():
+        with open("web/videos.json", "r") as f:
+            video_data = json.loads("".join(f.readlines()))
 
-# html gen from videos.json
-if True:
-    with open("web/videos.json", "r") as f:
-        video_data = json.loads("".join(f.readlines()))
+        with open("web/commissions.html", "r") as f:
+            commissions_html = "".join(f.readlines())
 
+        commissions_html = commissions_html.replace("$VIDEOS", CommissionsHelper.getVideosHTML(video_data["paid"])).replace("$CHANNELS", CommissionsHelper.getChannelsHTML(video_data["yt-clients"]))
+
+        with open(OUTPUT_DIRECTORY + "/commissions.html", "w") as f:
+            f.write(commissions_html)
+
+        
+    @staticmethod
     def getViews(video):
         return int(video["views"])
 
+    @staticmethod
     def formatViewNumber(views):
         views = int(views)
         if views >= 1000000000:
@@ -43,8 +50,9 @@ if True:
         
         return views
 
+    @staticmethod
     def getVideosHTML(videos):
-        videos.sort(reverse=True, key=getViews)
+        videos.sort(reverse=True, key=CommissionsHelper.getViews)
 
         video_html = ""
 
@@ -53,13 +61,14 @@ if True:
             video_html += '<img src="/img/videos/' +  video["id"] + '.jpg" alt="video thumbnail"> \n'
 
             video_html += '<b class="title">' + video["title"][0:45] + "</b> \n"
-            video_html += "<b>" + formatViewNumber(video["views"]) + ' Views </b> <b class="title"> by ' + video["channel"] + " </b> \n"
+            video_html += "<b>" + CommissionsHelper.formatViewNumber(video["views"]) + ' Views </b> <b class="title"> by ' + video["channel"] + " </b> \n"
             video_html += "</a>\n"
         
         return video_html
 
+    @staticmethod
     def getChannelsHTML(channels):
-        channels.sort(reverse=True, key=getViews)
+        channels.sort(reverse=True, key=CommissionsHelper.getViews)
 
         html = '<link rel="stylesheet" href="/styles/channels.css">\n'
 
@@ -68,171 +77,21 @@ if True:
             html += '<img src="/img/videos/' +  channel["id"] + '.jpg" alt="video thumbnail"> \n'
 
             html += '<b class="title">' + channel["title"] + "</b> \n"
-            html += '<b class="subs">' + formatViewNumber(channel["subscribers"]) + ' Subscribers </b> \n'
-            html += '<b class="views">' + formatViewNumber(channel["views"]) + ' Views </b> \n'
+            html += '<b class="subs">' + CommissionsHelper.formatViewNumber(channel["subscribers"]) + ' Subscribers </b> \n'
+            html += '<b class="views">' + CommissionsHelper.formatViewNumber(channel["views"]) + ' Views </b> \n'
             html += "</span>\n"
         
         return html
 
-def combile_md(source_folder, filename, target_folder, pages_list, can=None):
-    with open(source_folder + "/" + filename, "r") as f:
-         md_content = "".join(f.readlines())
-    html_content = markdown.markdown(md_content, extensions=['fenced_code', "mdx_linkify"])
 
-    # print(html_content)
-
-    code_parts = html_content.split("<code>")
-    html_syntax_highlighted = code_parts[0]
-    del code_parts[0]
-
-    for part in code_parts:
-        code = part.split("</code>")[0]
-        code = su.unescape(code)
-        end = part.split("</code>")[1]
-
-        styled_code = highlight(code, lex, formatter)
-        
-        styled_code = styled_code.split('<div class="highlight"><pre>')[1]
-        styled_code = styled_code.split('</div>')[0]
-
-        html_syntax_highlighted += '<code class="highlight">'
-        html_syntax_highlighted += styled_code
-        html_syntax_highlighted += "</code>"
-        html_syntax_highlighted += end
-    
-    title = ".".join(filename.split(".")[:-1])
-    filename_to_write = title + ".html"
-    
-    # meta tags
-    meta = ""
-    if True:
-        if title in site_data["un_versioned"]:
-            dataUrl = "https://github.com/LukeGrahamLandry/modding-tutorials/blob/master/pages/{}".format(filename)
-        else:
-            dataUrl = "https://github.com/LukeGrahamLandry/modding-tutorials/blob/master/{}/{}".format(source_folder.split("/")[-1], filename)
-        
-        meta += "<!-- submit a fix to the content of this page: {} -->".format(dataUrl)
-        
-        displayName = ""
-        for part in filename.split(".")[0].split("-"):
-            displayName += part[0].upper() + part[1:] + " "
-        displayName += "| Minecraft Modding Tutorials"
-        
-        if title == "index":
-            displayName = "Minecraft Forge Modding Tutorials"
-
-        meta += "<title>" + displayName + "</title>"
-        path = title
-        if target_folder is not None and title not in site_data["un_versioned"]:
-            path = target_folder + "/" + path
-        else:
-            if can is not None and title not in site_data["un_versioned"]:
-                path = can + "/" + path
-        meta += '<link rel="canonical" href="https://moddingtutorials.org/' + path + '"/>'
-
-        if title in site_data["descriptions"]:
-            meta += '<meta name="description" content="' + site_data["descriptions"][title] + '">'
-
-    full_content = template.replace("$CONTENT", html_syntax_highlighted).replace("$META", meta).replace("$TUTORIALS", json.dumps(pages_list)).replace("\$CHANNELS", getChannelsHTML(video_data["yt-clients"]))
-
-    generateSlashRedirectFix(target_folder, title)
-
-    if target_folder is None:
-        with open(filename_to_write, "w") as f:
-            f.write(full_content)
-    else: 
-        with open(target_folder + "/" + filename_to_write, "w") as f:
-            f.write(full_content)
-
-def buildMainTutorialSite():
-    default_section_url = "o19"
-
-    for section_data in site_data["sections"]:
-        for root, dirs, files in os.walk(section_data["folder"], topdown=False):
-            if not os.path.isdir(section_data["url"]):
-                os.mkdir(section_data["url"])
-
-            for rooti, dirsi, filesi in os.walk("pages", topdown=False):
-                for namei in filesi:
-                    if (".md" in namei):
-                        print(section_data["url"], namei)
-                        combile_md(rooti, namei, section_data["url"], section_data["files"])
-
-                        if section_data["url"] == default_section_url:
-                            combile_md(rooti, namei, None, section_data["files"], default_section_url)
-
-            for name in files:
-                if (".md" in name):
-                    print(section_data["url"], name)
-                    combile_md(root, name, section_data["url"], section_data["files"])
-
-                    if section_data["url"] == default_section_url:
-                        combile_md(root, name, None, section_data["files"], default_section_url)
-
-    for root, dirs, files in os.walk("web", topdown=True):
-        for dir in dirs:
-            if (not os.path.isdir(dir)):
-                os.mkdir(dir)
-
-        rel_dir = os.path.relpath(root, os.getcwd() + "/web")
-
-        if (not os.path.isdir(rel_dir)):
-            os.mkdir(rel_dir)
-
-        for file in files:
-            if ".py" in file or ".json" in file:
-                continue
-
-            shutil.copy("web/" + rel_dir + "/" + file, rel_dir + "/" + file)
-
-    with open("code.css", "w") as f:
-        f.write(formatter.get_style_defs())
-
-    with open("web/commissions.html", "r") as f:
-        commissions_html = "".join(f.readlines())
-
-    commissions_html = commissions_html.replace("$VIDEOS", getVideosHTML(video_data["paid"])).replace("$CHANNELS", getChannelsHTML(video_data["yt-clients"])) # .replace("$FORGE1.15", getVideosHTML(video_data["1.15"]))
-
-    with open("commissions.html", "w") as f:
-        f.write(commissions_html)
-
-    with open("web/index.html", "r") as f:
-        index_html = "".join(f.readlines())
-
-    for section_info in site_data["sections"]:
-        url = section_info["url"]
-        shutil.copy("commissions.html", url + "/commissions.html")
-        with open(url + "/index.html", "w") as f:
-            f.write(index_html)
-
-    shutil.copy(default_section_url + "/index.html", "index.html")
-
-
-def generateSlashRedirectFix(directory, filename):
-    # ugly hack
-
-    if directory is None:
-        if (not os.path.isdir(filename)):
-            os.mkdir(filename)
-        with open(filename + "/index.html", "w") as f:
-            f.write('<link rel="canonical" href="https://moddingtutorials.org/' + filename + '"/>')
-            f.write('cloudflare pages can not deal with trailing slashes properly. redirecting to <a href="/' + filename + '">' + filename + '</a> <script> window.location.href = "/' + filename + '";</script>')
-
-    else:
-        if (not os.path.isdir(directory + "/" + filename)):
-            os.mkdir(directory + "/" + filename)
-        with open(directory + "/" + filename + "/index.html", "w") as f:
-            f.write('<link rel="canonical" href="https://moddingtutorials.org/' + directory + "/" + filename + '"/>')
-            f.write('cloudflare pages can not deal with trailing slashes properly. redirecting to <a href="/' + directory + "/" + filename + '">' + filename + '</a> <script> window.location.href = "/' + directory + "/" + filename + '";</script>')
-
-
+# TODO: refactor these methods to be a SiteSection implementation
 def buildFetchedPages(extra_nav_html):
-    with open("web/mod_docs_template.html", "r") as f:
+    with open("web/templates/mod-documentation.html", "r") as f:
         template = "".join(f.readlines())
     
     for directory, pages in site_data["fetched-pages"].items():
-        if not os.path.isdir(directory):
-                os.mkdir(directory)
+        if not os.path.isdir(OUTPUT_DIRECTORY + "/" + directory):
+                os.mkdir(OUTPUT_DIRECTORY + "/" + directory)
 
         for page in pages:
             url = None
@@ -285,12 +144,11 @@ def buildFetchedPages(extra_nav_html):
 
             full_content = template.replace("$CONTENT", html_content).replace("$META", meta).replace("$LICENSE", license_html).replace("$NAV", extra_nav_html)
 
-            with open(directory + "/" + filename + ".html", "w") as f:
+            with open(OUTPUT_DIRECTORY + "/" + directory + "/" + filename + ".html", "w") as f:
                 f.write(full_content)
 
-            generateSlashRedirectFix(directory, filename)
-
 def generateModDocsIndexHtml():
+
     # my mods
     index_html = ""
     for page in site_data["fetched-pages"]["mods"]:
@@ -316,10 +174,9 @@ def generateModDocsIndexHtml():
 
     return index_html
 
-
 # valid front matter keys: author, version, source, download, contact
 def buildDocsPages(extra_nav_html):
-    with open("web/mod_docs_template.html", "r") as f:
+    with open("web/templates/mod-documentation.html", "r") as f:
         template = "".join(f.readlines())
 
     for root, dirs, files in os.walk("mod-documentation", topdown=True):
@@ -386,18 +243,170 @@ def buildDocsPages(extra_nav_html):
 
             full_content = template.replace("$CONTENT", html_content).replace("$META", meta).replace("$LICENSE", license_html).replace("$NAV", extra_nav_html)
 
-            with open("mods/" + name + ".html", "w") as f:
+            with open(OUTPUT_DIRECTORY + "/mods/" + name + ".html", "w") as f:
                 f.write(full_content)
 
-            generateSlashRedirectFix("mods", name)
+# TODO: refactor so i dont need this referenced in the normal SiteSection, should only be in TutorialSiteSection
+defaultNamespace = "o19"
+
+class SiteSection:
+    def __init__(self, sourceDir, urlPrefix, templateFile):
+        self.sourceDir = sourceDir
+        self.urlPrefix = urlPrefix
+        self.templateFile = templateFile
+        with open("web/templates/" + templateFile, "r") as f:
+            self.template_html = "".join(f.readlines())
+
+    def processFiles(self):
+        target_output_dir = OUTPUT_DIRECTORY + "/" + self.urlPrefix
+        if not os.path.isdir(target_output_dir):
+            os.mkdir(target_output_dir)
+        
+        baseroot = None
+        for root, dirs, files in os.walk(self.sourceDir, topdown=True):
+            if baseroot is None:
+                baseroot = root
+            
+            subdirectory = root.replace(baseroot + "/", "").replace(baseroot, "")
+            print(root, baseroot, subdirectory)
+            for filename in files:
+                if ".md" not in filename:
+                    continue
+
+                target = filename
+                if subdirectory != "":
+                    target = subdirectory + "/" + filename
+                
+                self.compileMD(baseroot, target)
+            
+            for dir in dirs:
+                os.mkdir(OUTPUT_DIRECTORY + "/" +  self.urlPrefix + "/" + dir)
+
+                if self.urlPrefix == defaultNamespace:
+                    os.mkdir(OUTPUT_DIRECTORY + "/" + dir)
+
+    def highlightCode(self, html_content):
+        code_parts = html_content.split("<code>")
+        html_syntax_highlighted = code_parts[0]
+        del code_parts[0]
+
+        for part in code_parts:
+            code = part.split("</code>")[0]
+            code = su.unescape(code)
+            end = part.split("</code>")[1]
+
+            styled_code = highlight(code, lex, formatter)
+            
+            styled_code = styled_code.split('<div class="highlight"><pre>')[1]
+            styled_code = styled_code.split('</div>')[0]
+
+            html_syntax_highlighted += '<code class="highlight">'
+            html_syntax_highlighted += styled_code
+            html_syntax_highlighted += "</code>"
+            html_syntax_highlighted += end
+        
+        return html_syntax_highlighted
+
+    def getCanonicalPath(self, title):
+        path = "{}/{}".format(self.urlPrefix, title)
+        if self.urlPrefix is None or self.urlPrefix == "":
+            path = "{}".format(title)
+        return path
+
+    def getDescription(self, title, metadata):
+        if "description" in metadata:
+            return metadata["description"]
+
+    def getDisplayName(self, title, metadata):
+        displayName = ""
+        for part in title.split("-"):
+            displayName += part[0].upper() + part[1:] + " "
+        
+        return displayName
+
+    def generateMetaTags(self, title, metadata):
+        meta = "<title>{}</title> \n".format(self.getDisplayName(title, metadata))
+        meta += '<link rel="canonical" href="https://moddingtutorials.org/{}"/> \n'.format(self.getCanonicalPath(title))
+        meta += '<meta name="description" content="{}"> \n'.format(self.getDescription(title, metadata))
+        return meta
+
+    def compileMD(self, source_folder_path, filename):
+        print("building {}/{} to {}".format(source_folder_path, filename, self.urlPrefix))
+
+        title = ".".join(filename.split(".")[:-1])
+        with open(source_folder_path + "/" + filename, "r") as f:
+            metadata, md_content = frontmatter.parse(f.read())
+        
+        html_content = markdown.markdown(md_content, extensions=['fenced_code', "mdx_linkify"])
+        html_content = self.highlightCode(html_content)
+        html_content = self.template_html.replace("$CONTENT", html_content).replace("$META", self.generateMetaTags(title, metadata))
+        
+        self.writeFile(title, html_content)
+    
+    def writeFile(self, title, html_content):
+        out_path = "{}/{}.html".format(self.urlPrefix, title)
+        if self.urlPrefix is None or self.urlPrefix == "":
+            out_path = "{}.html".format(title)
+        out_path = OUTPUT_DIRECTORY + "/" + out_path
+            
+        with open(out_path, "w") as f:
+            f.write(html_content)
 
 
-buildMainTutorialSite()
-mod_docs_index = generateModDocsIndexHtml()
-buildFetchedPages(mod_docs_index)
-buildDocsPages(mod_docs_index)
+class TutorialSiteSection(SiteSection):
+    def __init__(self, sourceDir, urlPrefix, templateFile):
+        super().__init__(sourceDir, urlPrefix, templateFile)
+    
+    def getDescription(self, title, metadata):
+        if title in site_data["descriptions"]:
+            return site_data["descriptions"][title]
+    
+    def getDisplayName(self, title, metadata):
+        displayName = super().getDisplayName(title, metadata)
 
-# export PATH=$PATH:/opt/buildhome/.local/bin && pip3 install requests && pip3 install markdown && pip3 install pygments && pip3 install mdx_linkify && pip3 install python-frontmatter && python3 build.py
-# PYTHON_VERSION 3.7
+        displayName += "| Minecraft Modding Tutorials"
+        if title == "index":
+            displayName = "Minecraft Forge Modding Tutorials"
 
-# https://cf.way2muchnoise.eu/
+        return displayName
+
+    def writeFile(self, title, html_content):
+        super().writeFile(title, html_content)
+
+        if self.urlPrefix == "o19":
+            out_path = "{}/{}.html".format(OUTPUT_DIRECTORY, title)
+            with open(out_path, "w") as f:
+                f.write(html_content)
+
+if __name__ == "__main__":
+    versions = ["19", "18", "17", "16"]
+    sections = [
+        TutorialSiteSection("mod-documentation", "mods", "mod-documentation.html"),
+        TutorialSiteSection("articles", "c", "article.html")
+    ]
+
+    for v in versions:
+        sections.append(TutorialSiteSection("forge-1.{}-tutorials".format(v), "o{}".format(v), "tutorial.html"))
+        sections.append(TutorialSiteSection("pages".format(v), "o{}".format(v), "tutorial.html"))
+
+
+    if os.path.isdir(OUTPUT_DIRECTORY):
+        shutil.rmtree(OUTPUT_DIRECTORY)
+    shutil.copytree("web", OUTPUT_DIRECTORY)
+
+    for section in sections:
+        section.processFiles()
+
+    CommissionsHelper.processCommissionsPage()
+
+    with open(OUTPUT_DIRECTORY + "/styles/code.css", "w") as f:
+        f.write(formatter.get_style_defs())
+
+    for v in versions:
+        url = "o" + v
+        shutil.copy(OUTPUT_DIRECTORY + "/commissions.html", OUTPUT_DIRECTORY + "/" + url + "/commissions.html")
+        shutil.copy(OUTPUT_DIRECTORY + "/index.html",  OUTPUT_DIRECTORY + "/" + url + "/index.html")
+
+    mod_docs_index = generateModDocsIndexHtml()
+    buildFetchedPages(mod_docs_index)
+    buildDocsPages(mod_docs_index)
