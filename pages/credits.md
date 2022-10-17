@@ -36,7 +36,7 @@ People who paid me to make mods.
 
 ## Tutorial Contributors 
 
-If you notice any mistakes in my tutorials, please submit a pull request on [the github page](https://github.com/LukeGrahamLandry/modding-tutorials). When it's merged, I'll add your name to this list. 
+If you notice any mistakes in my tutorials or want to submit additional tutorials to be hosted on the site, please [let me know](/discord)!. I'll add your name to this list. 
 
 - thedude
 - Matthew
@@ -51,5 +51,5 @@ If you notice any mistakes in my tutorials, please submit a pull request on [the
 
 - Dalton Pratt
 - **PsycoNova**
-- **CiaoRobban**
+- CiaoRobban
 - SpottyTheTurtle

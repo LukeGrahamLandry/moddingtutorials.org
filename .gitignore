@@ -1,10 +1,9 @@
 # mac os
-# .DS_Store
+.DS_Store
 
 # built site
 dist
 
 # in progress
-articles
 */blueprint
 */citadel

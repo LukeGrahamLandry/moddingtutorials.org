@@ -1,37 +1,4 @@
 {
-    "sections": [
-        {
-            "folder": "forge-1.19-tutorials",
-            "url": "o19",
-            "title": "Forge 1.19",
-            "files": ["intro", "java-basics", "environment-setup", "basic-items", "advanced-items", "basic-blocks", 
-                "advanced-blocks", "tools-armor", "tile-entities", "enchantments", "recipes", "arrows", "world-gen", "resources", "solutions"]
-        },
-        {
-            "folder": "forge-1.18-tutorials",
-            "url": "o18",
-            "title": "Forge 1.18.2",
-            "files": ["intro", "java-basics", "environment-setup", "basic-items", "advanced-items", "basic-blocks", 
-                "advanced-blocks", "tools-armor", "tile-entities", "enchantments", "recipes", "arrows", "world-gen", "resources", "solutions"]
-        },
-        {
-            "folder": "forge-1.17-tutorials",
-            "url": "o17",
-            "title": "Forge 1.17.1",
-            "files": ["intro", "java-basics", "environment-setup", "basic-items", "advanced-items", "basic-blocks", 
-                "advanced-blocks", "tools-armor", "tile-entities", "enchantments", "recipes", "arrows", "world-gen", "resources", "solutions"]
-        },
-        {
-            "folder": "forge-1.16-tutorials",
-            "url": "o16",
-            "title": "Forge 1.16.5",
-            "files": ["intro", "java-basics", "environment-setup", "basic-items", "advanced-items", "basic-blocks", 
-                "advanced-blocks", "tools-armor", "tile-entities", "enchantments", "recipes", "arrows", "world-gen", "resources", "solutions"]
-        }
-    ],
-    "un_versioned": [
-        "intro", "index",  "topics", "changelog", "credits", "my-mods", "my-work", "history", 
-        "java-basics", "mappings", "registries", "sides", "mods-toml", "solutions", "bad-clients"],
     "videos": [
         "https://www.youtube.com/watch?v=jVzeGKbVLCc",
         "https://www.youtube.com/watch?v=lJp6rdELdu8",
@@ -139,7 +106,7 @@
         "java-basics": "An overview of java programming language concepts required to create Minecraft mods.",
         "environment-setup": "Setup a development environment to create a Minecraft mod with the Forge API (1.16.5+)",
         "basic-items": "How to create a simple item in your Minecraft Forge mod (1.16.5+)",
-        "advanced-items": "How to create items with complex bevavior, like food and fuel (2022, Forge 1.16.5+)",
+        "advanced-items": "How to create items with complex behavior, like food and fuel (2022, Forge 1.16.5+)",
         "basic-blocks": "How to create a simple block in your Minecraft Forge Mod (1.16.5+)",
         "advanced-blocks": "Create a block with complex behavior (like reacting to right clicks) in your Minecraft Forge Mod (1.16.5+)",
         "tools-armor": "Create custom tools and armor in your Minecraft mod (2022, Forge 1.16.5+)",

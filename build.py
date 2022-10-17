@@ -3,9 +3,7 @@ import markdown, json, shutil, requests
 from pygments import lexers
 from pygments import highlight 
 from pygments.formatters import HtmlFormatter
-import re
 from xml.sax import saxutils as su
-from datetime import datetime
 import frontmatter
 
 with open("web/pages.json", "r") as f:
@@ -84,7 +82,7 @@ class CommissionsHelper:
         return html
 
 
-# TODO: refactor these methods to be a SiteSection implementation
+# TODO: refactor into a SiteSection implementation
 def buildFetchedPages(extra_nav_html):
     with open("web/templates/mod-documentation.html", "r") as f:
         template = "".join(f.readlines())
@@ -147,105 +145,6 @@ def buildFetchedPages(extra_nav_html):
             with open(OUTPUT_DIRECTORY + "/" + directory + "/" + filename + ".html", "w") as f:
                 f.write(full_content)
 
-def generateModDocsIndexHtml():
-
-    # my mods
-    index_html = ""
-    for page in site_data["fetched-pages"]["mods"]:
-        name = page["name"].lower().replace(" ", "-")
-        index_html += '<a href="{}" class="post">{}</a>'.format(name, page["name"])
-    
-    index_html += "<hr/>"
-
-    # md files
-    for root, dirs, files in os.walk("mod-documentation", topdown=True):
-        for filename in files:
-            if filename == "index.md" or ".md" not in filename:
-                continue
-            
-            name = filename.split(".")[0]
-            displayName = ""
-            for part in name.split("-"):
-                displayName += part[0].upper() + part[1:] + " "
-
-            index_html += '<a href="{}" class="post">{}</a>'.format(name, displayName)
-
-        break;
-
-    return index_html
-
-# valid front matter keys: author, version, source, download, contact
-def buildDocsPages(extra_nav_html):
-    with open("web/templates/mod-documentation.html", "r") as f:
-        template = "".join(f.readlines())
-
-    for root, dirs, files in os.walk("mod-documentation", topdown=True):
-        for filename in files:
-            if ".md" not in filename:
-                continue
-            
-            name = filename.split(".")[0]
-            displayName = ""
-            for part in name.split("-"):
-                displayName += part[0].upper() + part[1:] + " "
-            
-            meta = "<title>" + displayName + "</title>"
-            meta += '<link rel="canonical" href="https://moddingtutorials.org/{}/{}"/>'.format("mods", name)
-
-            post = frontmatter.load("mod-documentation/" + filename)
-
-            html_content = ""
-            if filename != "index.md":
-
-                html_content += """
-                    <div style="text-align: center; margin-top: 10px;">
-                """
-                
-                if "author" in post.keys():
-                    html_content += """
-                        
-                        <h1 style="margin-bottom: 0px"> $NAME by $AUTHOR </h1>
-                    """.replace("$NAME", displayName).replace("$AUTHOR", post["author"])
-
-                if "version" in post.keys():
-                    html_content += """
-                        <span style="font-size: 1rem"> version $VERSION </span> <br>
-                    """.replace("$VERSION", post["version"])
-
-                if "download" in post.keys():
-                    html_content += """
-                        <a class="alert orange sm" style="display: inline-block;" href="$LINK" target="_blank">
-                            Download Mod
-                        </a>
-                    """.replace("$LINK", post["download"])
-                
-                if "source" in post.keys():
-                    html_content += """
-                        <a class="alert black sm" style="display: inline-block;" href="$LINK" target="_blank">
-                            Source Code
-                        </a>
-                    """.replace("$LINK", post["source"])
-
-                if "contact" in post.keys():
-                    html_content += """
-                        <a class="alert blue sm" style="display: inline-block;" href="$LINK" target="_blank">
-                            Contact Author
-                        </a>
-                    """.replace("$LINK", post["contact"])
-
-                html_content += "<br><br></div>"
-            
-            html_content += markdown.markdown(post.content, extensions=['fenced_code'])
-
-            license_html = """
-            This content is available under the <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0 License</a>.
-            """
-
-            full_content = template.replace("$CONTENT", html_content).replace("$META", meta).replace("$LICENSE", license_html).replace("$NAV", extra_nav_html)
-
-            with open(OUTPUT_DIRECTORY + "/mods/" + name + ".html", "w") as f:
-                f.write(full_content)
-
 # TODO: refactor so i dont need this referenced in the normal SiteSection, should only be in TutorialSiteSection
 defaultNamespace = "o19"
 
@@ -266,9 +165,9 @@ class SiteSection:
         for root, dirs, files in os.walk(self.sourceDir, topdown=True):
             if baseroot is None:
                 baseroot = root
-            
+
             subdirectory = root.replace(baseroot + "/", "").replace(baseroot, "")
-            print(root, baseroot, subdirectory)
+            
             for filename in files:
                 if ".md" not in filename:
                     continue
@@ -330,6 +229,9 @@ class SiteSection:
         meta += '<meta name="description" content="{}"> \n'.format(self.getDescription(title, metadata))
         return meta
 
+    def handleReplacements(self, html_content, title, metadata):
+        return self.template_html.replace("$CONTENT", html_content).replace("$META", self.generateMetaTags(title, metadata))
+
     def compileMD(self, source_folder_path, filename):
         print("building {}/{} to {}".format(source_folder_path, filename, self.urlPrefix))
 
@@ -339,8 +241,8 @@ class SiteSection:
         
         html_content = markdown.markdown(md_content, extensions=['fenced_code', "mdx_linkify"])
         html_content = self.highlightCode(html_content)
-        html_content = self.template_html.replace("$CONTENT", html_content).replace("$META", self.generateMetaTags(title, metadata))
-        
+        html_content = self.handleReplacements(html_content, title, metadata)
+
         self.writeFile(title, html_content)
     
     def writeFile(self, title, html_content):
@@ -360,7 +262,7 @@ class TutorialSiteSection(SiteSection):
     def getDescription(self, title, metadata):
         if title in site_data["descriptions"]:
             return site_data["descriptions"][title]
-    
+
     def getDisplayName(self, title, metadata):
         displayName = super().getDisplayName(title, metadata)
 
@@ -373,40 +275,120 @@ class TutorialSiteSection(SiteSection):
     def writeFile(self, title, html_content):
         super().writeFile(title, html_content)
 
-        if self.urlPrefix == "o19":
+        if self.urlPrefix == defaultNamespace:
             out_path = "{}/{}.html".format(OUTPUT_DIRECTORY, title)
             with open(out_path, "w") as f:
                 f.write(html_content)
 
+# for pages that are the same between MC versions. sets the canonical tag to the root/title instead of root/version/title so google doesn't punish me for duplicate content
+class UnversionedTutorialSiteSection(TutorialSiteSection):
+    def getCanonicalPath(self, title):
+        return title
+
+class ModDocsSiteSection(SiteSection):
+    def __init__(self, sourceDir, urlPrefix, templateFile):
+        super().__init__(sourceDir, urlPrefix, templateFile)
+        self.extra_nav_html = self.generateModDocsIndexHtml()
+    
+    def generateModDocsIndexHtml(self):
+        index_html = ""
+
+        # fetched
+        for page in site_data["fetched-pages"][self.urlPrefix]:
+            name = page["name"].lower().replace(" ", "-")
+            index_html += '<a href="{}" class="post">{}</a>'.format(name, page["name"])
+        
+        index_html += "<hr/>"
+
+        # md files
+        for root, dirs, files in os.walk(self.sourceDir, topdown=True):
+            for filename in files:
+                if filename == "index.md" or ".md" not in filename:
+                    continue
+                
+                name = filename.split(".")[0]
+                displayName = ""
+                for part in name.split("-"):
+                    displayName += part[0].upper() + part[1:] + " "
+
+                index_html += '<a href="{}" class="post">{}</a>'.format(name, displayName)
+
+            break
+
+        return index_html
+
+    # valid front matter keys: description, author, version, source, download, contact
+    def handleReplacements(self, html_content, title, metadata):
+        header_html = """
+            <div style="text-align: center; margin-top: 10px;">
+        """
+        
+        if "author" in metadata:
+            header_html += """
+                
+                <h1 style="margin-bottom: 0px"> $NAME by $AUTHOR </h1>
+            """.replace("$NAME", self.getDisplayName(title, metadata)).replace("$AUTHOR", metadata["author"])
+
+        if "version" in metadata:
+            header_html += """
+                <span style="font-size: 1rem"> version $VERSION </span> <br>
+            """.replace("$VERSION", metadata["version"])
+
+        if "download" in metadata:
+            header_html += """
+                <a class="alert orange sm" style="display: inline-block;" href="$LINK" target="_blank">
+                    Download Mod
+                </a>
+            """.replace("$LINK", metadata["download"])
+        
+        if "source" in metadata:
+            header_html += """
+                <a class="alert black sm" style="display: inline-block;" href="$LINK" target="_blank">
+                    Source Code
+                </a>
+            """.replace("$LINK", metadata["source"])
+
+        if "contact" in metadata:
+            header_html += """
+                <a class="alert blue sm" style="display: inline-block;" href="$LINK" target="_blank">
+                    Contact Author
+                </a>
+            """.replace("$LINK", metadata["contact"])
+
+        header_html += "<br><br></div>"
+        license_html = """This content is available under the <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0 License</a>."""
+
+        full_content = super().handleReplacements(header_html + html_content, title, metadata)
+        full_content = full_content.replace("$LICENSE", license_html).replace("$NAV", self.extra_nav_html)
+        return full_content
+
+
 if __name__ == "__main__":
-    versions = ["19", "18", "17", "16"]
-    sections = [
-        TutorialSiteSection("mod-documentation", "mods", "mod-documentation.html"),
-        TutorialSiteSection("articles", "c", "article.html")
-    ]
-
-    for v in versions:
-        sections.append(TutorialSiteSection("forge-1.{}-tutorials".format(v), "o{}".format(v), "tutorial.html"))
-        sections.append(TutorialSiteSection("pages".format(v), "o{}".format(v), "tutorial.html"))
-
-
     if os.path.isdir(OUTPUT_DIRECTORY):
         shutil.rmtree(OUTPUT_DIRECTORY)
     shutil.copytree("web", OUTPUT_DIRECTORY)
 
-    for section in sections:
-        section.processFiles()
+    # SiteSection("articles", "c", "article.html").processFiles()
+    # SiteSection("vanilla", "vanilla", "article.html").processFiles()
+    
+    versions = ["19", "18", "17", "16"]
+    for v in versions:
+        TutorialSiteSection("forge-1.{}-tutorials".format(v), "o{}".format(v), "tutorial.html").processFiles()
+
+        UnversionedTutorialSiteSection("pages", "o{}".format(v), "tutorial.html").processFiles()
+    
+    modDocs = ModDocsSiteSection("mod-documentation", "mods", "mod-documentation.html")
+    modDocs.processFiles()
+    try:
+        buildFetchedPages(modDocs.extra_nav_html)
+    except requests.exceptions.ConnectionError:
+        print("Failed to buildFetchedPages, you're probably not connected to the internet.")
 
     CommissionsHelper.processCommissionsPage()
-
-    with open(OUTPUT_DIRECTORY + "/styles/code.css", "w") as f:
-        f.write(formatter.get_style_defs())
-
     for v in versions:
         url = "o" + v
         shutil.copy(OUTPUT_DIRECTORY + "/commissions.html", OUTPUT_DIRECTORY + "/" + url + "/commissions.html")
         shutil.copy(OUTPUT_DIRECTORY + "/index.html",  OUTPUT_DIRECTORY + "/" + url + "/index.html")
-
-    mod_docs_index = generateModDocsIndexHtml()
-    buildFetchedPages(mod_docs_index)
-    buildDocsPages(mod_docs_index)
+    
+    with open(OUTPUT_DIRECTORY + "/styles/code.css", "w") as f:
+        f.write(formatter.get_style_defs())

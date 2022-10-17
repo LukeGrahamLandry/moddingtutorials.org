@@ -127,6 +127,7 @@
             $CONTENT
         </div>
 
+        <br>
         <div class="hide-for-print" style="display: inline-block; max-width: 800px; width: 100%">
             <a class="alert blue full" href="/discord" target="_blank">
                 Got Questions? Join the Discord!
@@ -147,7 +148,7 @@
     <script>
         let thisPage = window.location.pathname.split("/").pop().split(".")[0]
 
-        // version select
+        // handle version select
         document.getElementById("dropdown").onchange = function (e){
             let new_url = e.target.value;
             if (new_url.includes("/")){
@@ -157,7 +158,7 @@
             }
         }
         
-        // mobile nav expand button
+        // handle mobile nav expand button
         let showing = false;
         function toggle(){
             showing = !showing;
@@ -169,18 +170,15 @@
             }
         }
 
+        // display selected version
         let versionId = window.location.pathname.split("/")[1]
-        if (versionId == "mods"){
-            document.getElementById("dropdown").innerHTML = ""
-        } else {
-            if (["o19", "o18", "o17", "o16"].indexOf(versionId) == -1){
-                versionId = "o19";
-            }
-            try {
-                document.getElementById(versionId).selected = true;
-            } catch (error) {
-                console.log("failed to mark selected #" + versionId);
-            }
+        if (["o19", "o18", "o17", "o16"].indexOf(versionId) == -1){
+            versionId = "o19";
+        }
+        try {
+            document.getElementById(versionId).selected = true;
+        } catch (error) {
+            console.log("failed to mark selected #" + versionId);
         }
     </script>
 </body>
