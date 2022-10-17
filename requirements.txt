@@ -1,0 +1,5 @@
+requests
+markdown
+pygments
+mdx_linkify
+python-frontmatter
