@@ -65,36 +65,19 @@ if (getCookie("darkmode")) {
     updateDarkmode();
 }
 
+window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
 
-// stream notification
-function checkStream(){
-    let API_KEY = "AIzaSyBqwRckp6kyEQK7yXNI4OhmRDGSEEUrgKk";
-    let channelId = "UC8gYhA5SkhI1tajZ5JF2pbQ";
-
-    let getStreamURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=" + channelId + "&eventType=live&type=video&key=" + API_KEY;
-    let streamData = httpGet(getStreamURL);
-    if (streamData["error"] != undefined){
-        console.log("youtube api key used on invalid site. PLEASE DONT STEAL MY CODE :) - LukeGrahamLandry#6888");
-    } else if (streamData["items"].length == 0) {
-        console.log("no stream found");
-    } else {
-        let url = "https://youtube.com/watch?v=" + streamData["items"][0]["id"]["videoId"];
-        let img = streamData["items"][0]["snippet"]["thumbnails"]["default"]["url"];
-        let title = streamData["items"][0]["snippet"]["title"];
-
-        console.log("found stream: " + title);
-    
-        let code = '<a class="video" href="' + url + '" target="_blank" id="videolink">'
-        code += '<img alt="stream thumbnail" src="' + img + '" id="videoimg">'
-        code += '<div style="position: absolute; bottom: 3rem; right: 25px; color: red; background-color: white; border-radius: 25px; padding: 3px; font-size: 0.75rem; font-weight: 1000;">&#x2B24; LIVE</div>'
-        code += '<b class="title" id="videotitle"> ' + title + ' </b>';
-        code += '</a>';
-    
-        let elements = document.getElementsByClassName("embedstream");
-        for (let i=0;i<elements.length;i++){
-            let element = elements[i];
-            element.innerHTML = code;
+function addGoalLinkEvents(){
+    let goals = ["discord", "patreon", "github"]
+    let urls = goals.map((goal) => document.location.origin + "/" + goal)
+    let links = document.getElementsByTagName("a");
+    for (let i=0;i<links.length;i++){
+        for (let g=0;g<goals.length;g++){
+            if (links[i].href == urls[g]){
+                links[i].onclick = () => plausible('Redirect', {props: {target: goals[g], page: document.location.pathname}});
+            }
         }
     }
 }
-// setTimeout(checkStream, 1);
+
+window.addEventListener('load', addGoalLinkEvents);

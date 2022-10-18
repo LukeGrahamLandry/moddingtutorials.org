@@ -16,17 +16,23 @@ OUTPUT_DIRECTORY = "dist"
 
 class CommissionsHelper:
     @staticmethod
-    def processCommissionsPage():
+    def processFiles():
         with open("web/videos.json", "r") as f:
             video_data = json.loads("".join(f.readlines()))
+        
+        CommissionsHelper.processPage("commissions.html", video_data)
+        CommissionsHelper.processPage("credits.html", video_data)
+    
+    def processPage(filename, video_data):
+        print("CommissionsHelper processing " + filename)
 
-        with open("web/commissions.html", "r") as f:
-            commissions_html = "".join(f.readlines())
+        with open(OUTPUT_DIRECTORY + "/" + filename, "r") as f:
+            content = "".join(f.readlines())
 
-        commissions_html = commissions_html.replace("$VIDEOS", CommissionsHelper.getVideosHTML(video_data["paid"])).replace("$CHANNELS", CommissionsHelper.getChannelsHTML(video_data["yt-clients"]))
+        content = content.replace("$VIDEOS", CommissionsHelper.getVideosHTML(video_data["paid"])).replace("$CHANNELS", CommissionsHelper.getChannelsHTML(video_data["yt-clients"]))
 
-        with open(OUTPUT_DIRECTORY + "/commissions.html", "w") as f:
-            f.write(commissions_html)
+        with open(OUTPUT_DIRECTORY + "/" + filename, "w") as f:
+            f.write(content)
 
         
     @staticmethod
@@ -80,7 +86,6 @@ class CommissionsHelper:
             html += "</span>\n"
         
         return html
-
 
 # TODO: refactor into a SiteSection implementation
 def buildFetchedPages(extra_nav_html):
@@ -384,7 +389,7 @@ if __name__ == "__main__":
     except requests.exceptions.ConnectionError:
         print("Failed to buildFetchedPages, you're probably not connected to the internet.")
 
-    CommissionsHelper.processCommissionsPage()
+    CommissionsHelper.processFiles()
     for v in versions:
         url = "o" + v
         shutil.copy(OUTPUT_DIRECTORY + "/commissions.html", OUTPUT_DIRECTORY + "/" + url + "/commissions.html")
@@ -392,3 +397,6 @@ if __name__ == "__main__":
     
     with open(OUTPUT_DIRECTORY + "/styles/code.css", "w") as f:
         f.write(formatter.get_style_defs())
+
+
+# gamerules, config, saved data

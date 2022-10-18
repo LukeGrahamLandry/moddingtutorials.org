@@ -72,7 +72,7 @@ When you release your mod, you generally include a license file that tells peopl
 - can they use parts of your code in their own mods?
 - can they reuse your assets (textures, models, etc) for their own projects?
 
-By default, having no license file makes your work All Rights Reserved, you own the copywrite so nobody's allowed to touch it. You can read more about your options at [choosealicense.org](choosealicense.org) but the basics choices are,  
+By default, having no license file makes your work All Rights Reserved, you own the copywrite so nobody's allowed to touch it. You can read more about your options at [choosealicense.org](https://choosealicense.org) but the basics choices are,  
 
 - MIT, which lets anyone do anything they want with your code. (this is what I use for almost everything I release)
 - GPL, GNU General Public License, which lets anyone do anything with your code as long as any derivative works they create are also open source under the GPL.
