@@ -6,41 +6,48 @@ from pygments.formatters import HtmlFormatter
 from xml.sax import saxutils as su
 import frontmatter
 
+lex = lexers.get_lexer_by_name("java")
+formatter = HtmlFormatter()
 with open("web/pages.json", "r") as f:
     site_data = json.loads("".join(f.readlines()))
 
-lex = lexers.get_lexer_by_name("java")
-formatter = HtmlFormatter()
-
 OUTPUT_DIRECTORY = "dist"
 
+"""
+    Performs replacements on files passed to processFiles. 
+
+    Arguments: stats from youtube's api by web/scrape-videos.py (input ids are from web/pages.json)
+    - paid_videos: [{id, title, views, time, channel}]
+    - client_channels: [{id, title, views, subscribers}]
+
+    Replacements:
+    - \$VIDEOS is replaced by thumbnails generated from paid_videos
+    - \$CHANNELS is replaced by icons & stats generated from client_channels
+"""
 class CommissionsHelper:
-    @staticmethod
-    def processFiles():
-        with open("web/videos.json", "r") as f:
-            video_data = json.loads("".join(f.readlines()))
-        
-        CommissionsHelper.processPage("commissions.html", video_data)
-        CommissionsHelper.processPage("credits.html", video_data)
+    def __init__(self, paid_videos, client_channels):
+        self.paid_videos = paid_videos
+        self.client_channels = client_channels
+
+    def processFiles(self, *files):
+        for filename in files:
+            self.processFile(filename)
     
-    def processPage(filename, video_data):
+    def processFile(self, filename):
         print("CommissionsHelper processing " + filename)
 
         with open(OUTPUT_DIRECTORY + "/" + filename, "r") as f:
             content = "".join(f.readlines())
 
-        content = content.replace("$VIDEOS", CommissionsHelper.getVideosHTML(video_data["paid"])).replace("$CHANNELS", CommissionsHelper.getChannelsHTML(video_data["yt-clients"]))
+        content = content.replace("\$VIDEOS", self.getVideosHTML()).replace("\$CHANNELS", self.getChannelsHTML())
 
         with open(OUTPUT_DIRECTORY + "/" + filename, "w") as f:
             f.write(content)
 
-        
-    @staticmethod
-    def getViews(video):
+    def getViews(self, video):
         return int(video["views"])
-
-    @staticmethod
-    def formatViewNumber(views):
+    
+    def formatViewNumber(self, views):
         views = int(views)
         if views >= 1000000000:
             views = str(round(views / 1000000000, 2)) + "B"
@@ -54,104 +61,37 @@ class CommissionsHelper:
         
         return views
 
-    @staticmethod
-    def getVideosHTML(videos):
-        videos.sort(reverse=True, key=CommissionsHelper.getViews)
+    def getVideosHTML(self):
+        self.paid_videos.sort(reverse=True, key=self.getViews)
 
         video_html = ""
 
-        for video in videos:
+        for video in self.paid_videos:
             video_html += '<a class="video" target="_blank" href="https://www.youtube.com/watch?v=' + video["id"] + '"> \n' 
             video_html += '<img src="/img/videos/' +  video["id"] + '.jpg" alt="video thumbnail"> \n'
 
             video_html += '<b class="title">' + video["title"][0:45] + "</b> \n"
-            video_html += "<b>" + CommissionsHelper.formatViewNumber(video["views"]) + ' Views </b> <b class="title"> by ' + video["channel"] + " </b> \n"
+            video_html += "<b>" + self.formatViewNumber(video["views"]) + ' Views </b> <b class="title"> by ' + video["channel"] + " </b> \n"
             video_html += "</a>\n"
         
         return video_html
-
-    @staticmethod
-    def getChannelsHTML(channels):
-        channels.sort(reverse=True, key=CommissionsHelper.getViews)
+    
+    def getChannelsHTML(self):
+        self.client_channels.sort(reverse=True, key=self.getViews)
 
         html = '<link rel="stylesheet" href="/styles/channels.css">\n'
 
-        for channel in channels:
+        for channel in self.client_channels:
             html += '<span class="channel"> \n' 
             html += '<img src="/img/videos/' +  channel["id"] + '.jpg" alt="video thumbnail"> \n'
 
             html += '<b class="title">' + channel["title"] + "</b> \n"
-            html += '<b class="subs">' + CommissionsHelper.formatViewNumber(channel["subscribers"]) + ' Subscribers </b> \n'
-            html += '<b class="views">' + CommissionsHelper.formatViewNumber(channel["views"]) + ' Views </b> \n'
+            html += '<b class="subs">' + self.formatViewNumber(channel["subscribers"]) + ' Subscribers </b> \n'
+            html += '<b class="views">' + self.formatViewNumber(channel["views"]) + ' Views </b> \n'
             html += "</span>\n"
         
         return html
 
-# TODO: refactor into a SiteSection implementation
-def buildFetchedPages(extra_nav_html):
-    with open("web/templates/mod-documentation.html", "r") as f:
-        template = "".join(f.readlines())
-    
-    for directory, pages in site_data["fetched-pages"].items():
-        if not os.path.isdir(OUTPUT_DIRECTORY + "/" + directory):
-                os.mkdir(OUTPUT_DIRECTORY + "/" + directory)
-
-        for page in pages:
-            url = None
-
-            if "repo" in page:
-                if not "branch" in page:
-                    page["branch"] = "main"
-
-                url = "https://raw.githubusercontent.com/{}/{}/README.md".format(page["repo"], page["branch"])
-            
-            if url is None:
-                print("no page url found " + json.dumps(page))
-                continue
-
-            r = requests.get(url)
-            if not r.status_code == 200:
-                print("error " + str(r.status_code) + " " + url)
-                continue
-
-            filename = page["name"].lower().replace(" ", "-")
-
-            meta = "<title>" + page["name"] + "</title>"
-            meta += '<link rel="canonical" href="https://moddingtutorials.org/{}/{}"/>'.format(directory, filename)
-            meta += "<!-- the text on this page was fetched from " + url + " I'm fairly confident that I'm only getting my own content but if you feel I stole something, please DM me on discord: LukeGrahamLandry#6888 -->"
-            
-            html_content = """<div style="text-align: center; margin-top: 10px;">"""
-
-            if "curseforge" in page:
-                html_content += """
-                    <a class="alert orange sm" style="display: inline-block;" href="https://www.curseforge.com/minecraft/mc-mods/$CF" target="_blank">
-                    Download Mod
-                    </a>
-                """.replace("$CF", page["curseforge"])
-            
-            html_content += """
-                <a class="alert black sm" style="display: inline-block;" href="https://github.com/$PATH" target="_blank">
-                    Source Code
-                </a>
-                <a class="alert blue sm" style="display: inline-block;" href="/discord" target="_blank">
-                    Contact Author
-                </a>
-                </div>
-            """.replace("$PATH", page["repo"])
-
-            html_content += markdown.markdown(r.text, extensions=['fenced_code'])
-
-            license_html = """
-            This content is available under the <a href="$PATH" target="_blank">$NAME mod's license</a>. 
-            """.replace("$PATH", "https://github.com/" + page["repo"]).replace("$NAME", page["name"])
-
-            full_content = template.replace("$CONTENT", html_content).replace("$META", meta).replace("$LICENSE", license_html).replace("$NAV", extra_nav_html)
-
-            with open(OUTPUT_DIRECTORY + "/" + directory + "/" + filename + ".html", "w") as f:
-                f.write(full_content)
-
-# TODO: refactor so i dont need this referenced in the normal SiteSection, should only be in TutorialSiteSection
-defaultNamespace = "o19"
 
 class SiteSection:
     def __init__(self, sourceDir, urlPrefix, templateFile):
@@ -181,13 +121,13 @@ class SiteSection:
                 if subdirectory != "":
                     target = subdirectory + "/" + filename
                 
-                self.compileMD(baseroot, target)
+                self.processMarkdownFile(baseroot, target)
             
             for dir in dirs:
-                os.mkdir(OUTPUT_DIRECTORY + "/" +  self.urlPrefix + "/" + dir)
-
-                if self.urlPrefix == defaultNamespace:
-                    os.mkdir(OUTPUT_DIRECTORY + "/" + dir)
+                self.makeSubfolder(dir)
+    
+    def makeSubfolder(self, dir):
+        os.mkdir(OUTPUT_DIRECTORY + "/" +  self.urlPrefix + "/" + dir)
 
     def highlightCode(self, html_content):
         code_parts = html_content.split("<code>")
@@ -222,6 +162,9 @@ class SiteSection:
             return metadata["description"]
 
     def getDisplayName(self, title, metadata):
+        if "title" in metadata:
+            return metadata["title"]
+        
         displayName = ""
         for part in title.split("-"):
             displayName += part[0].upper() + part[1:] + " "
@@ -231,18 +174,25 @@ class SiteSection:
     def generateMetaTags(self, title, metadata):
         meta = "<title>{}</title> \n".format(self.getDisplayName(title, metadata))
         meta += '<link rel="canonical" href="https://moddingtutorials.org/{}"/> \n'.format(self.getCanonicalPath(title))
-        meta += '<meta name="description" content="{}"> \n'.format(self.getDescription(title, metadata))
+        
+        description = self.getDescription(title, metadata)
+        if description is not None:
+            meta += '<meta name="description" content="{}"> \n'.format(description)
         return meta
 
     def handleReplacements(self, html_content, title, metadata):
         return self.template_html.replace("$CONTENT", html_content).replace("$META", self.generateMetaTags(title, metadata))
 
-    def compileMD(self, source_folder_path, filename):
+    def processMarkdownFile(self, source_folder_path, filename):
         print("building {}/{} to {}".format(source_folder_path, filename, self.urlPrefix))
 
         title = ".".join(filename.split(".")[:-1])
         with open(source_folder_path + "/" + filename, "r") as f:
-            metadata, md_content = frontmatter.parse(f.read())
+            self.compileMD(title, f.read())
+
+    def compileMD(self, title, raw_markdown_text, extraMetadata={}):
+        metadata, md_content = frontmatter.parse(raw_markdown_text)
+        metadata = {**metadata, **extraMetadata}
         
         html_content = markdown.markdown(md_content, extensions=['fenced_code', "mdx_linkify"])
         html_content = self.highlightCode(html_content)
@@ -261,10 +211,16 @@ class SiteSection:
 
 
 class TutorialSiteSection(SiteSection):
+    defaultNamespace = "o19"
+
     def __init__(self, sourceDir, urlPrefix, templateFile):
         super().__init__(sourceDir, urlPrefix, templateFile)
     
     def getDescription(self, title, metadata):
+        description = super().getDescription(title, metadata)
+        if description is not None:
+            return description
+        
         if title in site_data["descriptions"]:
             return site_data["descriptions"][title]
 
@@ -280,30 +236,50 @@ class TutorialSiteSection(SiteSection):
     def writeFile(self, title, html_content):
         super().writeFile(title, html_content)
 
-        if self.urlPrefix == defaultNamespace:
+        if self.urlPrefix == TutorialSiteSection.defaultNamespace:
             out_path = "{}/{}.html".format(OUTPUT_DIRECTORY, title)
             with open(out_path, "w") as f:
                 f.write(html_content)
 
+    def handleReplacements(self, html_content, title, metadata):
+        if self.urlPrefix in site_data["tutorial-videos"] and title in site_data["tutorial-videos"][self.urlPrefix]:
+            video_id = site_data["tutorial-videos"][self.urlPrefix][title]
+            html_content = """
+                <div class="alert video-wrapper" onclick="showYoutubeVideo(this, '$VIDEO')">
+                    There is a video version of this tutorial. Click here to watch!
+                </div>
+            """.replace("$VIDEO", video_id) + html_content
+        
+        return super().handleReplacements(html_content, title, metadata)
+
+    def makeSubfolder(self, dir):
+        super().makeSubfolder(dir)
+
+        if self.urlPrefix == TutorialSiteSection.defaultNamespace:
+            os.mkdir(OUTPUT_DIRECTORY + "/" + dir)
+    
 # for pages that are the same between MC versions. sets the canonical tag to the root/title instead of root/version/title so google doesn't punish me for duplicate content
 class UnversionedTutorialSiteSection(TutorialSiteSection):
     def getCanonicalPath(self, title):
         return title
 
+
+# TODO: could change so that FetchedSiteSection also handles a directory with another method for the fetched pages then ModDocsSiteSection FetchedSiteSection > SiteSection
 class ModDocsSiteSection(SiteSection):
-    def __init__(self, sourceDir, urlPrefix, templateFile):
+    def __init__(self, pages, sourceDir, urlPrefix, templateFile):
         super().__init__(sourceDir, urlPrefix, templateFile)
+        self.pages = pages
         self.extra_nav_html = self.generateModDocsIndexHtml()
     
     def generateModDocsIndexHtml(self):
         index_html = ""
 
         # fetched
-        for page in site_data["fetched-pages"][self.urlPrefix]:
+        for page in self.pages:
             name = page["name"].lower().replace(" ", "-")
-            index_html += '<a href="{}" class="post">{}</a>'.format(name, page["name"])
+            index_html += '<a href="{}" class="post">{}</a> \n'.format(name, page["name"])
         
-        index_html += "<hr/>"
+        # index_html += "<hr/> \n"
 
         # md files
         for root, dirs, files in os.walk(self.sourceDir, topdown=True):
@@ -316,13 +292,12 @@ class ModDocsSiteSection(SiteSection):
                 for part in name.split("-"):
                     displayName += part[0].upper() + part[1:] + " "
 
-                index_html += '<a href="{}" class="post">{}</a>'.format(name, displayName)
+                index_html += '<a href="{}" class="post">{}</a> \n'.format(name, displayName)
 
             break
 
         return index_html
 
-    # valid front matter keys: description, author, version, source, download, contact
     def handleReplacements(self, html_content, title, metadata):
         header_html = """
             <div style="text-align: center; margin-top: 10px;">
@@ -360,43 +335,95 @@ class ModDocsSiteSection(SiteSection):
                 </a>
             """.replace("$LINK", metadata["contact"])
 
-        header_html += "<br><br></div>"
-        license_html = """This content is available under the <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0 License</a>."""
-
+        header_html += "<br><br></div> \n"
+        
         full_content = super().handleReplacements(header_html + html_content, title, metadata)
-        full_content = full_content.replace("$LICENSE", license_html).replace("$NAV", self.extra_nav_html)
+        full_content = full_content.replace("$LICENSE", self.getLicense(metadata)).replace("$NAV", self.extra_nav_html)
         return full_content
+    
+    def getLicense(self, metadata):
+        return """This content is available under the <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0 License</a>."""
+
+
+class FetchedModDocsSiteSection(ModDocsSiteSection):
+    def processFiles(self):
+        if not os.path.isdir(OUTPUT_DIRECTORY + "/" + self.urlPrefix):
+            os.mkdir(OUTPUT_DIRECTORY + "/" + self.urlPrefix)
+        
+        for page in self.pages:
+            url = self.getUrl(page)
+            if url is None:
+                print("no page url found " + json.dumps(page))
+                continue
+                
+            print("building {} to {}".format(url, self.urlPrefix))
+                
+            r = requests.get(url)
+            if not r.status_code == 200:
+                print("error " + str(r.status_code) + " " + url)
+                continue
+
+            title = page["name"].lower().replace(" ", "-")
+            
+            self.compileMD(title, r.text, {
+                "contact": "/discord", 
+                "source_url": url, 
+                "author": "LukeGrahamLandry", 
+                "source": "https://github.com/" + page["repo"],
+                "download": "https://www.curseforge.com/minecraft/mc-mods/" + page["curseforge"],
+                "mod_name": page["name"]
+            })
+
+    def generateMetaTags(self, title, metadata):
+        return super().generateMetaTags(title, metadata) + \
+            "<!-- the text on this page was fetched from " + metadata["source_url"] + " I'm fairly confident that I'm only getting my own content but if you feel I stole something, please DM me on discord: LukeGrahamLandry#6888 --> \n"
+
+    def getUrl(self, page_data):
+        if "url" in page_data:
+            url = page_data["url"]
+        elif "repo" in page_data:
+            if not "branch" in page_data:
+                page_data["branch"] = "main"
+
+            url = "https://raw.githubusercontent.com/{}/{}/README.md".format(page_data["repo"], page_data["branch"])
+        else:
+            url = None
+        
+        return url
+        
+    def getLicense(self, metadata):
+        return """This content is available under the <a href="$PATH" target="_blank">$NAME mod's license</a>.""" \
+            .replace("$PATH", metadata["source"]).replace("$NAME", metadata["mod_name"])
 
 
 if __name__ == "__main__":
     if os.path.isdir(OUTPUT_DIRECTORY):
         shutil.rmtree(OUTPUT_DIRECTORY)
-    shutil.copytree("web", OUTPUT_DIRECTORY)
+    shutil.copytree("web", OUTPUT_DIRECTORY, ignore=lambda src, files: ["pages.json", "videos.json", "server.py", "scrape-videos.py"])
 
     # SiteSection("articles", "c", "article.html").processFiles()
-    # SiteSection("vanilla", "vanilla", "article.html").processFiles()
+    # SiteSection("vanilla", "vanilla", "vanilla.html").processFiles()
     
     versions = ["19", "18", "17", "16"]
     for v in versions:
         TutorialSiteSection("forge-1.{}-tutorials".format(v), "o{}".format(v), "tutorial.html").processFiles()
-
         UnversionedTutorialSiteSection("pages", "o{}".format(v), "tutorial.html").processFiles()
     
-    modDocs = ModDocsSiteSection("mod-documentation", "mods", "mod-documentation.html")
+    modDocs = ModDocsSiteSection(site_data["fetched-pages"]["mods"], "mod-documentation", "mods", "mod-documentation.html")
     modDocs.processFiles()
     try:
-        buildFetchedPages(modDocs.extra_nav_html)
+        FetchedModDocsSiteSection(site_data["fetched-pages"]["mods"], "mod-documentation", "mods", "mod-documentation.html").processFiles()
     except requests.exceptions.ConnectionError:
         print("Failed to buildFetchedPages, you're probably not connected to the internet.")
 
-    CommissionsHelper.processFiles()
-    for v in versions:
-        url = "o" + v
-        shutil.copy(OUTPUT_DIRECTORY + "/commissions.html", OUTPUT_DIRECTORY + "/" + url + "/commissions.html")
-        shutil.copy(OUTPUT_DIRECTORY + "/index.html",  OUTPUT_DIRECTORY + "/" + url + "/index.html")
+    with open("web/videos.json", "r") as f:
+        video_data = json.loads("".join(f.readlines()))
+        CommissionsHelper(video_data["paid"], video_data["yt-clients"]).processFiles("commissions.html", "credits.html")
     
+    toCopyToAllSections = ["commissions", "credits", "index"]
+    for v in versions:
+        for page in toCopyToAllSections:
+            shutil.copy("{}/{}.html".format(OUTPUT_DIRECTORY, page), "{}/o{}/{}.html".format(OUTPUT_DIRECTORY, v, page))
+
     with open(OUTPUT_DIRECTORY + "/styles/code.css", "w") as f:
         f.write(formatter.get_style_defs())
-
-
-# gamerules, config, saved data

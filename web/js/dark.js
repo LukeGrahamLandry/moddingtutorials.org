@@ -68,16 +68,23 @@ if (getCookie("darkmode")) {
 window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
 
 function addGoalLinkEvents(){
-    let goals = ["discord", "patreon", "github"]
+    let goals = ["discord", "patreon", "github", "commissions"]
     let urls = goals.map((goal) => document.location.origin + "/" + goal)
     let links = document.getElementsByTagName("a");
     for (let i=0;i<links.length;i++){
         for (let g=0;g<goals.length;g++){
             if (links[i].href == urls[g]){
-                links[i].onclick = () => plausible('Redirect', {props: {target: goals[g], page: document.location.pathname}});
+                links[i].onclick = () => plausible('Redirect', {props: {target: goals[g]}});
             }
         }
     }
 }
 
 window.addEventListener('load', addGoalLinkEvents);
+
+function showYoutubeVideo(container, video_id){
+    container.innerHTML = `<iframe class="ytplayer" type="text/html" width="${container.clientWidth}" height="${container.clientWidth * 0.5625}" src="https://www.youtube.com/embed/${video_id}?rel=0" frameborder="0"></iframe>`;
+    container.style.borderColor = "black";
+    container.style.backgroundColor = "white";
+    plausible('Youtube Embed');
+}

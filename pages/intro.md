@@ -12,7 +12,7 @@ This site has tutorials for versions 1.19, 1.18.2, 1.17.1, and 1.16.5. You can s
 
 Minecraft does not natively allow you to load code that modifies the game. Helpfully, some very clever people wrote some complicated code that provides a framework that can load user created chunks of code (called mods) that are run along side minecraft's existing code. The programs that do this for you are called mod loaders. They generally provide an additional layer of abstraction that helps you interact with minecraft's code to change the game more easily (called an api). 
 
-Important to note is that players can only use one mod loader at a time so mods written for different mod loaders are incompatable. 
+Important to note is that players can only use one mod loader at a time so mods written for different mod loaders are incompatible. 
 
 Each mod loader will distribute an installer program that players can run to add that mod loader to their minecraft installation. It will generally create a new profile in the vanilla launcher so you can still easily choose between different versions or mod loaders. You can also use third party launchers, like CurseForge or MultiMC, to make this process easier. 
 
@@ -22,13 +22,13 @@ Each mod loader will distribute an installer program that players can run to add
 
 Forge was one of the first mod loaders and is still by far the most popular. It provides a large api that makes it easier to change lots of things. It patches minecraft's code in many places to add event hooks that will call your mod code to make it easy to change lots vanilla behavior while maintaining compatibility with other mods that try to change similar things (or at least not crashing). There are also helpful things like capabilities (fancy abstract data storage) like Forge Energy (RF) for power, a fluid api, additional attributes (swim speed, gravity), and abstractions over object registration. However, since this api is so large and interacts so much with vanilla's code, forge often takes a long time to update to new Minecraft versions. 
 
-Forge has downloads available all the way back to version 1.1.
+Forge has downloads available all the way back to Minecraft version 1.1.
 
 ### Fabric 
 
 > Exists because the dude runs forge's discord server is mean to people who don't learn java and that's rude. 
 
-Fabric started when minecraft was at 1.14 as a competitor to forge, mostly because forge took a long time to update. Fabric has a more modular philosify than forge, they keep the mod loader as light as possible so it can be updated to new versions quickly. They also provide the fabric api that makes it easier to impliment lots of thing as a mod that can be downloaded seperatly. Techniclly, that means that you could write fabric mods without depending on thier api but thats rarely done. Fabric's api is still less all encompassing than forge's so you have to do more things for yourself. Fabric also supports jar-in-jar mods more elegantly than forge which lets you easily bundle dependencies within your own mod file. This two factors combined lead to a culture of obsessively depending on random libraries. 
+Fabric started when minecraft was at 1.14 as a competitor to forge, mostly because forge took a long time to update. Fabric has a more modular pilosity than forge, they keep the mod loader as light as possible so it can be updated to new versions quickly. They also provide the fabric api that makes it easier to implement lots of thing as a mod that can be downloaded severalty. Technically, that means that you could write fabric mods without depending on their api but thats rarely done. Fabric's api is still less all encompassing than forge's so you have to do more things for yourself. Fabric also supports jar-in-jar mods more elegantly than forge which lets you easily bundle dependencies within your own mod file. This two factors combined lead to a culture of obsessively depending on random libraries. 
 
 ### Quilt
 
@@ -58,7 +58,7 @@ Modrinth is an open source competitor to CurseForge that is several orders of ma
 
 ### Github 
 
-Github is a website for sharing source code with other developers. It makes it easy to put the code for your mod online to let other people learn from it. Almost all minecraft mods have thier code freely available on github for the world to enjoy. 
+Github is a website for sharing source code with other developers. It makes it easy to put the code for your mod online to let other people learn from it. Almost all minecraft mods have their code freely available on github for the world to enjoy. 
 
 Github uses a version control system called Git. Git lets you easily track changes in your code as you update your mod and add new features, as well as roll back any mistakes easily. This is a ridiculously important tool to learn how to use! It shines most if you end up working with multiple other people on the same project and need to merge your changes together. You should really install the Github Desktop app at some point and play around with it. It may seem strange at first but it will make life so much easier in the long run. 
 
@@ -72,7 +72,7 @@ When you release your mod, you generally include a license file that tells peopl
 - can they use parts of your code in their own mods?
 - can they reuse your assets (textures, models, etc) for their own projects?
 
-By default, having no license file makes your work All Rights Reserved, you own the copywrite so nobody's allowed to touch it. You can read more about your options at [choosealicense.org](https://choosealicense.org) but the basics choices are,  
+By default, having no license file makes your work All Rights Reserved, you own the copyright so nobody's allowed to touch it. You can read more about your options at [choosealicense.org](https://choosealicense.org) but the most popular choices are,  
 
 - MIT, which lets anyone do anything they want with your code. (this is what I use for almost everything I release)
 - GPL, GNU General Public License, which lets anyone do anything with your code as long as any derivative works they create are also open source under the GPL.

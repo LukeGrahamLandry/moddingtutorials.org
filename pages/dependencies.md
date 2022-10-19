@@ -33,7 +33,7 @@ If you want to get a mod directly from curseforge you can use [cursemaven.com](h
 ```
 repositories {
     maven {
-        url "https://cursemaven.com"
+        url 'https://cursemaven.com'
     }
 }
 

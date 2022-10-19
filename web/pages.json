@@ -121,5 +121,10 @@
         "events": "An in-depth explication of how the Forge Events System allows your Minecraft mod to react to actions taken in game",
         "world-gen": "Collection of resources for understanding world generation in Minecraft",
         "solutions": "Answers to minecraft modding questions asked on my discord server"
+    },
+    "tutorial-videos": {
+        "o19": {
+            
+        }
     }
 }

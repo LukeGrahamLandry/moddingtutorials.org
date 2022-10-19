@@ -6,7 +6,7 @@ This is an index of the content covered on this site.
 
 - [Introduction to Modding](intro)
     - an overview of what you should know before making your first mod
-    - the different mod loaders, mod distribution, lisencing, code concepts
+    - the different mod loaders, mod distribution, licensing, code concepts
 - [Java Basics](java-basics) **WIP**
     - summary of Java syntax 
 - [Registries](registries) **WIP**
