@@ -62,6 +62,10 @@ body {
     scrollbar-color:  rgb(53, 53, 53)  rgb(20, 20, 20);  /* new but only for firefox*/
 }
 
+.markdown-body code {
+  background-color: #242424;
+}
+
 #ads {
     color: rgb(0, 162, 255);
     background-color: rgb(0,0,0);
