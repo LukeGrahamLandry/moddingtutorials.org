@@ -3,7 +3,10 @@
 
 # built site
 dist
+scripts/generated/cache
 
 # in progress
 */blueprint
 */citadel
+
+__pycache__

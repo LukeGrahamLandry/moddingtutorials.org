@@ -1,14 +1,16 @@
 import os
-import markdown, json, shutil, requests
+import markdown, json, shutil
 from pygments import lexers
 from pygments import highlight 
 from pygments.formatters import HtmlFormatter
 from xml.sax import saxutils as su
 import frontmatter
 
+from scripts.fetch import FetchedPageCache
+
 lex = lexers.get_lexer_by_name("java")
 formatter = HtmlFormatter()
-with open("web/pages.json", "r") as f:
+with open("scripts/pages.json", "r") as f:
     site_data = json.loads("".join(f.readlines()))
 
 OUTPUT_DIRECTORY = "dist"
@@ -21,8 +23,9 @@ OUTPUT_DIRECTORY = "dist"
     - client_channels: [{id, title, views, subscribers}]
 
     Replacements:
-    - \$VIDEOS is replaced by thumbnails generated from paid_videos
+    - \$VIDEOS is replaced by thumbnails & stats generated from paid_videos
     - \$CHANNELS is replaced by icons & stats generated from client_channels
+    - $FETCHED_URLS is replaced by a list of all urls fetched so far during the build (from the FetchedPageCache)
 """
 class CommissionsHelper:
     def __init__(self, paid_videos, client_channels):
@@ -39,7 +42,10 @@ class CommissionsHelper:
         with open(OUTPUT_DIRECTORY + "/" + filename, "r") as f:
             content = "".join(f.readlines())
 
-        content = content.replace("\$VIDEOS", self.getVideosHTML()).replace("\$CHANNELS", self.getChannelsHTML())
+        content = content \
+            .replace("\$VIDEOS", self.getVideosHTML()) \
+            .replace("\$CHANNELS", self.getChannelsHTML()) \
+            .replace("$FETCHED_URLS", "\n".join(urlCache.getCachedUrls()))
 
         with open(OUTPUT_DIRECTORY + "/" + filename, "w") as f:
             f.write(content)
@@ -357,15 +363,10 @@ class FetchedModDocsSiteSection(ModDocsSiteSection):
                 continue
                 
             print("building {} to {}".format(url, self.urlPrefix))
-                
-            r = requests.get(url)
-            if not r.status_code == 200:
-                print("error " + str(r.status_code) + " " + url)
-                continue
 
             title = page["name"].lower().replace(" ", "-")
             
-            self.compileMD(title, r.text, {
+            self.compileMD(title, urlCache.get(url), {
                 "contact": "/discord", 
                 "source_url": url, 
                 "author": "LukeGrahamLandry", 
@@ -397,9 +398,11 @@ class FetchedModDocsSiteSection(ModDocsSiteSection):
 
 
 if __name__ == "__main__":
+    urlCache = FetchedPageCache("scripts/generated/cache")
+    
     if os.path.isdir(OUTPUT_DIRECTORY):
         shutil.rmtree(OUTPUT_DIRECTORY)
-    shutil.copytree("web", OUTPUT_DIRECTORY, ignore=lambda src, files: ["pages.json", "videos.json", "server.py", "scrape-videos.py"])
+    shutil.copytree("web", OUTPUT_DIRECTORY)
 
     # SiteSection("articles", "c", "article.html").processFiles()
     # SiteSection("vanilla", "vanilla", "vanilla.html").processFiles()
@@ -411,12 +414,9 @@ if __name__ == "__main__":
     
     modDocs = ModDocsSiteSection(site_data["fetched-pages"]["mods"], "mod-documentation", "mods", "mod-documentation.html")
     modDocs.processFiles()
-    try:
-        FetchedModDocsSiteSection(site_data["fetched-pages"]["mods"], "mod-documentation", "mods", "mod-documentation.html").processFiles()
-    except requests.exceptions.ConnectionError:
-        print("Failed to buildFetchedPages, you're probably not connected to the internet.")
-
-    with open("web/videos.json", "r") as f:
+    FetchedModDocsSiteSection(site_data["fetched-pages"]["mods"], "mod-documentation", "mods", "mod-documentation.html").processFiles()
+    
+    with open("scripts/generated/videos.json", "r") as f:
         video_data = json.loads("".join(f.readlines()))
         CommissionsHelper(video_data["paid"], video_data["yt-clients"]).processFiles("commissions.html", "credits.html")
     
@@ -427,3 +427,13 @@ if __name__ == "__main__":
 
     with open(OUTPUT_DIRECTORY + "/styles/code.css", "w") as f:
         f.write(formatter.get_style_defs())
+    
+
+
+# fetch the well written ones from forge community wiki
+# sides, registries, access transformers, mods.toml, events, biome modifiers, block states, sounds, tinted textures
+# use beutiful soup to get content and remove script and style tags
+# keep license meta and add canonical 
+# have a header like "<a>this content is from the Forge Community Wiki. Last Modified: date, License: MIT </a>"
+# take out my footer links 
+# https://docs.minecraftforge.net/en/1.19.x/misc/updatechecker/#update-json-format

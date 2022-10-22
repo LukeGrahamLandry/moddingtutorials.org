@@ -10,7 +10,7 @@ Code for my Minecraft modding tutorial website. View the tutorials online at [mo
 
 ## Content
 
-Each folder has markdown files that are built into html and inserted into a template from /web/templates. 
+Files in /web are directly exposed by the web server. Other folders have markdown files that are built into html and inserted into a template from /web/templates. 
 
 - forge-1.xx-tutorials (/oxx)
     - version specific forge modding tutorials
@@ -31,7 +31,9 @@ Each folder has markdown files that are built into html and inserted into a temp
     - advancements 
         - requirements for completing the harder in game advancements 
 
-## Metadata (web/pages.json)
+## Scripts 
+
+### pages.json
 
 - videos
     - list of youtube urls to display on commissions page
@@ -43,3 +45,17 @@ Each folder has markdown files that are built into html and inserted into a temp
     - map of page titles to descriptions to insert in meta tags
 - tutorial-videos
     - map of urlPrefix to map of page title to youtube video identifier to inject button to load
+
+### scrape-videos.py
+
+1. Input video and channel ids of my youtube clients are read from `pages.json`
+2. Stats and images are fetched from youtube's api
+3. Results are saved in `generated/videos.json` which is used by `build.py`
+
+### fetch.py
+
+Caches urls fetched during the build process. This speeds up builds when testing and allows testing offline. 
+
+### server.py
+
+Serves the dist directory for local testing. 

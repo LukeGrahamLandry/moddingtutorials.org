@@ -3,20 +3,12 @@ import requests, json
 from PIL import Image
 import time
 
-with open("pages.json", "r") as f:
-    site_data = json.loads("".join(f.readlines()))
-
-data = {
-    "paid": [],
-    "yt-clients": []
-}
-
-# probably shouldn't have my api key public like this
-# but it should only be able to access the youtube api v3 so it doesn't really matter
-api_key = "AIzaSyD3YtUIi_m0OHp_fcZxLSInHPr2KWzuJKM"
-youtube = build('youtube', 'v3', developerKey=api_key)
-
-def getInfo(video_id):
+"""
+    Fetches data about a given youtube video from the api.
+    Returns {id, title, views, time, channel}
+    Saves video thumbnail at img/videos/[id].jpg
+"""
+def getVideoInfo(video_id):
     info = {}
 
     print(video_id)
@@ -67,29 +59,12 @@ def getInfo(video_id):
 
     return info
 
+
 """
-for name, playlist_id in site_data["playlists"].items():
-    data[name] = []
-
-    p_request = youtube.playlistItems().list(
-        part = "snippet",
-        playlistId = playlist_id,
-        maxResults = 50
-    )
-    p_response = p_request.execute()
-    playlist_items = []
-    while p_request is not None:
-        p_response = p_request.execute()
-        playlist_items += p_response["items"]
-        p_request = youtube.playlistItems().list_next(p_request, p_response)
-
-    for vid in playlist_items:
-        vid_id = vid["snippet"]["resourceId"]["videoId"]
-        data[name].append(getInfo(vid_id))
-
-    time.sleep(1)
+    Fetches data about a given youtube channel from the api.
+    Returns {id, title, views, subscribers}
+    Saves channel icon at img/videos/[id].jpg
 """
-
 def getChannelInfo(channel_id):
     info = {}
 
@@ -121,18 +96,24 @@ def getChannelInfo(channel_id):
     
     return info
 
-def processVideos():
+
+"""
+    Fetches data for a list of videos.
+"""
+def processVideos(video_urls):
+    result = []
     total = 0
 
-    for video_url in site_data["videos"]:
+    for video_url in video_urls:
         if "watch" in video_url:
             video_id = video_url.split("v=")[1]
         else:
             video_id = video_url.split("be/")[1]
 
         try:
-            data["paid"].append(getInfo(video_id))
-            total += int(data["paid"][-1]["views"])
+            video_data = getVideoInfo(video_id)
+            result.append(video_data)
+            total += int(video_data["views"])
         except:
             print("Failed video: " + video_id)
 
@@ -140,14 +121,34 @@ def processVideos():
     
     print("total views:", total)
 
-def processChannels():
-    for channelid in site_data["yt-clients"]:
-        data["yt-clients"].append(getChannelInfo(channelid))
+    return result
+
+
+"""
+    Fetches data for a list of channels.
+"""
+def processChannels(channel_ids):
+    result = []
+    for channel_id in channel_ids:
+        result.append(getChannelInfo(channel_id))
         time.sleep(1)
+    
+    return result
 
-processVideos()
-processChannels()
-youtube.close()
 
-with open("videos.json", "w") as f:
-    f.write(json.dumps(data, indent=4))
+if __name__ == "__main__":
+    api_key = "AIzaSyD3YtUIi_m0OHp_fcZxLSInHPr2KWzuJKM"
+    youtube = build('youtube', 'v3', developerKey=api_key)
+
+    with open("pages.json", "r") as f:
+        site_data = json.loads("".join(f.readlines()))
+
+    data = {
+        "paid": processVideos(site_data["videos"]),
+        "yt-clients": processChannels(site_data["yt-clients"])
+    }
+
+    with open("generated/videos.json", "w") as f:
+        f.write(json.dumps(data, indent=4))
+    
+    youtube.close()

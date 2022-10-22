@@ -110,14 +110,14 @@ int level = EnchantmentHelper.getEnchantmentLevel(EnchantmentInit.BRIDGING.get()
 
 You can use this for basically anything you want. Often you'll want to do it in response to something happening so you'll listen for an event. 
 
-I'm going to make an inner class in my `BridgingEnchantment` class to react to the tick event (it could be a full class in your `events` package but I like the organization of this better). The  `buildBridge` will fire every tick for each player. The first line makes sure that it only fires on the server side and that it fires at the end of the tick processing (the event is actually fired twice per tick).
+I'm going to make an inner class in my `BridgingEnchantment` class to react to the tick event (it could be a full class in your `events` package but I like the organization of this better). The  `buildBridge` will fire every tick for each player. The first line makes sure that it only fires on the server side and that it fires at the start of the tick processing (the event is actually fired twice per tick).
 
 ```
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
 public static class BridgeBuildingHandler {
     @SubscribeEvent
     public static void buildBridge(TickEvent.PlayerTickEvent event){
-        if (event.phase == TickEvent.Phase.END || !event.player.level.isClientSide()) return;
+        if (event.phase == TickEvent.Phase.END || event.player.level.isClientSide()) return;
 
         int level = EnchantmentHelper.getEnchantmentLevel(EnchantmentInit.BRIDGE.get(), event.player);
 

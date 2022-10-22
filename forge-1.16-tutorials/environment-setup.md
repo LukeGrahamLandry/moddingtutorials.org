@@ -37,9 +37,6 @@ Make a public static string that holds your mod id. This is how the forge mod lo
             final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
     
             modEventBus.addListener(this::setup);
-    
-            // Register ourselves for server and other game events we are interested in
-            MinecraftForge.EVENT_BUS.register(this);
         }
     
         private void setup(final FMLCommonSetupEvent event) {

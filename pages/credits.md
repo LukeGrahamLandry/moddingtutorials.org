@@ -53,3 +53,11 @@ If you notice any mistakes in my tutorials or want to submit additional tutorial
 - **PsycoNova**
 - CiaoRobban
 - SpottyTheTurtle
+
+## External Pages
+
+Some pages are rehosted from external sites. I'm fairly confident I'm respecting their licenses but if you feel I'm stealing your content, please [contact me](/discord)! Here is the list of urls that were fetched during the build process:  
+
+```
+$FETCHED_URLS
+```
