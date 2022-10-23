@@ -4,7 +4,7 @@ Code for my Minecraft modding tutorial website. View the tutorials online at [mo
 
 ## Build
 
-- run `python3 build.py` (PYTHON_VERSION=3.7)
+- run `python3 scripts/build.py` (PYTHON_VERSION=3.7)
 - serve the `dist` directory
 - relies on Cloudflare Pages to use the `web/_redirects` files
 

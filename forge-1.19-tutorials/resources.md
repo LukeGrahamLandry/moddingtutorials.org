@@ -99,4 +99,4 @@ Mixins allow you to directly modify vanilla's bytecode. Generally try to avoid u
 
 Automatically run unit tests that interact with a minecraft game instance. 
 
-- https://gist.github.com/SizableShrimp/60ad4109e3d0a23107a546b3bc0d9752s
+- https://gist.github.com/SizableShrimp/60ad4109e3d0a23107a546b3bc0d9752

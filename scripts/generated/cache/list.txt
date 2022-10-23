@@ -1,0 +1,12 @@
+https://raw.githubusercontent.com/LukeGrahamLandry/Torcherino/1.19/README.md
+https://raw.githubusercontent.com/LukeGrahamLandry/mercenaries-mod/main/README.md
+https://raw.githubusercontent.com/LukeGrahamLandry/tieredshulkers/1.18/README.md
+https://raw.githubusercontent.com/LukeGrahamLandry/mountables-mod/main/README.md
+https://raw.githubusercontent.com/LukeGrahamLandry/smells-fishy-mod/main/README.md
+https://raw.githubusercontent.com/LukeGrahamLandry/find-my-friends-mod/forge-1.18/README.md
+https://raw.githubusercontent.com/LukeGrahamLandry/inclusive-enchanting-mod/main/README.md
+https://raw.githubusercontent.com/LukeGrahamLandry/tribes-mod/forge-1.16.5/README.md
+https://raw.githubusercontent.com/LukeGrahamLandry/XpSpawnerControl/master/README.md
+https://raw.githubusercontent.com/LukeGrahamLandry/travel_anchors/1.18.x/README.md
+https://raw.githubusercontent.com/LukeGrahamLandry/harder-core-mod/main/README.md
+https://raw.githubusercontent.com/LukeGrahamLandry/cultivated-snacks-mod/forge-1.16.5/README.md

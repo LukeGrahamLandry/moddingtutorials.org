@@ -45,8 +45,6 @@ in intellij you can press shift twice to search through vanilla classes (theres 
 
 also, if you're looking at a reference to a vanilla class/method, you can "Go To Declaration", generally by holding command/control and clicking on it
 
-for doing something that tints based on the biome colour (like grass and leaves) look at the vanilla code for how it gets that biome's colour in BlockColors#createDefault which calls GrassColors#get
-
 ## how do i make a geckolib animation sync with an attack
 
 geckolib has a pretty good wiki (https://github.com/bernie-g/geckolib/wiki/Home) for the details of making animations play at all. for an attack animation specificly, you'd have a dataparameter on your entity that syncs an int from server to client and then when your attack starts you set that to the length of your animation (in ticks) and decrement it every tick until its 0 and check it on the client (in your animation predicate) to play your animation while its ticking down. my mimic mod has an example you can look at https://github.com/LukeGrahamLandry/mimic-mod (look in the `MimicEntity` and `MimicAttackGoal` classes)
@@ -77,6 +75,8 @@ make sure you are running the gradle `runData` task (ie `./gradlew runData` from
 theres a whole thing for having a greyscale overlay texture and then tinting it. its like the one thing forge docs have lol https://mcforge.readthedocs.io/en/1.16.x/models/color/ thats for 1.16 but i think it should be the same. 
 
 you can store which colour it should use in the item stack's nbt tag and read it back when the game wants to apply the tint so you dont need lots of different items. you can also have different layers of texture, defined in your model json file, if you only want to tint part of the texture a certain colour
+
+for doing something that tints based on the biome colour (like grass and leaves) look at the vanilla code for how it gets that biome's colour in BlockColors#createDefault which calls GrassColors#get
 
 ## how do i replace my arrow render with a blockbench model 
 

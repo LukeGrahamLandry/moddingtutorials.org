@@ -6,7 +6,7 @@ from pygments.formatters import HtmlFormatter
 from xml.sax import saxutils as su
 import frontmatter
 
-from scripts.fetch import FetchedPageCache
+from fetch import FetchedPageCache
 
 lex = lexers.get_lexer_by_name("java")
 formatter = HtmlFormatter()
@@ -436,4 +436,5 @@ if __name__ == "__main__":
 # keep license meta and add canonical 
 # have a header like "<a>this content is from the Forge Community Wiki. Last Modified: date, License: MIT </a>"
 # take out my footer links 
-# https://docs.minecraftforge.net/en/1.19.x/misc/updatechecker/#update-json-format
+# https://docs.minecraftforge.net/en/1.19.x/misc/updatechecker/#update-json-format (MIT)
+# https://github.com/Darkhax/darkhax-dot-net/blob/gh-pages/_posts/tutorials/2020-7-31-mixins.md (CC attribution)
