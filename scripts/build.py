@@ -1,3 +1,4 @@
+from email import header
 import os
 import markdown, json, shutil
 from pygments import lexers
@@ -14,6 +15,8 @@ with open("scripts/pages.json", "r") as f:
     site_data = json.loads("".join(f.readlines()))
 
 OUTPUT_DIRECTORY = "dist"
+
+other_fetched_urls = []
 
 """
     Performs replacements on files passed to processFiles. 
@@ -45,7 +48,7 @@ class CommissionsHelper:
         content = content \
             .replace("\$VIDEOS", self.getVideosHTML()) \
             .replace("\$CHANNELS", self.getChannelsHTML()) \
-            .replace("$FETCHED_URLS", "\n".join(urlCache.getCachedUrls()))
+            .replace("$FETCHED_URLS", "\n".join(urlCache.getCachedUrls()) + "\n" + "\n".join(other_fetched_urls))
 
         with open(OUTPUT_DIRECTORY + "/" + filename, "w") as f:
             f.write(content)
@@ -189,18 +192,18 @@ class SiteSection:
     def handleReplacements(self, html_content, title, metadata):
         return self.template_html.replace("$CONTENT", html_content).replace("$META", self.generateMetaTags(title, metadata))
 
-    def processMarkdownFile(self, source_folder_path, filename):
+    def processMarkdownFile(self, source_folder_path, filename, extraMetadata={}, tab_length=4):
         print("building {}/{} to {}".format(source_folder_path, filename, self.urlPrefix))
 
         title = ".".join(filename.split(".")[:-1])
         with open(source_folder_path + "/" + filename, "r") as f:
-            self.compileMD(title, f.read())
+            self.compileMD(title, f.read(), extraMetadata=extraMetadata, tab_length=tab_length)
 
-    def compileMD(self, title, raw_markdown_text, extraMetadata={}):
+    def compileMD(self, title, raw_markdown_text, extraMetadata={}, tab_length=4):
         metadata, md_content = frontmatter.parse(raw_markdown_text)
         metadata = {**metadata, **extraMetadata}
         
-        html_content = markdown.markdown(md_content, extensions=['fenced_code', "mdx_linkify"])
+        html_content = markdown.markdown(md_content, extensions=['fenced_code', "mdx_linkify"], tab_length=tab_length)
         html_content = self.highlightCode(html_content)
         html_content = self.handleReplacements(html_content, title, metadata)
 
@@ -283,7 +286,10 @@ class ModDocsSiteSection(SiteSection):
         # fetched
         for page in self.pages:
             name = page["name"].lower().replace(" ", "-")
-            index_html += '<a href="{}" class="post">{}</a> \n'.format(name, page["name"])
+            url = "/" + self.urlPrefix + "/" + name
+            if page["branch"] == "wiki":
+                url = "/" + self.urlPrefix + "/" + page["repo"].split("/")[1] + "/Home"
+            index_html += '<a href="{}" class="post">{}</a> \n'.format(url, page["name"])
         
         # index_html += "<hr/> \n"
 
@@ -298,23 +304,24 @@ class ModDocsSiteSection(SiteSection):
                 for part in name.split("-"):
                     displayName += part[0].upper() + part[1:] + " "
 
-                index_html += '<a href="{}" class="post">{}</a> \n'.format(name, displayName)
+                index_html += '<a href="{}" class="post">{}</a> \n'.format("/" + self.urlPrefix + "/" + name, displayName)
 
             break
 
         return index_html
 
     def handleReplacements(self, html_content, title, metadata):
+        header_html = self.getHeaderHtml(title, metadata)
+        
+        full_content = super().handleReplacements(header_html + html_content, title, metadata)
+        full_content = full_content.replace("$LICENSE", self.getLicense(metadata)).replace("$NAV", self.getExtraNavHTML(title, metadata))
+        return full_content
+
+    def getHeaderHtml(self, title, metadata):
         header_html = """
             <div style="text-align: center; margin-top: 10px;">
         """
         
-        if "author" in metadata:
-            header_html += """
-                
-                <h1 style="margin-bottom: 0px"> $NAME by $AUTHOR </h1>
-            """.replace("$NAME", self.getDisplayName(title, metadata)).replace("$AUTHOR", metadata["author"])
-
         if "version" in metadata:
             header_html += """
                 <span style="font-size: 1rem"> version $VERSION </span> <br>
@@ -341,11 +348,18 @@ class ModDocsSiteSection(SiteSection):
                 </a>
             """.replace("$LINK", metadata["contact"])
 
+        if "author" in metadata and metadata["author"] != "LukeGrahamLandry":
+            header_html += """
+                Author: $AUTHOR 
+            """.replace("$NAME", self.getDisplayName(title, metadata)).replace("$AUTHOR", metadata["author"])
+
+
         header_html += "<br><br></div> \n"
-        
-        full_content = super().handleReplacements(header_html + html_content, title, metadata)
-        full_content = full_content.replace("$LICENSE", self.getLicense(metadata)).replace("$NAV", self.extra_nav_html)
-        return full_content
+
+        return header_html
+
+    def getExtraNavHTML(self, title, metadata):
+        return self.extra_nav_html
     
     def getLicense(self, metadata):
         return """This content is available under the <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0 License</a>."""
@@ -357,6 +371,9 @@ class FetchedModDocsSiteSection(ModDocsSiteSection):
             os.mkdir(OUTPUT_DIRECTORY + "/" + self.urlPrefix)
         
         for page in self.pages:
+            if page["branch"] == "wiki":
+                continue
+
             url = self.getUrl(page)
             if url is None:
                 print("no page url found " + json.dumps(page))
@@ -371,7 +388,7 @@ class FetchedModDocsSiteSection(ModDocsSiteSection):
                 "source_url": url, 
                 "author": "LukeGrahamLandry", 
                 "source": "https://github.com/" + page["repo"],
-                "download": "https://www.curseforge.com/minecraft/mc-mods/" + page["curseforge"],
+                "download": "https://www.curseforge.com/minecraft/mc-mods/" + page["curseforge"] + "/files",
                 "mod_name": page["name"]
             })
 
@@ -397,6 +414,94 @@ class FetchedModDocsSiteSection(ModDocsSiteSection):
             .replace("$PATH", metadata["source"]).replace("$NAME", metadata["mod_name"])
 
 
+class WikiModDocsSiteSection(FetchedModDocsSiteSection):
+    def __init__(self, pages, sourceDir, urlPrefix, templateFile):
+        super().__init__(pages, sourceDir, urlPrefix, templateFile)
+
+    def processFiles(self):
+        if not os.path.isdir(OUTPUT_DIRECTORY + "/" + self.urlPrefix):
+            os.mkdir(OUTPUT_DIRECTORY + "/" + self.urlPrefix)
+
+        for page in self.pages:
+            if page["branch"] != "wiki":
+                continue
+            repo = page["repo"]
+
+            url = "https://github.com/{}/wiki".format(repo)
+            other_fetched_urls.append(url)
+            os.system("git clone \"{}\"".format( "https://github.com/{}.wiki.git".format(repo)))
+            self.current_repo_name = repo.split("/")[1]
+            self.makeSubfolder(self.current_repo_name)
+            folder = repo.split("/")[1] + ".wiki"
+
+            with open(OUTPUT_DIRECTORY + "/_redirects", "a") as f:
+                f.write("/{0}/{1} /{0}/{1}/Home\n".format(self.urlPrefix, self.current_repo_name))
+
+            with open(folder + "/_Sidebar.md", "r") as f:
+                md_content = "".join(f.readlines())
+            nav_html = markdown.markdown(md_content, extensions=['fenced_code', "mdx_linkify"], tab_length=3)
+
+            baseroot = None
+            for root, dirs, files in os.walk(folder, topdown=True):
+                if baseroot is None:
+                    baseroot = root
+
+                subdirectory = root.replace(baseroot + "/", "").replace(baseroot, "")
+                
+                for filename in files:
+                    if ".md" not in filename:
+                        continue
+
+                    target = filename
+                    if subdirectory != "":
+                        target = subdirectory + "/" + filename
+                    
+                    print("building {}/{} to {}".format(url, filename, self.urlPrefix))
+
+                    meta = {
+                        "contact": "/discord", 
+                        "source_url": url + "/" + filename.split(".")[0], 
+                        "source": "https://github.com/" + repo,
+                        "mod_name": repo.split("/")[1],
+                        "nav_html": nav_html,
+                        "page_title": page["name"]
+                    }
+                    if "curseforge" in page:
+                        meta["download"] = "https://www.curseforge.com/minecraft/mc-mods/" + page["curseforge"] + "/files"
+
+                    self.processMarkdownFile(baseroot, target, extraMetadata=meta, tab_length=3)
+            
+            for dir in dirs:
+                self.makeSubfolder(dir)
+            
+            shutil.rmtree(folder)
+    
+    def getHeaderHtml(self, title, metadata):
+        if title == "Home":
+            title = "Wiki"
+        
+        return super().getHeaderHtml(title, metadata) + "<h1>{}</h1>".format(self.getDisplayName(title, metadata), title)
+
+    def getExtraNavHTML(self, title, metadata):
+        return "<br><b>" + metadata["page_title"]  + " Wiki </b>" + metadata["nav_html"] + "<b style=\"display: block; margin-bottom: 20px;\">Luke's Mods</b>" + super().getExtraNavHTML(title, metadata)
+
+    def writeFile(self, title, html_content):
+        out_path = "{}/{}/{}.html".format(self.urlPrefix, self.current_repo_name, title)
+        if self.urlPrefix is None or self.urlPrefix == "":
+            out_path = "{}.html".format(title)
+        out_path = OUTPUT_DIRECTORY + "/" + out_path
+            
+        with open(out_path, "w") as f:
+            f.write(html_content)
+    
+    def getCanonicalPath(self, title):
+        path = "{}/{}/{}".format(self.urlPrefix, self.current_repo_name, title)
+        return path
+
+    def getDisplayName(self, title, metadata):
+        return metadata["page_title"] + ": " + super().getDisplayName(title, metadata)
+
+
 if __name__ == "__main__":
     urlCache = FetchedPageCache("scripts/generated/cache")
     
@@ -415,6 +520,7 @@ if __name__ == "__main__":
     modDocs = ModDocsSiteSection(site_data["fetched-pages"]["mods"], "mod-documentation", "mods", "mod-documentation.html")
     modDocs.processFiles()
     FetchedModDocsSiteSection(site_data["fetched-pages"]["mods"], "mod-documentation", "mods", "mod-documentation.html").processFiles()
+    WikiModDocsSiteSection(site_data["fetched-pages"]["mods"], "mod-documentation", "mods", "mod-documentation.html").processFiles()
     
     with open("scripts/generated/videos.json", "r") as f:
         video_data = json.loads("".join(f.readlines()))
@@ -427,7 +533,6 @@ if __name__ == "__main__":
 
     with open(OUTPUT_DIRECTORY + "/styles/code.css", "w") as f:
         f.write(formatter.get_style_defs())
-    
 
 
 # fetch the well written ones from forge community wiki

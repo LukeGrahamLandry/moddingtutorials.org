@@ -19,7 +19,7 @@ def getVideoInfo(video_id):
     thumnail_url = "http://img.youtube.com/vi/" + video_id + "/0.jpg"
 
     img_data = requests.get(thumnail_url).content
-    filename = 'img/videos/' + video_id + '.jpg'
+    filename = 'web/img/videos/' + video_id + '.jpg'
     with open(filename, 'wb') as handler:
         handler.write(img_data)
     
@@ -90,7 +90,7 @@ def getChannelInfo(channel_id):
     img_url = list(api_response['items'][0]['snippet']["thumbnails"].values())[0]["url"]
     print(img_url)
     img_data = requests.get(img_url).content
-    filename = 'img/videos/' + channel_id + '.jpg'
+    filename = 'web/img/videos/' + channel_id + '.jpg'
     with open(filename, 'wb') as handler:
         handler.write(img_data)
     
@@ -140,7 +140,7 @@ if __name__ == "__main__":
     api_key = "AIzaSyD3YtUIi_m0OHp_fcZxLSInHPr2KWzuJKM"
     youtube = build('youtube', 'v3', developerKey=api_key)
 
-    with open("pages.json", "r") as f:
+    with open("scripts/pages.json", "r") as f:
         site_data = json.loads("".join(f.readlines()))
 
     data = {
@@ -148,7 +148,7 @@ if __name__ == "__main__":
         "yt-clients": processChannels(site_data["yt-clients"])
     }
 
-    with open("generated/videos.json", "w") as f:
+    with open("scripts/generated/videos.json", "w") as f:
         f.write(json.dumps(data, indent=4))
     
     youtube.close()

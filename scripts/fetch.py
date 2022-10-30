@@ -51,3 +51,7 @@ class FetchedPageCache:
         with open(self.list_file, "r") as f:
             entries = f.readlines()
         return [x.rstrip() for x in entries]
+
+if __name__ == "__main__":
+    urlCache = FetchedPageCache("scripts/generated/cache")
+    urlCache.refresh()

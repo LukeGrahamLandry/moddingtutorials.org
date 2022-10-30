@@ -1,13 +1,61 @@
-# Minecraft Mod Documentation
+# My Mods
 
-## For Players 
+This site hosts the documentation for most of my Minecraft mods. 
 
-This site aims to increase the discoverability of features in minecraft mods. We host documentation for a variety of open source mods to give players a trusted source of detailed explanations of how mods work.
+<!--
+## Mimic
 
-## For Developers
 
-If you're the developer of a simple open source mod, I'd be happy to help document it! Send me a link to your mod's github page and I'll write you some free documentaion. With the added benefit of your mod being added to the site's side bar for discoverability by readers of other mod docs. 
+## Find My Friends 
 
-**Why is this service free?**  
-I'll host the docs I write on this site and ask that you link to it from your curseforge page. When people click through to read about your mod, there's a chance they'll be interested in the little ad for my mod commissions on the left of the page. 
-Your documentation page will never have any third party ads! 
+1.16, 1.17, 1.18 (forge)
+
+## Entity Rain
+
+1.16 & 1.18 (forge)
+
+## Inclusive Enchanting
+
+Allows many vanilla enchantments to go on extra items. For example, fire aspect tools and piercing bows. 
+
+1.16 & 1.19 (forge)
+
+## Tired Shulkers
+
+I ported to 1.18 & 1.19 (forge). Original Authors (iron skulker boxes): ProgWML6, Alexbegt
+
+## Torcherino
+
+Adds special torches that speed up ticks in an area (also lantern and jack-o-lantern variants). GUI to configure radius and speed up amount. Config for tiers with different limits on stats
+
+I ported to 1.18 & 1.19 (forge & fabric). Original Authors: Moze_Intel, sci4me, 3llemes
+
+## Travel Staff
+
+The travel anchors and staff of traveling from EnderIO. 
+
+I ported to fabric (1.18 & 1.19). Original Authors: CastCrafter, MelanX, noeppinoeppi
+
+## Better Combat
+
+Massively improves attack animations. Loads animation definitions for each weapon from data packs. Replaces targeting logic with collision detection on the animated weapon. 
+
+I ported to forge (1.18 & 1.19) and 1.16. Original Author: Daedelus
+
+## PlayerEx
+
+I ported the last forge 1.16.5 version to 1.18. Original Author: CleverNucleus
+
+## Skillable 
+
+Spend xp to level up in different skills which unlocks the ability to use items. Config for which items are unlocked at which skill levels. 
+
+I ported to 1.18 (forge). Original Author: notmajik
+
+## Simple Xp Config
+
+- (ported from 1.12, Original Author: bright_spark)
+- 
+- 
+
+-->

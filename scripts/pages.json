@@ -97,6 +97,17 @@
                 "repo": "LukeGrahamLandry/cultivated-snacks-mod",
                 "branch": "forge-1.16.5",
                 "curseforge": "cultivated-snacks"
+            },
+            {
+                "name": "Forged Fabric",
+                "repo": "LukeGrahamLandry/ForgedFabric",
+                "branch": "wiki",
+                "curseforge": "forgedfabric"
+            },
+            {
+                "name": "Modular Professions",
+                "repo": "LukeGrahamLandry/modular-professions-mod",
+                "branch": "wiki"
             }
         ]
     },

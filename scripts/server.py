@@ -1,13 +1,19 @@
-import flask
+import flask, os
 
 app = flask.Flask(__name__)
 
-OUTPUT_DIRECTORY = "../dist"
+OUTPUT_DIRECTORY = os.getcwd() + "/dist"
+
 
 @app.route("/<path:filename>", methods=["GET"])
 def file_reader(filename):
+    original = filename
     if not "." in filename:
         filename += ".html"
+
+    if not os.path.exists(OUTPUT_DIRECTORY + "/" + filename):
+        filename = original + "/index.html"
+    
     return flask.send_from_directory(OUTPUT_DIRECTORY, filename)
 
 

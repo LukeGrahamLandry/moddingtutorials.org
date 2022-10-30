@@ -33,6 +33,8 @@ Files in /web are directly exposed by the web server. Other folders have markdow
 
 ## Scripts 
 
+All scripts should be run from the root directory (ie `python3 scripts/[name].py`). 
+
 ### pages.json
 
 - videos
@@ -54,7 +56,11 @@ Files in /web are directly exposed by the web server. Other folders have markdow
 
 ### fetch.py
 
-Caches urls fetched during the build process. This speeds up builds when testing and allows testing offline. 
+Caches urls fetched during the build process. This speeds up builds when testing and allows testing offline. Run the script on its own to refresh all cached content. 
+
+### build.py
+
+Builds all content into full html files output to `dist`. The build should not require a network connection. Any web resources must be cached in `generated`. 
 
 ### server.py
 
