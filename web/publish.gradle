@@ -1,0 +1,218 @@
+/*
+ * Automatic Minecraft Mod Publishing.
+ * Supported Platforms: CurseForge and Github Releases.
+ * LICENSE : Public Domain, https://creativecommons.org/publicdomain/zero/1.0
+ * AUTHOR  : LukeGrahamLandry#6888
+ * SOURCE  : https://moddingtutorials.org/publish.gradle
+ *
+ * Usage:
+ * 1. add gradle plugin repo for dependencies (in settings.gradle)
+ *    pluginManagement {
+ *        repositories {
+ *              maven { url "https://maven.architectury.dev" }
+ *        }
+ *    }
+ * 2. apply gradle plugin dependencies (top of build.gradle)
+ *    plugins {
+ *        id "me.shedaniel.unified-publishing" version "0.1.10"
+ *        id "com.github.breadmoirai.github-release" version "2.4.1"
+ *    }
+ * 3. import this script (bottom of build.gradle)
+ *    apply from: "https://moddingtutorials.org/publish.gradle"
+ * 4. create the config file .github/publish.json as specified bellow
+ * 5. define your api keys as environment variables and make sure you expose the required gradle properties
+ * 6. create a github action to run `./gradlew publishMod` whenever you want to publish a new version
+ *
+ * Structure of the config file (.github/publish.json):
+ * - versions: array of supported minecraft versions. ie ["1.19.3", "1.19.2"]
+ * - loader: "forge" or "fabric"
+ * - changelogUrl: url will be added to description body
+ * - releaseType: default "release", could also be "beta" or "alpha"
+ * - github: (optional)
+ *      - repo: the name of the repository to release to
+ *      - owner: the name of the github account that owns repo
+ *      - branch: the name of the branch this release is based on
+ * - curseforge: (optional)
+ *      - id: the id of the project to publish the file (as a string)
+ *
+ * Required gradle.properties variables:
+ * - version
+ * - archives_base_name
+ *
+ * Required environment variables
+ * - CURSEFORGE_API_KEY: https://authors.curseforge.com/account/api-tokens
+ * - GH_API_KEY: personal token with repo permissions https://github.com/settings/tokens
+ */
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.google.code.gson:gson:2.8.2'
+    }
+}
+
+import java.nio.charset.StandardCharsets
+import java.nio.file.Files
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonSyntaxException
+
+class AutoModPublishHelper {
+    class CurseforgePublishConfig {
+        String id;
+    }
+
+    class GithubPublishConfig {
+        String owner;
+        String repo;
+        String branch;
+    }
+
+    class PublishConfig {
+        CurseforgePublishConfig curseforge = null;
+        GithubPublishConfig github = null;
+        String loader;
+        String changelogUrl;
+        String[] mc_versions;
+        String releaseType = "release"
+    }
+
+    PublishConfig config;
+    String cfToken;
+    String ghToken;
+
+    Project parentProject
+    AutoModPublishHelper(Project parentProject) {
+        this.parentProject = parentProject
+        this.config = this.loadConfig();
+        if (this.config == null) return;
+
+        if (this.config.curseforge != null) this.curseforge();
+        if (this.config.github != null) this.github()
+    }
+
+    PublishConfig loadConfig(){
+        File dataFile = new File(".github", "publish.json")
+        if (!dataFile.exists()){
+            println("Missing config file: " + dataFile.toString())
+            return null;
+        }
+
+        List<String> lines = Files.readAllLines(dataFile.toPath(), StandardCharsets.UTF_8);
+        String data = String.join("\n", lines);
+        Gson GSON = (new GsonBuilder()).setPrettyPrinting().disableHtmlEscaping().create();
+        try {
+            this.config = GSON.fromJson(data, PublishConfig.class);
+        } catch (JsonSyntaxException e){
+            e.printStackTrace();
+            println("Failed to parse config file: " + dataFile.toString());
+            return null;
+        }
+
+        this.cfToken = this.parentProject.findProperty("CURSEFORGE_API_KEY") ?: System.getenv("CURSEFORGE_API_KEY")
+        if (this.config.curseforge == null){
+            println("Missing key 'curseforge' in config, will not publish there.");
+        } else if (this.cfToken == null){
+            this.config.curseforge = null;
+            println("Missing env variable CURSEFORGE_API_KEY, will not publish there.");
+        }
+        if (this.config.curseforge != null){
+            if (this.config.curseforge.id == null){
+                println("Missing key 'curseforge[id]' in config, will not publish there.");
+                this.config.curseforge = null;
+            }
+        }
+
+        this.ghToken = this.parentProject.findProperty("GH_API_KEY") ?: System.getenv("GH_API_KEY")
+        if (this.config.github == null){
+            println("Missing key 'github' in config, will not publish there.");
+        } else if (this.ghToken == null){
+            this.config.github = null;
+            println("Missing env variable GH_API_KEY, will not publish there.");
+        }
+        if (this.config.github != null){
+            if (this.config.github.repo == null){
+                println("Missing key 'github[repo]' in config, will not publish there.");
+                this.config.github = null;
+            }
+            if (this.config.github.branch == null){
+                println("Missing key 'github[branch]' in config, will not publish there.");
+                this.config.github = null;
+            }
+            if (this.config.github.owner == null){
+                println("Missing key 'github[owner]' in config, will not publish there.");
+                this.config.github = null;
+            }
+        }
+
+        return this.config;
+    }
+
+    // https://github.com/shedaniel/unified-publishing
+    // gradlew publishUnified
+    void curseforge(){
+       this.parentProject.unifiedPublishing {
+            project {
+                releaseType = this.config.releaseType
+                displayName = this.parentProject.archives_base_name + " " + this.parentProject.version + " " + this.config.loader
+                version = this.parentProject.version
+                changelog = "See ${this.config.changelogUrl} for full details"
+                gameVersions = List.of(this.config.mc_versions)
+                gameLoaders = [this.config.loader]
+
+                mainPublication this.parentProject.tasks.remapJar
+
+                curseforge {
+                    token = cfToken
+                    id = this.config.curseforge.id
+                }
+            }
+        }
+    }
+
+    void github(){
+        if (this.ghToken == null){
+            println("Missing Github Api Key; skipping. Set env variable GH_API_KEY")
+            return;
+        }
+
+        String changelogInfo = """See ${this.config.changelogUrl} for full details.  \nSupported MC Versions: **${String.join(", ", this.config.mc_versions)}**  \nSupported Mod Loader: **${this.config.loader}**  \n"""
+
+        this.parentProject.githubRelease {
+            token this.ghToken
+            owner this.config.github.owner
+            repo this.config.github.repo
+            tagName this.parentProject.version
+            targetCommitish this.config.github.branch
+            releaseName this.parentProject.version
+            body changelogInfo
+            generateReleaseNotes false
+            draft false
+            releaseAssets this.parentProject.remapJar.archiveFile
+            allowUploadToExisting false
+            overwrite false
+            apiEndpoint "https://api.github.com"
+            client
+        }
+    }
+}
+
+
+class AutoPublishPlugin implements Plugin<Project> {
+    void apply(Project project){
+        AutoModPublishHelper publisher = new AutoModPublishHelper(project)
+
+        project.tasks.register("publishMod") {
+            dependsOn(project.tasks.build)
+            if (publisher.config.curseforge != null) finalizedBy(project.tasks.publishUnified)
+            if (publisher.config.github != null) finalizedBy(project.tasks.githubRelease)
+        }
+
+        println "Registered gradle task: publishMod"
+    }
+}
+
+apply plugin: AutoPublishPlugin
