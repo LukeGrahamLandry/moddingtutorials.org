@@ -150,6 +150,7 @@ class JustEnoughPublishing {
             this.log("Config requires keys 'mc_versions', 'loader', 'changelogUrl'. will not publish mod.");
             return null;
         }
+        if (this.config.releaseType == null) this.config.releaseType = "release";
 
         this.cfToken = this.parentProject.findProperty("CURSEFORGE_API_KEY") ?: System.getenv("CURSEFORGE_API_KEY")
         if (this.config.curseforge == null){
@@ -194,7 +195,7 @@ class JustEnoughPublishing {
                 gameVersions = List.of(this.config.mc_versions)
                 gameLoaders = [this.config.loader]
 
-                mainPublication this.parentProject.tasks.remapJar
+                mainPublication this.parentProject.hasProperty("remapJar") ? this.parentProject.remapJar : this.parentProject.jar
 
                 curseforge {
                     token = cfToken
@@ -217,7 +218,7 @@ class JustEnoughPublishing {
             body changelogInfo
             generateReleaseNotes false
             draft false
-            releaseAssets this.parentProject.remapJar.archiveFile
+            releaseAssets this.parentProject.hasProperty("remapJar") ? this.parentProject.remapJar.archiveFile : this.parentProject.jar.archiveFile
             allowUploadToExisting false
             overwrite false
             apiEndpoint "https://api.github.com"
