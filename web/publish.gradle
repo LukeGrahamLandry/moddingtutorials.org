@@ -27,7 +27,7 @@
  * - version
  * - archives_base_name
  *
- * Environment variables:
+ * Environment variables: (can also be set in USER_HOME_FOLDER/.gradle/gradle.properties)
  * - CURSEFORGE_API_KEY: https://authors.curseforge.com/account/api-tokens
  * - GH_API_KEY: personal token with repo permissions https://github.com/settings/tokens
  */
@@ -101,6 +101,7 @@ class JustEnoughPublishing {
     }
 
     PublishConfig config;
+    String prettyName;
     String cfToken;
     String ghToken;
 
@@ -109,6 +110,7 @@ class JustEnoughPublishing {
         this.parentProject = parentProject
         this.config = this.loadConfig();
         if (this.config == null) return;
+        this.prettyName = this.parentProject.archives_base_name + " " + this.parentProject.version + " " + this.config.loader
 
         if (this.config.curseforge != null) this.curseforge();
         if (this.config.github != null) this.github()
@@ -124,7 +126,7 @@ class JustEnoughPublishing {
         File dataFile;
         for (int i=0;i<configLocations.size();i++){
             dataFile = configLocations.get(i);
-            this.log("Checking for config file: " + dataFile.toString())
+            this.log("checking config file: " + dataFile.toString())
             if (dataFile.exists()) break
             else dataFile = null;
         }
@@ -145,7 +147,7 @@ class JustEnoughPublishing {
         }
 
         if (this.config.mc_versions == null || this.config.loader == null || this.config.changelogUrl == null){
-            this.log("config requires keys 'mc_versions', 'loader', 'changelogUrl'. will not publish mod.");
+            this.log("Config requires keys 'mc_versions', 'loader', 'changelogUrl'. will not publish mod.");
             return null;
         }
 
@@ -156,7 +158,7 @@ class JustEnoughPublishing {
             this.log("Missing env variable CURSEFORGE_API_KEY, will not publish to curseforge.");
             this.config.curseforge = null;
         } else if (this.config.curseforge.id == null){
-            this.log("config[curseforge] requires key 'id. will not publish to curseforge.");
+            this.log("Config[curseforge] requires key 'id. will not publish to curseforge.");
             this.config.curseforge = null;
         }
 
@@ -167,12 +169,12 @@ class JustEnoughPublishing {
             this.config.github = null;
             this.log("Missing env variable GH_API_KEY, will not publish to github.");
         } else if (this.config.github.repo == null || this.config.github.branch == null || this.config.github.owner == null){
-            this.log("config[github] requires keys 'repo', 'owner', 'branch'. will not publish to github.");
+            this.log("Config[github] requires keys 'repo', 'owner', 'branch'. will not publish to github.");
             this.config.github = null;
         }
 
         if (this.config.github == null && this.config.curseforge == null){
-            this.log("no valid publishing targets")
+            this.log("No valid publishing targets")
             return null;
         }
 
@@ -186,7 +188,7 @@ class JustEnoughPublishing {
        this.parentProject.unifiedPublishing {
             project {
                 releaseType = this.config.releaseType
-                displayName = this.parentProject.archives_base_name + " " + this.parentProject.version + " " + this.config.loader
+                displayName = this.prettyName
                 version = this.parentProject.version
                 changelog = "See ${this.config.changelogUrl} for full details"
                 gameVersions = List.of(this.config.mc_versions)
@@ -211,7 +213,7 @@ class JustEnoughPublishing {
             repo this.config.github.repo
             tagName this.parentProject.version
             targetCommitish this.config.github.branch
-            releaseName this.parentProject.version
+            releaseName this.prettyName
             body changelogInfo
             generateReleaseNotes false
             draft false
@@ -231,8 +233,17 @@ class JustEnoughPublishingPlugin implements Plugin<Project> {
 
         project.tasks.register("publishMod") {
             dependsOn(project.tasks.build)
-            if (publisher.config.curseforge != null) finalizedBy(project.tasks.publishUnified)
-            if (publisher.config.github != null) finalizedBy(project.tasks.githubRelease)
+
+            List<String> targets = new ArrayList<>();
+            if (publisher.config.curseforge != null) {
+                finalizedBy(project.tasks.publishUnified)
+                targets.add("curseforge")
+            }
+            if (publisher.config.github != null) {
+                finalizedBy(project.tasks.githubRelease)
+                targets.add("github")
+            }
+            publisher.log("active targets: " + String.join(", ", targets))
         }
 
         publisher.log("registered gradle task: publishMod")
@@ -240,3 +251,5 @@ class JustEnoughPublishingPlugin implements Plugin<Project> {
 }
 
 apply plugin: JustEnoughPublishingPlugin
+
+// TODO: modrinth support, maven support
