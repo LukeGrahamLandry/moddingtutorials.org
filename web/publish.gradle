@@ -20,8 +20,10 @@
  *      - repo: the name of the repository to release to
  *      - owner: the name of the github account that owns repo
  *      - branch: the name of the branch this release is based on
+ *      - requiredDependencies: map of display name to url
  * - curseforge: (optional)
  *      - id: the id of the project to publish the file (as a string)
+ *      - requiredDependencies: list of project slugs
  *
  * Required gradle.properties variables:
  * - version
@@ -49,6 +51,8 @@ buildscript {
 
 import java.nio.charset.StandardCharsets
 import java.nio.file.Files
+import java.util.Map
+import java.util.HashMap
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -83,12 +87,14 @@ apply plugin: GithubReleasePlugin
 class JustEnoughPublishing {
     class CurseforgePublishConfig {
         String id;
+        String[] requiredDependencies;
     }
 
     class GithubPublishConfig {
         String owner;
         String repo;
         String branch;
+        Map<String, String> requiredDependencies;
     }
 
     class PublishConfig {
@@ -200,7 +206,14 @@ class JustEnoughPublishing {
                 curseforge {
                     token = cfToken
                     id = this.config.curseforge.id
-                }
+                    if (this.config.curseforge.requiredDependencies != null){
+                        relations { 
+                            for (String slug : List.of(this.config.curseforge.requiredDependencies)){
+                                depends slug
+                            }
+                        }
+                    }
+                }   
             }
         }
     }
@@ -208,6 +221,12 @@ class JustEnoughPublishing {
     void github(){
         String changelogInfo = """See ${this.config.changelogUrl} for full details.  \nSupported MC Versions: **${String.join(", ", this.config.mc_versions)}**  \nSupported Mod Loader: **${this.config.loader}**  \n"""
 
+        if (this.config.github.requiredDependencies != null){
+            changelogInfo += "## Required Dependencies \n";
+            for (Map.Entry<String, String> dep : this.config.github.requiredDependencies){
+                changelogInfo += "- [${dep.getKey()}](${dep.getValue()}) \n"
+            }
+        }
         this.parentProject.githubRelease {
             token this.ghToken
             owner this.config.github.owner
@@ -254,3 +273,4 @@ class JustEnoughPublishingPlugin implements Plugin<Project> {
 apply plugin: JustEnoughPublishingPlugin
 
 // TODO: modrinth support, maven support
+// TODO: dependencies (also write them in github release description)
