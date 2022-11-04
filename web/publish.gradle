@@ -27,7 +27,6 @@
  *
  * Required gradle.properties variables:
  * - version
- * - archives_base_name
  *
  * Environment variables: (can also be set in USER_HOME_FOLDER/.gradle/gradle.properties)
  * - CURSEFORGE_API_KEY: https://authors.curseforge.com/account/api-tokens
@@ -60,7 +59,9 @@ import com.google.gson.JsonSyntaxException
 
 //////// START DEPENDENCY PLUGINS ////////////
 
-// seems like i cant apply plugins that i added to buildscript classpath by id
+// i dont want to have to apply the plugins from the main build.gradle file
+// there's a thing for resolving transient dependencies but i think it requires building a jar from the plugin and shoving that in maven somewhere which i dont want to deal with 
+// seems like i cant apply (plugins that i added to buildscript classpath) by id
 // so instead have to import the plugin class and apply it that way
 // but unifiedpublishing tries to apply com.matthewprenger.cursegradle by id
 // which i can't do so i have my own wrapper plugin that adds their extension and task without trying to apply the dependency
@@ -116,7 +117,7 @@ class JustEnoughPublishing {
         this.parentProject = parentProject
         this.config = this.loadConfig();
         if (this.config == null) return;
-        this.prettyName = this.parentProject.archives_base_name + " " + this.parentProject.version + " " + this.config.loader
+        this.prettyName = this.parentProject.version + " " + this.config.loader
 
         if (this.config.curseforge != null) this.curseforge();
         if (this.config.github != null) this.github()
@@ -273,4 +274,4 @@ class JustEnoughPublishingPlugin implements Plugin<Project> {
 apply plugin: JustEnoughPublishingPlugin
 
 // TODO: modrinth support, maven support
-// TODO: dependencies (also write them in github release description)
+// TODO: property to block applying dependency plugins so other people dont have to do similar hack as i did for unifiedPublishing

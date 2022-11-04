@@ -1,5 +1,8 @@
 # Change Log
 
+## November 
+- publishing mods page 
+
 ## October 
 - button on tutorial page to embed corresponding youtube video when available 
 - use self hosted plausible analytics instead of google analytics (65.6kb -> 1.4kb)
