@@ -1,5 +1,6 @@
+// script for updating lwlgl in old forge dev environments that dont nativly work with apple silicon 
+// LICENSE : Public Domain, https://creativecommons.org/publicdomain/zero/1.0
 // AUTHOR  : LukeGrahamLandry#6888
-// LICENSE : MIT
 // README  : https://moddingtutorials.org/o19/m1
 // NOTE    : you MUST set mc_version in your gradle.properties file
 

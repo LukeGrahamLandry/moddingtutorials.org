@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NotEnoughGraphs | Explore Your Curseforge Earnings</title>
+    <script defer data-domain="moddingtutorials.org" src="https://plausible.moddingtutorials.org/js/script.js"></script>
+</head>
+<body>
+    <h1> NotEnoughGraphs: Explore Your Curseforge Earnings </h1>
+
+    <h2> Exporting Your Data </h2>
+
+    Open <a href="/cfstats.js">cfstats.js</a> and follow the instructions at the top. 
+
+    <h2> Graphing Your Data </h2>
+
+    <label for="data">Paste your json data here:</label> <br>
+    <textarea id="data" cols="60" rows="10"></textarea> <br>
+    <button onclick="onDataChanged()"> update </button>
+    <button onclick="clearData()"> clear </button>
+
+    <p style="font-size: 0.5rem;">
+        Your data will be saved in your browser's local storage. It will stay when you refresh the page. <br>
+        Your data stays private and is never sent to my servers. Feel free to inspect element and look at the code to verify this. <br>
+    </p>
+    
+    <h3> Daily Earnings </h3>
+    <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+    <h3>Cumulative Earnings</h3>
+    <canvas id="myChart2" style="width:100%;max-width:700px"></canvas>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script>
+        let dataInputElement = document.getElementById("data");
+
+        function onDataChanged(){
+            let data;
+            try {
+                data = JSON.parse(dataInputElement.value);
+            } catch (e) {
+                console.error(e, e.stack);
+                return;
+            }
+            
+            window.localStorage.setItem("cfstats", dataInputElement.value);
+            dataInputElement.value = JSON.stringify(data, null, 4);
+
+            let dailyValues = [];
+            let totalValues = [];
+            let runningTotal = 0;
+            
+            data.sort((a, b) => a.epoch - b.epoch);
+
+            for (let dataPoint of data){
+                runningTotal += dataPoint.total
+                dailyValues.push({x: dataPoint.epoch, y: dataPoint.total})
+                totalValues.push({x: dataPoint.epoch, y: runningTotal})
+            }
+
+            makeSimpleScatterChart("myChart", dailyValues);
+            makeSimpleScatterChart("myChart2", totalValues);
+        }
+
+        function clearData(){
+            dataInputElement.value = "";
+            window.localStorage.clear("cfstats");
+            clearCanvas("myChart");
+            clearCanvas("myChart2");
+        }
+
+        function clearCanvas(id){
+            let canvas = document.getElementById(id);
+            let context = canvas.getContext("2d");
+            context.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+        function makeSimpleScatterChart(canvasID, dataPoints){
+            new Chart(canvasID, {
+                type: "scatter",
+                data: {
+                    datasets: [{
+                        pointRadius: 4,
+                        pointBackgroundColor: "rgba(0,0,255,1)",
+                        data: dataPoints
+                    }]
+                },
+                options: {
+                    legend: {display: false},
+                    tooltips: {
+                        callbacks: {
+                            label: function(tooltipItem, data) {
+                                return tooltipItem.yLabel.toFixed(2) + " points on " + new Date(tooltipItem.xLabel * 1000).toDateString();
+                            }
+                        }
+                    },
+                    scales: {
+                        xAxes: [
+                            {
+                                ticks: {
+                                    min: dataPoints[0].x, 
+                                    max: dataPoints[dataPoints.length-1].x,
+                                    callback: function(label, index, labels) {
+                                        return new Date(label * 1000).toDateString();
+                                    }
+                                }
+                            }
+                        ],
+                        yAxes: [
+                            {
+                                ticks: {
+                                    callback: function(label, index, labels) {
+                                        return "$" + (label/20);
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            });
+        }
+
+        let savedData = window.localStorage.getItem("cfstats");
+        if (savedData != null){
+            dataInputElement.value = savedData;
+        }
+
+        dataInputElement.addEventListener("change", onDataChanged);
+
+        onDataChanged();
+    </script>
+</body>
+</html>

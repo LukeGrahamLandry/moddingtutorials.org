@@ -1,5 +1,5 @@
 /*
- * JustEnoughPublishing: automaticlly publish minecraft mods to CurseForge and Github Releases
+ * JustEnoughPublishing: automatically publish minecraft mods to CurseForge and Github Releases
  * LICENSE : Public Domain, https://creativecommons.org/publicdomain/zero/1.0
  * AUTHOR  : LukeGrahamLandry#6888
  * SOURCE  : https://moddingtutorials.org/publish.gradle
@@ -274,4 +274,5 @@ class JustEnoughPublishingPlugin implements Plugin<Project> {
 apply plugin: JustEnoughPublishingPlugin
 
 // TODO: modrinth support, maven support
+// TODO: config entry for optional dependencies
 // TODO: property to block applying dependency plugins so other people dont have to do similar hack as i did for unifiedPublishing

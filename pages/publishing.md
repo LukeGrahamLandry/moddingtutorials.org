@@ -1,6 +1,6 @@
 # Releasing Your Mod
 
-When your mod is ready for other people to play it, you'll want them be able to add it to their game rather than only running in a development environment. 
+When your mod is ready for other people to play it, you'll want them be able to add it to their game rather than only running in a development environment. I'll review your options for distribution websites and give a tutorial on using gradle to automatically publish your mod. 
 
 ## Build 
 
@@ -106,6 +106,8 @@ The config file contains a json object with the following fields:
      - id: the id of the project to publish the file (as a string)
      - requiredDependencies: (optional) list of project slugs
 
+[example](https://github.com/LukeGrahamLandry/ForgedFabric/blob/1.16/.github/publish.json)
+
 ### gradle.properties variables
 
 - version: the version number of your mod's current release, should match the entry in your mods.toml
@@ -116,3 +118,7 @@ These are your api keys and should **not** be committed to your git repository. 
 
 - CURSEFORGE_API_KEY: https://authors.curseforge.com/account/api-tokens
 - GH_API_KEY: personal token with repo permissions https://github.com/settings/tokens
+
+## Forge Version Checker
+
+- https://forge.gemwire.uk/wiki/Version_Checker

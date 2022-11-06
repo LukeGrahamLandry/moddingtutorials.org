@@ -64,6 +64,12 @@ This is an index of the content covered on this site.
     - register a projectile entity that explodes when it hits someone
     - an arrow item that lets you shoot your custom projectile from a vanilla bow or crossbow
 - [Depending on Other Mods](dependencies)
+    - adding mods to your development environment
+    - accessing classes from other mods
+- [Releasing Your Mod](publishing)
+    - build your mod into a jar file
+    - options for distribution websites
+    - gradle script to automatically publish releases
 - [MultiHitbox Entities](multihitbox) **WIP** (1.18+ only)
 
 ## Resources
