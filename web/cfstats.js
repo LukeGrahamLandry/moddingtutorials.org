@@ -1,22 +1,29 @@
-/*
- * NotEnoughGraphs: export detailed stats about your cf points earnings as json
- * LICENSE : Public Domain, https://creativecommons.org/publicdomain/zero/1.0
- * AUTHOR  : LukeGrahamLandry#6888
- * SOURCE  : https://moddingtutorials.org/cfstats.js
- * UPDATED : November 5, 2022 
- * 
- * Usage 
- * 1. go to https://authors.curseforge.com/store/transactions
- * 2. inspect element and open the console 
- * 3. paste this whole script there (and press enter)
- * 4. wait like a minute for it to run
- * 5. copy the json data from the text box that's added to the top of the page
- * 
- * Note About Security
- * please be careful about pasting random scripts into the console of websites where you're logged in 
- * curseforge requires a 2FA code to withdraw points so i couldn't steal your money even if i wanted to
- * but as a matter of principle you should still review this code to see that i'm not being evil :)
- */ 
+// ==UserScript==
+// @name         NotEnoughGraphs
+// @namespace    https://moddingtutorials.org
+// @version      1.0
+// @description  export detailed stats about your cf points earnings as json
+// @author       LukeGrahamLandry#6888
+// @match        https://authors.curseforge.com/store/transactions
+// @downloadURL  https://moddingtutorials.org/cfstats.js
+// @grant        none
+// ==/UserScript==
+//
+// LICENSE : Public Domain, https://creativecommons.org/publicdomain/zero/1.0
+// UPDATED : November 5, 2022 
+// 
+// Manual Usage 
+// 1. go to https://authors.curseforge.com/store/transactions
+// 2. inspect element and open the console 
+// 3. paste this whole script there (and press enter)
+// 4. wait like a minute for it to run
+// 5. copy the json data from the text box that's added to the top of the page
+// 
+// Security
+// please be careful about pasting random scripts into the console of websites where you're logged in 
+// curseforge requires a 2FA code to withdraw points so i couldn't steal your money even if i wanted to
+// but as a matter of principle you should still review this code to see that i'm not being evil :)
+
 
 (() => {
     function uncheckCheckbox(id, callback){
@@ -28,6 +35,12 @@
     function loadAllTransactions(callback){
         let showMoreButton = document.getElementById("more");
 
+        let outputArea = document.createElement("span");
+        outputArea.id = "notenoughgraphsloading";
+        outputArea.style.backgroundColor = "yellow";
+        document.getElementsByClassName("transaction-header")[0].appendChild(outputArea);
+        let i = 0;
+
         function tryLoadMoreTransactions(){
             if (showMoreButton.classList.contains("loading")){
                 window.setTimeout(tryLoadMoreTransactions, 100);
@@ -35,11 +48,13 @@
             }
 
             if (showMoreButton.classList.contains("disabled")){
+                outputArea.remove();
                 callback();
                 return;
             }
 
-            console.log("loading transactions...");
+            i++;
+            outputArea.innerText = "[NotEnoughGraphs] loading transactions... (" + i + ")";  
             showMoreButton.click();
             window.setTimeout(tryLoadMoreTransactions, 100);
         }
@@ -86,11 +101,14 @@
         outputArea.id = "notenoughgraphsdataoutput";
         document.getElementsByClassName("transaction-header")[0].appendChild(outputArea);
         window.scrollTo(0, 0);
+
+        // if the script was injected by a chrome extension, send it the exported data
+        if (chrome != undefined && chrome.runtime != undefined) chrome.runtime.sendMessage({type: "notenoughgraphsdataoutput", data: data}, function(response) {});
     }
 
     let oldOutputElement = document.getElementById("notenoughgraphsdataoutput");
     if (oldOutputElement != undefined) oldOutputElement.remove();
-    
+
     (
         () => uncheckCheckbox("orders", 
         () => uncheckCheckbox("transfers", 

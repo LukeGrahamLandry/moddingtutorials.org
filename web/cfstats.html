@@ -10,9 +10,28 @@
 <body>
     <h1> NotEnoughGraphs: Explore Your Curseforge Earnings </h1>
 
+    <p style="max-width: 600px;">
+        Although Curseforge's new authors dashboard has some fancy graphs, you still can't see all the way back in time or download your data. 
+        To fix this, I wrote a script that parses the html of the rewards transactions page and exports the data as json that you can process however you like.     
+    </p>
+    
     <h2> Exporting Your Data </h2>
 
-    Open <a href="/cfstats.js">cfstats.js</a> and follow the instructions at the top. 
+    There are several options for running the export script. 
+
+    <ul>
+        <li>Open <a href="/cfstats.js">cfstats.js</a> and follow the instructions at the top</li>
+        <li>Use a userscript manager (like TamperMonkey) and import from url: <a href="https://moddingtutorials.org/cfstats.js">https://moddingtutorials.org/cfstats.js</a></li>
+        <li>Use my chrome extension: under review</li>
+    </ul>
+
+    <p style="max-width: 600px;">
+        <b>Security</b> <br>
+        Please be careful about pasting random scripts into the console of websites where you're logged in. 
+        Curseforge requires a 2FA code to withdraw points so i couldn't steal your money even if i wanted to.
+        But as a matter of principle you should still review this code to see that i'm not being evil :)
+    </p>
+    
 
     <h2> Graphing Your Data </h2>
 
@@ -26,7 +45,7 @@
         Your data stays private and is never sent to my servers. Feel free to inspect element and look at the code to verify this. <br>
     </p>
     
-    <h3> Daily Earnings </h3>
+    <h3 id="topgraph"> Daily Earnings </h3>
     <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
     <h3>Cumulative Earnings</h3>
     <canvas id="myChart2" style="width:100%;max-width:700px"></canvas>
@@ -61,6 +80,7 @@
 
             makeSimpleScatterChart("myChart", dailyValues);
             makeSimpleScatterChart("myChart2", totalValues);
+            window.setTimeout(() => document.getElementById("topgraph").scrollIntoView(), 100)
         }
 
         function clearData(){
