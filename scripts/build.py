@@ -502,6 +502,12 @@ class WikiModDocsSiteSection(FetchedModDocsSiteSection):
         return metadata["page_title"] + ": " + super().getDisplayName(title, metadata)
 
 
+def fetchScript(url, target):
+    content = urlCache.get(url)
+    with open(OUTPUT_DIRECTORY + "/" + target, "w") as f:
+        f.write(content)
+
+
 if __name__ == "__main__":
     urlCache = FetchedPageCache("scripts/generated/cache")
     
@@ -533,6 +539,11 @@ if __name__ == "__main__":
 
     with open(OUTPUT_DIRECTORY + "/styles/code.css", "w") as f:
         f.write(formatter.get_style_defs())
+
+    fetchScript("https://raw.githubusercontent.com/LukeGrahamLandry/TheMcUtil/main/applesilicon.gradle", "applesilicon.gradle")
+    fetchScript("https://raw.githubusercontent.com/LukeGrahamLandry/TheMcUtil/main/publish.gradle", "publish.gradle")
+    fetchScript("https://raw.githubusercontent.com/LukeGrahamLandry/TheMcUtil/main/multihitboxlib.js", "multihitboxlib.js")
+    fetchScript("https://raw.githubusercontent.com/LukeGrahamLandry/TheMcUtil/main/cf-data-export/cfstats.js", "cfstats.js")
 
 
 # fetch the well written ones from forge community wiki

@@ -29,7 +29,7 @@
         <b>Security</b> <br>
         Please be careful about pasting random scripts into the console of websites where you're logged in. 
         Curseforge requires a 2FA code to withdraw points so i couldn't steal your money even if i wanted to.
-        But as a matter of principle you should still review this code to see that i'm not being evil :)
+        But as a matter of principle you should still review the code to see that i'm not being evil :)
     </p>
     
 
@@ -49,6 +49,10 @@
     <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
     <h3>Cumulative Earnings</h3>
     <canvas id="myChart2" style="width:100%;max-width:700px"></canvas>
+    
+    <p>
+        Earn enough points to find this useful? You can probably afford to <a href="/patreon">donate</a> to support its development :)
+    </p>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <script>
@@ -142,7 +146,7 @@
         }
 
         let savedData = window.localStorage.getItem("cfstats");
-        if (savedData != null){
+        if (savedData != null && dataInputElement.value == ""){
             dataInputElement.value = savedData;
         }
 

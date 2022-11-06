@@ -10,3 +10,7 @@ https://raw.githubusercontent.com/LukeGrahamLandry/XpSpawnerControl/master/READM
 https://raw.githubusercontent.com/LukeGrahamLandry/travel_anchors/1.18.x/README.md
 https://raw.githubusercontent.com/LukeGrahamLandry/harder-core-mod/main/README.md
 https://raw.githubusercontent.com/LukeGrahamLandry/cultivated-snacks-mod/forge-1.16.5/README.md
+https://raw.githubusercontent.com/LukeGrahamLandry/TheMcUtil/main/applesilicon.gradle
+https://raw.githubusercontent.com/LukeGrahamLandry/TheMcUtil/main/publish.gradle
+https://raw.githubusercontent.com/LukeGrahamLandry/TheMcUtil/main/multihitboxlib.js
+https://raw.githubusercontent.com/LukeGrahamLandry/TheMcUtil/main/cf-data-export/cfstats.js
