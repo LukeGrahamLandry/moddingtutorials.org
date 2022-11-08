@@ -18,6 +18,9 @@
 // 3. paste this whole script there (and press enter)
 // 4. wait like a minute for it to run
 // 5. copy the json data from the text box that's added to the top of the page
+//
+// Alternative Install
+// https://chrome.google.com/webstore/detail/notenoughgraphs/polhlbkgbndjeekffdknaplndggmfmpe
 // 
 // Security
 // please be careful about pasting random scripts into the console of websites where you're logged in 
