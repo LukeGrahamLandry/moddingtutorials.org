@@ -105,6 +105,9 @@ The config file contains a json object with the following fields:
 - curseforge: (optional)
      - id: the id of the project to publish the file (as a string)
      - requiredDependencies: (optional) list of project slugs
+- modrinth: (optional)
+     - id: the id of the project to publish the file (as a string)
+     - requiredDependencies: (optional) list of project slugs
 
 [example](https://github.com/LukeGrahamLandry/ForgedFabric/blob/1.16/.github/publish.json)
 
@@ -118,6 +121,7 @@ These are your api keys and should **not** be committed to your git repository. 
 
 - CURSEFORGE_API_KEY: https://authors.curseforge.com/account/api-tokens
 - GH_API_KEY: personal token with repo permissions https://github.com/settings/tokens
+- MODRINTH_API_KEY: https://modrinth.com/settings/account
 
 ## Forge Version Checker
 

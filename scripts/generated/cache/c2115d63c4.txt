@@ -20,11 +20,14 @@
  *      - repo: the name of the repository to release to
  *      - owner: the name of the github account that owns repo
  *      - branch: the name of the branch this release is based on
- *      - requiredDependencies: map of display name to url
+ *      - requiredDependencies: map of display name to url (optional)
  * - curseforge: (optional)
  *      - id: the id of the project to publish the file (as a string)
- *      - requiredDependencies: list of project slugs
+ *      - requiredDependencies: list of project slugs (optional)
  *
+ * - modrinth: (optional)
+ *      - id: the id of the project to publish the file (as a string)
+ *      - requiredDependencies: list of project slugs (optional)
  * Required gradle.properties variables:
  * - version
  *
@@ -91,6 +94,11 @@ class JustEnoughPublishing {
         String[] requiredDependencies;
     }
 
+    class ModrinthPublishConfig {
+        String id;
+        String[] requiredDependencies;
+    }
+
     class GithubPublishConfig {
         String owner;
         String repo;
@@ -101,6 +109,7 @@ class JustEnoughPublishing {
     class PublishConfig {
         CurseforgePublishConfig curseforge = null;
         GithubPublishConfig github = null;
+        ModrinthPublishConfig modrinth = null;
         String loader;
         String changelogUrl;
         String[] mc_versions;
@@ -111,6 +120,7 @@ class JustEnoughPublishing {
     String prettyName;
     String cfToken;
     String ghToken;
+    String mrToken;
 
     Project parentProject
     JustEnoughPublishing(Project parentProject) {
@@ -119,7 +129,7 @@ class JustEnoughPublishing {
         if (this.config == null) return;
         this.prettyName = this.parentProject.version + " " + this.config.loader
 
-        if (this.config.curseforge != null) this.curseforge();
+        if (this.config.curseforge != null || this.config.modrinth != null) this.platform();
         if (this.config.github != null) this.github()
     }
 
@@ -166,7 +176,7 @@ class JustEnoughPublishing {
             this.log("Missing env variable CURSEFORGE_API_KEY, will not publish to curseforge.");
             this.config.curseforge = null;
         } else if (this.config.curseforge.id == null){
-            this.log("Config[curseforge] requires key 'id. will not publish to curseforge.");
+            this.log("Config[curseforge] requires key 'id'. will not publish to curseforge.");
             this.config.curseforge = null;
         }
 
@@ -181,7 +191,18 @@ class JustEnoughPublishing {
             this.config.github = null;
         }
 
-        if (this.config.github == null && this.config.curseforge == null){
+        this.mrToken = this.parentProject.findProperty("MODRINTH_API_KEY") ?: System.getenv("MODRINTH_API_KEY")
+        if (this.config.modrinth == null){
+            this.log("Missing key 'modrinth' in config. will not publish to modrinth.");
+        } else if (this.mrToken == null){
+            this.config.modrinth = null;
+            this.log("Missing env variable MODRINTH_API_KEY, will not publish to modrinth.");
+        } else if (this.config.modrinth.id == null){
+            this.log("Config[modrinth] requires key 'id'. will not publish to modrinth.");
+            this.config.modrinth = null;
+        }
+
+        if (this.config.github == null && this.config.curseforge == null && this.config.modrinth == null){
             this.log("No valid publishing targets")
             return null;
         }
@@ -192,7 +213,7 @@ class JustEnoughPublishing {
 
     // https://github.com/shedaniel/unified-publishing
     // gradlew publishUnified
-    void curseforge(){
+    void platform(){
        this.parentProject.unifiedPublishing {
             project {
                 releaseType = this.config.releaseType
@@ -204,17 +225,34 @@ class JustEnoughPublishing {
 
                 mainPublication this.parentProject.hasProperty("remapJar") ? this.parentProject.remapJar : this.parentProject.jar
 
-                curseforge {
-                    token = cfToken
-                    id = this.config.curseforge.id
-                    if (this.config.curseforge.requiredDependencies != null){
-                        relations { 
-                            for (String slug : List.of(this.config.curseforge.requiredDependencies)){
-                                depends slug
+                if (this.config.curseforge != null){
+                    curseforge {
+                        token = cfToken
+                        id = this.config.curseforge.id
+                        if (this.config.curseforge.requiredDependencies != null){
+                            relations {
+                                for (String slug : List.of(this.config.curseforge.requiredDependencies)){
+                                    depends slug
+                                }
                             }
                         }
                     }
-                }   
+                }
+
+                if (this.config.modrinth != null){
+                    modrinth {
+                        token = mrToken
+                        id = this.config.modrinth.id
+                        if (this.config.modrinth.requiredDependencies != null) {
+                            relations {
+                                for (String slug : List.of(this.config.modrinth.requiredDependencies)) {
+                                    depends slug
+                                }
+                            }
+                        }
+                    }
+                }
+
             }
         }
     }
@@ -256,10 +294,9 @@ class JustEnoughPublishingPlugin implements Plugin<Project> {
             dependsOn(project.tasks.build)
 
             List<String> targets = new ArrayList<>();
-            if (publisher.config.curseforge != null) {
-                finalizedBy(project.tasks.publishUnified)
-                targets.add("curseforge")
-            }
+            if (publisher.config.curseforge != null || publisher.config.modrinth != null) finalizedBy(project.tasks.publishUnified)
+            if (publisher.config.curseforge != null) targets.add("curseforge");
+            if (publisher.config.modrinth != null) targets.add("modrinth");
             if (publisher.config.github != null) {
                 finalizedBy(project.tasks.githubRelease)
                 targets.add("github")

@@ -1,14 +1,16 @@
 # Find My Friends Mod
 
-- Forge 1.18.1
-- Commissioned by *raffle*
+- Originally commissioned by *raffle*
 
 ## Features 
 
 Shows player names over any distance. Even if they're outside your render distance.   
 
-Server configs:  
+### Server Configs Options 
+
 - max range
 - update inverval
 - hide sneaking players
 - show distance above player name
+
+Edit `world/serverconfig/findmyfriends-server.toml`
