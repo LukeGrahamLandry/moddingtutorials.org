@@ -77,7 +77,7 @@
             {
                 "name": "Simple XP Config",
                 "repo": "LukeGrahamLandry/XpSpawnerControl",
-                "branch": "master",
+                "branch": "1.18",
                 "curseforge": "spawner-xp-config"
             },
             {

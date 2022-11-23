@@ -2,6 +2,7 @@
 
 ## November 
 - publishing mods page 
+- NotEnoughGraphs
 
 ## October 
 - button on tutorial page to embed corresponding youtube video when available 
