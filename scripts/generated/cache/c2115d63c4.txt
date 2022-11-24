@@ -14,7 +14,7 @@
  * Structure of the config file (location options in order: {root}/.github/publish.json > {subproject}/publish.json > {root}/publish.json):
  * - versions: array of supported minecraft versions. ie ["1.19.3", "1.19.2"]
  * - loader: "forge" or "fabric"
- * - changelogUrl: url will be added to description body
+ * - changelogUrl: url will be added to description body (optional, a changelog.txt file may be used instead)
  * - releaseType: default "release", could also be "beta" or "alpha"
  * - github: (optional)
  *      - repo: the name of the repository to release to
@@ -121,6 +121,7 @@ class JustEnoughPublishing {
     String cfToken;
     String ghToken;
     String mrToken;
+    String changelogText;
 
     Project parentProject
     JustEnoughPublishing(Project parentProject) {
@@ -130,23 +131,43 @@ class JustEnoughPublishing {
         this.prettyName = this.parentProject.version + " " + this.config.loader
 
         if (this.config.curseforge != null || this.config.modrinth != null) this.platform();
-        if (this.config.github != null) this.github()
+        if (this.config.github != null) this.github();
     }
 
     void log(String s){
         println "[JustEnoughPublishing] " + s
     }
 
-    PublishConfig loadConfig(){
-        List<File> configLocations = [new File(new File(this.parentProject.rootDir, ".github"), "publish.json"), new File(this.parentProject.projectDir, "publish.json"), new File(this.parentProject.rootDir, "publish.json")]
+    String loadChangelog(){
+        String defaultChangelog = this.config.changelogUrl == null ? null : "See ${this.config.changelogUrl} for full details";
+        File changelog = this.locateFile("changelog.txt");
+        if (changelog == null) defaultChangelog;
+        String specificChangelog = changelog.getText('UTF-8')
+        if (specificChangelog.isEmpty()) return defaultChangelog;
+        return specificChangelog;
+    }
 
-        File dataFile;
-        for (int i=0;i<configLocations.size();i++){
-            dataFile = configLocations.get(i);
-            this.log("checking config file: " + dataFile.toString())
+    File locateFile(String filename){
+        List<File> locations = [new File(new File(this.parentProject.rootDir, ".github"), filename), new File(this.parentProject.projectDir, filename), new File(this.parentProject.rootDir, filename)]
+
+        File dataFile = null;
+        for (int i=0;i<locations.size();i++){
+            dataFile = locations.get(i);
+            this.log("checking for file: " + dataFile.toString())
             if (dataFile.exists()) break
             else dataFile = null;
         }
+        return dataFile;
+    }
+
+    void clearChangelog(){
+        File changelog = this.locateFile("changelog.txt");
+        if (changelog == null) return;
+        changelog.text = '';
+    }
+
+    PublishConfig loadConfig(){
+        File dataFile = locateFile("publish.json");
         if (dataFile == null){
             this.log("Missing config file")
             return null;
@@ -163,10 +184,17 @@ class JustEnoughPublishing {
             return null;
         }
 
-        if (this.config.mc_versions == null || this.config.loader == null || this.config.changelogUrl == null){
-            this.log("Config requires keys 'mc_versions', 'loader', 'changelogUrl'. will not publish mod.");
+        if (this.config.mc_versions == null || this.config.loader == null){
+            this.log("Config requires keys 'mc_versions', 'loader'. will not publish mod.");
             return null;
         }
+
+        this.changelogText = this.loadChangelog();
+        if (this.changelogText == null){
+            this.log("Either the config key 'changelogUrl' or a 'changelog.txt' file is required. will not publish mod.")
+            return null;
+        }
+
         if (this.config.releaseType == null) this.config.releaseType = "release";
 
         this.cfToken = this.parentProject.findProperty("CURSEFORGE_API_KEY") ?: System.getenv("CURSEFORGE_API_KEY")
@@ -219,9 +247,9 @@ class JustEnoughPublishing {
                 releaseType = this.config.releaseType
                 displayName = this.prettyName
                 version = this.parentProject.version
-                changelog = "See ${this.config.changelogUrl} for full details"
+                changelog = this.changelogText;
                 gameVersions = List.of(this.config.mc_versions)
-                gameLoaders = [this.config.loader]
+                gameLoaders = this.config.loader.equals("forge") ? ["forge"] : ["fabric", "quilt"]
 
                 mainPublication this.parentProject.hasProperty("remapJar") ? this.parentProject.remapJar : this.parentProject.jar
 
@@ -258,7 +286,8 @@ class JustEnoughPublishing {
     }
 
     void github(){
-        String changelogInfo = """See ${this.config.changelogUrl} for full details.  \nSupported MC Versions: **${String.join(", ", this.config.mc_versions)}**  \nSupported Mod Loader: **${this.config.loader}**  \n"""
+        String changelogInfo = this.changelogText;
+        changelogInfo += """\nSupported MC Versions: **${String.join(", ", this.config.mc_versions)}**  \nSupported Mod Loader: **${this.config.loader}**  \n"""
 
         if (this.config.github.requiredDependencies != null){
             changelogInfo += "## Required Dependencies \n";
@@ -270,7 +299,7 @@ class JustEnoughPublishing {
             token this.ghToken
             owner this.config.github.owner
             repo this.config.github.repo
-            tagName this.parentProject.version
+            tagName this.parentProject.version + "+" + this.config.loader
             targetCommitish this.config.github.branch
             releaseName this.prettyName
             body changelogInfo
@@ -302,6 +331,10 @@ class JustEnoughPublishingPlugin implements Plugin<Project> {
                 targets.add("github")
             }
             publisher.log("active targets: " + String.join(", ", targets))
+
+            doLast {
+                publisher.clearChangelog()
+            }
         }
 
         publisher.log("registered gradle task: publishMod")
@@ -310,6 +343,6 @@ class JustEnoughPublishingPlugin implements Plugin<Project> {
 
 apply plugin: JustEnoughPublishingPlugin
 
-// TODO: modrinth support, maven support
+// TODO: maven support with sources jar
 // TODO: config entry for optional dependencies
 // TODO: property to block applying dependency plugins so other people dont have to do similar hack as i did for unifiedPublishing

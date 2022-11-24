@@ -94,8 +94,8 @@ Location Options
 The config file contains a json object with the following fields: 
 
 - versions: array of supported minecraft versions. ie ["1.19.3", "1.19.2"]
-- loader: "forge" or "fabric"
-- changelogUrl: url will be added to description body
+- loader: "forge" or "fabric" (fabric will automatically mark for quilt as well)
+- changelogUrl: url will be added to description body (optional, a changelog.txt file may be used instead)
 - releaseType: (optional) default is "release", could also be "beta" or "alpha"
 - github: (optional)
      - repo: the name of the repository to release to

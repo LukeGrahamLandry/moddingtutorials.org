@@ -55,6 +55,12 @@
     <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
     <h3>Cumulative Earnings</h3>
     <canvas id="myChart2" style="width:100%;max-width:700px"></canvas>
+
+    <h3>Total Per Project</h3>
+    <table id="project-totals" style="font-family: monospace;"></table>
+
+    <h3>Last Day Per Project</h3>
+    <table id="project-daily" style="font-family: monospace;"></table>
     
     <p>
         Earn enough points to find this useful? You can probably afford to <a href="/patreon">donate</a> to support its development :)
@@ -90,7 +96,31 @@
 
             makeSimpleScatterChart("myChart", dailyValues);
             makeSimpleScatterChart("myChart2", totalValues);
-            window.setTimeout(() => document.getElementById("topgraph").scrollIntoView(), 100)
+            window.setTimeout(() => document.getElementById("topgraph").scrollIntoView(), 100);
+
+            let projectTotals = {};
+            data.forEach(day => {
+                for (let name of Object.keys(day.projects)){
+                    if (projectTotals[name] == undefined) projectTotals[name] = 0;
+                    projectTotals[name] += day.projects[name]
+                }
+            });
+            let projectTotalsHtml = "";
+            let projectNames = Object.keys(projectTotals);
+            projectNames.sort((a, b) => projectTotals[b] - projectTotals[a]);
+            for (let name of projectNames){
+                projectTotalsHtml += `<tr><td style="padding-right: 20px;">${name}</td> <td>$${(projectTotals[name] / 20).toFixed(2).padStart(6, "0")}</td></tr>`;
+            }
+            document.getElementById("project-totals").innerHTML = projectTotalsHtml;
+
+            let lastDay = data[data.length - 1];
+            let lastDayHtml = "";
+            projectNames = Object.keys(lastDay.projects);
+            projectNames.sort((a, b) => lastDay.projects[b] - lastDay.projects[a]);
+            for (let name of projectNames){
+                lastDayHtml += `<tr><td style="padding-right: 20px;">${name}</td> <td>$${(lastDay.projects[name] / 20).toFixed(2).padStart(6, "0")}</td></tr>`;
+            }
+            document.getElementById("project-daily").innerHTML = lastDayHtml;
         }
 
         function clearData(){
