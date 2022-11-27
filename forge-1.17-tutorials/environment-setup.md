@@ -22,16 +22,16 @@ Finally, launch intellijj. The first screen should let you choose some settings.
 
 ## Setup
 
-In the project explorer on the left open `src/main/java` and right click `com.example.examplemod` Choose refactor > rename and call it `tld.nameorwebsite.modid` (so I did ca.lukegrahamlandry.firstmod). Make sure there's no spaces or capital letters. Open ExampleMod.java and right click the name of the class to rename it to ModNameMain. This is your mod's main class. Some of these functions can be removed but it's fine if you leave them.
+In the project explorer on the left open `src/main/java` and right click `com.example.examplemod` Choose refactor > rename to change your package name to something unique so you don't conflict with other mods. The convention is to named it based on a domain you own, reversed like `tld.website.modid`, so I did `ca.lukegrahamlandry.firstmod`. Make sure there's no spaces or capital letters. Open ExampleMod.java and right click the name of the class to rename it to ModNameMain. This is your mod's main class. Some of these functions can be removed but it's fine if you leave them.
 
-Make a public static string that holds your mod id. This is how the forge mod loader will recognize your mod. It's generally based on your mod's name, unique and all lowercase with no special characters. You will use this often, don't forget it. It is also very important to change the value in the @Mod annotation at the top of the class to reference your mod id. I took out some of the unnecessary methods from this base class just to clean it up a bit. Here's what it looks like now:
+Make a variable that holds your mod id. This is how the forge mod loader will recognize your mod. It's generally based on your mod's name, unique and all lowercase with no special characters. You will use this often, don't forget it. It is also very important to change the value in the `@Mod` annotation at the top of the class to reference your mod id. I took out some of the unnecessary methods from this base class just to clean it up a bit. Here's what it looks like now:
 
     // imports up here // 
     
     @Mod(FirstModMain.MOD_ID)
     public class FirstModMain {
         public static final Logger LOGGER = LogManager.getLogger();
-        public static String MOD_ID = "firstmod";
+        public static final String MOD_ID = "firstmod";
     
         public FirstModMain() {
             final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -50,7 +50,7 @@ Open `src/main/resources/META-INF/mods.toml` It has a bunch of key value pairs t
     modLoader="javafml"
     loaderVersion="[37,)"
     
-    license="MIT"
+    license="ARR"
     
     [[mods]]
     
