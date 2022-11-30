@@ -28,7 +28,7 @@ The `Item.Properties` parameter sets certain data about like item such as durabi
 
 ## Creative Tab
 
-If you want to make a new tab in the creative menu for your item to show up in, you can make an inner class that extends `CreativeModeTab`. It can should the default constructor and override the method called `makeIcon` which returns an `ItemStack` to use as the icon in the GUI. You can reference you're own item here (with a `.get()` on the end) or a vanilla item (ex. `Items.DIAMOND_SWORD`, with no `.get()`)
+If you want to make a new tab in the creative menu for your item to show up in, you can make an inner class that extends `CreativeModeTab`. Let your IDE autofill the default constructor and then override the method called `makeIcon` which returns an `ItemStack` to use as the icon in the GUI. You can reference you're own item here (with a `.get()` on the end) or a vanilla item (ex. `Items.DIAMOND_SWORD`, with no `.get()`).
 
     public static class ModCreativeTab extends CreativeModeTab {
         private ModCreativeTab(int index, String label) {
