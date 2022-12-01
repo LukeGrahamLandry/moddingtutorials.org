@@ -134,17 +134,14 @@ If you want less clutter for the player, you can only show this when they're hol
     public class KeyboardHelper {
         private static final long WINDOW = Minecraft.getInstance().getWindow().getWindow();
 
-        @OnlyIn(Dist.CLIENT)
         public static boolean isHoldingShift() {
             return InputConstants.isKeyDown(WINDOW, GLFW.GLFW_KEY_LEFT_SHIFT) || InputConstants.isKeyDown(WINDOW, GLFW.GLFW_KEY_RIGHT_SHIFT);
         }
 
-        @OnlyIn(Dist.CLIENT)
         public static boolean isHoldingControl() {
             return InputConstants.isKeyDown(WINDOW, GLFW.GLFW_KEY_LEFT_CONTROL) || InputConstants.isKeyDown(WINDOW, GLFW.GLFW_KEY_RIGHT_CONTROL);
         }
 
-        @OnlyIn(Dist.CLIENT)
         public static boolean isHoldingSpace() {
             return InputConstants.isKeyDown(WINDOW, GLFW.GLFW_KEY_SPACE);
         }

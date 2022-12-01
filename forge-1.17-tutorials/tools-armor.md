@@ -152,7 +152,6 @@ The `name` string you use **must **start with your mod id, then a colon, then an
             return this.repairIngredient.get();
         }
     
-        @OnlyIn(Dist.CLIENT)
         public String getName() {
             return this.name;
         }
