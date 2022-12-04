@@ -129,7 +129,7 @@ class JustEnoughPublishing {
         this.config = this.loadConfig();
         if (this.config == null) return;
         this.prettyName = this.parentProject.version + " " + this.config.loader
-        if (!this.prettyName .contains("+")) this.prettyName += " " + this.mc_versions[0];
+        if (!this.prettyName .contains("+")) this.prettyName += " " + this.config.mc_versions[0];
 
         if (this.config.curseforge != null || this.config.modrinth != null) this.platform();
         if (this.config.github != null) this.github();
@@ -238,7 +238,7 @@ class JustEnoughPublishing {
     // gradlew publishUnified
     void platform(){
         String tag = this.parentProject.version;
-        if (!this.parentProject.version.contains("+")) tag += "+" + this.mc_versions[0];
+        if (!this.parentProject.version.contains("+")) tag += "+" + this.config.mc_versions[0];
 
        this.parentProject.unifiedPublishing {
             project {
@@ -295,7 +295,7 @@ class JustEnoughPublishing {
         }
 
         String tag = this.parentProject.version + "+" + this.config.loader;
-        if (!this.parentProject.version.contains("+")) tag += "+" + this.mc_versions[0];
+        if (!this.parentProject.version.contains("+")) tag += "+" + this.config.mc_versions[0];
 
         this.parentProject.githubRelease {
             token this.ghToken
