@@ -40,6 +40,7 @@ If you notice any mistakes in my tutorials or want to submit additional tutorial
 
 - thedude
 - Matthew
+- MiniBN
 
 ## Mod Contributors 
 

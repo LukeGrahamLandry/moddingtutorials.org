@@ -108,6 +108,11 @@
                 "name": "Modular Professions",
                 "repo": "LukeGrahamLandry/modular-professions-mod",
                 "branch": "wiki"
+            },
+            {
+                "name": "WrapperLib",
+                "repo": "LukeGrahamLandry/WrapperLib",
+                "branch": "wiki"
             }
         ]
     },

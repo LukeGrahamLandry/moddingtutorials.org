@@ -129,7 +129,9 @@ If we want to give the players some help understanding our mod, we can add a too
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
     }
 
-If you want less clutter for the player, you can only show this when they're holding shift. So make a new package called util and a class called KeyboardHelper. Everything here will be static, we can get the game window so we can get user input. Then make some functions to check if they're holding shift, space, or control respectively. For shift and control we are checking both the left and right one. Don't forget to import all these classes. Note: this class can only be used on the client side, [Learn More](sides).
+If you want less clutter for the player, you can only show this when they're holding shift. So make a new package called util and a class called KeyboardHelper. Everything here will be static, we can get the game window so we can get user input. Then make some functions to check if they're holding shift, space, or control respectively. For shift and control we are checking both the left and right one. Don't forget to import all these classes. 
+
+You must be very careful that you only call these methods in client sided code! You can't use them when making game logic decisions, it will work in single player but crash servers. You must send information with packets to get keybind input on the server (will be covered in a separate tutorial). [Learn More](sides).
 
     public class KeyboardHelper {
         private static final long WINDOW = Minecraft.getInstance().getWindow().getWindow();
