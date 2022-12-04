@@ -129,6 +129,7 @@ class JustEnoughPublishing {
         this.config = this.loadConfig();
         if (this.config == null) return;
         this.prettyName = this.parentProject.version + " " + this.config.loader
+        if (!this.prettyName .contains("+")) this.prettyName += " " + this.mc_versions[0];
 
         if (this.config.curseforge != null || this.config.modrinth != null) this.platform();
         if (this.config.github != null) this.github();
@@ -236,11 +237,14 @@ class JustEnoughPublishing {
     // https://github.com/shedaniel/unified-publishing
     // gradlew publishUnified
     void platform(){
+        String tag = this.parentProject.version;
+        if (!this.parentProject.version.contains("+")) tag += "+" + this.mc_versions[0];
+
        this.parentProject.unifiedPublishing {
             project {
                 releaseType = this.config.releaseType
                 displayName = this.prettyName
-                version = this.parentProject.version
+                version = tag
                 changelog = this.changelogText;
                 gameVersions = List.of(this.config.mc_versions)
                 gameLoaders = this.config.loader.equals("forge") ? ["forge"] : ["fabric", "quilt"]
@@ -289,11 +293,15 @@ class JustEnoughPublishing {
                 changelogInfo += "- [${dep.getKey()}](${dep.getValue()}) \n"
             }
         }
+
+        String tag = this.parentProject.version + "+" + this.config.loader;
+        if (!this.parentProject.version.contains("+")) tag += "+" + this.mc_versions[0];
+
         this.parentProject.githubRelease {
             token this.ghToken
             owner this.config.github.owner
             repo this.config.github.repo
-            tagName this.parentProject.version + "+" + this.config.loader
+            tagName tag
             targetCommitish this.config.github.branch
             releaseName this.prettyName
             body changelogInfo
