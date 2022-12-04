@@ -140,11 +140,11 @@ class JustEnoughPublishing {
 
     String loadChangelog(){
         String defaultChangelog = this.config.changelogUrl == null ? null : "See ${this.config.changelogUrl} for full details";
-        File changelog = this.locateFile("changelog.txt");
+        File changelog = this.locateFile("CHANGELOG.md");
         if (changelog == null) defaultChangelog;
         String specificChangelog = changelog.getText('UTF-8')
         if (specificChangelog.isEmpty()) return defaultChangelog;
-        return specificChangelog;
+        return "##" + specificChangelog.split("##")[1];
     }
 
     File locateFile(String filename){
@@ -158,12 +158,6 @@ class JustEnoughPublishing {
             else dataFile = null;
         }
         return dataFile;
-    }
-
-    void clearChangelog(){
-        File changelog = this.locateFile("changelog.txt");
-        if (changelog == null) return;
-        changelog.text = '';
     }
 
     PublishConfig loadConfig(){
@@ -191,7 +185,7 @@ class JustEnoughPublishing {
 
         this.changelogText = this.loadChangelog();
         if (this.changelogText == null){
-            this.log("Either the config key 'changelogUrl' or a 'changelog.txt' file is required. will not publish mod.")
+            this.log("Either the config key 'changelogUrl' or a 'CHANGELOG.md' file is required. will not publish mod.")
             return null;
         }
 
@@ -330,11 +324,8 @@ class JustEnoughPublishingPlugin implements Plugin<Project> {
                 finalizedBy(project.tasks.githubRelease)
                 targets.add("github")
             }
-            publisher.log("active targets: " + String.join(", ", targets))
 
-            doLast {
-                publisher.clearChangelog()
-            }
+            publisher.log("active targets: " + String.join(", ", targets))
         }
 
         publisher.log("registered gradle task: publishMod")
