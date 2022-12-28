@@ -178,7 +178,7 @@ You can also have multiple textures and switch between them based on properties 
 
 ### Bind Renderer
 
-For the game to know that your new renderer class should be used whenever your arrow exists in the world, you must register it on the client setup event. The forge events system is described in more depth in [the events tutorial](/events).
+For the game to know that your new renderer class should be used whenever your arrow exists in the world, you must register it on the client setup event. The forge events system is described in more depth in [the events tutorial](/concepts#events).
 
 Start by making a new class called `ClientSetup` in your `client` package with a method listening for the `FMLClientSetupEvent`. Note the `value = Dist.CLIENT` in the annotation on the class because the event only fires on the client side. In this method, we use the `registerEntityRenderingHandler` method to register our renderer. It just needs the entity type reference to the constructor of your renderer class. 
 

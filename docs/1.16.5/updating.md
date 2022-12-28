@@ -2,7 +2,7 @@
 
 If you are looking to update **from** 1.16 to a newer version, check out these tutorials. They have much more detailed information.
  
-- [updating from 1.16 to 1.17](/o17/updating)
+- [updating from 1.16 to 1.17](/1.18.2/updating-to-1.17)
 - [updating from 1.17 to 1.18](/1.18.2/updating)
 - [updating from 1.18 to 1.19](/1.19.2/updating)
 

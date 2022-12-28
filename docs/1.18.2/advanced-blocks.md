@@ -8,7 +8,7 @@ A tutorial on making a block with custom behaviour. It will react to being right
 
 ## Init
 
-Very similar to how we did [advanced items](/advanced-items), let's make a block that has some unique behaviour by creating our own version of the block class. Start with the same code for a [basic block](/basic-blocks) but reference a new class. 
+Very similar to how we did [advanced items](advanced-items), let's make a block that has some unique behaviour by creating our own version of the block class. Start with the same code for a [basic block](basic-blocks) but reference a new class. 
 
 ```java
 public static final RegistryObject<Block> SAD_BLOCK = BLOCKS.register("sad_block",

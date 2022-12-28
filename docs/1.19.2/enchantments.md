@@ -147,7 +147,7 @@ if (level > 0 && event.player.isShiftKeyDown()){
 
 If you want to make an enchantment that will only show up when you put an item you made in the enchantment table, you must make your own `EnchantmentCategory`. We use the static `create` method on `EnchantmentCategory` which takes a string name for the type and a predicate that takes in the item being enchanted and returns a boolean representing whether it can accept the enchantment. Then simply make your enchantment class, pass your new `EnchantmentCategory` into the constructor and register it with the deferred register in your `EnchantmentInit` as before. 
 
-This example would allow the enchantment to apply to the teleport staff item we made in the [advanced items tutorial](/advanced-items). 
+This example would allow the enchantment to apply to the teleport staff item we made in the [advanced items tutorial](advanced-items). 
 
 ```java
 public class DistanceEnchantment extends Enchantment {

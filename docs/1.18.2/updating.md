@@ -2,7 +2,7 @@
 
 Before you do anything, please **make a backup** so you can roll back if something goes wrong. Be careful to follow these steps in order!  
 
-If you have a 1.16 mod that you want to update to 1.18, you must also apply the code changes between 1.16 and 1.17. Consult the [updating from 1.16 to 1.17](/o17/updating) tutorial. 
+If you have a 1.16 mod that you want to update to 1.18, you must also apply the code changes between 1.16 and 1.17. Consult the [updating from 1.16 to 1.17](/1.18.2/updating-to-1.17) tutorial. 
 
 First open the terminal / CMD and navigate to your mod folder with the command `cd /path/to/mod/folder`. 
 

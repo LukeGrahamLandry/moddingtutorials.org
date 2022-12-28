@@ -245,7 +245,7 @@ If all the pieces are from your special class keep in mind that this tick method
 
 ### On Attacked
 
-The `ArmorItem` class doesn't offer a method to override for this but we can use events instead. Events are a way to let forge know that it should call one of your methods when something specific in the game happens. This system is described in more depth in [the events tutorial](/events).
+The `ArmorItem` class doesn't offer a method to override for this but we can use events instead. Events are a way to let forge know that it should call one of your methods when something specific in the game happens. This system is described in more depth in [the events tutorial](/concepts#events).
 
 In your `util` package make an interface called `IDamageHandlingArmor` with a single method called `onDamaged`. This will take the entity being attacked, the armor slot being processed, the damage source (which gives you the type of damage and the attacker if applicable). The default implementation will simply return the same damage amount so nothing will change
 

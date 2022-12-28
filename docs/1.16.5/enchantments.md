@@ -148,7 +148,7 @@ if (level > 0 && event.player.isShiftKeyDown()){
 
 If you want to make an enchantment that will only show up when you put an item you made in the enchantment table, you must make your own `EnchantmentType`. We use the static `create` method on `EnchantmentType` which takes a string name for the type and a predicate that takes in the item being enchanted and returns a boolean representing whether it can accept the enchantment. Then simply make your enchantment class, pass your new `EnchantmentType` into the constructor and register it with the deferred register in your `EnchantmentInit` as before. 
 
-This example would allow the enchantment to apply to the teleport staff item we made in the [advanced items tutorial](/advanced-items). 
+This example would allow the enchantment to apply to the teleport staff item we made in the [advanced items tutorial](advanced-items). 
 
 ```java
 public class DistanceEnchantment extends Enchantment {
@@ -181,4 +181,4 @@ Your enchantment will need an entry in your lang file, just like items/blocks.
 
 ## Practice
 
-- Make the `DistanceEnchantment` created above increase the range of the teleport staff. (For example, by default you can teleport up to 15 blocks, distance level 1 might allow 30 and level 2 could allow 45). This will require editing the `TeleportStaff` class made in the [advanced items tutorial](/advanced-items). 
+- Make the `DistanceEnchantment` created above increase the range of the teleport staff. (For example, by default you can teleport up to 15 blocks, distance level 1 might allow 30 and level 2 could allow 45). This will require editing the `TeleportStaff` class made in the [advanced items tutorial](advanced-items). 

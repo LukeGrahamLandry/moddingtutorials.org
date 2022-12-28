@@ -5,4 +5,3 @@ Code for my Minecraft modding tutorial website. View the tutorials online at [mo
 - docs: markdown files built by docusaurus 
 - static: files served as is
 - scripts: some content generation
-- src: docusaurus components (the 404 page)

@@ -11,3 +11,5 @@ Since WrapperLib is an external library, you'll have to add a couple lines to yo
 - [Keybinds](keybinds): react to keyboard input, automatically synced to the server.
 - [Saved Data](saved-data): save extra information with world data.
 - [Resources](resources): load information from data packs or resource packs.
+
+You can look at [the example mod](https://github.com/LukeGrahamLandry/WrapperLib/tree/1.19/example) for a practical example of these features in action. 

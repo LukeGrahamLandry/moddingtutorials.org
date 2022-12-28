@@ -180,5 +180,5 @@ Your enchantment will need an entry in your lang file, just like items/blocks.
 
 ## Practice
 
-- Make the `DistanceEnchantment` created above increase the range of the teleport staff. (For example, by default you can teleport up to 15 blocks, distance level 1 might allow 30 and level 2 could allow 45). This will require editing the `TeleportStaff` class made in the [advanced items tutorial](/advanced-items). 
+- Make the `DistanceEnchantment` created above increase the range of the teleport staff. (For example, by default you can teleport up to 15 blocks, distance level 1 might allow 30 and level 2 could allow 45). This will require editing the `TeleportStaff` class made in the [advanced items tutorial](advanced-items). 
 

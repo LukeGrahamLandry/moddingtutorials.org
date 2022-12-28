@@ -13,7 +13,7 @@ This is an overview of common concepts that come up while modding. I won't go in
 
 When Forge doesn't provide an event for whatever you're trying to do, you will have to use [Mixins](/mixins) instead. They are more complicated to set up but allow you to directly modify Minecraft's bytecode at runtime. 
 
-## Game Object Registries 
+## Registries 
 
 - https://forge.gemwire.uk/wiki/Registration
 - https://docs.minecraftforge.net/en/1.19.x/concepts/registries/

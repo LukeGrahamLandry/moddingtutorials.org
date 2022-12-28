@@ -2,7 +2,7 @@
 
 If you are looking to update **from** 1.17 to a newer version, check out these tutorials.
 
-- [updating from 1.17 to 1.18](/o18/updating)
+- [updating from 1.17 to 1.18](/1.18.2/updating)
 
 Before you do anything, please **make a backup** so you can roll back if something goes wrong. Be careful to follow these steps in order!  
 

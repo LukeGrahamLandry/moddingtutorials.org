@@ -58,7 +58,7 @@ More info about this system: https://gist.github.com/gigaherz/691f528a61f631af90
 
 ## Block Item
 
-You need a BlockItem to place your block. You can register it manually like your other items but that's tedious so lets make it automatic. We will use the events system to run some code when the game registers all the other items. You can just copy this code for now or read the [events tutorial](/events) for a more detailed explanation of how events work.
+You need a BlockItem to place your block. You can register it manually like your other items but that's tedious so lets make it automatic. We will use the events system to run some code when the game registers all the other items. You can just copy this code for now or read the [events tutorial](/concepts#events) for a more detailed explanation of how events work.
 
 At the top of your class add this line to allow it to subscribe to events.
 

@@ -142,7 +142,7 @@ public boolean isValidRepairItem(ItemStack tool, ItemStack material) {
 
 ### Combine
 
-You can also make anvil recipes to craft things similarly to the smithing table. However, these are not data driven, they must be done from code. You do this by listening for the `AnvilUpdateEvent`, manually checking the inputs and changing the output. The forge events system is described in more depth in [the events tutorial](/events).
+You can also make anvil recipes to craft things similarly to the smithing table. However, these are not data driven, they must be done from code. You do this by listening for the `AnvilUpdateEvent`, manually checking the inputs and changing the output. The forge events system is described in more depth in [the events tutorial](/concepts#events).
 
 The first step is always to make a class in your `event` package with the `EventBusSubscriber` annotation. 
 
