@@ -33,4 +33,5 @@ files = {
 
 for path, url in files.items():
     with open(path, "w") as f:
+        print("Downloading... " + url)
         f.write(requests.get(url).text)

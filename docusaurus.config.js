@@ -50,7 +50,7 @@ const config = {
             position: 'left',
             label: 'Tutorials',
           },
-          {to: '/commissions', label: '💰Commissions', position: 'left'},
+          {to: 'pathname:///commissions.html', label: '💰Commissions', position: 'left'},
           {
             type: 'doc',
             docId: 'mods/index',
