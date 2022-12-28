@@ -227,17 +227,10 @@ If you run the game the items show up in the creative tab and have textures. You
 ## Practice
 
 - Make an item that replaces any block you right click with dirt
-
     - hint: `world.setBlock(pos, Blocks.VANILLA_NAME.defaultBlockState());`
-
 - Make an item that gives poison to any entity you right click
-
     - hint: `entity.addEffect(new EffectInstance(Effects.VANILLA_NAME, duration, amplifier));`
-
 - Make an item that propels the player in the direction they're looking
-
     - hint: `player.setDeltaMovement(dx, dy, dz);`
-
 - Make an item that places a torch automatically while in the inventory of a player in darkness
-
     - hint: `Math.max(world.getBrightness(LightType.BLOCK, pos), world.getBrightness(LightType.SKY, pos)) > 7`

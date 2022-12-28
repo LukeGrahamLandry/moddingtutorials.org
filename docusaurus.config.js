@@ -7,12 +7,12 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Modding Tutorials',
-  tagline: 'Dinosaurs are cool',
+  tagline: 'Make Minecraft mods with Forge',
   url: 'https://moddingtutorials.org',
   baseUrl: '/',
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/favicon.ico',
+  favicon: '/img/icon.png',
 
   // Even if you don't use internalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want
@@ -29,12 +29,7 @@ const config = {
       ({
         docs: {
           routeBasePath: '/',
-          sidebarPath: require.resolve('./sidebars.js'),
-          
-          editUrl: ({locale, versionDocsDirPath, docPath}) => {
-            if (docPath.startsWith("mods")) return undefined;
-            return 'https://github.com/LukeGrahamLandry/moddingtutorials.org'
-          }
+          sidebarPath: require.resolve('./sidebars.js')
         },
       }),
     ],
@@ -102,7 +97,7 @@ const config = {
             <a class="alert blue full" href="/discord" target="_blank"> Got Questions? Join the Discord Server! </a>`
           }
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} Luke Graham Landry.`,
+        copyright: `Copyright © ${new Date().getFullYear()} Luke Graham Landry. <br>Any of my code in the tutorials is public domain. Feel free to use it in your own projects.`,
       },
       prism: {
         theme: lightCodeTheme,

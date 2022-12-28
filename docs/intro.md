@@ -88,10 +88,6 @@ These programs are basically text editors but with extra features like code comp
 
 Gradle is the build system used for making minecraft mods. You write a special file called `build.gradle` that tells your computer how to download minecraft's base code and dependencies and then how to build your mod against that into one cohesive program. Whatever IDE you use should include support for gradle so it knows exactly how to interpret that file to do everything it needs to. Gradle is a very powerful tool that can seem a bit confusing at first so generally you'll just stick with the template `build.gradle` provided by your mod loader's example mod. 
 
-## Mappings
-
-Read more about this system on the Forge blog: http://blog.minecraftforge.net/personal/sciwhiz12/what-are-mappings
-
 ## Getting Started
 
 Congratulations! Now you're ready to make your own minecraft mod.  

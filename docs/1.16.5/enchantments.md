@@ -12,26 +12,25 @@ Enchantments are registered the same way as items and blocks.
 
 Start by making a class called `EnchantmentInit` in your `init` package and setup a deferred register. Then register a new enchantment which references a class we haven't created yet. 
 
+```java
+public class EnchantmentInit {
+    public static final DeferredRegister<Enchantment> ENCHANTMENTS = DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, FirstModMain.MOD_ID);
 
-    public class EnchantmentInit {
-        public static final DeferredRegister<Enchantment> ENCHANTMENTS = DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, FirstModMain.MOD_ID);
-    
-        public static final RegistryObject<Enchantment> BRIDGE = ENCHANTMENTS.register("bridge", BridgeEnchantment::new);
-    }
+    public static final RegistryObject<Enchantment> BRIDGE = ENCHANTMENTS.register("bridge", BridgeEnchantment::new);
+}
+```
 
 Don't forget to actually call this deferred register from the constructor of your main class!
 
-```
+```java
 EnchantmentInit.ENCHANTMENTS.register(modEventBus);
 ```
-
-
 
 ## Enchantment Class
 
 Create a package called `enchants` and a class that extends `Enchantment` (named whatever you used to create the enchantment above). Instead of taking constructor parameters, I'll hard code them since we only use this class for one enchantment. 
 
-```
+```java
 public class BridgeEnchantment extends Enchantment {
     public BridgeEnchantment() {
         super(rarity, enchantType, slotType);
@@ -48,19 +47,15 @@ public class BridgeEnchantment extends Enchantment {
 
 For this example I'll be using `super(Enchantment.Rarity.RARE, EnchantmentType.ARMOR_FEET, new EquipmentSlotType[]{EquipmentSlotType.FEET});`
 
-
-
 ### Useful Methods
 
 The `Enchantment` class has several methods that you can override to decide more details about your enchantment. 
-
-
 
 #### getMaxLevel
 
 Sets how many levels of your enchantment can be applied to an item. For example, protection is 4 and mending is only 1.
 
-```
+```java
 @Override
 public int getMaxLevel() {
 	return 3;
@@ -71,14 +66,12 @@ public int getMaxLevel() {
 
 Defines other enchantments that cannot be applied at the same time as yours. For example, `InfinityEnchantment` uses this to not be on an item with mending. I don't want mine to go with frost walker so I'll check for that in this method. 
 
-```
+```java
 @Override
 protected boolean checkCompatibility(Enchantment other) {
    return super.checkCompatibility(other) && other != Enchantments.FROST_WALKER;
 }
 ```
-
-
 
 #### doPostAttack
 
@@ -86,27 +79,23 @@ Called when a player (and most other entities) with this enchantment (on its hel
 
 This does not respect the `slotType` set in the constructor. Which means that with the code below, whether you are properly wearing boots with my enchant or just holding them, things you attack will burn. 
 
-```
+```java
 @Override
 public void doPostAttack(LivingEntity attacker, Entity target, int level) {
     target.setRemainingFireTicks(40);
 }
 ```
 
-
-
 #### doPostHurt
 
 Called when something with this enchantment is attacked. Same as above, this will run multiple times for multiple items and does not respect the enchantment's `slotType`. Vanilla uses this for the thorns enchantment. 
 
-```
+```java
 @Override
 public void doPostHurt(LivingEntity target, Entity attacker, int p_151367_3_) {
 	target.addEffect(new EffectInstance(Effects.DAMAGE_BOOST, 100));
 }
 ```
-
-
 
 #### Simple Booleans
 
@@ -121,7 +110,7 @@ Methods you can override to return a boolean that answers the following question
 
 Anywhere in your own code you can check for your enchantment on a player (or other entity). The following line will give you the highest level of the enchantment on the player's valid items. if `level` is 0, the player does not have that enchantment. 
 
-```
+```java
 int level = EnchantmentHelper.getEnchantmentLevel(EnchantmentInit.BRIDGING.get(), player);
 ```
 
@@ -129,7 +118,7 @@ You can use this for basically anything you want. Often you'll want to do it in 
 
 I'm going to make an inner class in my `BridgingEnchantment` class to react to the tick event (it could be a full class in your `events` package but I like the organization of this better). The  `buildBridge` will fire every tick for each player. The first line makes sure that it only fires on the server side and that it fires at the start of the tick processing (the event is actually fired twice per tick).
 
-```
+```java
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
 public static class BridgeBuildingHandler {
     @SubscribeEvent
@@ -147,7 +136,7 @@ Next I'll do something based on the level of my enchantment the player has.
 
 If the player has my enchantment and is holding shift, I'll check the block below them. If it is air, I'll set it to slime instead. This will form a nice bridge to walk on so you can kinda fly while shifting. 
 
-```
+```java
 if (level > 0 && event.player.isShiftKeyDown()){
     BlockState state = event.player.level.getBlockState(event.player.blockPosition().below());
     if (!state.isAir()) return;
@@ -161,18 +150,19 @@ If you want to make an enchantment that will only show up when you put an item y
 
 This example would allow the enchantment to apply to the teleport staff item we made in the [advanced items tutorial](/advanced-items). 
 
+```java
+public class DistanceEnchantment extends Enchantment {
+    static EnchantmentType TELEPORT_STAFF_TYPE = EnchantmentType.create("teleport_staff", (item -> item == ItemInit.TELEPORT_STAFF.get()));
 
-    public class DistanceEnchantment extends Enchantment {
-        static EnchantmentType TELEPORT_STAFF_TYPE = EnchantmentType.create("teleport_staff", (item -> item == ItemInit.TELEPORT_STAFF.get()));
-    
-        public DistanceEnchantment() {
-            super(Rarity.UNCOMMON, TELEPORT_STAFF_TYPE, new EquipmentSlotType[]{EquipmentSlotType.MAINHAND, EquipmentSlotType.OFFHAND});
-        }
+    public DistanceEnchantment() {
+        super(Rarity.UNCOMMON, TELEPORT_STAFF_TYPE, new EquipmentSlotType[]{EquipmentSlotType.MAINHAND, EquipmentSlotType.OFFHAND});
     }
+}
+```
 
 You will also need to override the `getEnchantmentValue` method in your item class to return a value larger than 0. This is the [enchantibility value](https://minecraft.fandom.com/wiki/Enchanting_mechanics#How_enchantments_are_chosen) of your item which is used to determine how many and how rare enchantments are applied an the enchanting table. 
 
-```
+```java
 // TeleportStaff.java
 
 @Override
@@ -181,15 +171,14 @@ public int getEnchantmentValue() {
 }
 ```
 
-
-
 ## Assets
 
 Your enchantment will need an entry in your lang file, just like items/blocks. 
 
-    "enchantment.firstmod.bridge": "Bridging",
+```json
+"enchantment.firstmod.bridge": "Bridging",
+```
 
 ## Practice
 
 - Make the `DistanceEnchantment` created above increase the range of the teleport staff. (For example, by default you can teleport up to 15 blocks, distance level 1 might allow 30 and level 2 could allow 45). This will require editing the `TeleportStaff` class made in the [advanced items tutorial](/advanced-items). 
-

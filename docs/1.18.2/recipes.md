@@ -20,59 +20,65 @@ The `key` map assigns a character to each item you use in the recipe. You can se
 
 The result's `item` field tells it what item to output. It can also add a `count ` field to `result` if you want it to give more than one. 
 
-    {
-        "type": "minecraft:crafting_shaped",
-        "pattern": [
-            "###",
-            " / ",
-            " / "
-        ],
-        "key": {
-            "#": {
-                "item": "firstmod:smile"
-            },
-            "/": {
-              "tag": "minecraft:planks"
-          }
+```json
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "###",
+        " / ",
+        " / "
+    ],
+    "key": {
+        "#": {
+            "item": "firstmod:smile"
         },
-        "result": {
-            "item": "firstmod:pink_pickaxe"
+        "/": {
+            "tag": "minecraft:planks"
         }
-    } 
+    },
+    "result": {
+        "item": "firstmod:pink_pickaxe"
+    }
+}
+```
 
 ## Shapeless (Crafting Table)
 
 Ingredients is a list of items to use to craft. The result tells it the item to output and how many. The arrangement of items in the crafting table will not effect the output of the recipe. 
 
-    {
-      "type": "minecraft:crafting_shapeless",
-      "ingredients": [
+```json
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
         {
-          "item": "minecraft:ender_pearl"
+            "item": "minecraft:ender_pearl"
         },
         {
-          "item": "firstmod:smile"
+            "item": "firstmod:smile"
         }
-      ],
-      "result": {
+    ],
+    "result": {
         "item": "minecraft:diamond",
         "count": 3
-      }
-    } 
+    }
+} 
+```
 
 ## Furnace
 
 The ingredient item is the input and the result is the output. You can also set the amount of experience points it should give the player and how long it takes to cook (in ticks). 
 
-    {
-        "type": "minecraft:smelting",
-        "ingredient": {
-            "item": "firstmod:smile_block"
-        },
-        "result": "firstmod:smile",
-        "experience": 1.0,
-        "cookingtime": 100
-    } 
+```json
+{
+    "type": "minecraft:smelting",
+    "ingredient": {
+        "item": "firstmod:smile_block"
+    },
+    "result": "firstmod:smile",
+    "experience": 1.0,
+    "cookingtime": 100
+} 
+```
 
 You can use the same json format with other `type` keys to make recipes for the other types of furnace. Vanilla has conventions for which types of items each furnace can process and how long they should take but you are not required to follow them. 
 
@@ -84,18 +90,20 @@ You can use the same json format with other `type` keys to make recipes for the 
 
 The `base` ingredient goes in the first slot of the smithing table and the `addition` goes in the second to create the `result`.
 
-    {
-      "type": "minecraft:smithing",
-      "base": {
+```json
+{
+    "type": "minecraft:smithing",
+    "base": {
         "item": "minecraft:wooden_axe"
-      },
-      "addition": {
+    },
+    "addition": {
         "item": "minecraft:cobblestone"
-      },
-      "result": {
+    },
+    "result": {
         "item": "minecraft:stone_axe"
-      }
     }
+}
+```
 
 ## Stone Cutter
 
@@ -103,14 +111,16 @@ The `ingredient` defines the input (item or tag) and the `result` defines the ou
 
 Vanilla uses the stone cutter for more efficient crafting of stone items but you are not limited to that. Unlike other recipe types, you are able to define multiple recipe json files for the same input because the stone cutter has multiple output slots so it can show all possibilities. 
 
-    {
-      "type": "minecraft:stonecutting",
-      "ingredient": {
+```json
+{
+    "type": "minecraft:stonecutting",
+    "ingredient": {
         "item": "firstmod:smile_block"
-      },
-      "result": "minecraft:stone_stairs",
-      "count": 2
-    }
+    },
+    "result": "minecraft:stone_stairs",
+    "count": 2
+}
+```
 
 ## Anvil 
 
@@ -118,7 +128,7 @@ Vanilla uses the stone cutter for more efficient crafting of stone items but you
 
 If you want to repair a custom item in an anvil, there are two methods on your item class to override. `isRepairable` is self explanatory. `isValidRepairItem` takes in the item stacks on the left and right of the anvil and returns true if the right is a valid repair item (only called if the left is your item).
 
-```
+```java
 @Override
 public boolean isRepairable(ItemStack stack) {
     return true;
@@ -136,7 +146,7 @@ You can also make anvil recipes to craft things similarly to the smithing table.
 
 The first step is always to make a class in your `event` package with the `EventBusSubscriber` annotation. 
 
-```
+```java
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class AnvilHandler {
 
@@ -147,7 +157,7 @@ I'm going to start by making two classes that describe the types of recipes we m
 
 We will start by making a class that defines a recipe much like a smithing table. You tell it the two input items and the output item. 
 
-```
+```java
 static class CombineRecipe {
     public final Item left;
     public final Item right;
@@ -162,17 +172,17 @@ static class CombineRecipe {
 
 Next I'll make a list that will hold all my anvil combining recipes. I'll make a public method that adds all the recipes I want to these lists. 
 
-```
+```java
 private static ArrayList<CombineRecipe> combineRecipes = new ArrayList<>();
 
-public static void initAnvilRecipes()
+public static void initAnvilRecipes(){
     combineRecipes.add(new CombineRecipe(Items.BEEF, Items.COAL, Items.COOKED_BEEF);
 }
 ```
 
 This init method must be called from somewhere when the game starts but it must be after modded items have been initialized so they can be referenced by our recipes. I'll call it on the `FMLCommonSetupEvent` with the following method in my **main class**. Note that the event listener for this is added by the line `modEventBus.addListener(this::setup);` in my constructor.  
 
-```
+```java
 private void setup(final FMLCommonSetupEvent event) {
 	AnvilHandler.initAnvilRecipes();
 }
@@ -182,7 +192,7 @@ Finally make a method that listens for the `AnvilUpdateEvent` and loops through 
 
 Note that since vanilla expects the item on the left to be a tool, it will always consume the entire stack. This means that you should set the size of the output stack and how much of the right stack to require (`setMaterialCost`) based on the size of the left stack. I'm also setting the experience cost of the craft based on this but remember that the value of levels does not increase linearly (level twenty is worth much more than 20 level ones). This way its more efficient to craft one at a time than a whole stack, you may want to do a more clever calculation to prevent this. 
 
-```
+```java
 @SubscribeEvent
 public static void handleRepair(AnvilUpdateEvent event){
     combineRecipes.forEach((data) -> {
@@ -203,10 +213,10 @@ This should be done on the `FMLCommonSetupEvent` so that items will already be r
 
 The first argument is an ingredient that will go in the bottom water bottle slots (this should not be stackable because of how vanilla's code works). The second argument is an ingredient that goes in the top slot (like netherwart). The final argument is the item stack to output when the recipe is finished. 
 
-```
+```java
 private void setup(final FMLCommonSetupEvent event) {
     BrewingRecipeRegistry.addRecipe(Ingredient.of(Items.DIAMOND_AXE), Ingredient.of(ItemInit.SMILE.get()), new ItemStack(Items.NETHERITE_AXE));
 }
 ```
 
-Of course, this can also be used to create recipes for your own custom potions once they've been registered. This will be covered in the Effects tutorial. Join [the discord server](/discord) to be notified when it is released.  
+Of course, this can also be used to create recipes for your own custom potions once they've been registered. This will be covered in the Effects tutorial. Join [the discord server](/discord) to be notified when it is released.

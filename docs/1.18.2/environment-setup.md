@@ -30,55 +30,62 @@ In the project explorer on the left open `src/main/java` and right click `com.ex
 
 Make a variable that holds your mod id. This is how the forge mod loader will recognize your mod. It's generally based on your mod's name, unique and all lowercase with no special characters. You will use this often, don't forget it. It is also very important to change the value in the `@Mod` annotation at the top of the class to reference your mod id. I took out some of the unnecessary methods from this base class just to clean it up a bit. Here's what it looks like now:
 
-    // imports up here // 
-    
-    @Mod(FirstModMain.MOD_ID)
-    public class FirstModMain {
-        public static final Logger LOGGER = LogManager.getLogger();
-        public static final String MOD_ID = "firstmod";
-    
-        public FirstModMain() {
-            final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-    
-            modEventBus.addListener(this::setup);
-        }
-    
-        private void setup(final FMLCommonSetupEvent event) {
-            
-        }
+```java
+// imports up here // 
+
+@Mod(FirstModMain.MOD_ID)
+public class FirstModMain {
+    public static final Logger LOGGER = LogManager.getLogger();
+    public static final String MOD_ID = "firstmod";
+
+    public FirstModMain() {
+        final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        modEventBus.addListener(this::setup);
     }
-    
+
+    private void setup(final FMLCommonSetupEvent event) {
+        
+    }
+}
+```   
 
 Open `src/main/resources/META-INF/mods.toml` It has a bunch of key value pairs that mostly set the information shown on the mods list in game. The only one you have to change is the modId (to whatever you had in your main class). You must keep the modLoader and loaderVersion the same but the fields lower down like display name can be whatever you want, they'll be displayed in the mods list ingame. You should also choose a license, go to https://choosealicense.com for more information. 
 
-    modLoader="javafml"
-    loaderVersion="[39,)"
-    
-    license="ARR"
-    
-    [[mods]]
-    
-    modId="firstmod"
-    
-    
-    # ... more fields down here
+```toml
+modLoader="javafml"
+loaderVersion="[39,)"
+
+license="ARR"
+
+[[mods]]
+
+modId="firstmod"
+
+
+# ... more fields down here
+```
 
 The `build.gradle` file tells it what dependancies to download (like Minecraft and Forge). Set the group to whatever you named your package (and click the elephant icon in intellij to update these settings).
 
-    group = "ca.lukegrahamlandry.firstmod"
-    
+```java
+group = "ca.lukegrahamlandry.firstmod"
+```
 
 Close intellij, open the terminal, navigate to your mod folder and run the command below (on windows use CMD and you don't need the ./ prefix). It will take a while to run.
 
-    cd /path/to/mod/folder
-    ./gradlew genIntellijRuns
-    
+```
+cd /path/to/mod/folder
+./gradlew genIntellijRuns
+```
 
 ## Run the game
 
 You can open intellij again and run the game by clicking the little green play button in the top right. If you have any problems with that you can also run it with the command below.
 
-    ./gradlew runClient
+```
+./gradlew runClient
+```
 
 ## Info Files
 

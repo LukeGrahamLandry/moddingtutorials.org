@@ -120,7 +120,7 @@ instead of calling `player.setPos(...)`, try `((ServerPlayerEntity)player).conne
 
 If you made your cactus based on the vanilla CactusBlock, it breaks if the canSurvive method returns false. vanilla has that method call canSustainPlant on the block state below it, so you should make sure that your plant is a valid block for your plant to grow on. You can do that by overriding canSustainPlant on your custom cactus block and returning true if the state passed in is of your plant. I think this would work, 
 
-```
+```java
 @Override
 public boolean canSustainPlant(BlockState state, IBlockReader world, BlockPos pos, Direction facing, net.minecraftforge.common.IPlantable plantable) {
     BlockState plant = plantable.getPlant(world, pos.relative(facing));
@@ -141,7 +141,7 @@ for the sugar cane, i would think using the same randomTick method as vanilla's 
 
 vanilla ones use the OreBlock class which just overrides this method (you can return whatever number you want. can give more based on fortune level but should give 0 if they have silk touch)
 
-```
+```java
 @Override
 public int getExpDrop(BlockState state, net.minecraft.world.IWorldReader reader, BlockPos pos, int fortune, int silktouch) {
     return silktouch == 0 ? RANDOM.nextInt(7) : 0;
@@ -185,7 +185,7 @@ problem is that the `tick` method on blocks is for random ticks (https://minecra
 
 the HoneyBottleItem has a method that specifies the animation to play while its being used
 
-```
+```java
 @Override
 public UseAnim getUseAnimation(ItemStack pStack) {
     return UseAnim.DRINK;
@@ -256,7 +256,7 @@ Each minecraft account has a Universally Unique Identifier. There are websites t
 
 its just part of the normal jdk libraries
 
-```
+```java
 public static String get(String url) {
     try {
         HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();

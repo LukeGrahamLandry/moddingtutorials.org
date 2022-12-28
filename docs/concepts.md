@@ -2,10 +2,6 @@
 
 This is an overview of common concepts that come up while modding. I won't go into any specific code here but a having a general understanding of these will probably make the whole process easier. See the links in each section for resources with additional information. Feel free to skip this and move on to the specific tutorials for your version. 
 
-## Mappings
-
-- http://blog.minecraftforge.net/personal/sciwhiz12/what-are-mappings/
-
 ## Sides
 
 - https://docs.minecraftforge.net/en/1.19.x/concepts/sides/
@@ -22,10 +18,6 @@ When Forge doesn't provide an event for whatever you're trying to do, you will h
 - https://forge.gemwire.uk/wiki/Registration
 - https://docs.minecraftforge.net/en/1.19.x/concepts/registries/
 
-## mods.toml
-
-- https://forge.gemwire.uk/wiki/Mods.toml
-
 ## Resources 
 
 - https://docs.minecraftforge.net/en/1.19.x/concepts/resources/
@@ -34,6 +26,13 @@ When Forge doesn't provide an event for whatever you're trying to do, you will h
 
 - https://docs.minecraftforge.net/en/1.19.x/concepts/internationalization/
 
+## Mappings
+
+- http://blog.minecraftforge.net/personal/sciwhiz12/what-are-mappings/
+
+## mods.toml
+
+- https://forge.gemwire.uk/wiki/Mods.toml
 
 ## Multi-platform Mods 
 
