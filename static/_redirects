@@ -37,6 +37,7 @@
 /o19/tools-armor /1.19.2/tools-armor
 /o19/updating /1.19.2/updating
 /o19/world-gen /1.19.2/world-gen
+/o19 /1.19.2
 /o19/solutions /solutions
 /o19/intro /intro
 /o19/dependencies /dependencies
@@ -60,6 +61,7 @@
 /o18/tools-armor /1.18.2/tools-armor
 /o18/updating /1.18.2/updating
 /o18/world-gen /1.18.2/world-gen
+/o18 /1.18.2
 /o18/solutions /solutions
 /o18/intro /intro
 /o18/dependencies /dependencies
@@ -83,6 +85,7 @@
 /o17/tools-armor /1.18.2/tools-armor
 /o17/updating /1.18.2/updating
 /o17/world-gen /1.18.2/world-gen
+/o17 /1.18.2
 /o17/solutions /solutions
 /o17/intro /intro
 /o17/dependencies /dependencies
@@ -106,6 +109,7 @@
 /o16/tools-armor /1.16.5/tools-armor
 /o16/updating /1.16.5/updating
 /o16/world-gen /1.16.5/world-gen
+/o16 /1.16.5
 /o16/solutions /solutions
 /o16/intro /intro
 /o16/dependencies /dependencies

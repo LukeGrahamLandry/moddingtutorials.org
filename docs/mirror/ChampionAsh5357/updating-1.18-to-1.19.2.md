@@ -5,7 +5,8 @@
 
 <pre>
 Source: <a href="https://gist.github.com/ChampionAsh5357/ef542d1ae4e1a5d096f7f8b51f5e0637">https://gist.github.com/ChampionAsh5357/ef542d1ae4e1a5d096f7f8b51f5e0637</a> <br></br>
-License: Creative Commons Attribution 4.0 International
+License: Creative Commons Attribution 4.0 International <br></br>
+Retrieved: 2022-12-28
 </pre> 
 
 # Minecraft 1.18.x -> 1.19.x Mod Migration Primer

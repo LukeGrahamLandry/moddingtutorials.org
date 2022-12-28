@@ -135,3 +135,5 @@ public static <T extends BlockEntity> void tick(Level level, BlockPos pos, Block
 
 - a bunch of stuff with entity models and rendering has changed. I'll add info about this as my tutorials get to it
 - heres a tool that can help you update world gen data packs: https://misode.github.io/upgrader/
+
+Overview: https://gist.github.com/50ap5ud5/beebcf056cbdd3c922cc8993689428f4 

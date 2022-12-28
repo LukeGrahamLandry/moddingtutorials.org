@@ -91,3 +91,5 @@ There are a few other changes to make in your code. For example,
 - info about changes to entity model rendering : https://gist.github.com/gigaherz/7115024820f55717bc40a6e2247c6aca
 - info about changes to tool system: https://gist.github.com/gigaherz/691f528a61f631af90c9426c076a298a
 - heres a tool that can help you update world gen data packs: https://misode.github.io/upgrader/
+
+Overview: https://gist.github.com/ChampionAsh5357/73c3bb41d3a8de2d020827e0069314a7 

@@ -44,3 +44,5 @@ There are a few changes to make in your code. For example,
 - registry events have changed. If you're automatically registering block items, as i do, revisit the relevant section of the [blocks tutorial](basic-blocks)
 - Some methods that previously took a `Random` instance, now want a `RandomSource` (it just became an interface). `Block#randomTick(BlockState, ServerLevel, BlockPos, Random)` becomes `Block#randomTick(BlockState, ServerLevel, BlockPos, RandomSource)`
 - if you're using an apple silicon computer, you need to add a new mixin, read [apple silicon tutorial](m1) or you will get an `UnsatisfiedLinkError`
+
+Overview: https://gist.github.com/ChampionAsh5357/ef542d1ae4e1a5d096f7f8b51f5e0637 

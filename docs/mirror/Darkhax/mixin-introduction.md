@@ -5,7 +5,8 @@
 
 <pre>
 Source: <a href="https://darkhax.net/2020/07/mixins">https://darkhax.net/2020/07/mixins</a> <br></br>
-License: <a href="https://github.com/Darkhax/darkhax-dot-net/blob/gh-pages/LICENSE">Creative Commons Attribution 4.0 International</a>
+License: <a href="https://github.com/Darkhax/darkhax-dot-net/blob/gh-pages/LICENSE">Creative Commons Attribution 4.0 International</a> <br></br>
+Retrieved: 2022-12-28
 </pre> 
 
 

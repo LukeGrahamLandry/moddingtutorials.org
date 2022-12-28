@@ -4,18 +4,5 @@ Code for my Minecraft modding tutorial website. View the tutorials online at [mo
 
 - docs: markdown files built by docusaurus 
 - static: files served as is
+- scripts: some content generation
 - src: docusaurus components (the 404 page)
-
-## Build
-
-- run `npm run build` 
-- serve the `build` directory
-- relies on Cloudflare Pages to use the `_redirects` files
-
-## Scripts 
-
-- fetch.py
-    - Downloads my mod readme files (at `/docs/mods`) and parts of the WrapperLib wiki (at `/docs/wrapperlib`). 
-    - These are not committed in this repo so the script must be run once before the docusaurus build.
-- redirects.py
-    - generates additions to the `_redirects` file (used by cloudflare) to convert from old site paths so external links from before docusaurus migration still work 

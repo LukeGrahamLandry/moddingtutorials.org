@@ -5,7 +5,8 @@
 
 <pre>
 Source: <a href="https://gist.github.com/50ap5ud5/beebcf056cbdd3c922cc8993689428f4">https://gist.github.com/50ap5ud5/beebcf056cbdd3c922cc8993689428f4</a> <br></br>
-License: Creative Commons
+License: Creative Commons <br></br>
+Retrieved: 2022-12-28
 </pre> 
 
 # Minecraft 1.16.5 to 1.17 Modding Migration Primer

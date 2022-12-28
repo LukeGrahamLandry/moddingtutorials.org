@@ -1,4 +1,5 @@
 import requests, os
+from datetime import datetime
 
 wrapperlib = "docs/wrapperlib"
 mod_docs = "docs/mods"
@@ -46,6 +47,9 @@ third_party_gists = {
     }, 
     "misode": {
         "adding-structures-1.18-1.19": ['<a href="https://github.com/misode/misode.github.io/blob/master/LICENSE">MIT, Copyright (c) 2020 Misode</a>', "https://raw.githubusercontent.com/misode/misode.github.io/master/src/guides/adding-custom-structures.md"]
+    }, 
+    "williewillus": {
+        "updating-1.12-to-1.14": ["CC0", "https://gist.githubusercontent.com/williewillus/353c872bcf1a6ace9921189f6100d09a/raw/ba45cc90ff25278b803c9ba9dc262de3802d0abd/primer.md"]
     }
 }
 
@@ -86,10 +90,11 @@ if is_dev_env:
 
 <pre>
 Source: <a href="{0}">{0}</a> <br></br>
-License: {1}
+License: {1} <br></br>
+Retrieved: {2}
 </pre> \n
 """             \
-                .format(main_url, license) \
+                .format(main_url, license, datetime.today().strftime('%Y-%m-%d')) \
                 + text.replace("<a>", "</a>").replace("<Capability>", "`<Capability>`").replace("<Biome>", "`<Biome>`").replace("<mappings channel>", "`<mappings channel>`").replace("<Type>", "`<Type>`")
 
                 f.write(text)

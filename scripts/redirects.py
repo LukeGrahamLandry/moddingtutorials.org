@@ -8,6 +8,8 @@ def process(old_version, new_version):
         generated_redirects.append("{0}/{2} /{1}/{2}".format(old_version, new_version, page))
     
     if old_version != "":
+        generated_redirects.append("{0} /{1}".format(old_version, new_version))
+        
         for page in unversioned:
             generated_redirects.append("{0}/{2} /{2}".format(old_version, new_version, page))
     

@@ -5,7 +5,8 @@
 
 <pre>
 Source: <a href="https://misode.github.io/guides/adding-custom-structures">https://misode.github.io/guides/adding-custom-structures</a> <br></br>
-License: <a href="https://github.com/misode/misode.github.io/blob/master/LICENSE">MIT, Copyright (c) 2020 Misode</a>
+License: <a href="https://github.com/misode/misode.github.io/blob/master/LICENSE">MIT, Copyright (c) 2020 Misode</a> <br></br>
+Retrieved: 2022-12-28
 </pre> 
 
 

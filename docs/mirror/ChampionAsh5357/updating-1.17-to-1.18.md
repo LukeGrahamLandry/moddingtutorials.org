@@ -5,7 +5,8 @@
 
 <pre>
 Source: <a href="https://gist.github.com/ChampionAsh5357/73c3bb41d3a8de2d020827e0069314a7">https://gist.github.com/ChampionAsh5357/73c3bb41d3a8de2d020827e0069314a7</a> <br></br>
-License: Creative Commons Attribution 4.0 International
+License: Creative Commons Attribution 4.0 International <br></br>
+Retrieved: 2022-12-28
 </pre> 
 
 # Minecraft 1.17.x -> 1.18.x Mod Migration Primer
