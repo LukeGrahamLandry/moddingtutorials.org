@@ -38,3 +38,7 @@ When Forge doesn't provide an event for whatever you're trying to do, you will h
 
 - https://github.com/jaredlll08/MultiLoader-Template
 - https://docs.architectury.dev/start
+
+## Hot-swapping
+
+- https://forge.gemwire.uk/wiki/Hotswap

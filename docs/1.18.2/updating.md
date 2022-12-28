@@ -1,4 +1,4 @@
-# Updating from 1.17 to 1.18
+# Updating from 1.17.1 to 1.18.2
 
 Before you do anything, please **make a backup** so you can roll back if something goes wrong. Be careful to follow these steps in order!  
 

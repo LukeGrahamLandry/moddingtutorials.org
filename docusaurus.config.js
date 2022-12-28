@@ -46,7 +46,7 @@ const config = {
         items: [
           {
             type: 'doc',
-            docId: 'intro',
+            docId: 'index',
             position: 'left',
             label: 'Tutorials',
           },
@@ -97,7 +97,6 @@ const config = {
             <a class="alert blue full" href="/discord" target="_blank"> Got Questions? Join the Discord Server! </a>`
           }
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} Luke Graham Landry. <br>Any of my code in the tutorials is public domain. Feel free to use it in your own projects.`,
       },
       prism: {
         theme: lightCodeTheme,
