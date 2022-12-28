@@ -1,11 +1,18 @@
-# mac os
+# MacOS
 .DS_Store
 
-# built site
-dist
+# Docusaurus
+node_modules
+.docusaurus
+build
 
-# in progress
-*/blueprint
-*/citadel
-
-__pycache__
+# Fetched Pages
+docs/wrapperlib/*
+!docs/wrapperlib/index.md
+!docs/wrapperlib/assets
+docs/mods/*
+!docs/mods/index.md
+static/applesilicon.gradle
+static/multihitboxlib.js
+static/publish.gradle
+static/cfstats.js

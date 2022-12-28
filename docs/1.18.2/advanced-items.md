@@ -1,3 +1,7 @@
+---
+sidebar_position: 3
+---
+
 # Advanced Items
 
 A tutorial on making items with unique custom behaviours. We will make a food that gives a potion effect, a furnace fuel and an item that teleports you forward when right clicked.

@@ -1,3 +1,7 @@
+---
+sidebar_position: 10
+---
+
 # Custom Projectile 
 
 Your projectile is an example of an entity. Entities have a position in the world, are bound to a renderer so the player can see them, have a bounding box to detect collisions, and react to ticks (move around, etc). Each individual entity in the world is an instance of the `Entity` class. There are many classes that extend `Entity` to give more interesting behavior. 

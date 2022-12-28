@@ -1,3 +1,7 @@
+---
+sidebar_position: 4
+---
+
 # Basic Blocks
 
 In this tutorial we will register a simple block with a texture and a loot table. It will be a similar process to basic items.

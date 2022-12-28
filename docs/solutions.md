@@ -1,4 +1,4 @@
-# Modding Questions and Answers (from discord)
+# Modding Questions and Answers 
 
 If there's something you want to learn how to do that i dont have a tutorial for and you can't figure out from vanilla's code, feel free to [join my discord server](https://discord.com/invite/uG4DewBcwV) to ask me. This page is a collection of information I've given people on that server so you can search it more easily. It will only be helpful if you're already comfortable with Java! These answers are for a mix of versions so you will have to do some translating but they should point you in the right direction. 
 
@@ -248,7 +248,7 @@ nope, the whole point is that forge magically does it at the right time for you.
  
 look at the `PotionItem#appendHoverText` which calls `PotionUtils#addPotionTooltip`. Example: `pTooltips.add((new TranslatableComponent("potion.whenDrank")).withStyle(ChatFormatting.DARK_PURPLE));`
 
-## how do i have different behaviour for specific players? 
+## how do i have different behaviour for specific players?
 
 Each minecraft account has a Universally Unique Identifier. There are websites to get these from a player's username (like https://mcuuid.net). Have a list of people's uuids (ie. `List<UUID> coolPeople = List.of(new UUID[]{UUID.fromString("bcb2252d-70de-4abc-9932-bc46bd5dc62f")});`) and then have an if statement that checks `coolPeople.contains(player.getUUID())`. You could even put that list on pastebin or equivilent and fetch it with an http request so you could update it without changing your mod's code. 
 

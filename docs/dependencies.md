@@ -1,4 +1,4 @@
-# Adding Dependencies to Your Minecraft Mod
+# Dependencies on Other Mods
 
 Sometimes you'll want gradle to load other libraries or mods so you can access their code. Most of the work will be done in your build.gradle file. 
 

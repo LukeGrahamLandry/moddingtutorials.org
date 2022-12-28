@@ -1,67 +1,17 @@
 # Modding Tutorials Website
 
-Code for my Minecraft modding tutorial website. View the tutorials online at [moddingtutorials.org](https://moddingtutorials.org). New tutorials are made for 1.19, 1.18.2, 1.17.1 and 1.16.5. The code for the tutorial mod is in another repo: [LukeGrahamLandry/modding-tutorials](https://github.com/LukeGrahamLandry/modding-tutorials). Goals of the project are to provide a reference for when I forget things and have good enough SEO that I can get new clients without MMD.
+Code for my Minecraft modding tutorial website. View the tutorials online at [moddingtutorials.org](https://moddingtutorials.org). New tutorials are made for 1.19.3, 1.19.2, 1.18.2, and 1.16.5. The code for the tutorial mod is in another repo: [LukeGrahamLandry/modding-tutorials](https://github.com/LukeGrahamLandry/modding-tutorials). Goals of the project are to provide a reference for when I forget things and have good enough SEO that I can get new clients without MMD.
+
+- docs: markdown files built by docusaurus 
+- static: files served as is
+- src: docusaurus components (the 404 page)
 
 ## Build
 
-- run `python3 scripts/build.py` (PYTHON_VERSION=3.7)
-- serve the `dist` directory
-- relies on Cloudflare Pages to use the `web/_redirects` files
-
-## Content
-
-Files in /web are directly exposed by the web server. Other folders have markdown files that are built into html and inserted into a template from /web/templates. 
-
-- forge-1.xx-tutorials (/oxx)
-    - version specific forge modding tutorials
-    - tutorials for the most recent version are also hosted at / 
-- pages (/oxx)
-    - tutorials and explanations that don't change between versions
-- mod-documentation (/mods)
-    - docs for minecraft mods (features, config options, api, etc)
-    - supported front matter tags: description, author, version, source, download, contact
-    - additional pages fetched from my mod readme files
-- articles (/c)
-    - take advantage of my good SEO for low traffic minecraft keywords
-    - some are funnels for my paid services 
-    - detailed opinions about things that people might google like chat reporting 
-- vanilla
-    - redstone
-        - tutorials for creating redstone contraptions 
-    - advancements 
-        - requirements for completing the harder in game advancements 
-
-## Scripts 
-
-All scripts should be run from the root directory (ie `python3 scripts/[name].py`). 
-
-### pages.json
-
-- videos
-    - list of youtube urls to display on commissions page
-- yt-clients 
-    - list of youtube channel identifiers to display on clients page
-- fetched-pages
-    - map of urlPrefix to list of markdown urls to download
-- descriptions
-    - map of page titles to descriptions to insert in meta tags
-- tutorial-videos
-    - map of urlPrefix to map of page title to youtube video identifier to inject button to load
-
-### scrape-videos.py
-
-1. Input video and channel ids of my youtube clients are read from `pages.json`
-2. Stats and images are fetched from youtube's api
-3. Results are saved in `generated/videos.json` which is used by `build.py`
+- run `npm run build` 
+- serve the `build` directory
+- relies on Cloudflare Pages to use the `_redirects` files
 
 ### fetch.py
 
-Caches urls fetched during the build process. This speeds up builds when testing and allows testing offline. Run the script on its own to refresh all cached content. 
-
-### build.py
-
-Builds all content into full html files output to `dist`. The build should not require a network connection. Any web resources must be cached in `generated`. 
-
-### server.py
-
-Serves the dist directory for local testing. 
+Downloads my mod readme files (at /docs/mods) and parts of the WrapperLib wiki (at /docs/wrapperlib). These are not committed in this repo so the script must be run once before the docusaurus build.

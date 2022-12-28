@@ -1,4 +1,4 @@
-# Introduction to Minecraft Modding 
+# Introduction to Modding 
 
 Minecraft is a fun game with a world made of cubes. Over time, dedicated players decided there were not enough types of cubes so they started writing code that modified the base game (mods) to add new content. This website will teach you how to write your own mods to implement any new features you can imagine. 
 
@@ -6,7 +6,7 @@ Minecraft is a fun game with a world made of cubes. Over time, dedicated players
 
 Over time, Mojang/Microsoft releases updates to Minecraft that add new content. Unfortunately, they also change lots of things about how Minecraft's code works internally each update as well. This means that any given mod is only compatible with the version of minecraft it was made for. Porting mods between versions is sometimes trivial but often quite difficult, depending on how much has changed in the vanilla code that the mod must interact with.
 
-This site has tutorials for versions 1.19, 1.18.2, 1.17.1, and 1.16.5. You can switch between them by using the drop down menu at the top of the nav bar on the left of each tutorial page. 
+This site has tutorials for versions 1.19.2, 1.18.2, and 1.16.5. You can see them all in the sidebar. 
 
 ## Mod Loaders
 
@@ -54,7 +54,7 @@ CurseForge is the most popular website where people distribute their mods. Devel
 
 #### Modrinth
 
-Modrinth is an open source competitor to CurseForge that is several orders of magnitude less popular (probably because they don't give ad revenue to mod developers). 
+Modrinth is an open source competitor to CurseForge that is several orders of magnitude less popular.
 
 ### Github 
 

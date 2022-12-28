@@ -1,3 +1,7 @@
+---
+sidebar_position: 8
+---
+
 # Enchantments
 
 A tutorial on making enchantments. We will make an enchantment that goes on boots and builds a bridge of blocks under you when you walk. 

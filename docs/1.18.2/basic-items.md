@@ -1,3 +1,7 @@
+---
+sidebar_position: 2
+---
+
 # Basic Items
 
 In this tutorial we will make a simple item with a name and a texture. We will also make a new creative tab to put items in.

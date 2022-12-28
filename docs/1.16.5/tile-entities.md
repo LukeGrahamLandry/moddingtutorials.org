@@ -1,3 +1,7 @@
+---
+sidebar_position: 7
+---
+
 # Tile Entities
 
 Make a tile entity that kills nearby mobs.  

@@ -1,3 +1,7 @@
+---
+sidebar_position: 5
+---
+
 # Advanced Blocks
 
 A tutorial on making a block with custom behaviour. It will react to being right clicked, explosions, random ticks and even act as soil for crops!

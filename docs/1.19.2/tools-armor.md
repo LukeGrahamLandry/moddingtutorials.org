@@ -1,3 +1,7 @@
+---
+sidebar_position: 6
+---
+
 # Tools and Armor
 
 In this tutorial we make a simple set of tools and armor. We also make an armor piece that reacts to ticks and being attacked.

@@ -1,3 +1,7 @@
+---
+sidebar_position: 9
+---
+
 # Recipes
 
 In this tutorial we learn about the json recipe formats used by crafting tables, furnaces, smithing tables and stone cutters. We also use an event handler to manipulate the anvil's outputs. 

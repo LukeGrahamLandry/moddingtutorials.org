@@ -1,3 +1,7 @@
+---
+sidebar_position: 1
+---
+
 # Environment Setup
 
 How to setup a forge development environment for 1.19.2 with the official mappings. We download java 17, forge and IntelliJ. We also rename our main package and class and update the mods.toml file.

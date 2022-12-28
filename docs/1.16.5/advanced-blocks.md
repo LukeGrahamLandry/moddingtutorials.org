@@ -1,3 +1,7 @@
+---
+sidebar_position: 5
+---
+
 # Advanced Blocks
 
 A tutorial on making a block with custom behaviour. It will react to being right clicked, explosions, random ticks and even act as soil for crops!
@@ -6,8 +10,10 @@ A tutorial on making a block with custom behaviour. It will react to being right
 
 Very similar to how we did [advanced items](/advanced-items), let's make a block that has some unique behaviour by creating our own version of the block class. Start with the same code for a [basic block](/basic-blocks) but reference a new class. 
 
-    public static final RegistryObject<Block> SAD_BLOCK = BLOCKS.register("sad_block",
-                () -> new SadBlock(Block.Properties.copy(Blocks.DIRT)));
+```java
+public static final RegistryObject<Block> SAD_BLOCK = BLOCKS.register("sad_block",
+            () -> new SadBlock(Block.Properties.copy(Blocks.DIRT)));
+```
 
 Note that I'm copying the `Block.Properties` from the vanilla dirt block. If you were using one of your own blocks you'd have to call `.get()` to access the actual block itself because deferred registers are like that. 
 
@@ -15,11 +21,13 @@ Note that I'm copying the `Block.Properties` from the vanilla dirt block. If you
 
 Now create the class for your block. It will extend block and use the default constructor. 
 
-    public class SadBlock extends Block {
-    	public SadBlock(Block.Properties properties) {
-    		super(properties);
-    	}
+```java
+public class SadBlock extends Block {
+    public SadBlock(Block.Properties properties) {
+        super(properties);
     }
+}
+```
 
 Just like with the `Item` class, `Block` has many fun methods to override to get interesting behaviour. 
 
@@ -29,18 +37,20 @@ The `use` method defines what happens when a player right clicks the block. Note
 
 You can do anything you want here but I want my block to be explosive so I'll start by getting the `ItemStack` in the player's hand and checking if it is gun powder. The world's explode method requires the entity responsible for the explosion (for death messages, etc. Can be `null`), the position, the size to make the explosion (tnt is 4), a boolean of whether it should set fires, and the explosion mode (`NONE` does not damage terrain, `BREAK` drops items from the blocks it breaks while `DESTROY` deletes them).  I'll also shrink the item stack by one so it consumes the gun powder. 
 
-    @Override
-    public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
-        ItemStack held = player.getItemInHand(hand);
-    
-        if (!world.isClientSide() && held.getItem() == Items.GUNPOWDER){
-        	world.explode(player, pos.getX(), pos.getY(), pos.getZ(), 4.0F, true, Explosion.Mode.DESTROY);
-        	held.shrink(1);
-        return ActionResultType.CONSUME;
-        }
-    
-        return super.use(state, world, pos, player, hand, hit);
+```java
+@Override
+public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
+    ItemStack held = player.getItemInHand(hand);
+
+    if (!world.isClientSide() && held.getItem() == Items.GUNPOWDER){
+        world.explode(player, pos.getX(), pos.getY(), pos.getZ(), 4.0F, true, Explosion.Mode.DESTROY);
+        held.shrink(1);
+    return ActionResultType.CONSUME;
     }
+
+    return super.use(state, world, pos, player, hand, hit);
+}
+```
 
 Note that explosions won't work if the block's blast resistance is too high (because the explosion starts from inside the block)
 
@@ -63,26 +73,30 @@ There are four different `ActionResultType`s you can return from this method (al
 
 You can use the `wasExploded` method to react to the block being broken by an explosion. I'll just create an explosion just like before so they can be used in chain reactions like TNT. 
 
-    @Override
-    public void wasExploded(World world, BlockPos pos, Explosion explosion) {
-    	world.explode(null, pos.getX(), pos.getY(), pos.getZ(), 4.0F, true, Explosion.Mode.DESTROY);
-        super.wasExploded(world, pos, explosion);
-    }
+```java
+@Override
+public void wasExploded(World world, BlockPos pos, Explosion explosion) {
+    world.explode(null, pos.getX(), pos.getY(), pos.getZ(), 4.0F, true, Explosion.Mode.DESTROY);
+    super.wasExploded(world, pos, explosion);
+}
+```
 
 ### Allowing Plants
 
 You can override `canSustainPlant` to allow your block to act as soil for specific plants, simply return true if the plant passed in should be allowed to grow. I'll get the `Block` from the `Iplantable` passed in and allow it to grow if it's a cactus. Otherwise, I'll use the super method to let the vanilla behaviour decide. Which in this case will always be false, preventing any other plants from growing. 
 
-    @Override
-    public boolean canSustainPlant(BlockState state, IBlockReader world, BlockPos pos, Direction facing, IPlantable plantable) {
-    	Block plant = plantable.getPlant(world, pos.relative(facing)).getBlock();
-    
-        if (plant == Blocks.CACTUS){
-    		return true;
-        } else {
-            return super.canSustainPlant(state, world, pos, facing, plantable);
-        }
+```java
+@Override
+public boolean canSustainPlant(BlockState state, IBlockReader world, BlockPos pos, Direction facing, IPlantable plantable) {
+    Block plant = plantable.getPlant(world, pos.relative(facing)).getBlock();
+
+    if (plant == Blocks.CACTUS){
+        return true;
+    } else {
+        return super.canSustainPlant(state, world, pos, facing, plantable);
     }
+}
+```
 
 ### Random Ticks 
 
@@ -92,14 +106,16 @@ To allow your block to receive random ticks, you must either call `randomTicks()
 
 Then you can override `randomTick` to do something interesting. I'll make mine check if the block above is air and create a cactus. 
 
-    // !! call randomTicks() on your block properties or this wont work !!
-    @Override
-    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random rand) {
-        BlockState above = world.getBlockState(pos.above());
-        if (above.isAir()){
-            world.setBlockAndUpdate(pos.above(), Blocks.CACTUS.defaultBlockState());
-        }
+```java
+// !! call randomTicks() on your block properties or this wont work !!
+@Override
+public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random rand) {
+    BlockState above = world.getBlockState(pos.above());
+    if (above.isAir()){
+        world.setBlockAndUpdate(pos.above(), Blocks.CACTUS.defaultBlockState());
     }
+}
+```
 
 You can use the command `/gamerule randomTickSpeed 9999` to increase the tick rate while testing.
 
@@ -118,47 +134,57 @@ The `Block` class has lots more methods to play with. Here's a description of a 
 
 To make the block rotatable like a furnace, you have to add a property to the block state so you can tell the model file which sides to render where. It will hold a value of `NORTH`, `SOUTH`, `EAST`, or `WEST` which represents the direction it is facing. First create the property as a static field in your block class. 
 
-    public static final DirectionProperty FACING = HorizontalBlock.FACING;
+```java
+public static final DirectionProperty FACING = HorizontalBlock.FACING;
+```
 
- Then set a default value of the state in the constructor. We will replace this with the correct direction when a player places the block but it would probably randomly crash sometimes if you don't do this. 
+Then set a default value of the state in the constructor. We will replace this with the correct direction when a player places the block but it would probably randomly crash sometimes if you don't do this. 
 
-    this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
+```java
+this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
+```
 
 You also need to tell the block about the properties it is allowed to use by adding this method:
 
-    @Override
-    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
-    	builder.add(FACING);
-    }
+```java
+@Override
+protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+    builder.add(FACING);
+}
+```
 
 You'll have to override `getStateForPlacement` to have it face the player when placed. This snippet is taken from the vanilla furnace. If you want to to face forwards from the player instead of towards them, take out the `.getOpposite()`.
 
-    @Override
-    public BlockState getStateForPlacement(BlockItemUseContext context) {
-    	return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
-    }
+```java
+@Override
+public BlockState getStateForPlacement(BlockItemUseContext context) {
+    return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
+}
+```
 
 Now you'll need to create a block state json file. This must have the same name as your block's registry name.  `/src/main/resources/assets/modid/blockstates/block_name.json`:
 
-    {
-      "variants": {
+```json
+{
+    "variants": {
         "facing=east": {
-          "model": "firstmod:block/sad_block",
-          "y": 90
+            "model": "firstmod:block/sad_block",
+            "y": 90
         },
         "facing=north": {
-          "model": "firstmod:block/sad_block"
+            "model": "firstmod:block/sad_block"
         },
         "facing=south": {
-          "model": "firstmod:block/sad_block",
-          "y": 180
+            "model": "firstmod:block/sad_block",
+            "y": 180
         },
         "facing=west": {
-          "model": "firstmod:block/sad_block",
-          "y": 270
+            "model": "firstmod:block/sad_block",
+            "y": 270
         }
-      }
     }
+}
+```
 
 You can also do more complicated things in your block state like switching out the model file and using multiple block state properties. For example the furnace uses `facing=west,lit=false` and `facing=west,lit=true` to switch to a version of the model where the face is lit up when something is cooking (lit being a `BooleanProperty` instead of a `DirectionProperty`).
 
@@ -168,14 +194,16 @@ Then you'll need to make the model file (in `assets/models/block/` as before). Y
 
 It can be named anything because a single block state definition might need multiple models. Its name is the string you referenced in the block state file (so `sad_block.json` for me).
 
-    {
-      "parent": "minecraft:block/orientable",
-      "textures": {
+```json
+{
+    "parent": "minecraft:block/orientable",
+    "textures": {
         "top": "minecraft:block/sand",
         "front": "firstmod:blocks/sad_block",
         "side": "minecraft:block/tnt_side"
-      }
     }
+}
+```
 
 > If you you're making a block without rotation, you can just make a generic block state and model file similar to the basic block.  Don't forget to update your lang file and make item model file for the block just like we did for the basic one. You should also make a loot table so your block drops something interesting. 
 

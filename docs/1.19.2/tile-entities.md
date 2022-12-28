@@ -1,4 +1,8 @@
-# Block Entity
+---
+sidebar_position: 7
+---
+
+# Block Entities
 
 Make a block entity that kills nearby mobs.  
 
