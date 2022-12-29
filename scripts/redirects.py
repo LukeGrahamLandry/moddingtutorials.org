@@ -7,6 +7,7 @@ def process(old_version, new_version):
     for page in pages:
         generated_redirects.append("{0}/{2} /{1}/{2}".format(old_version, new_version, page))
     
+    generated_redirects.append("{0}/topics /".format(old_version))
     if old_version != "":
         generated_redirects.append("{0} /{1}".format(old_version, new_version))
         
@@ -19,8 +20,8 @@ def process(old_version, new_version):
 process("", "1.19.2")  # change to 1.19.3
 process("/o19", "1.19.2")
 process("/o18", "1.18.2")
-process("/o17", "1.18.2")
 process("/o16", "1.16.5")
+process("/o17", "1.18.2")
 
 lines = []
 with open("static/_redirects", "r") as f:

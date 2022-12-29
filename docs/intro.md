@@ -62,7 +62,7 @@ Github is a website for sharing source code with other developers. It makes it e
 
 Github uses a version control system called Git. Git lets you easily track changes in your code as you update your mod and add new features, as well as roll back any mistakes easily. This is a ridiculously important tool to learn how to use! It shines most if you end up working with multiple other people on the same project and need to merge your changes together. You should really install the Github Desktop app at some point and play around with it. It may seem strange at first but it will make life so much easier in the long run. 
 
-#### Licensing
+### Licensing
 
 When you release your mod, you generally include a license file that tells people what they're allowed to do with your work. For example, 
 
@@ -74,9 +74,11 @@ When you release your mod, you generally include a license file that tells peopl
 
 By default, having no license file makes your work All Rights Reserved, you own the copyright so nobody's allowed to touch it. You can read more about your options at [choosealicense.org](https://choosealicense.org) but the most popular choices are,  
 
-- MIT, which lets anyone do anything they want with your code. (this is what I use for almost everything I release)
-- GPL, GNU General Public License, which lets anyone do anything with your code as long as any derivative works they create are also open source under the GPL.
-- ARR, All Rights Reserved, nobody is allowed to do anything with your code :(
+- Public Domain / [CC0](https://creativecommons.org/publicdomain/zero/1.0/) / [The Unlicense](https://unlicense.org/) / [WTFPL](http://www.wtfpl.net/about/): you renounce your copyright on your work. anyone can do anything they want with your code.
+- MIT, which lets anyone do anything they want with your code as long as they include your copyright notice. 
+- LGPL, GNU Lesser General Public License, which lets anyone do anything with your code as long as any modified versions they create are also open source under the LGPL.
+
+Note that you're able to release your code and art assets under different licenses. 
 
 ## Your IDE
 

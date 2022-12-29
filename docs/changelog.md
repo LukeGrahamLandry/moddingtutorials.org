@@ -1,5 +1,14 @@
 # Change Log
 
+See https://github.com/LukeGrahamLandry/moddingtutorials.org/commits/main for full details. 
+
+# 2022
+
+## December
+- switch to building with docusarus
+- rearrange site
+- mirror some modding gists
+
 ## November 
 - publishing mods page 
 - NotEnoughGraphs

@@ -4,7 +4,7 @@ WrapperLib is a library I wrote to make a few modding tasks easier. Most of what
 
 WrapperLib helpfully provides the same API for all supported Minecraft versions. So it will save you extra time if you end up porting in future. 
 
-Since WrapperLib is an external library, you'll have to add a couple lines to your build.gradle to import it into your development environment. See [Installation](installation) for details. Your players will have to install WrapperLib as additional mod when they play with your mod. 
+Since WrapperLib is an external library, you'll have to add a couple lines to your build.gradle to import it into your development environment. Your players will have to install WrapperLib as additional mod when they play with your mod. See [Installation](installation) for details. 
 
 - [Networking](networking): send information between the client and the server.
 - [Config](config): allow players to configure mod features by editing json files.

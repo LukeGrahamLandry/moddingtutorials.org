@@ -29,7 +29,8 @@ const config = {
       ({
         docs: {
           routeBasePath: '/',
-          sidebarPath: require.resolve('./scripts/sidebars.js')
+          sidebarPath: require.resolve('./scripts/sidebars.js'),
+          editUrl: "https://github.com/LukeGrahamLandry/moddingtutorials.org/edit/main/"
         },
       }),
     ],

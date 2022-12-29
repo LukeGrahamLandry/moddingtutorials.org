@@ -12,6 +12,7 @@ the thing that makes it weird is that when you scale the matrix it scales any tr
 
 - PoseStack#pushPose
 - render text centered on 0,0 (you'll probably need to check the width and height of the component since i'm guessing you pass in the top left coordinate when you render it)
+    - the Screen class has a this.font variable you can use (it gets it from Minecraft.getInstance().font). can do this.font.draw(poseStack, Component.literal("words"), x, y, 0xFFFFFF); 
 - scale it
 - translate to real position
 - PoseStack#popPose
@@ -291,3 +292,23 @@ here's the code, dont forget the mixins and access transformers, https://github.
 ## how to play a gif as an overlay in game
 
 https://gist.github.com/gigaherz/56b259126f715807c8e6c3dc055b924b
+
+## how to add a villager like trade gui to a custom entity 
+
+have your entity implement Merchant
+- on mobInteract call setTradingPlayer and openTradingScreen
+- override getOffers , you'll have to make a MerchantOffers object (if you choose the trades randomly you'll probably want to save them in the entity's nbt so they stay the same for the same entity instance). look at WanderingTrader#updateTrades for an example of how to populate the trades. the individual trade options will be an object implementing ItemListing, there are a bunch of classes you can use in VillagerTrades, just scroll down a bit
+- you could just extend AbstractVillager and override updateTrades to save some time implementing the other Merchant stuff. depends if your entity needs to extend something else for some specific reason 
+- if you actually want to load trades from a data pack instead of hardcoding them thats some extra work. you have to register a SimpleJsonResourceReloadListener on AddReloadListenerEvent, here's an example https://github.com/LukeGrahamLandry/modular-professions-mod/blob/forge-1.18/src/main/java/ca/lukegrahamlandry/modularprofessions/api/ProfessionDataLoader.java. you'd load the trade data in from json files and then use that to create the MerchantOffers described above
+
+## how do tile entity renderers work 
+
+basically you end up with a render method that gets called every frame for each instance of your tile entity where you can run whatever rendering code you like. you're never going to find a detailed tutorial on what to actually do in that method cause there's like infinite variations and nobody likes dealing with rendering code. you pretty much just have to look around vanilla and other mod's code and slowly figure out what you can do
+
+More Info: https://forge.gemwire.uk/wiki/Block_Entity_Renderer
+
+## how to create a moving entity
+
+start by registering your entity and renderer like in [my projectiles tutorial](/arrows) but have it extend PathfinderMob then you can override registerGoals, look at some vanilla mobs for examples, like Cow uses WaterAvoidingRandomStrollGoal
+
+if you want details on how goals work take a look at https://github.com/Tslat/SmartBrainLib/wiki/How-do-Goal-Selectors-Work
