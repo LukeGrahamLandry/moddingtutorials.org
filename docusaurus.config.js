@@ -30,7 +30,14 @@ const config = {
         docs: {
           routeBasePath: '/',
           sidebarPath: require.resolve('./scripts/sidebars.js'),
-          editUrl: "https://github.com/LukeGrahamLandry/moddingtutorials.org/edit/main/"
+          editUrl: ({locale, versionDocsDirPath, docPath}) => {
+            if (docPath.startsWith("mods")) return undefined;
+            if (docPath.startsWith("mirror")) return undefined;
+            if (docPath.startsWith("wrapperlib")) return `https://github.com/LukeGrahamLandry/WrapperLib/wiki`;
+            if (docPath.startsWith("discordbots")) return `https://github.com/LukeGrahamLandry/PycordByExample/edit/main/${docPath.replace("discordbots/", "")}`;
+            
+            return `https://github.com/LukeGrahamLandry/moddingtutorials.org/edit/main/docs/${docPath}`;
+          },
         },
       }),
     ],
@@ -49,23 +56,23 @@ const config = {
             type: 'doc',
             docId: 'index',
             position: 'left',
-            label: 'Tutorials',
+            label: 'MC Forge',
           },
-          {to: 'pathname:///commissions.html', label: '💰Commissions', position: 'left'},
           {
             type: 'doc',
-            docId: 'mods/index',
+            docId: 'discordbots/README',
             position: 'left',
-            label: 'My Mods',
+            label: 'Discord Bots',
           },
+          {to: 'pathname:///commissions.html', label: '💰Commissions', position: 'left'},
           {
             href: 'https://discord.com/invite/uG4DewBcwV',
             label: 'Discord Server',
             position: 'right',
           },
           {
-            href: 'https://github.com/LukeGrahamLandry/modding-tutorials',
-            label: 'Source Code',
+            href: 'https://github.com/LukeGrahamLandry',
+            label: 'Github',
             position: 'right',
           },
         ],

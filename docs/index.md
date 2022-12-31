@@ -4,7 +4,9 @@ displayed_sidebar: tutorialSidebar
 ---
 
 # Forge Modding Tutorials 
-        
+
+This site will teach you how to make Minecraft mods for the [Forge](https://github.com/MinecraftForge/MinecraftForge) mod loader.
+
 I make these because I was frustrated by the lack of documentation and useable tutorials for Forge. 
 All the tutorials I could find were long videos of someone talking extremely slowly. 
 I hope to offer an alternative: text tutorials for those who don't need a visual to follow along. 

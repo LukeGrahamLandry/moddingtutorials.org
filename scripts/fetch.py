@@ -1,6 +1,11 @@
 import requests, os
 from datetime import datetime
 
+# third party files will be fetched on my computer and committed to git. 
+# this lets me look at any changes before publishing them.
+# make sure there are no naughty script tags, etc.
+is_dev_env = os.getcwd().startswith("/Users/luke/")
+
 wrapperlib = "docs/wrapperlib"
 mod_docs = "docs/mods"
 static = "static"
@@ -58,15 +63,23 @@ sources = {
     "misodeadding-structures-1.18-1.19": "https://misode.github.io/guides/adding-custom-structures"
 }
 
-for path, url in my_files.items():
-    with open(path, "w") as f:
-        print("Downloading... " + url)
-        f.write(requests.get(url).text)
+if not is_dev_env:
+    for path, url in my_files.items():
+        with open(path, "w") as f:
+            print("Downloading... " + url)
+            f.write(requests.get(url).text)
 
-# third party files will be fetched on my computer and committed to git. 
-# this lets me look at any changes before publishing them.
-# make sure there are no naughty script tags, etc.
-is_dev_env = os.getcwd().startswith("/Users/luke/")
+if not is_dev_env:
+    os.chdir("docs")
+    os.system('git clone "https://github.com/LukeGrahamLandry/DiscordByExample.git"')
+    os.system("rm -rf discordbots")
+    os.system("cp -r DiscordByExample discordbots")
+    os.system("rm -rf DiscordByExample")
+    os.chdir("..")
+else:
+    os.system("rm -rf docs/discordbots")
+    os.system("cp -r ../DiscordByExample docs/discordbots")
+
 if is_dev_env:
     for author, entries in third_party_gists.items():
         if not os.path.exists("docs/mirror/" + author):
@@ -90,11 +103,10 @@ if is_dev_env:
 
 <pre>
 Source: <a href="{0}">{0}</a> <br></br>
-License: {1} <br></br>
-Retrieved: {2}
+License: {1} 
 </pre> \n
 """             \
-                .format(main_url, license, datetime.today().strftime('%Y-%m-%d')) \
+                .format(main_url, license) \
                 + text.replace("<a>", "</a>").replace("<Capability>", "`<Capability>`").replace("<Biome>", "`<Biome>`").replace("<mappings channel>", "`<mappings channel>`").replace("<Type>", "`<Type>`")
 
                 f.write(text)
