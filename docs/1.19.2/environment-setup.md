@@ -94,3 +94,12 @@ In the top level of your mod folder you'll find a few extra files about forge. I
 
 - If you are using an Apple Silicon (m1) computer, read the [Apple Silicon tutorial](/m1)
 - If you have an existing 1.18, 1.17, or 1.16 modding environment that you would like to update to 1.19, follow [my updating tutorial](updating).
+
+## Later versions
+
+> TODO: update this page with the right version numbers for 1.19.2. I think the rest of the tutorials are already correct. 
+
+This tutorial is for 1.19.2, NOT 1.19.3 or 1.19.4. Mojang changed how they deal with breaking changes in minor versions so some stuff will be different. I'll probably update it at some point but for now see these resources for an overview of changes.
+
+- 1.19.3: https://gist.github.com/ChampionAsh5357/c21724bafbc630da2ed8899fe0c1d226
+- 1.19.4: https://gist.github.com/ChampionAsh5357/163a75e87599d19ee6b4b879821953e8

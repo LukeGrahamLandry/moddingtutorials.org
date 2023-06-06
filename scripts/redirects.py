@@ -25,14 +25,10 @@ process("/o17", "1.18.2")
 
 lines = []
 with open("static/_redirects", "r") as f:
-    manual_redirects = f.readlines()
+    manual_redirects = f.read()
 
-for line in manual_redirects:
-    if line.startswith("# Generated"):
-        break
-    lines.append(line)
-lines.append( "# Generated \n")
+manual_redirects = manual_redirects.split("# Generated\n")
+lines = manual_redirects[0].split("\n") + ["# Generated"] + generated_redirects + ["# Generated"] + manual_redirects[2].split("\n")
 
-lines = lines + list(s + "\n" for s in generated_redirects)
 with open("static/_redirects", "w") as f:
-    f.writelines(lines)
+    f.writelines(s + "\n" for s in lines if s != "")

@@ -5,8 +5,7 @@
 
 <pre>
 Source: <a href="https://darkhax.net/2020/07/mixins">https://darkhax.net/2020/07/mixins</a> <br></br>
-License: <a href="https://github.com/Darkhax/darkhax-dot-net/blob/gh-pages/LICENSE">Creative Commons Attribution 4.0 International</a> <br></br>
-Retrieved: 2022-12-28
+License: <a href="https://github.com/Darkhax/darkhax-dot-net/blob/gh-pages/LICENSE">Creative Commons Attribution 4.0 International</a> 
 </pre> 
 
 
@@ -38,6 +37,17 @@ buildscript {
 
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.spongepowered.mixin'
+```
+
+If you're using the new `plugins` DSL, you just need to add `id 'org.spongepowered.mixin' version '0.7.+'` onto your plugins block:
+
+```groovy
+plugins {
+    id 'eclipse'
+    id 'maven-publish'
+    id 'net.minecraftforge.gradle' version '5.1.+'
+    id 'org.spongepowered.mixin' version '0.7.+'
+}
 ```
 
 Now that the plugin is applied to your build script you can configure the plugin. This involves setting up the generation of a a refmap which is used by Mixin to map your changes to different Minecraft environments and telling MixinGradle the name of your Mixin config file. For the refmap, you just need to define the source set to generate mappings for and the name of the file to output to. It is common practice to use `modid.refmap.json`. For the Mixin config file, it is common to use `modid.mixins.json`.

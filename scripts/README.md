@@ -1,6 +1,4 @@
 - python3 scripts/fetch.py
-    - Downloads my mod readme files (at `/docs/mods`), parts of the WrapperLib wiki (at `/docs/wrapperlib`), and DiscordByExample (at `/docs/discordbots`). 
-        - These are not committed in this repo so the script must be run once before the Docusaurus build.
     - Some third party gists are downloaded as well (at `/docs/mirror`). 
         - These only download when run locally on my computer (not in cloudflare).
         - They are committed to the repo so I can review changes before publishing them.

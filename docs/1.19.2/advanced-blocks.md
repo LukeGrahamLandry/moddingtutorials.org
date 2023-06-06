@@ -226,3 +226,10 @@ You should now have a fully functional block with custom functionality!
 - Make a soil that grows crops very quickly while it's raining
   - hint: look at how the vanilla `BoneMealItem` uses `BonemealableBlock`
 - Make a directional block that rotates when you right click it
+
+## Later versions
+
+This tutorial is for 1.19.2, NOT 1.19.3 or 1.19.4. Mojang changed how they deal with breaking changes in minor versions so some stuff will be different. I'll probably update it at some point but for now see these resources for an overview of changes.
+
+- 1.19.3: https://gist.github.com/ChampionAsh5357/c21724bafbc630da2ed8899fe0c1d226
+- 1.19.4: https://gist.github.com/ChampionAsh5357/163a75e87599d19ee6b4b879821953e8

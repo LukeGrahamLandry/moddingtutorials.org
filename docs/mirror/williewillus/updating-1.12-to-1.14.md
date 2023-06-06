@@ -5,8 +5,7 @@
 
 <pre>
 Source: <a href="https://gist.github.com/williewillus/353c872bcf1a6ace9921189f6100d09a">https://gist.github.com/williewillus/353c872bcf1a6ace9921189f6100d09a</a> <br></br>
-License: CC0 <br></br>
-Retrieved: 2022-12-28
+License: CC0 
 </pre> 
 
 This primer is licensed under CC0, do whatever you want.

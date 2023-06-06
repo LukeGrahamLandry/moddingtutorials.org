@@ -5,8 +5,7 @@
 
 <pre>
 Source: <a href="https://gist.github.com/ChampionAsh5357/c21724bafbc630da2ed8899fe0c1d226">https://gist.github.com/ChampionAsh5357/c21724bafbc630da2ed8899fe0c1d226</a> <br></br>
-License: Creative Commons Attribution 4.0 International <br></br>
-Retrieved: 2022-12-28
+License: Creative Commons Attribution 4.0 International 
 </pre> 
 
 # Minecraft 1.19.2 -> 1.19.3 Mod Migration Primer

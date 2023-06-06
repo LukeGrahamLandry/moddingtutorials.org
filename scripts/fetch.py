@@ -45,7 +45,10 @@ third_party_gists = {
     "ChampionAsh5357": {
         "updating-1.17-to-1.18": ["Creative Commons Attribution 4.0 International", "https://gist.githubusercontent.com/ChampionAsh5357/73c3bb41d3a8de2d020827e0069314a7/raw/cab8251d590acf8d6b2867567c9b38f7523be54c/117-118-primer.md"],
         "updating-1.19.2-to-1.19.3": ["Creative Commons Attribution 4.0 International", "https://gist.githubusercontent.com/ChampionAsh5357/c21724bafbc630da2ed8899fe0c1d226/raw/a12ba2773225e7231785a839ab7e676fe7833644/1192-1193-primer.md"],
-        "updating-1.18-to-1.19.2": ["Creative Commons Attribution 4.0 International", "https://gist.githubusercontent.com/ChampionAsh5357/ef542d1ae4e1a5d096f7f8b51f5e0637/raw/c14876fc6d7304d3616b64860b908ebab2740d72/118-119-primer.md"]
+        "updating-1.18-to-1.19.2": ["Creative Commons Attribution 4.0 International", "https://gist.githubusercontent.com/ChampionAsh5357/ef542d1ae4e1a5d096f7f8b51f5e0637/raw/c14876fc6d7304d3616b64860b908ebab2740d72/118-119-primer.md"],
+        "updating-1.19.2-to-1.19.3": ["Creative Commons Attribution 4.0 International", "https://gist.githubusercontent.com/ChampionAsh5357/c21724bafbc630da2ed8899fe0c1d226/raw/a12ba2773225e7231785a839ab7e676fe7833644/1192-1193-primer.md"],
+        "updating-1.19.3-to-1.19.4": ["Creative Commons Attribution 4.0 International", "https://gist.githubusercontent.com/ChampionAsh5357/163a75e87599d19ee6b4b879821953e8/raw/f8973ecb7d7ada320582efb53301c7abdf058c5d/1193-1194-primer.md"]
+    
     }, 
     "Darkhax": {
         "mixin-introduction": ['<a href="https://github.com/Darkhax/darkhax-dot-net/blob/gh-pages/LICENSE">Creative Commons Attribution 4.0 International</a>', "https://raw.githubusercontent.com/Darkhax/darkhax-dot-net/gh-pages/_posts/tutorials/2020-7-31-mixins.md"]
@@ -68,17 +71,6 @@ if not is_dev_env:
         with open(path, "w") as f:
             print("Downloading... " + url)
             f.write(requests.get(url).text)
-
-if not is_dev_env:
-    os.chdir("docs")
-    os.system('git clone "https://github.com/LukeGrahamLandry/DiscordByExample.git"')
-    os.system("rm -rf discordbots")
-    os.system("cp -r DiscordByExample discordbots")
-    os.system("rm -rf DiscordByExample")
-    os.chdir("..")
-else:
-    os.system("rm -rf docs/discordbots")
-    os.system("cp -r ../DiscordByExample docs/discordbots")
 
 if is_dev_env:
     for author, entries in third_party_gists.items():

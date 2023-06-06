@@ -34,8 +34,7 @@ const config = {
             if (docPath.startsWith("mods")) return undefined;
             if (docPath.startsWith("mirror")) return undefined;
             if (docPath.startsWith("wrapperlib")) return `https://github.com/LukeGrahamLandry/WrapperLib/wiki`;
-            if (docPath.startsWith("discordbots")) return `https://github.com/LukeGrahamLandry/PycordByExample/edit/main/${docPath.replace("discordbots/", "")}`;
-            
+           
             return `https://github.com/LukeGrahamLandry/moddingtutorials.org/edit/main/docs/${docPath}`;
           },
         },
@@ -57,12 +56,6 @@ const config = {
             docId: 'index',
             position: 'left',
             label: 'MC Forge',
-          },
-          {
-            type: 'doc',
-            docId: 'discordbots/README',
-            position: 'left',
-            label: 'Discord Bots',
           },
           {to: 'pathname:///commissions.html', label: '💰Commissions', position: 'left'},
           {
@@ -112,13 +105,6 @@ const config = {
         additionalLanguages: ['java']
       },
     }),
-    scripts: [
-      {
-        src: "https://plausible.moddingtutorials.org/js/script.outbound-links.js",
-        defer: true, 
-        'data-domain': "moddingtutorials.org"
-      }
-    ]
 };
 
 module.exports = config;

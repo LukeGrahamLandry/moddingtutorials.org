@@ -1,18 +1,13 @@
 /discord https://discord.gg/uG4DewBcwV
 /patreon https://www.patreon.com/LukeGrahamLandry
 /github https://github.com/LukeGrahamLandry/modding-tutorials
-
 */my-mods /mods
 */history /changelog
-/mods/ForgedFabric/* https://github.com/LukeGrahamLandry/ForgedFabric/wiki/:splat
-/mods/WrapperLib/* https://github.com/LukeGrahamLandry/WrapperLib/wiki/:splat
-/mods/modular-professions-mod/* https://github.com/LukeGrahamLandry/modular-professions-mod/wiki/:splat
 /credits /commissions
 /1.16.5 /
 /1.18.2 /
 /1.19.2 /
-
-# Generated 
+# Generated
 /advanced-blocks /1.19.2/advanced-blocks
 /advanced-items /1.19.2/advanced-items
 /arrows /1.19.2/arrows
@@ -25,6 +20,7 @@
 /tools-armor /1.19.2/tools-armor
 /updating /1.19.2/updating
 /world-gen /1.19.2/world-gen
+/topics /
 /sides /concepts#sides
 /registries /concepts#registries
 /mappings /concepts#mappings
@@ -41,6 +37,7 @@
 /o19/tools-armor /1.19.2/tools-armor
 /o19/updating /1.19.2/updating
 /o19/world-gen /1.19.2/world-gen
+/o19/topics /
 /o19 /1.19.2
 /o19/solutions /solutions
 /o19/intro /intro
@@ -65,6 +62,7 @@
 /o18/tools-armor /1.18.2/tools-armor
 /o18/updating /1.18.2/updating
 /o18/world-gen /1.18.2/world-gen
+/o18/topics /
 /o18 /1.18.2
 /o18/solutions /solutions
 /o18/intro /intro
@@ -89,6 +87,7 @@
 /o16/tools-armor /1.16.5/tools-armor
 /o16/updating /1.16.5/updating
 /o16/world-gen /1.16.5/world-gen
+/o16/topics /
 /o16 /1.16.5
 /o16/solutions /solutions
 /o16/intro /intro
@@ -113,6 +112,7 @@
 /o17/tools-armor /1.18.2/tools-armor
 /o17/updating /1.18.2/updating
 /o17/world-gen /1.18.2/world-gen
+/o17/topics /
 /o17 /1.18.2
 /o17/solutions /solutions
 /o17/intro /intro
@@ -125,3 +125,7 @@
 /o17/registries /concepts#registries
 /o17/mappings /concepts#mappings
 /o17/events /concepts#events
+# Generated
+/mods/ForgedFabric/* https://github.com/LukeGrahamLandry/ForgedFabric/wiki/:splat
+/mods/WrapperLib/* https://github.com/LukeGrahamLandry/WrapperLib/wiki/:splat
+/mods/modular-professions-mod/* https://github.com/LukeGrahamLandry/modular-professions-mod/wiki/:splat
