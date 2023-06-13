@@ -8,7 +8,7 @@ How to setup a forge development environment for 1.19.2 with the official mappin
 
 ## Downloading
 
-First, download the JDK (java 17 development kit). Go to [oracle.com](https://www.oracle.com/java/technologies/downloads/#jdk17-windows) and select your operating system. It might ask you to make an account but you can borrow someone else's credentials from [bugmenot.com](http://bugmenot.com/view/oracle.com). Just copy paste them in and if the first doesn't work, try the next one.
+First, download the JDK (java 17 development kit). Go to [adoptium.net](https://adoptium.net/temurin/releases/) and select your operating system. Choose installer for easier start as it configures system path for you, or install zip and configure java path later in your IDE (IntelliJ). Adoptium Temurin is a free implementation of JDK, you do not need any account to download and use it.
 
 Next you need the Forge 1.19 MDK (mod development kit) from [files.minecraftforge.net](https://files.minecraftforge.net/net/minecraftforge/forge/index_1.19.html). Get the recommended version cause its the most likely to work.
 ![forge mdk download page](/img/download-forge.png)
