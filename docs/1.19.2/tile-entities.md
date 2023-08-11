@@ -124,7 +124,7 @@ if (!level.isClientSide() && tile.isActive){
         tile.hurtMobs();
     }
 }
-```java
+```
 
 I'll start by deciding the top left and bottom right corner of the area I want to target. I'll do this by adding the my chosen range to all the coordinates of the block entity to get the top and subtracting to get the bottom. Then I'll make an `AABB` from these points. This axis aligned bounding box represents a cube centered on my block entity going out `RANGE` blocks in all 3 dimensions. 
 
